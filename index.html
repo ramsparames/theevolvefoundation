@@ -12,17 +12,18 @@
     --ink:#101B22;
     --ink-soft:#1C2B33;
     --ink-line: rgba(233,237,231,0.14);
-    --paper:#EEF1EC;
-    --paper-soft:#E2E7DF;
+    --paper:#FBFAF7;
+    --paper-soft:#F0F0EA;
     --paper-line: rgba(16,27,34,0.12);
-    --brass:#C0873F;
-    --brass-soft:#DDB073;
+    --brass:#B87A2E;
+    --brass-soft:#E4B478;
     --route:#5C8A7E;
-    --route-soft:#A9C6BE;
-    --ink-text:#14212A;
-    --paper-text:#E9EDE7;
-    --muted-on-ink:#9FB2AE;
-    --muted-on-paper:#57655F;
+    --route-dark:#3A5C53;
+    --route-soft:#BBD3CC;
+    --ink-text:#12191D;
+    --paper-text:#F3F5F1;
+    --muted-on-ink:#C3D0CB;
+    --muted-on-paper:#3F4A46;
     --max: 1180px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -172,7 +173,7 @@
   .section{padding:110px 0;}
   .section-dark{background:var(--ink); color:var(--paper-text);}
   .section-head{max-width:640px; margin-bottom:64px;}
-  .section-head .eyebrow{color:var(--route); margin-bottom:18px;}
+  .section-head .eyebrow{color:var(--route-dark); margin-bottom:18px;}
   .section-dark .section-head .eyebrow{color:var(--route-soft);}
   .section-head h2{font-size:clamp(26px, 3.4vw, 40px); line-height:1.15;}
   .section-head p{margin-top:16px; font-size:16.5px; color:var(--muted-on-paper); max-width:56ch;}
@@ -189,7 +190,7 @@
   .problem-card{background:var(--paper); padding:36px 30px;}
   .problem-card .tag{
     font-family:'IBM Plex Mono'; font-size:11.5px; letter-spacing:0.1em;
-    color:var(--route); text-transform:uppercase; margin-bottom:18px; display:block;
+    color:var(--route-dark); text-transform:uppercase; margin-bottom:18px; display:block;
   }
   .problem-card h3{font-size:19px; font-weight:600; margin-bottom:12px; line-height:1.3;}
   .problem-card p{font-size:14.5px; color:var(--muted-on-paper);}
@@ -240,16 +241,16 @@
   }
   .beat:not(:last-child)::after{
     content:"→"; position:absolute; right:-14px; top:24px;
-    color:var(--route); font-size:14px;
+    color:var(--route-dark); font-size:14px;
   }
-  .beat .n{font-family:'IBM Plex Mono'; font-size:12px; color:var(--route); display:block; margin-bottom:10px;}
+  .beat .n{font-family:'IBM Plex Mono'; font-size:12px; color:var(--route-dark); display:block; margin-bottom:10px;}
   .beat h4{font-size:15px; font-weight:600; margin-bottom:6px;}
   .beat p{font-size:12.5px; color:var(--muted-on-paper);}
 
   /* ---------- OUTCOMES ---------- */
   .outcomes{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--paper-line); border:1px solid var(--paper-line); margin-top:56px;}
   .outcome-card{background:var(--paper); padding:32px;}
-  .outcome-card .num{font-family:'IBM Plex Mono'; font-size:12px; color:var(--route); display:block; margin-bottom:14px;}
+  .outcome-card .num{font-family:'IBM Plex Mono'; font-size:12px; color:var(--route-dark); display:block; margin-bottom:14px;}
   .outcome-card h3{font-size:18px; margin-bottom:10px; font-weight:600;}
   .outcome-card p{font-size:14px; color:var(--muted-on-paper);}
 
@@ -274,7 +275,7 @@
   .board-row .status.open{color:var(--brass-soft);}
   .logi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:40px;}
   .logi-card{padding:0;}
-  .logi-card .k{font-family:'IBM Plex Mono'; font-size:11px; color:var(--route); text-transform:uppercase; letter-spacing:0.08em; display:block; margin-bottom:8px;}
+  .logi-card .k{font-family:'IBM Plex Mono'; font-size:11px; color:var(--route-dark); text-transform:uppercase; letter-spacing:0.08em; display:block; margin-bottom:8px;}
   .logi-card .v{font-size:16px; font-weight:600;}
   .logi-card .sub{font-size:13px; color:var(--muted-on-paper); margin-top:4px;}
 
@@ -366,8 +367,8 @@
   <div class="grid-bg" aria-hidden="true"></div>
   <div class="wrap hero-inner">
     <span class="eyebrow">The Evolve Foundation</span>
-    <h1>You did everything right. So why does the map still feel <em>blank</em>?</h1>
-    <p class="lede">Launchpad is an 8-week guided programme that helps final-year students and recent graduates find real clarity, real confidence, and a real direction — before they're forced to decide without one.</p>
+    <h1>Clarity. Confidence. <em>Direction.</em> For what comes next.</h1>
+    <p class="lede">Launchpad is an 8-week guided programme that helps final-year students and recent graduates build real clarity, real confidence, and a real sense of direction — through honest reflection, real conversation, and thoughtful facilitation.</p>
     <div class="cta-row">
       <a href="#logistics" class="btn btn-primary">Join the Pilot Cohort →</a>
       <a href="#route" class="btn btn-ghost">See how it works</a>
@@ -394,40 +395,40 @@
   </div>
 </header>
 
+<!-- ============ ABOUT THE EVOLVE FOUNDATION ============ -->
+<section class="mission">
+  <div class="wrap mission-inner reveal">
+    <span class="eyebrow" style="color:var(--route-dark); margin-bottom:24px;">About The Evolve Foundation</span>
+    <blockquote>The Evolve Foundation exists because too many students are being prepared for exams, interviews, and careers, but not for the deeper questions that shape their future. Through structured developmental experiences like Launchpad, we help young people gain clarity about who they are, confidence in where they are going, and direction for what comes next.</blockquote>
+    <p class="attrib">THE EVOLVE FOUNDATION</p>
+  </div>
+</section>
+
 <!-- ============ THE PROBLEM ============ -->
 <section class="section" id="problem">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">The Problem</span>
-      <h2>Good grades. A finished degree. Still no answer to what's next.</h2>
-      <p>This isn't one student's problem. In conversation after conversation, the same three gaps show up.</p>
+      <span class="eyebrow">Why Launchpad</span>
+      <h2>A lot is expected from students these days</h2>
+      <p>These aren't shortcomings — they're patterns we see again and again, and they're simply part of navigating a fast-changing world with more choices than any generation before.</p>
     </div>
     <div class="problem-grid">
       <div class="problem-card reveal">
         <span class="tag">Direction</span>
-        <h3>No Clarity on Direction</h3>
-        <p>The biggest decisions get made on parental expectation or peer pressure — rarely on what the student actually wants.</p>
+        <h3>Finding Real Direction</h3>
+        <p>Big decisions are often shaped by family expectations or peer pressure, simply because students rarely get structured space to explore what they themselves actually want.</p>
       </div>
       <div class="problem-card reveal">
         <span class="tag">Confidence</span>
-        <h3>A Real Confidence Gap</h3>
-        <p>Not interview technique — a deeper, untested sense of what they're actually good at, after a lifetime of being evaluated only on marks.</p>
+        <h3>Building Real Confidence</h3>
+        <p>Confidence takes more than interview tips — it takes a genuine, tested sense of what a student is good at, beyond what marks alone can show.</p>
       </div>
       <div class="problem-card reveal">
         <span class="tag">The Gap</span>
         <h3>The Space Between Education and Life</h3>
-        <p>College prepares students for exams. Placement cells prepare them for interviews. Nobody prepares them for what's in between.</p>
+        <p>Colleges prepare students for exams, and placement cells prepare them for interviews. Launchpad exists for the space in between.</p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ============ MISSION ============ -->
-<section class="mission">
-  <div class="wrap mission-inner reveal">
-    <span class="eyebrow" style="color:var(--route); margin-bottom:24px;">Our Mission</span>
-    <blockquote>To make sure no student graduates technically qualified but personally adrift — by giving every student a structured space to build real clarity, real confidence, and a real direction, before they're forced to decide without it.</blockquote>
-    <p class="attrib">THE EVOLVE FOUNDATION — FOUNDING PRINCIPLE</p>
   </div>
 </section>
 
@@ -455,7 +456,7 @@
       <div class="module-card reveal">
         <span class="wk">WK 01–02</span>
         <h3>Self-Awareness</h3>
-        <p>A tested picture of who they are — strengths backed by proof, confirmed by others. Techniques: the Proof Method, the Johari Window.</p>
+        <p>A tested picture of who they are — strengths backed by proof, and confirmed by the people who know them best.</p>
       </div>
       <div class="module-card reveal">
         <span class="wk">WK 03–04</span>
@@ -560,8 +561,8 @@
       </div>
       <div class="logi-card">
         <span class="k">Investment</span>
-        <div class="v">₹2,000–3,000</div>
-        <div class="sub">Full 8-week programme, direct enrolment</div>
+        <div class="v">₹4,000</div>
+        <div class="sub">₹500 per week, across the full 8-week programme</div>
       </div>
     </div>
   </div>
@@ -587,7 +588,7 @@
         <div class="fstat">NEXT — COLLEGE PARTNERSHIPS</div>
         <div class="fbody">
           <h4>Launchpad on Campus</h4>
-          <p>In-person cohorts delivered directly through college TPO cells, backed by real outcome data from this pilot.</p>
+          <p>In-person or live online cohorts delivered directly through college TPO cells, backed by real outcome data from this pilot.</p>
         </div>
       </div>
       <div class="future-row">
@@ -598,10 +599,10 @@
         </div>
       </div>
       <div class="future-row">
-        <div class="fstat">LATER — BEYOND CAMPUS</div>
+        <div class="fstat">LATER — VALUE ADDED PROGRAMS</div>
         <div class="fbody">
-          <h4>A Pre-Onboarding Programme for New Hires</h4>
-          <p>The same clarity-building arc, adapted for organizations bringing on their first cohort of fresh graduates.</p>
+          <h4>Digital Outreach, Community and Mentorship</h4>
+          <p>Personalized learning journeys, 1:1 or small group mentorship and guidance from industry experts.</p>
         </div>
       </div>
     </div>
@@ -611,9 +612,10 @@
 <!-- ============ FOUNDER ============ -->
 <section class="founder">
   <div class="wrap founder-inner reveal">
-    <span class="eyebrow" style="color:var(--route); margin-bottom:24px;">Why This Exists</span>
-    <p>This didn't come from market research. It came from repeated, direct conversations with students — hearing the same pattern again and again: people who did everything right, and still felt fundamentally unclear about their own lives.</p>
-    <p>Launchpad exists to close that gap, one small cohort at a time.</p>
+    <span class="eyebrow" style="color:var(--route-dark); margin-bottom:24px;">Why This Exists</span>
+    <p>After more than 30 years working with global financial institutions and Wall Street firms, I felt a growing desire to invest my experience in something that could make a meaningful difference.</p>
+    <p>Over the years, I observed that students are often prepared for examinations, interviews, and careers, but not for the deeper questions that shape their future around clarity, confidence, and direction.</p>
+    <p>The Evolve Foundation was created to help address that gap. Through thoughtfully designed programmes such as Launchpad, I help students discover themselves, gain confidence in their decisions, and move forward with greater clarity and direction.</p>
     <div class="sig">Rams Parameswaran</div>
     <div class="role">Founder, The Evolve Foundation</div>
   </div>
@@ -624,7 +626,7 @@
   <div class="wrap reveal">
     <h2>Cohort 01 is boarding.</h2>
     <p>15–20 seats. Departs 15 August 2026. Live and online.</p>
-    <a href=" https://docs.google.com/forms/d/e/1FAIpQLSeB8gp7-ZcM_GcUdCeMW9QALk5R5DQTukuP7P05dJEDZWYRqA/viewform?usp=publish-editor " class="btn btn-primary">Apply for the Pilot Cohort →</a>
+    <a href="mailto:hello@evolvefoundation.org" class="btn btn-primary">Apply for the Pilot Cohort →</a>
   </div>
 </section>
 
