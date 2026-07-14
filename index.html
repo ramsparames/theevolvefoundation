@@ -169,7 +169,50 @@
   .traj-label.d4{animation-delay:2.5s;}
   @keyframes fadein{ to{opacity:1;} }
 
-  /* ---------- SECTION GENERIC ---------- */
+  /* ---------- MENTORING ADD-ON ---------- */
+  .mentoring{padding:0 0 110px;}
+  .mentoring-card{
+    display:flex; gap:48px; align-items:center; flex-wrap:wrap;
+    background:var(--ink); color:var(--paper-text);
+    border-radius:10px; padding:56px; overflow:hidden;
+  }
+  .mentoring-text{flex:1.4; min-width:280px;}
+  .mentoring-text .eyebrow{color:var(--route-soft); margin-bottom:18px;}
+  .mentoring-text h2{font-size:clamp(24px,3vw,32px); margin-bottom:16px; line-height:1.2;}
+  .mentoring-text p{font-size:15.5px; color:var(--muted-on-ink); max-width:56ch;}
+  .mentoring-stamp{
+    flex:1; min-width:220px; display:flex; flex-direction:column; gap:1px;
+    background:var(--ink-line); border:1px solid var(--ink-line); border-radius:6px; overflow:hidden;
+  }
+  .ms-row{display:flex; justify-content:space-between; gap:12px; background:var(--ink-soft); padding:16px 20px; font-family:'IBM Plex Mono'; font-size:13px;}
+  .ms-k{color:var(--muted-on-ink);}
+  .ms-v{color:var(--brass-soft); font-weight:500; text-align:right;}
+
+  /* ---------- FOUNDER (updated) ---------- */
+  .founder-grid{display:flex; gap:52px; align-items:flex-start; flex-wrap:wrap;}
+  .founder-photo{flex:0 0 220px;}
+  .photo-placeholder{
+    width:220px; height:220px; border-radius:8px;
+    background:var(--paper-soft); border:1px dashed var(--paper-line);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces'; font-size:56px; color:var(--route-dark);
+    font-weight:600;
+  }
+  .founder-inner{flex:1; min-width:320px; max-width:640px;}
+  .credential-stamp{display:flex; flex-direction:column; gap:1px; background:var(--paper-line); border:1px solid var(--paper-line); border-radius:6px; overflow:hidden; margin:26px 0; max-width:440px;}
+  .cs-item{display:flex; justify-content:space-between; gap:12px; background:var(--paper); padding:12px 18px; font-family:'IBM Plex Mono'; font-size:12.5px;}
+  .cs-k{color:var(--muted-on-paper);}
+  .cs-v{color:var(--route-dark); font-weight:500; text-align:right;}
+
+  /* ---------- BOARD LINK / NOTE ---------- */
+  .board-link{
+    font-family:'IBM Plex Mono'; font-size:12.5px; color:var(--brass-soft) !important;
+    text-decoration:none; font-weight:500; white-space:nowrap;
+  }
+  .board-link:hover{text-decoration:underline;}
+  .board-note{font-size:13px; color:var(--muted-on-paper); margin-top:16px; font-style:italic;}
+
+  /* ---------- SECTION GENERIC (cont'd) ---------- */
   .section{padding:110px 0;}
   .section-dark{background:var(--ink); color:var(--paper-text);}
   .section-head{max-width:640px; margin-bottom:64px;}
@@ -331,8 +374,8 @@
     .modules{grid-template-columns:1fr 1fr; }
     .outcomes{grid-template-columns:1fr;}
     .logi-grid{grid-template-columns:1fr; gap:20px;}
-    .board-row{grid-template-columns:1.2fr 1fr 1fr; font-size:11.5px; padding:14px 16px;}
-    .board-row div:nth-child(4){display:none;}
+    .board-row{grid-template-columns:1.4fr 1fr 0.9fr; font-size:11.5px; padding:14px 16px;}
+    .board-row div:nth-child(2){display:none;}
     .rhythm{flex-direction:column;}
     .beat::after{display:none;}
     .beat{border-left:2px solid var(--paper-line); border-top:none; padding-left:18px;}
@@ -342,6 +385,11 @@
     .hero{padding:150px 0 70px;}
     .section{padding:80px 0;}
     .future-row{flex-direction:column; gap:8px;}
+    .mentoring-card{padding:32px 24px; gap:32px;}
+    .founder-photo{flex:0 0 auto;}
+    .photo-placeholder{width:140px; height:140px; font-size:36px;}
+    .ms-row, .cs-item{flex-direction:column; gap:4px;}
+    .ms-v, .cs-v{text-align:left;}
   }
 </style>
 </head>
@@ -357,7 +405,7 @@
       <a href="#outcomes">Outcomes</a>
       <a href="#logistics">Join</a>
       <a href="#future">What's Next</a>
-      <a href="#logistics" class="nav-cta">Apply — Aug 15</a>
+      <a href="#logistics" class="nav-cta">Join Cohort 01</a>
     </div>
   </div>
 </nav>
@@ -375,7 +423,7 @@
     </div>
     <div class="flight-stamp">
       <div class="label">COHORT</div><div class="val">01</div>
-      <div class="label">DEPARTS</div><div class="val">15 AUG 2026</div>
+      <div class="label">STATUS</div><div class="val">ENROLLING NOW</div>
       <div class="label">FORMAT</div><div class="val">LIVE · ONLINE · 8 WKS</div>
     </div>
 
@@ -409,7 +457,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Why Launchpad</span>
-      <h2>A lot is expected from students these days</h2>
+      <h2>Today's students face a lot of challenges</h2>
       <p>These aren't shortcomings — they're patterns we see again and again, and they're simply part of navigating a fast-changing world with more choices than any generation before.</p>
     </div>
     <div class="problem-grid">
@@ -527,26 +575,47 @@
   </div>
 </section>
 
+<!-- ============ MENTORING ADD-ON ============ -->
+<section class="section mentoring">
+  <div class="wrap">
+    <div class="mentoring-card reveal">
+      <div class="mentoring-text">
+        <span class="eyebrow">Included With Every Cohort</span>
+        <h2>Plus, direct 1:1 time with your facilitator</h2>
+        <p>Alongside the eight weekly group sessions, every student also gets dedicated one-on-one time to work through what's immediately on their mind — a specific decision, a specific worry, a specific conversation they're dreading. The group builds the framework; the 1:1 time applies it to whatever's actually going on in your life right now. Included in the programme fee, no separate cost.</p>
+      </div>
+      <div class="mentoring-stamp">
+        <div class="ms-row"><span class="ms-k">Format</span><span class="ms-v">1:1, live</span></div>
+        <div class="ms-row"><span class="ms-k">Included In</span><span class="ms-v">Programme Fee</span></div>
+        <div class="ms-row"><span class="ms-k">Focus</span><span class="ms-v">Your immediate challenge</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ LOGISTICS / DEPARTURE BOARD ============ -->
 <section class="section board-section" id="logistics">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Join a Cohort</span>
       <h2>One route currently open</h2>
-      <p>Small groups, live and online. Applications close a few days before departure.</p>
+      <p>Small groups, live and online. Register your interest below and we'll follow up directly with exact dates.</p>
     </div>
 
     <div class="board reveal">
       <div class="board-row head">
-        <div>Cohort</div><div>Departs</div><div>Seats</div><div>Status</div>
+        <div>Cohort</div><div>Seats</div><div>Status</div><div></div>
       </div>
       <div class="board-row">
-        <div>Launchpad — Cohort 01</div><div>15 AUG 2026</div><div>15–20</div><div class="status open">Boarding</div>
+        <div>Launchpad — Cohort 01</div><div>15–20</div><div class="status open">Enrolling</div>
+        <div><a href="mailto:hello@evolvefoundation.org?subject=Join%20Launchpad%20Cohort%2001" class="board-link">Join →</a></div>
       </div>
       <div class="board-row">
-        <div>Launchpad — Cohort 02</div><div>Q4 2026</div><div>15–20</div><div class="status">Scheduling</div>
+        <div>Launchpad — Cohort 02</div><div>15–20</div><div class="status">Planning</div>
+        <div><a href="mailto:enquire@evolvefoundation.org?subject=Interest%20-%20Launchpad%20Cohort%2002" class="board-link">Notify Me →</a></div>
       </div>
     </div>
+    <p class="board-note">Register your interest and we'll reach out directly to confirm your start date and next steps.</p>
 
     <div class="logi-grid reveal">
       <div class="logi-card">
@@ -568,41 +637,41 @@
   </div>
 </section>
 
-<!-- ============ FUTURE / EXPANSION ============ -->
+<!-- ============ BEYOND LAUNCHPAD ============ -->
 <section class="section future" id="future">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Beyond Launchpad</span>
-      <h2>This is the first waypoint, not the destination</h2>
-      <p>Launchpad is where The Evolve Foundation is proving the model. Here's what's charted next.</p>
+      <h2>Launchpad is the entry point, not the whole map</h2>
+      <p>The Evolve Foundation's long-term vision is to become the trusted platform where students come to figure out their lives before entering the real world. Launchpad is deliberately the first, narrow, proven step toward that — everything below is built on top of the trust and outcomes Launchpad creates, not alongside it.</p>
     </div>
     <div class="future-map reveal">
       <div class="future-row">
-        <div class="fstat now">NOW — LIVE</div>
+        <div class="fstat now">NOW</div>
         <div class="fbody">
-          <h4>Direct-to-Student Cohorts</h4>
-          <p>Live, online, open-enrolment batches — the current pilot, and the proving ground for everything after it.</p>
+          <h4>Launchpad — The Entry Programme</h4>
+          <p>The 8-week guided journey through clarity, confidence, and direction — live, online, and the proving ground for everything that follows.</p>
         </div>
       </div>
       <div class="future-row">
-        <div class="fstat">NEXT — COLLEGE PARTNERSHIPS</div>
+        <div class="fstat">YEAR 1–2</div>
         <div class="fbody">
-          <h4>Launchpad on Campus</h4>
-          <p>In-person or live online cohorts delivered directly through college TPO cells, backed by real outcome data from this pilot.</p>
+          <h4>Elevate</h4>
+          <p>Structured 1:1 or small-group mentorship connecting Launchpad alumni with industry experts, once the model has proven itself to scale.</p>
         </div>
       </div>
       <div class="future-row">
-        <div class="fstat">LATER — FORMAL RECOGNITION</div>
+        <div class="fstat">YEAR 3</div>
         <div class="fbody">
-          <h4>Value-Added Course Status</h4>
-          <p>Working toward formal NAAC Value-Added Course recognition, so Launchpad counts toward a student's own institution, not just their own growth.</p>
+          <h4>Horizon</h4>
+          <p>Helping students design their future around managing money, handling failure and building resilience and personal growth and development.</p>
         </div>
       </div>
       <div class="future-row">
-        <div class="fstat">LATER — VALUE ADDED PROGRAMS</div>
+        <div class="fstat">YEAR 1–3</div>
         <div class="fbody">
-          <h4>Digital Outreach, Community and Mentorship</h4>
-          <p>Personalized learning journeys, 1:1 or small group mentorship and guidance from industry experts.</p>
+          <h4>Compass</h4>
+          <p>A digital platform serving as a lifelong growth companion for students.</p>
         </div>
       </div>
     </div>
@@ -611,22 +680,35 @@
 
 <!-- ============ FOUNDER ============ -->
 <section class="founder">
-  <div class="wrap founder-inner reveal">
-    <span class="eyebrow" style="color:var(--route-dark); margin-bottom:24px;">Why This Exists</span>
-    <p>After more than 30 years working with global financial institutions and Wall Street firms, I felt a growing desire to invest my experience in something that could make a meaningful difference.</p>
-    <p>Over the years, I observed that students are often prepared for examinations, interviews, and careers, but not for the deeper questions that shape their future around clarity, confidence, and direction.</p>
-    <p>The Evolve Foundation was created to help address that gap. Through thoughtfully designed programmes such as Launchpad, I help students discover themselves, gain confidence in their decisions, and move forward with greater clarity and direction.</p>
-    <div class="sig">Rams Parameswaran</div>
-    <div class="role">Founder, The Evolve Foundation</div>
+  <div class="wrap reveal">
+    <span class="eyebrow" style="color:var(--route-dark); margin-bottom:32px;">The Founder</span>
+    <div class="founder-grid">
+      <div class="founder-photo">
+        <!-- Replace this placeholder div with: <img src="your-photo.jpg" alt="Rams Parameswaran"> -->
+        <div class="photo-placeholder">RP</div>
+      </div>
+      <div class="founder-inner">
+        <p>After 30+ years serving in leadership capacities for Global Financial Institutions and Wall Street firms, I felt a growing desire to invest my skills and experience in something that could make a meaningful impact to students.</p>
+        <p>This is why The Evolve Foundation exists. The vision for The Evolve Foundation is to help young adults develop the clarity, confidence, and self-awareness needed to navigate life's most important decisions.  I believe every student deserves the opportunity to understand who they are before deciding what they should become.</p>
+        <p>This is why Launchpad is built the way it is — one small cohort at a time, with real attention on each student rather than a one-size-fits-all workshop.</p>
+        <div class="credential-stamp">
+          <div class="cs-item"><span class="cs-k">Experience</span><span class="cs-v">30+ Years, Fortune 500 Companies</span></div>
+          <div class="cs-item"><span class="cs-k">Role</span><span class="cs-v">Founder &amp; Lead Facilitator</span></div>
+          <div class="cs-item"><span class="cs-k">Focus</span><span class="cs-v">Passionate about making a difference in people's lives, one student at a time</span></div>
+        </div>
+        <div class="sig">Rams Parameswaran</div>
+        <div class="role">Founder, The Evolve Foundation</div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ============ FINAL CTA ============ -->
 <section class="final-cta">
   <div class="wrap reveal">
-    <h2>Cohort 01 is boarding.</h2>
-    <p>15–20 seats. Departs 15 August 2026. Live and online.</p>
-    <a href="mailto:hello@evolvefoundation.org" class="btn btn-primary">Apply for the Pilot Cohort →</a>
+    <h2>Cohort 01 is enrolling.</h2>
+    <p>15–20 seats. Live and online. Register your interest — we'll follow up directly with your start date.</p>
+    <a href="mailto:hello@evolvefoundation.org?subject=Join%20Launchpad%20Cohort%2001" class="btn btn-primary">Join Cohort 01 →</a>
   </div>
 </section>
 
