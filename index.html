@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Evolve Foundation — Launchpad</title>
+<title>The Evolve Foundation | Launchpad, our flagship programme</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -191,12 +191,10 @@
   /* ---------- FOUNDER (updated) ---------- */
   .founder-grid{display:flex; gap:52px; align-items:flex-start; flex-wrap:wrap;}
   .founder-photo{flex:0 0 220px;}
-  .photo-placeholder{
+  .founder-img{
     width:220px; height:220px; border-radius:8px;
-    background:var(--paper-soft); border:1px dashed var(--paper-line);
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Fraunces'; font-size:56px; color:var(--route-dark);
-    font-weight:600;
+    object-fit:cover; display:block;
+    border:1px solid var(--paper-line);
   }
   .founder-inner{flex:1; min-width:320px; max-width:640px;}
   .credential-stamp{display:flex; flex-direction:column; gap:1px; background:var(--paper-line); border:1px solid var(--paper-line); border-radius:6px; overflow:hidden; margin:26px 0; max-width:440px;}
@@ -247,6 +245,8 @@
     border-left:2px solid var(--brass); padding-left:28px; margin-bottom:32px;
   }
   .mission .attrib{font-family:'IBM Plex Mono'; font-size:12.5px; color:var(--muted-on-paper); letter-spacing:0.04em;}
+  .mission .bridge-line{font-size:16px; color:var(--ink-text); margin-top:28px; padding-top:28px; border-top:1px solid var(--paper-line);}
+  .mission .bridge-line strong{color:var(--route-dark);}
 
   /* ---------- ROUTE (signature) ---------- */
   .route-section{background:var(--ink); color:var(--paper-text); padding:120px 0;}
@@ -387,7 +387,7 @@
     .future-row{flex-direction:column; gap:8px;}
     .mentoring-card{padding:32px 24px; gap:32px;}
     .founder-photo{flex:0 0 auto;}
-    .photo-placeholder{width:140px; height:140px; font-size:36px;}
+    .founder-img{width:140px; height:140px;}
     .ms-row, .cs-item{flex-direction:column; gap:4px;}
     .ms-v, .cs-v{text-align:left;}
   }
@@ -397,7 +397,7 @@
 
 <nav>
   <div class="nav-inner">
-    <div class="nav-brand">The Evolve Foundation <span>/ Launchpad</span></div>
+    <div class="nav-brand">The Evolve Foundation</div>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">MENU</button>
     <div class="nav-links" id="navLinks">
       <a href="#problem">Why</a>
@@ -416,7 +416,7 @@
   <div class="wrap hero-inner">
     <span class="eyebrow">The Evolve Foundation</span>
     <h1>Clarity. Confidence. <em>Direction.</em> For what comes next.</h1>
-    <p class="lede">Launchpad is an 8-week guided programme that helps final-year students and recent graduates build real clarity, real confidence, and a real sense of direction — through honest reflection, real conversation, and thoughtful facilitation.</p>
+    <p class="lede">The Evolve Foundation helps students build real clarity, real confidence, and a real sense of direction — starting with Launchpad, our flagship 8-week guided programme, delivered through honest reflection, real conversation, and thoughtful facilitation.</p>
     <div class="cta-row">
       <a href="#logistics" class="btn btn-primary">Join the Pilot Cohort →</a>
       <a href="#route" class="btn btn-ghost">See how it works</a>
@@ -449,6 +449,7 @@
     <span class="eyebrow" style="color:var(--route-dark); margin-bottom:24px;">About The Evolve Foundation</span>
     <blockquote>The Evolve Foundation exists because too many students are being prepared for exams, interviews, and careers, but not for the deeper questions that shape their future. Through structured developmental experiences like Launchpad, we help young people gain clarity about who they are, confidence in where they are going, and direction for what comes next.</blockquote>
     <p class="attrib">THE EVOLVE FOUNDATION</p>
+    <p class="bridge-line">Our first step toward that vision is <strong>Launchpad</strong> — an 8-week guided programme built for exactly this.</p>
   </div>
 </section>
 
@@ -457,7 +458,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Why Launchpad</span>
-      <h2>Today's students face a lot of challenges</h2>
+      <h2>Growing up today asks a lot of students, quickly</h2>
       <p>These aren't shortcomings — they're patterns we see again and again, and they're simply part of navigating a fast-changing world with more choices than any generation before.</p>
     </div>
     <div class="problem-grid">
@@ -612,7 +613,7 @@
       </div>
       <div class="board-row">
         <div>Launchpad — Cohort 02</div><div>15–20</div><div class="status">Planning</div>
-        <div><a href="mailto:enquire@evolvefoundation.org?subject=Interest%20-%20Launchpad%20Cohort%2002" class="board-link">Notify Me →</a></div>
+        <div><a href="mailto:hello@evolvefoundation.org?subject=Interest%20-%20Launchpad%20Cohort%2002" class="board-link">Notify Me →</a></div>
       </div>
     </div>
     <p class="board-note">Register your interest and we'll reach out directly to confirm your start date and next steps.</p>
@@ -643,7 +644,7 @@
     <div class="section-head reveal">
       <span class="eyebrow">Beyond Launchpad</span>
       <h2>Launchpad is the entry point, not the whole map</h2>
-      <p>The Evolve Foundation's long-term vision is to become the trusted platform where students come to figure out their lives before entering the real world. Launchpad is deliberately the first, narrow, proven step toward that — everything below is built on top of the trust and outcomes Launchpad creates, not alongside it.</p>
+      <p>The Evolve Foundation's long-term vision is to become the trusted platform where students across India come to figure out their lives before entering the real world. Launchpad is deliberately the first, narrow, proven step toward that — everything below is built on top of the trust and outcomes Launchpad creates, not alongside it.</p>
     </div>
     <div class="future-map reveal">
       <div class="future-row">
@@ -657,21 +658,28 @@
         <div class="fstat">YEAR 1–2</div>
         <div class="fbody">
           <h4>Elevate</h4>
-          <p>Structured 1:1 or small-group mentorship connecting Launchpad alumni with industry experts, once the model has proven itself to scale.</p>
+          <p>Structured 1:1 or small-group mentorship connecting Launchpad alumni with industry experts, once the model has proven itself at scale.</p>
         </div>
       </div>
       <div class="future-row">
         <div class="fstat">YEAR 3</div>
         <div class="fbody">
           <h4>Horizon</h4>
-          <p>Helping students design their future around managing money, handling failure and building resilience and personal growth and development.</p>
+          <p>Helping students navigate what comes after — managing money, handling failure, and building the resilience personal growth requires.</p>
         </div>
       </div>
       <div class="future-row">
         <div class="fstat">YEAR 1–3</div>
         <div class="fbody">
           <h4>Compass</h4>
-          <p>A digital platform serving as a lifelong growth companion for students.</p>
+          <p>A digital platform serving as a lifelong growth companion for students, wherever they are in their journey.</p>
+        </div>
+      </div>
+      <div class="future-row">
+        <div class="fstat">YEAR 3+</div>
+        <div class="fbody">
+          <h4>Evolve Digital</h4>
+          <p>A personalised digital platform — built once the in-person model is proven, as an extension of what works, not a replacement for it.</p>
         </div>
       </div>
     </div>
@@ -684,17 +692,16 @@
     <span class="eyebrow" style="color:var(--route-dark); margin-bottom:32px;">The Founder</span>
     <div class="founder-grid">
       <div class="founder-photo">
-        <!-- Replace this placeholder div with: <img src="your-photo.jpg" alt="Rams Parameswaran"> -->
-        <div class="photo-placeholder">RP</div>
+        <img class="founder-img" src="rams.jpeg" alt="Rams Parameswaran, Founder of The Evolve Foundation">
       </div>
       <div class="founder-inner">
-        <p>After 30+ years serving in leadership capacities for Global Financial Institutions and Wall Street firms, I felt a growing desire to invest my skills and experience in something that could make a meaningful impact to students.</p>
-        <p>This is why The Evolve Foundation exists. The vision for The Evolve Foundation is to help young adults develop the clarity, confidence, and self-awareness needed to navigate life's most important decisions.  I believe every student deserves the opportunity to understand who they are before deciding what they should become.</p>
+        <p>After 30+ years serving in leadership capacities for global financial institutions and Wall Street firms, I felt a growing desire to invest my skills and experience in something that could make a meaningful impact to students.</p>
+        <p>This is why The Evolve Foundation exists. The vision for The Evolve Foundation is to help young adults develop the clarity, confidence, and self-awareness needed to navigate life's most important decisions. I believe every student deserves the opportunity to understand who they are before deciding what they should become.</p>
         <p>This is why Launchpad is built the way it is — one small cohort at a time, with real attention on each student rather than a one-size-fits-all workshop.</p>
         <div class="credential-stamp">
           <div class="cs-item"><span class="cs-k">Experience</span><span class="cs-v">30+ Years, Fortune 500 Companies</span></div>
           <div class="cs-item"><span class="cs-k">Role</span><span class="cs-v">Founder &amp; Lead Facilitator</span></div>
-          <div class="cs-item"><span class="cs-k">Focus</span><span class="cs-v">Passionate about making a difference in people's lives, one student at a time</span></div>
+          <div class="cs-item"><span class="cs-k">Focus</span><span class="cs-v">Making a difference, one student at a time</span></div>
         </div>
         <div class="sig">Rams Parameswaran</div>
         <div class="role">Founder, The Evolve Foundation</div>
