@@ -1,4 +1,11 @@
 The Evolve Foundation website
 
-Upload index.html, styles.css, script.js, and founder.jpg to the same web folder.
-Open index.html locally to preview the site.
+Files:
+- index.html
+- styles.css
+- script.js
+- founder.jpg
+
+Upload all four files to the same web directory.
+
+Updated: transparent ₹4,000 pilot pricing, programme inclusions, and commitment language.
