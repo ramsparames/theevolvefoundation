@@ -828,3 +828,34 @@ footer{padding:76px 0;background:var(--ink);}
   .hero .traj-labels-row{min-width:620px;}
   .mission blockquote{font-size:34px;}
 }
+
+
+/* ---------- V2.6 FINAL ACCORDION REFINEMENT ---------- */
+.acc-list{
+  gap:0;
+  background:transparent;
+  border-top:1px solid var(--paper-line);
+  border-right:0;
+  border-bottom:0;
+  border-left:0;
+  border-radius:0;
+  overflow:visible;
+}
+.acc-item{
+  border-bottom:1px solid rgba(184,122,46,.30);
+}
+.acc-trigger{
+  padding:30px 4px;
+  gap:18px;
+}
+.acc-trigger:hover{background:rgba(240,240,234,.55);}
+.acc-title{font-size:clamp(20px,2vw,24px);line-height:1.22;}
+.acc-sub{font-size:14px;line-height:1.5;margin-top:4px;}
+.acc-panel-inner{padding:4px 4px 48px;}
+.acc-icon{font-size:24px;}
+@media(max-width:680px){
+  .acc-trigger{padding:24px 2px;gap:12px;}
+  .acc-title{font-size:21px;}
+  .acc-sub{font-size:13px;}
+  .acc-panel-inner{padding:2px 2px 38px;}
+}

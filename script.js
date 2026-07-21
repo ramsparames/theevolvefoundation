@@ -33,6 +33,9 @@
     window.scrollTo({ top: y, behavior: 'smooth' });
   }
   const allTriggers = Array.from(document.querySelectorAll('.acc-trigger'));
+  // Keep the first section open on initial load so visitors see the programme immediately.
+  const firstOpenTrigger = allTriggers.find(trigger => trigger.getAttribute('aria-expanded') === 'true');
+  if(firstOpenTrigger){ openAccordion(firstOpenTrigger); }
   allTriggers.forEach(trigger => {
     trigger.addEventListener('click', () => {
       const isOpen = trigger.getAttribute('aria-expanded') === 'true';
