@@ -1,11 +1,3 @@
-The Evolve Foundation website
+The Evolve Foundation Website v2.0
 
-Files:
-- index.html
-- styles.css
-- script.js
-- founder.jpg
-
-Upload all four files to the same web directory.
-
-Updated: transparent ₹4,000 pilot pricing, programme inclusions, and commitment language.
+Deploy all files in this folder together.
