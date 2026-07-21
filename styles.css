@@ -748,3 +748,33 @@ footer{padding:76px 0;background:var(--ink);}
 .faq-item h3{font-size:21px;margin-bottom:10px;}
 .faq-item p{font-size:15px;color:var(--muted-on-paper);line-height:1.65;}
 @media(max-width:680px){.faq-grid{grid-template-columns:1fr;}.faq-item{padding:26px 22px;}}
+
+
+/* ---------- V2.1 BRAND ARCHITECTURE ---------- */
+.hero-programme-note{
+  display:flex; flex-wrap:wrap; gap:8px 10px; align-items:baseline;
+  max-width:620px; margin:-12px 0 32px; padding:16px 0;
+  border-top:1px solid var(--ink-line); border-bottom:1px solid var(--ink-line);
+  color:var(--muted-on-ink); font-size:15px;
+}
+.hero-programme-note span{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--brass-soft);}
+.hero-programme-note strong{font-family:'Fraunces',serif;font-size:20px;color:var(--paper-text);}
+.programmes-section{padding:112px 0;background:var(--paper);}
+.programme-family{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;}
+.programme-feature{padding:40px;border:1px solid var(--paper-line);border-radius:16px;background:var(--paper);}
+.programme-feature:first-child{background:var(--ink);color:var(--paper-text);border-color:var(--ink);}
+.programme-status{display:inline-block;margin-bottom:26px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;}
+.programme-status.current{color:var(--brass-soft);}
+.programme-status.developing{color:var(--route-dark);}
+.programme-feature h3{font-size:34px;margin-bottom:6px;}
+.programme-purpose{font-family:'Fraunces',serif;font-size:19px;margin-bottom:22px;color:var(--route-dark);}
+.programme-feature:first-child .programme-purpose{color:var(--brass-soft);}
+.programme-feature>p:not(.programme-purpose){font-size:16px;line-height:1.7;color:var(--muted-on-paper);max-width:54ch;}
+.programme-feature:first-child>p:not(.programme-purpose){color:var(--muted-on-ink);}
+.text-link{display:inline-block;margin-top:26px;color:var(--brass-soft);text-decoration:none;font-weight:600;}
+.programme-note{display:block;margin-top:24px;padding-top:20px;border-top:1px solid var(--paper-line);font-size:13px;color:var(--muted-on-paper);}
+.foundation-beyond{background:var(--paper-soft);padding:40px;border-left:2px solid var(--brass);}
+.foundation-beyond .eyebrow{color:var(--route-dark);margin-bottom:18px;}
+.foundation-beyond h3{font-size:28px;margin-bottom:18px;}
+.foundation-beyond p{max-width:70ch;color:var(--muted-on-paper);font-size:16px;margin-top:12px;}
+@media(max-width:760px){.programme-family{grid-template-columns:1fr}.programme-feature{padding:28px}.programmes-section{padding:82px 0}}
