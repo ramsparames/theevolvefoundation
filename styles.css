@@ -754,7 +754,7 @@ footer{padding:76px 0;background:var(--ink);}
 .hero-programme-note{
   display:flex; flex-wrap:nowrap; white-space:nowrap; gap:10px; align-items:center;
   max-width:620px; margin:-12px 0 32px; padding:16px 0;
-  border-top:1px solid var(--ink-line); border-bottom:1px solid var(--ink-line);
+  border-top:1px solid var(--brass); border-bottom:1px solid var(--brass);
   color:var(--muted-on-ink); font-size:15px;
 }
 .hero-programme-note span{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--brass-soft);}
