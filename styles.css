@@ -752,13 +752,22 @@ footer{padding:76px 0;background:var(--ink);}
 
 /* ---------- V2.1 BRAND ARCHITECTURE ---------- */
 .hero-programme-note{
-  display:inline-flex; flex-wrap:nowrap; white-space:nowrap; gap:8px; align-items:center;
-  max-width:620px; margin:-12px 0 32px; padding:10px 0;
-  border-top:1px solid var(--brass); border-bottom:1px solid var(--brass); width: fit-content;
-  color:var(--muted-on-ink); font-size:15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 10px 0;
+
+    border-top: 1px solid var(--brass);
+    border-bottom: 1px solid var(--brass);
+
+    width: fit-content;
 }
-.hero-programme-note span{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--brass-soft);}
-.hero-programme-note strong{font-family:'Fraunces',serif;font-size:20px;color:var(--paper-text);}
+.hero-programme-note span{    font-family: "IBM Plex Mono";
+    font-size: 0.78rem;
+    letter-spacing: .12em;}
+.hero-programme-note strong{  font-family: "Source Sans 3";
+    font-weight: 600;}
 .programmes-section{padding:112px 0;background:var(--paper);}
 .programme-family{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;}
 .programme-feature{padding:40px;border:1px solid var(--paper-line);border-radius:16px;background:var(--paper);}
