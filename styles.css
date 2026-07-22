@@ -868,3 +868,106 @@ footer{padding:76px 0;background:var(--ink);}
   .acc-sub{font-size:13px;}
   .acc-panel-inner{padding:2px 2px 38px;}
 }
+
+
+/* ---------- FINAL VISUAL POLISH ---------- */
+.hero-programme-block {
+  margin: 0 0 30px;
+  max-width: 620px;
+}
+
+.hero-programme-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 9px 0;
+  border-top: 1px solid rgba(228, 180, 120, 0.72);
+  border-bottom: 1px solid rgba(228, 180, 120, 0.72);
+  white-space: nowrap;
+}
+
+.hero-programme-note span:first-child {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  color: var(--route-soft);
+}
+
+.hero-programme-note strong {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 600;
+  color: var(--paper-text);
+}
+
+.programme-divider {
+  width: 1px;
+  height: 14px;
+  background: rgba(228, 180, 120, 0.55);
+}
+
+.hero-programme-description {
+  margin-top: 12px;
+  max-width: 48ch;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--muted-on-ink);
+}
+
+.hero-trajectory {
+  margin-top: 56px;
+}
+
+.credential-stamp {
+  width: 100%;
+  max-width: 100%;
+}
+
+.cs-item {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+}
+
+.cs-v {
+  white-space: nowrap;
+  text-align: left;
+}
+
+@media (max-width: 680px) {
+  .hero-programme-note {
+    gap: 9px;
+  }
+
+  .hero-programme-note span:first-child {
+    font-size: 9.5px;
+    letter-spacing: 0.09em;
+  }
+
+  .hero-programme-note strong {
+    font-size: 14px;
+  }
+
+  .hero-programme-description {
+    font-size: 14.5px;
+  }
+
+  .hero-trajectory {
+    margin-top: 46px;
+  }
+
+  .cs-item {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .cs-v {
+    white-space: normal;
+  }
+}
