@@ -752,7 +752,7 @@ footer{padding:76px 0;background:var(--ink);}
 
 /* ---------- V2.1 BRAND ARCHITECTURE ---------- */
 .hero-programme-note{
-  display:flex; flex-wrap:wrap; gap:8px 10px; align-items:baseline;
+  display:flex; flex-wrap:nowrap; white-space:nowrap; gap:10px; align-items:center;
   max-width:620px; margin:-12px 0 32px; padding:16px 0;
   border-top:1px solid var(--ink-line); border-bottom:1px solid var(--ink-line);
   color:var(--muted-on-ink); font-size:15px;
