@@ -989,3 +989,161 @@ footer{padding:76px 0;background:var(--ink);}
     white-space: normal;
   }
 }
+
+/* ---------- ABOUT RAMS PAGE ---------- */
+
+.nav-brand {
+  text-decoration: none;
+}
+
+.founder-page {
+  background: var(--paper);
+}
+
+.founder-page-hero {
+  padding: 150px 0 90px;
+  background: var(--ink);
+  color: var(--paper-text);
+}
+
+.founder-page-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
+  gap: 72px;
+  align-items: center;
+}
+
+.founder-page-photo img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid var(--ink-line);
+}
+
+.founder-page-intro .eyebrow {
+  margin-bottom: 24px;
+  color: var(--route-soft);
+}
+
+.founder-page-intro h1 {
+  margin-bottom: 24px;
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 1.02;
+}
+
+.founder-page-lede {
+  max-width: 44ch;
+  color: var(--muted-on-ink);
+  font-size: 20px;
+  line-height: 1.55;
+}
+
+.founder-story {
+  padding: 110px 0;
+}
+
+.founder-story-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.founder-story-inner p {
+  margin-bottom: 24px;
+  color: var(--ink-text);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.founder-story-inner blockquote {
+  margin: 52px 0;
+  padding-left: 30px;
+  border-left: 2px solid var(--brass);
+  color: var(--ink-text);
+  font-family: "Fraunces", serif;
+  font-size: clamp(27px, 4vw, 40px);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.founder-belief {
+  padding: 110px 0;
+  background: var(--paper-soft);
+}
+
+.founder-belief-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.founder-belief .eyebrow {
+  margin-bottom: 34px;
+  color: var(--route-dark);
+}
+
+.founder-belief blockquote {
+  margin-bottom: 28px;
+  color: var(--ink-text);
+  font-family: "Fraunces", serif;
+  font-size: clamp(30px, 4.8vw, 52px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.founder-belief p {
+  max-width: 55ch;
+  margin: 0 auto;
+  color: var(--muted-on-paper);
+  font-size: 16.5px;
+}
+
+.founder-launchpad {
+  padding: 110px 0;
+}
+
+.founder-launchpad .eyebrow {
+  margin-bottom: 20px;
+  color: var(--route-dark);
+}
+
+.founder-launchpad h2 {
+  margin-bottom: 28px;
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.15;
+}
+
+.founder-launchpad .btn {
+  margin-top: 18px;
+}
+
+@media (max-width: 800px) {
+  .founder-page-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .founder-page-photo {
+    max-width: 320px;
+  }
+
+  .founder-page-hero {
+    padding: 120px 0 70px;
+  }
+}
+
+@media (max-width: 560px) {
+  .founder-page-hero,
+  .founder-story,
+  .founder-belief,
+  .founder-launchpad {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .founder-story-inner p {
+    font-size: 16.5px;
+  }
+}
