@@ -171,18 +171,19 @@
   .traj-dot.d4{animation-delay:1.6s;}
   @keyframes pop{ from{opacity:0; r:2;} to{opacity:1;} }
   .traj-labels-row{
-    display:flex; justify-content:space-between; flex-wrap:wrap;
-    gap:8px 16px; margin-top:14px;
+    display:grid;
+    grid-template-columns:40px 1fr 1fr 1fr 40px;
+    align-items:start;
+    margin-top:14px;
   }
   .traj-labels-row span{
-    font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.04em;
-    color:var(--muted-on-ink);
-    opacity:0; animation:fadein 0.6s ease forwards;
+    justify-self:center;
+    text-align:center;
   }
-  .traj-labels-row span.d1{animation-delay:0.5s;}
-  .traj-labels-row span.d2{animation-delay:0.9s;}
-  .traj-labels-row span.d3{animation-delay:1.3s;}
-  .traj-labels-row span.d4{animation-delay:1.7s;}
+.traj-labels-row .d1{grid-column:1;}
+.traj-labels-row .d2{grid-column:2;}
+.traj-labels-row .d3{grid-column:3;}
+.traj-labels-row .d4{grid-column:4;}
   @keyframes fadein{ to{opacity:1;} }
 
   /* ---------- SECTION GENERIC ---------- */
