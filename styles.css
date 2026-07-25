@@ -850,6 +850,7 @@ footer{padding:76px 0;background:var(--ink);}
   padding-top:38px;
   border-top:1px solid var(--ink-line);
 }
+
 .trajectory-intro{
   display:flex;
   justify-content:space-between;
@@ -1169,5 +1170,57 @@ footer{padding:76px 0;background:var(--ink);}
 
   .founder-story-inner p {
     font-size: 16.5px;
+  }
+}
+.mobile-trajectory {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .hero-trajectory {
+    display: none;
+  }
+
+  .mobile-trajectory {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 42px;
+    padding-left: 10px;
+  }
+
+  .mobile-stage {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--muted-on-ink);
+  }
+
+  .mobile-dot {
+    width: 11px;
+    height: 11px;
+    flex: 0 0 11px;
+    border-radius: 50%;
+    background: var(--ink);
+    border: 2px solid var(--route-soft);
+  }
+
+  .mobile-line {
+    width: 1px;
+    height: 30px;
+    margin-left: 5px;
+    background: linear-gradient(
+      to bottom,
+      var(--route-soft),
+      var(--brass-soft)
+    );
+  }
+
+  .mobile-stage:last-child .mobile-dot {
+    background: var(--brass);
+    border-color: var(--brass-soft);
   }
 }
