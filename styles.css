@@ -191,7 +191,7 @@
 .traj-labels-row .d1 {
   left: 3.64%;
   transform: translateX(0);
-  text-align: left;
+  text-align: center;
 }
 
 .traj-labels-row .d2 {
@@ -205,7 +205,7 @@
 .traj-labels-row .d4 {
   left: 96.36%;
   transform: translateX(-100%);
-  text-align: right;
+  text-align: center;
 }
   @keyframes fadein{ to{opacity:1;} }
 
