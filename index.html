@@ -420,7 +420,7 @@ gtag('config', 'G-QW376FG9T4');
 <div>Launchpad Cohort 02</div>
 <div>15 to 20</div>
 <div class="status">Planning</div>
-<div><a class="board-link" href="mailto:enquire@theevolvefoundation.com?subject=Interest%20-%20Launchpad%20Cohort%2002">Notify Me →</a></div>
+<div><a class="board-link" id="contact-email" href="mailto:enquire@theevolvefoundation.com?subject=Interest%20-%20Launchpad%20Cohort%2002">Notify Me →</a></div>
 </div>
 </div>
 <p class="board-note">Register your interest and we'll reach out directly to confirm the start date and next steps.</p>
@@ -745,6 +745,19 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     }
+  const email =
+      document.getElementById("contact-email");
+  
+  if (email) {
+  
+      email.addEventListener("click", function () {
+  
+          gtag('event', 'contact_clicked', {
+              event_category: 'Contact'
+          });
+  
+      });
+  }
 });
 </script>
 </body>
