@@ -712,7 +712,7 @@ gtag('config', 'G-QW376FG9T4');
 <p></p><p><b><i></i></b>We want this to be genuinely risk free. Attend the first two weeks and if you don't feel it is worth your time,
       we will refund in full. No questions asked.</i></b></p>
 <p class="final-cta-followup">Register your interest and we will reach out personally with the start date and next steps.</p> 
-<a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSec7ptaquS_0xUQPLiwQ_1R844AA6dajxTcv0T7b9giZUz7gw/viewform" rel="noopener" target="_blank">
+<a class="btn btn-primary" id="apply-button" href="https://docs.google.com/forms/d/e/1FAIpQLSec7ptaquS_0xUQPLiwQ_1R844AA6dajxTcv0T7b9giZUz7gw/viewform" rel="noopener" target="_blank">
       Apply for Cohort 01 →
     </a>
 </div>
@@ -727,5 +727,25 @@ gtag('config', 'G-QW376FG9T4');
 </div>
 </div></div></footer>
 <script defer="" src="script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const applyButton =
+        document.getElementById("apply-button");
+
+    if (applyButton) {
+
+        applyButton.addEventListener("click", function () {
+
+            gtag('event', 'apply_clicked', {
+                event_category: 'Launchpad',
+                event_label: 'Founding Cohort'
+            });
+
+        });
+
+    }
+});
+</script>
 </body>
 </html>
