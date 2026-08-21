@@ -1,77 +1,218 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Terms &amp; Conditions | The Evolve Foundation</title>
-<meta name="description" content="The terms governing use of The Evolve Foundation website, programmes and services.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="The terms governing use of The Evolve Foundation website, programmes and services."/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
 
 <style>
-  :root{
-    --green:#063c33; --green-deep:#022f29; --cream:#fbf7ef;
-    --gold:#c98d22; --ink:#18352f; --muted:#6d746f; --line:#e4dccd;
+  .legal-hero{
+    padding:150px 0 64px;
+    background:var(--paper-soft);
+    border-bottom:1px solid var(--paper-line);
   }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--cream);color:var(--ink);font-family:"Source Sans 3",Arial,sans-serif;line-height:1.72}
-  a{color:inherit}
-  .legal-nav{background:var(--green-deep);color:#fff;border-bottom:1px solid rgba(201,141,34,.45)}
-  .legal-nav-inner{max-width:1120px;margin:auto;padding:18px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px}
-  .legal-brand{font-family:"Fraunces",Georgia,serif;font-size:20px;text-decoration:none;letter-spacing:.02em}
-  .legal-back{font-size:14px;color:#f2e9d9;text-decoration:none}
-  .legal-back:hover{color:#e5b54b}
-  .legal-hero{background:var(--green-deep);color:white;padding:72px 28px 64px}
-  .legal-hero-inner{max-width:920px;margin:auto}
-  .legal-kicker{display:block;color:#e5b54b;text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:600;margin-bottom:14px}
-  .legal-hero h1{font-family:"Fraunces",Georgia,serif;font-size:clamp(42px,6vw,68px);font-weight:400;line-height:1.05;margin:0 0 18px}
-  .legal-hero p{max-width:700px;color:#e9eee9;font-size:18px;margin:0}
-  .legal-content{max-width:920px;margin:auto;padding:64px 28px 80px}
-  .legal-content h2{font-family:"Fraunces",Georgia,serif;font-weight:500;font-size:28px;line-height:1.25;color:var(--green-deep);margin:42px 0 12px;padding-top:8px}
-  .legal-content h3{font-family:"Fraunces",Georgia,serif;font-weight:500;font-size:21px;color:var(--green-deep);margin:28px 0 8px}
-  .legal-content p{font-size:16px;margin:0 0 15px}
-  .legal-content ul{margin:4px 0 20px 24px;padding:0}
-  .legal-content li{margin:7px 0;padding-left:5px}
-  .legal-updated{margin-top:46px;padding-top:22px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
-  .legal-footer{background:var(--green-deep);color:#e9eee9}
-  .legal-footer-inner{max-width:1120px;margin:auto;padding:34px 28px;display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap}
-  .legal-footer a{color:#e5b54b;text-decoration:none}
-  .legal-footer-links{display:flex;gap:18px;flex-wrap:wrap}
-  @media(max-width:650px){
-    .legal-nav-inner,.legal-footer-inner{align-items:flex-start}
-    .legal-hero{padding-top:54px;padding-bottom:48px}
-    .legal-content{padding-top:42px}
+  .legal-hero-inner{max-width:860px;}
+  .legal-hero .eyebrow{color:var(--route-dark);margin-bottom:22px;}
+  .legal-hero h1{
+    font-size:clamp(38px,5vw,60px);
+    line-height:1.08;
+    color:var(--ink-text);
+    margin-bottom:20px;
+    max-width:16ch;
+  }
+  .legal-hero p{
+    max-width:62ch;
+    color:var(--muted-on-paper);
+    font-size:17px;
+    line-height:1.7;
+  }
+  .legal-content{
+    max-width:860px;
+    padding-top:70px;
+    padding-bottom:96px;
+  }
+  .legal-content h2{
+    font-size:clamp(24px,3vw,32px);
+    line-height:1.2;
+    color:var(--ink-text);
+    margin:44px 0 16px;
+    padding-top:8px;
+  }
+  .legal-content h3{
+    font-size:21px;
+    line-height:1.3;
+    color:var(--ink-text);
+    margin:30px 0 12px;
+  }
+  .legal-content p{
+    font-size:16px;
+    line-height:1.75;
+    color:var(--muted-on-paper);
+    margin-bottom:16px;
+  }
+  .legal-content ul{
+    margin:0 0 22px 24px;
+    color:var(--muted-on-paper);
+  }
+  .legal-content li{
+    font-size:16px;
+    line-height:1.7;
+    margin:7px 0;
+    padding-left:4px;
+  }
+  .legal-content .legal-updated{
+    margin-top:52px;
+    padding-top:24px;
+    border-top:1px solid var(--paper-line);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:.04em;
+    color:var(--route-dark);
+  }
+  .legal-footer-links{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .legal-footer-links a{
+    text-decoration:none;
+  }
+  .legal-footer-links a:hover{
+    color:var(--paper-text);
+    text-decoration:underline;
+  }
+  @media(max-width:700px){
+    .legal-hero{padding-top:128px;padding-bottom:48px;}
+    .legal-content{padding-top:48px;padding-bottom:72px;}
   }
 </style>
 
 </head>
 <body>
-<nav class="legal-nav">
-  <div class="legal-nav-inner">
-    <a class="legal-brand" href="index.html">The Evolve Foundation</a>
-    <a class="legal-back" href="index.html">← Back to website</a>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html" style="text-decoration:none;">The Evolve Foundation</a>
+    <button aria-label="Toggle menu" class="nav-toggle" id="navToggle">MENU</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#foundation">About</a>
+      <a href="index.html#programmes">Programmes</a>
+      <a href="index.html#launchpad">Launchpad</a>
+      <a href="index.html#parents">For Parents</a>
+      <a class="nav-cta" href="index.html#apply">Apply</a>
+    </div>
   </div>
 </nav>
+
 <header class="legal-hero">
-  <div class="legal-hero-inner">
-    <span class="legal-kicker">The Evolve Foundation</span>
+  <div class="wrap legal-hero-inner">
+    <span class="eyebrow">The Evolve Foundation</span>
     <h1>Terms &amp; Conditions</h1>
     <p>The terms governing use of The Evolve Foundation website, programmes and services.</p>
   </div>
 </header>
-<main class="legal-content">
-<h2>1. Introduction and Acceptance of Terms</h2><p>These Terms and Conditions (&quot;Terms&quot;) govern access to and use of the website located at theevolvefoundation.com (&quot;Website&quot;) and the educational programmes for real world readiness and related services (&quot;Services&quot;) offered by The Evolve Foundation, having its registered office at 94A, Karpagam Ave, RA Puram, Chennai 600028, Tamil Nadu, India and hereinafter referred to as &quot;EVOLVE&quot;.</p><p>By accessing the Website, registering for a Programme, or making payment for any Service, the person doing so (&quot;User,&quot; &quot;you,&quot; or &quot;Student&quot;) agrees to be bound by these Terms, the Privacy Policy, and any Programme-specific terms communicated at the time of enrolment. If you do not agree to these Terms, you must not use the Website or enrol in any Service.</p><p>These Terms constitute a legally binding agreement between you and EVOLVE. It is recommended that you read them carefully, in full, before enrolling.</p><p>Supplemental terms and conditions or Programme-specific documents may be communicated or posted from time to time and shall form part of these Terms where applicable. EVOLVE reserves the right to make changes or modifications to these Terms. Material changes affecting enrolled Students will be communicated as set out in Clause 12.</p><p>The information provided on the Website is not intended for distribution to or use by any person or entity in any jurisdiction where such distribution or use would be contrary to law or regulation. Persons who access the Website from other locations are responsible for compliance with applicable local laws.</p><h2>2. Eligibility and Age Requirements</h2><p>2.1 The Services are primarily intended for young people and college students within the age range specified for each Programme. Launchpad is intended for college students between the ages of 17 and 24 (inclusive).</p><p>2.2 For Users who are 17 years of age, the following additional conditions apply:</p><ul><li>Enrolment and payment must be made by, or with the express and verifiable consent of, a parent or legal guardian (&quot;Guardian&quot;), who shall confirm acceptance of these Terms on the minor Student&#x27;s behalf.</li><li>The Guardian shall be treated as a party to this agreement jointly with the minor Student for the purposes of payment obligations, refund requests, and communications regarding the Services.</li><li>Any consent required for the collection, use or processing of the minor Student&#x27;s personal data under Clause 5 must be given or verified by the Guardian.</li></ul><p>2.3 Users aged 18 and above who enrol in their own capacity confirm, by accepting these Terms, that they are of legal age to contract in their jurisdiction and have the capacity to enter into a binding agreement.</p><p>2.4 EVOLVE reserves the right to request proof of age or student status where relevant to a Programme and to refuse or cancel enrolment where eligibility criteria are not met.</p><h2>3. Description of Services</h2><p>3.1 EVOLVE offers educational and developmental programmes designed to help young people prepare for the real world. Programmes may include areas such as self-understanding, strengths, direction, decision-making, confidence, communication, execution, life capabilities, mentoring and other areas relevant to real world readiness.</p><p>3.2 Programme content, facilitators or mentors, schedule, mode of delivery, duration and specific outcomes are as described on the Website or in Programme-specific materials at the time of enrolment. EVOLVE may make reasonable updates to Programme content or delivery. Material changes to an enrolled Student&#x27;s Programme will be communicated in advance where reasonably possible.</p><p>3.3 EVOLVE does not guarantee any specific employment, academic, career or personal outcome as a result of completing a Programme.</p><h2>4. Fees, Payment, and Enrolment</h2><p>4.1 Programme fees are as displayed on the Website or otherwise communicated at the time of enrolment, inclusive or exclusive of applicable taxes as indicated. Fees must be paid in full before access to the Programme is granted, unless EVOLVE has expressly agreed otherwise in writing.</p><p>4.2 Payments may be processed through Razorpay or another payment processor communicated by EVOLVE. EVOLVE does not store full payment card details; payment data is handled in accordance with the security standards and privacy practices of the relevant payment processor.</p><p>4.3 Enrolment is confirmed only upon receipt of payment and issuance of a confirmation by EVOLVE.</p><p>4.4 EVOLVE reserves the right to revise Programme fees for future enrolments at any time. Fee revisions will not affect Students already enrolled and paid for a given Programme batch.</p><h2>5. Consent for Use of Personal Data</h2><p>5.1 By registering on the Website or enrolling in a Programme, you acknowledge that EVOLVE will collect and process personal data as described in its Privacy Policy, including information such as name, age, contact details, college or institution details, payment-related information and Programme participation records, for purposes including:</p><ul><li>processing enquiries, enrolment and payment;</li><li>delivering and administering the Programme, including attendance and participation tracking;</li><li>communicating with you regarding the Programme, schedule changes and related administrative matters;</li><li>improving the Services, including anonymised or aggregated analysis of Programme effectiveness;</li><li>sending promotional or marketing communications where you have opted in or where otherwise permitted by law, and from which you may opt out; and</li><li>complying with applicable legal and regulatory requirements.</li></ul><p>5.2 Where the Student is under 18 years of age, any consent required under applicable law must be provided or verified by the Student&#x27;s Guardian in accordance with Clause 2.2, in addition to any assent obtained from the Student where appropriate.</p><p>5.3 EVOLVE shall not sell personal data to third parties. Personal data may be shared with service providers only as reasonably necessary for the purposes described above, such as payment processors, IT or hosting providers, online form providers, email or communication platforms, and video-conferencing providers, subject to applicable law.</p><p>5.4 Full details of data collection, use, retention and applicable rights, including access, correction and deletion requests, are set out in EVOLVE&#x27;s separate Privacy Policy, which forms part of these Terms by reference.</p><p>5.5 You (and, where applicable, your Guardian) may withdraw consent for non-essential processing, such as marketing communications, at any time by writing to enquire@theevolvefoundation.com. Withdrawal of consent for data essential to delivering the Programme may affect EVOLVE&#x27;s ability to continue providing the Service.</p><h2>6. Cancellation and Refund Policy</h2><p>6.1 EVOLVE wants Students to have the opportunity to experience a Programme and determine whether it is right for them. Programme-specific refund terms may be communicated at the time of enrolment and, where applicable, shall form part of these Terms.</p><p>6.2 For Launchpad, a Student may attend the first two weeks and experience the Programme. If, after attending the first two weeks, the Student genuinely feels that Launchpad is not right for them, the Student may notify EVOLVE in writing within 3 calendar days following completion of the second scheduled Programme session, and EVOLVE will refund the Programme fee in full.</p><p>6.3 A Student who completes Launchpad with full participation and genuinely feels that the Programme has not helped them build greater clarity, confidence and a direction worth testing may speak with EVOLVE. EVOLVE will listen to and review the circumstances in good faith and seek to make the matter right, including offering a refund where EVOLVE considers that to be the fair outcome.</p><p>6.4 Refund requests must be submitted in writing to enquire@theevolvefoundation.com and should include sufficient information to identify the relevant enrolment and the reason for the request.</p><p>6.5 Approved refunds will be processed to the original mode of payment within 8 business days of approval, subject to processing timelines of the relevant bank or payment gateway, which are outside EVOLVE&#x27;s control.</p><p>6.6 For Programmes other than Launchpad, the cancellation and refund terms communicated for that Programme at the time of enrolment shall apply.</p><h2>7. Student Conduct and Responsibilities</h2><p>7.1 Students agree to provide accurate and complete information at the time of registration, including proof of eligibility or enrolment in a college or university where required.</p><p>7.2 Students agree to participate in the Programme in good faith, including attending scheduled sessions and completing assigned exercises. Students acknowledge that developmental outcomes depend substantially on individual participation, reflection, practice and application.</p><p>7.3 Students shall not record, reproduce, distribute, publish, share or resell Programme content, materials or recordings without EVOLVE&#x27;s prior written consent.</p><p>7.4 Students are expected to engage respectfully with facilitators, mentors and other participants. EVOLVE reserves the right to remove a Student from a Programme, without refund, in cases of serious misconduct, harassment, disruption, misuse of Programme materials or other material breach of these Terms.</p><h2>8. Disclaimer of Outcomes and Limitation of Liability</h2><p>8.1 EVOLVE provides Programme content, structure and guidance in good faith and using reasonable professional effort. The benefit a Student derives from a Programme depends substantially on the Student&#x27;s own participation, reflection, practice and application of the concepts and exercises.</p><p>8.2 Except for the refund commitments expressly set out in Clause 6, EVOLVE makes no warranty or guarantee that any Student will achieve a particular result, including any specific career, employment, academic or personal outcome, as a result of taking a Programme.</p><p>8.3 To the maximum extent permitted by applicable law, EVOLVE shall not be liable for any indirect or consequential loss or damage arising from a Student&#x27;s failure to apply or benefit from Programme content where the Services have otherwise been delivered substantially as described.</p><p>8.4 Nothing in this Clause excludes or limits EVOLVE&#x27;s liability for fraud or fraudulent misrepresentation, or any other liability that cannot lawfully be excluded or limited.</p><p>8.5 Subject to Clause 8.4 and applicable law, EVOLVE&#x27;s total aggregate liability arising out of or in connection with these Terms or the Services shall not exceed the amount of fees actually paid by the Student for the specific Programme giving rise to the claim.</p><h2>9. Intellectual Property</h2><p>9.1 All Programme materials, content, trademarks, logos and other intellectual property made available through the Website or a Programme remain the property of EVOLVE or its licensors. Students are granted a limited, non-exclusive, non-transferable licence to use such materials solely for their personal learning purposes, subject to Clause 7.3.</p><p>9.2 EVOLVE has taken reasonable care not to infringe third-party intellectual property rights in delivering its Programmes.</p><h2>10. Term and Termination</h2><p>10.1 These Terms shall remain in force while you use the Website or participate in a Service. EVOLVE may suspend or terminate access to a Programme or the Website where a User materially breaches these Terms, engages in serious misconduct, misuses Programme content, or where suspension or termination is reasonably necessary to comply with law or protect EVOLVE, its Students or its service providers.</p><p>10.2 Where EVOLVE removes a Student from a Programme for serious misconduct or material breach under Clause 7.4, the Student shall not be entitled to a refund except where required by applicable law.</p><p>10.3 EVOLVE reserves the right to take appropriate action in respect of misuse of its Website, Services, intellectual property or other rights.</p><h2>11. Dispute Resolution and Governing Law</h2><p>11.1 These Terms shall be governed by and construed in accordance with the laws of India, without regard to conflict of law principles.</p><p>11.2 Any dispute arising out of or in connection with these Terms shall first be addressed through good-faith negotiation between the parties. If unresolved within 30 days, the dispute shall be referred to a sole arbitrator in accordance with the Arbitration and Conciliation Act, 1996. The seat of arbitration shall be Chennai, India.</p><h2>12. Modification of Terms</h2><p>12.1 EVOLVE reserves the right to amend these Terms from time to time. Material changes affecting enrolled Students will be notified via email or Website notice where reasonably appropriate. Changes will apply prospectively from the date specified in the revised Terms, except where a change is required by law.</p><h2>13. Contact Information</h2><p>For questions regarding these Terms, refunds or data privacy, please contact:</p><p>The Evolve Foundation<br>Email: enquire@theevolvefoundation.com<br>Phone: +91 80560 38128<br>94A, Karpagam Ave, RA Puram<br>Chennai 600028, Tamil Nadu, India</p><p class="legal-updated">Last updated: August 2026</p>
+
+<main class="wrap legal-content">
+<h2>1. Introduction and Acceptance of Terms</h2>
+<p>These Terms and Conditions (&quot;Terms&quot;) govern access to and use of the website located at theevolvefoundation.com (&quot;Website&quot;) and the educational programmes for real world readiness and related services (&quot;Services&quot;) offered by The Evolve Foundation, having its registered office at 94A, Karpagam Ave, RA Puram, Chennai 600028, Tamil Nadu, India and hereinafter referred to as &quot;EVOLVE&quot;.</p>
+<p>By accessing the Website, registering for a Programme, or making payment for any Service, the person doing so (&quot;User,&quot; &quot;you,&quot; or &quot;Student&quot;) agrees to be bound by these Terms, the Privacy Policy, and any Programme-specific terms communicated at the time of enrolment. If you do not agree to these Terms, you must not use the Website or enrol in any Service.</p>
+<p>These Terms constitute a legally binding agreement between you and EVOLVE. It is recommended that you read them carefully, in full, before enrolling.</p>
+<p>Supplemental terms and conditions or Programme-specific documents may be communicated or posted from time to time and shall form part of these Terms where applicable. EVOLVE reserves the right to make changes or modifications to these Terms. Material changes affecting enrolled Students will be communicated as set out in Clause 12.</p>
+<p>The information provided on the Website is not intended for distribution to or use by any person or entity in any jurisdiction where such distribution or use would be contrary to law or regulation. Persons who access the Website from other locations are responsible for compliance with applicable local laws.</p>
+<h2>2. Eligibility and Age Requirements</h2>
+<p>2.1 The Services are primarily intended for young people and college students within the age range specified for each Programme. Launchpad is intended for college students between the ages of 17 and 24 (inclusive).</p>
+<p>2.2 For Users who are 17 years of age, the following additional conditions apply:</p>
+<ul>
+<li>Enrolment and payment must be made by, or with the express and verifiable consent of, a parent or legal guardian (&quot;Guardian&quot;), who shall confirm acceptance of these Terms on the minor Student&#x27;s behalf.</li>
+<li>The Guardian shall be treated as a party to this agreement jointly with the minor Student for the purposes of payment obligations, refund requests, and communications regarding the Services.</li>
+<li>Any consent required for the collection, use or processing of the minor Student&#x27;s personal data under Clause 5 must be given or verified by the Guardian.</li>
+</ul>
+<p>2.3 Users aged 18 and above who enrol in their own capacity confirm, by accepting these Terms, that they are of legal age to contract in their jurisdiction and have the capacity to enter into a binding agreement.</p>
+<p>2.4 EVOLVE reserves the right to request proof of age or student status where relevant to a Programme and to refuse or cancel enrolment where eligibility criteria are not met.</p>
+<h2>3. Description of Services</h2>
+<p>3.1 EVOLVE offers educational and developmental programmes designed to help young people prepare for the real world. Programmes may include areas such as self-understanding, strengths, direction, decision-making, confidence, communication, execution, life capabilities, mentoring and other areas relevant to real world readiness.</p>
+<p>3.2 Programme content, facilitators or mentors, schedule, mode of delivery, duration and specific outcomes are as described on the Website or in Programme-specific materials at the time of enrolment. EVOLVE may make reasonable updates to Programme content or delivery. Material changes to an enrolled Student&#x27;s Programme will be communicated in advance where reasonably possible.</p>
+<p>3.3 EVOLVE does not guarantee any specific employment, academic, career or personal outcome as a result of completing a Programme.</p>
+<h2>4. Fees, Payment, and Enrolment</h2>
+<p>4.1 Programme fees are as displayed on the Website or otherwise communicated at the time of enrolment, inclusive or exclusive of applicable taxes as indicated. Fees must be paid in full before access to the Programme is granted, unless EVOLVE has expressly agreed otherwise in writing.</p>
+<p>4.2 Payments may be processed through Razorpay or another payment processor communicated by EVOLVE. EVOLVE does not store full payment card details; payment data is handled in accordance with the security standards and privacy practices of the relevant payment processor.</p>
+<p>4.3 Enrolment is confirmed only upon receipt of payment and issuance of a confirmation by EVOLVE.</p>
+<p>4.4 EVOLVE reserves the right to revise Programme fees for future enrolments at any time. Fee revisions will not affect Students already enrolled and paid for a given Programme batch.</p>
+<h2>5. Consent for Use of Personal Data</h2>
+<p>5.1 By registering on the Website or enrolling in a Programme, you acknowledge that EVOLVE will collect and process personal data as described in its Privacy Policy, including information such as name, age, contact details, college or institution details, payment-related information and Programme participation records, for purposes including:</p>
+<ul>
+<li>processing enquiries, enrolment and payment;</li>
+<li>delivering and administering the Programme, including attendance and participation tracking;</li>
+<li>communicating with you regarding the Programme, schedule changes and related administrative matters;</li>
+<li>improving the Services, including anonymised or aggregated analysis of Programme effectiveness;</li>
+<li>sending promotional or marketing communications where you have opted in or where otherwise permitted by law, and from which you may opt out; and</li>
+<li>complying with applicable legal and regulatory requirements.</li>
+</ul>
+<p>5.2 Where the Student is under 18 years of age, any consent required under applicable law must be provided or verified by the Student&#x27;s Guardian in accordance with Clause 2.2, in addition to any assent obtained from the Student where appropriate.</p>
+<p>5.3 EVOLVE shall not sell personal data to third parties. Personal data may be shared with service providers only as reasonably necessary for the purposes described above, such as payment processors, IT or hosting providers, online form providers, email or communication platforms, and video-conferencing providers, subject to applicable law.</p>
+<p>5.4 Full details of data collection, use, retention and applicable rights, including access, correction and deletion requests, are set out in EVOLVE&#x27;s separate Privacy Policy, which forms part of these Terms by reference.</p>
+<p>5.5 You (and, where applicable, your Guardian) may withdraw consent for non-essential processing, such as marketing communications, at any time by writing to enquire@theevolvefoundation.com. Withdrawal of consent for data essential to delivering the Programme may affect EVOLVE&#x27;s ability to continue providing the Service.</p>
+<h2>6. Cancellation and Refund Policy</h2>
+<p>6.1 EVOLVE wants Students to have the opportunity to experience a Programme and determine whether it is right for them. Programme-specific refund terms may be communicated at the time of enrolment and, where applicable, shall form part of these Terms.</p>
+<p>6.2 For Launchpad, a Student may attend the first two weeks and experience the Programme. If, after attending the first two weeks, the Student genuinely feels that Launchpad is not right for them, the Student may notify EVOLVE in writing within 3 calendar days following completion of the second scheduled Programme session, and EVOLVE will refund the Programme fee in full.</p>
+<p>6.3 A Student who completes Launchpad with full participation and genuinely feels that the Programme has not helped them build greater clarity, confidence and a direction worth testing may speak with EVOLVE. EVOLVE will listen to and review the circumstances in good faith and seek to make the matter right, including offering a refund where EVOLVE considers that to be the fair outcome.</p>
+<p>6.4 Refund requests must be submitted in writing to enquire@theevolvefoundation.com and should include sufficient information to identify the relevant enrolment and the reason for the request.</p>
+<p>6.5 Approved refunds will be processed to the original mode of payment within 8 business days of approval, subject to processing timelines of the relevant bank or payment gateway, which are outside EVOLVE&#x27;s control.</p>
+<p>6.6 For Programmes other than Launchpad, the cancellation and refund terms communicated for that Programme at the time of enrolment shall apply.</p>
+<h2>7. Student Conduct and Responsibilities</h2>
+<p>7.1 Students agree to provide accurate and complete information at the time of registration, including proof of eligibility or enrolment in a college or university where required.</p>
+<p>7.2 Students agree to participate in the Programme in good faith, including attending scheduled sessions and completing assigned exercises. Students acknowledge that developmental outcomes depend substantially on individual participation, reflection, practice and application.</p>
+<p>7.3 Students shall not record, reproduce, distribute, publish, share or resell Programme content, materials or recordings without EVOLVE&#x27;s prior written consent.</p>
+<p>7.4 Students are expected to engage respectfully with facilitators, mentors and other participants. EVOLVE reserves the right to remove a Student from a Programme, without refund, in cases of serious misconduct, harassment, disruption, misuse of Programme materials or other material breach of these Terms.</p>
+<h2>8. Disclaimer of Outcomes and Limitation of Liability</h2>
+<p>8.1 EVOLVE provides Programme content, structure and guidance in good faith and using reasonable professional effort. The benefit a Student derives from a Programme depends substantially on the Student&#x27;s own participation, reflection, practice and application of the concepts and exercises.</p>
+<p>8.2 Except for the refund commitments expressly set out in Clause 6, EVOLVE makes no warranty or guarantee that any Student will achieve a particular result, including any specific career, employment, academic or personal outcome, as a result of taking a Programme.</p>
+<p>8.3 To the maximum extent permitted by applicable law, EVOLVE shall not be liable for any indirect or consequential loss or damage arising from a Student&#x27;s failure to apply or benefit from Programme content where the Services have otherwise been delivered substantially as described.</p>
+<p>8.4 Nothing in this Clause excludes or limits EVOLVE&#x27;s liability for fraud or fraudulent misrepresentation, or any other liability that cannot lawfully be excluded or limited.</p>
+<p>8.5 Subject to Clause 8.4 and applicable law, EVOLVE&#x27;s total aggregate liability arising out of or in connection with these Terms or the Services shall not exceed the amount of fees actually paid by the Student for the specific Programme giving rise to the claim.</p>
+<h2>9. Intellectual Property</h2>
+<p>9.1 All Programme materials, content, trademarks, logos and other intellectual property made available through the Website or a Programme remain the property of EVOLVE or its licensors. Students are granted a limited, non-exclusive, non-transferable licence to use such materials solely for their personal learning purposes, subject to Clause 7.3.</p>
+<p>9.2 EVOLVE has taken reasonable care not to infringe third-party intellectual property rights in delivering its Programmes.</p>
+<h2>10. Term and Termination</h2>
+<p>10.1 These Terms shall remain in force while you use the Website or participate in a Service. EVOLVE may suspend or terminate access to a Programme or the Website where a User materially breaches these Terms, engages in serious misconduct, misuses Programme content, or where suspension or termination is reasonably necessary to comply with law or protect EVOLVE, its Students or its service providers.</p>
+<p>10.2 Where EVOLVE removes a Student from a Programme for serious misconduct or material breach under Clause 7.4, the Student shall not be entitled to a refund except where required by applicable law.</p>
+<p>10.3 EVOLVE reserves the right to take appropriate action in respect of misuse of its Website, Services, intellectual property or other rights.</p>
+<h2>11. Dispute Resolution and Governing Law</h2>
+<p>11.1 These Terms shall be governed by and construed in accordance with the laws of India, without regard to conflict of law principles.</p>
+<p>11.2 Any dispute arising out of or in connection with these Terms shall first be addressed through good-faith negotiation between the parties. If unresolved within 30 days, the dispute shall be referred to a sole arbitrator in accordance with the Arbitration and Conciliation Act, 1996. The seat of arbitration shall be Chennai, India.</p>
+<h2>12. Modification of Terms</h2>
+<p>12.1 EVOLVE reserves the right to amend these Terms from time to time. Material changes affecting enrolled Students will be notified via email or Website notice where reasonably appropriate. Changes will apply prospectively from the date specified in the revised Terms, except where a change is required by law.</p>
+<h2>13. Contact Information</h2>
+<p>For questions regarding these Terms, refunds or data privacy, please contact:</p>
+<p>The Evolve Foundation<br>Email: enquire@theevolvefoundation.com<br>Phone: +91 80560 38128<br>94A, Karpagam Ave, RA Puram<br>Chennai 600028, Tamil Nadu, India</p>
+<p class="legal-updated">Last updated: August 2026</p>
 </main>
-<footer class="legal-footer">
-  <div class="legal-footer-inner">
-    <div>© 2026 The Evolve Foundation</div>
-    <div class="legal-footer-links">
-      <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
-      <a href="mailto:enquire@theevolvefoundation.com">Contact</a>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-v2">
+      <div class="footer-v2-brand">
+        <h2>The Evolve Foundation</h2>
+        <p>An educational initiative helping young people understand themselves and navigate life well.</p>
+      </div>
+      <div class="footer-v2-meta">
+        <a href="mailto:enquire@theevolvefoundation.com?subject=Website%20Enquiry">enquire@theevolvefoundation.com</a>
+        <span>Bengaluru · India · Established 2026</span>
+        <span class="legal-footer-links">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <span>·</span>
+          <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+        </span>
+        <span>© 2026 The Evolve Foundation. Launchpad and future programmes are initiatives of The Evolve Foundation.</span>
+      </div>
     </div>
   </div>
 </footer>
+<script defer src="script.js"></script>
 </body>
 </html>
