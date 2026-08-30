@@ -33,7 +33,6 @@
     window.scrollTo({ top: y, behavior: 'smooth' });
   }
   const allTriggers = Array.from(document.querySelectorAll('.acc-trigger'));
-  // All accordion sections remain collapsed on initial load.
   allTriggers.forEach(trigger => {
     trigger.addEventListener('click', () => {
       const isOpen = trigger.getAttribute('aria-expanded') === 'true';
@@ -81,3 +80,17 @@
   document.querySelectorAll('.nav-links a:not([href^="#acc-"])').forEach(a => {
     a.addEventListener('click', () => navLinks.classList.remove('open'));
   });
+
+// programmes dropdown
+const programmeDropdown = document.querySelector('.nav-dropdown');
+const programmeTrigger = document.querySelector('.nav-dropdown-trigger');
+if(programmeDropdown && programmeTrigger){
+  programmeTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = programmeDropdown.classList.toggle('open');
+    programmeTrigger.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', (e) => {
+    if(!programmeDropdown.contains(e.target)){ programmeDropdown.classList.remove('open'); programmeTrigger.setAttribute('aria-expanded','false'); }
+  });
+}
