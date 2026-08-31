@@ -963,3 +963,24 @@ footer{padding:76px 0;background:var(--ink);}
 }
 .programme-feature:first-child .programme-audience{color:var(--paper-text);}
 .programme-campus .programme-audience{color:var(--ink);}
+
+
+/* V3.11 mobile founder image fix
+   On programme pages, show the complete founder portrait on smaller screens. */
+@media (max-width:800px){
+  .programme-founder .founder-photo-col{
+    width:100%;
+    max-width:none;
+    display:block;
+  }
+  .programme-founder .founder-img{
+    display:block;
+    width:min(100%,360px);
+    max-width:360px;
+    height:auto;
+    aspect-ratio:auto;
+    object-fit:contain;
+    object-position:center;
+    margin:0 auto;
+  }
+}
