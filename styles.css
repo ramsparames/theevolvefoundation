@@ -984,3 +984,31 @@ footer{padding:76px 0;background:var(--ink);}
     margin:0 auto;
   }
 }
+
+
+/* V3.13 — clearer programme architecture + Ignite institutional model */
+.programme-family{gap:30px;}
+.programme-feature,.programme-feature:first-child{background:var(--paper);color:var(--ink);border:1px solid var(--paper-line);box-shadow:0 16px 42px rgba(24,34,30,.06);position:relative;overflow:hidden;}
+.programme-feature:before{content:"";display:block;position:absolute;left:0;top:0;width:100%;height:5px;background:var(--brass);}
+.programme-feature:first-child:before{background:var(--route-dark);}
+.programme-feature .programme-audience,.programme-feature:first-child .programme-audience,.programme-campus .programme-audience{color:var(--ink);font-size:.92rem;margin-bottom:.8rem;}
+.programme-feature .programme-status,.programme-feature:first-child .programme-status,.programme-status.current,.programme-status.developing{color:var(--route-dark);margin-bottom:22px;}
+.programme-feature .programme-purpose,.programme-feature:first-child .programme-purpose{color:var(--route-dark);}
+.programme-feature>p:not(.programme-purpose),.programme-feature:first-child>p:not(.programme-purpose){color:var(--muted-on-paper);}
+.programme-feature .btn{margin-top:8px;}
+.campus-format{grid-template-columns:repeat(3,1fr);}
+.ignite-resource-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+.campus-cta .btn-outline-on-brass{background:transparent;color:var(--ink);border:1px solid var(--ink);}
+.campus-cta .btn-outline-on-brass:hover{background:var(--ink);color:var(--paper-text);}
+.ignite-cta-note{font-size:14px!important;line-height:1.55!important;margin:22px 0 0!important;max-width:75ch!important;}
+@media(max-width:800px){.campus-format{grid-template-columns:1fr}.ignite-resource-actions{align-items:stretch}.ignite-resource-actions .btn{text-align:center}}
+
+
+/* V3.14 founder college engagement */
+.founder-college-engagement{padding:18px 0 96px;background:var(--paper-soft);}
+.founder-engagement-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);gap:64px;align-items:center;}
+.founder-engagement-photo img{width:100%;max-height:430px;display:block;object-fit:cover;border-radius:16px;filter:saturate(.78) contrast(.98);}
+.founder-engagement-copy{max-width:560px;}
+.founder-engagement-copy h2{font-family:'Fraunces',serif;font-size:clamp(30px,3.6vw,46px);line-height:1.12;margin:12px 0 22px;}
+.founder-engagement-copy p{font-size:17px;line-height:1.7;color:var(--muted-on-paper);margin:0 0 16px;}
+@media(max-width:880px){.founder-college-engagement{padding:8px 0 72px}.founder-engagement-grid{grid-template-columns:1fr;gap:30px}.founder-engagement-photo img{max-height:none;height:auto;object-fit:contain}.founder-engagement-copy{max-width:none}}
