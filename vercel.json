@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/campus-launchpad.html",
+      "destination": "/ignite.html",
+      "permanent": true
+    },
+    {
+      "source": "/for-colleges.html",
+      "destination": "/ignite.html",
+      "permanent": true
+    }
+  ]
+}
