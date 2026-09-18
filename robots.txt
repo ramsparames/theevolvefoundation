@@ -2,4 +2,4 @@ User-agent: *
 
 Allow: /
 
-Sitemap: https://theevolvefoundation.com/sitemap.xml
+Sitemap: https://www.theevolvefoundation.com/sitemap.xml

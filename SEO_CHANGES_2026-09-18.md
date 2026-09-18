@@ -12,6 +12,6 @@
 ## After deployment
 1. Confirm Vercel production domain redirects consistently to the preferred hostname.
 2. Add/verify the domain property in Google Search Console.
-3. Submit https://theevolvefoundation.com/sitemap.xml.
+3. Submit https://www.theevolvefoundation.com/sitemap.xml.
 4. Inspect and request indexing for /, /launchpad.html, /ignite.html and /about-rams.html.
 5. Inspect the two legacy URLs and confirm Google sees their permanent redirects to /ignite.html.
