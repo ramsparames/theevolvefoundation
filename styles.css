@@ -1012,8 +1012,3 @@ footer{padding:76px 0;background:var(--ink);}
 .founder-engagement-copy h2{font-family:'Fraunces',serif;font-size:clamp(30px,3.6vw,46px);line-height:1.12;margin:12px 0 22px;}
 .founder-engagement-copy p{font-size:17px;line-height:1.7;color:var(--muted-on-paper);margin:0 0 16px;}
 @media(max-width:880px){.founder-college-engagement{padding:8px 0 72px}.founder-engagement-grid{grid-template-columns:1fr;gap:30px}.founder-engagement-photo img{max-height:none;height:auto;object-fit:contain}.founder-engagement-copy{max-width:none}}
-
-/* Footer tagline single line */
-footer p {
-    white-space: nowrap;
-}
