@@ -1019,9 +1019,7 @@ footer{padding:76px 0;background:var(--ink);}
     white-space: nowrap;
   }
 
-  .home-contact h2 {
-    white-space: nowrap;
-  }
+
 }
 
 .footer-v2-meta {
@@ -1032,5 +1030,8 @@ footer{padding:76px 0;background:var(--ink);}
 
 .footer-v2-meta > * {
   display: block;
+}
+.home-contact h2 .keep-together {
+  white-space: nowrap;
 }
 
