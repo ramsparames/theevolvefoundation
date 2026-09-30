@@ -141,3 +141,72 @@
 .compass-result-closing .eyebrow{color:var(--route-dark);}
 .compass-result-closing p{color:var(--muted-on-paper);font-size:14px;}
 @media(max-width:900px){.compass-result-library .library-recommended-grid{grid-template-columns:1fr;}.compass-result-closing{flex-direction:column;gap:8px;}}
+
+
+/* ==========================================================
+   LIBRARY / COMPASS REFINEMENT — 2026-09-30
+   ========================================================== */
+
+/* Public Library is independent of Student Compass. */
+.library-hero h1{max-width:15ch;}
+.library-bridge-actions{align-items:flex-start;}
+
+/* Compass recommendations: exactly three ideas, then the public Library. */
+.compass-ideas-hero{padding-bottom:72px;}
+.compass-ideas-hero h1{max-width:12ch;}
+.compass-ideas-hero p{max-width:62ch;color:var(--muted-on-ink);font-size:18px;line-height:1.55;margin-top:24px;}
+.compass-library-recommendations{padding:76px 0 92px;}
+.compass-library-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--paper-line);border:1px solid var(--paper-line);}
+.compass-library-card{background:var(--paper);padding:30px;display:flex;flex-direction:column;min-height:290px;}
+.compass-library-card:hover{background:var(--paper-soft);}
+.compass-library-card .library-number{display:block;margin-bottom:20px;}
+.compass-library-card h2{font-family:'Fraunces',serif;font-size:28px;line-height:1.08;margin-bottom:12px;}
+.compass-library-card .library-moment{font-family:'Fraunces',serif;font-size:17px;line-height:1.4;}
+.compass-library-card .library-tags{margin-top:auto;padding-top:24px;}
+.compass-library-card .text-link{margin-top:18px;width:max-content;}
+.compass-library-all{margin-top:56px;padding:34px 0 0;border-top:1px solid var(--paper-line);display:flex;justify-content:space-between;align-items:end;gap:40px;}
+.compass-library-all h2{font-family:'Fraunces',serif;font-size:clamp(30px,3.4vw,44px);line-height:1.05;margin-top:12px;}
+.compass-library-all p{max-width:58ch;color:var(--muted-on-paper);margin-top:10px;}
+
+/* Individual idea pages: hero → duration → video → one compact three-part meat section. */
+.capsule-hero{padding-bottom:76px;}
+.capsule-hero h1{max-width:12ch;}
+.capsule-video-section{padding:44px 0 70px;background:var(--paper);}
+.capsule-video-wrap{max-width:980px;}
+.capsule-video-meta{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-bottom:16px;border-bottom:1px solid var(--paper-line);margin-bottom:24px;}
+.capsule-video-meta .eyebrow{color:var(--route-dark);}
+.capsule-video-meta strong{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-on-paper);font-weight:500;}
+.capsule-video-placeholder{min-height:520px;max-width:520px;margin:0 auto;aspect-ratio:9 / 16;background:var(--ink);}
+.capsule-meat-section{background:var(--paper-soft);padding:0 0 84px;}
+.capsule-meat-grid{display:grid;grid-template-columns:1.15fr .9fr .9fr;gap:1px;background:var(--paper-line);border:1px solid var(--paper-line);}
+.capsule-meat-block{background:var(--paper-soft);padding:34px 30px;min-height:245px;}
+.capsule-meat-block .eyebrow{color:var(--route-dark);}
+.capsule-meat-idea h2{font-family:'Fraunces',serif;font-size:clamp(28px,3.1vw,42px);line-height:1.08;margin-top:16px;max-width:18ch;}
+.capsule-meat-question{background:var(--paper);border-top:3px solid var(--brass);}
+.capsule-meat-question p,.capsule-meat-explore > p{font-family:'Fraunces',serif;font-size:25px;line-height:1.22;margin-top:16px;}
+.capsule-meat-explore{background:var(--ink);color:var(--paper-text);}
+.capsule-meat-explore .eyebrow{color:var(--route-soft);}
+.capsule-meat-explore > p{color:var(--paper-text);}
+.capsule-meat-explore .library-tags{margin-top:24px;}
+.capsule-meat-explore .library-tag{border-color:var(--ink-line);color:var(--muted-on-ink);}
+.capsule-meat-explore .library-tag:hover{border-color:var(--brass-soft);color:var(--paper-text);background:transparent;}
+.capsule-meat-explore .text-link{color:var(--paper-text);display:inline-block;margin-top:22px;}
+
+/* Idea pages are public Library pages, so do not visually activate Student Compass. */
+body:has(.capsule-page) .nav-student-compass{color:var(--muted-on-ink);}
+
+@media(max-width:900px){
+  .compass-library-grid{grid-template-columns:1fr;}
+  .compass-library-all{flex-direction:column;align-items:flex-start;}
+  .capsule-meat-grid{grid-template-columns:1fr;}
+  .capsule-video-placeholder{max-width:460px;}
+}
+@media(max-width:680px){
+  .compass-library-recommendations{padding:58px 0 68px;}
+  .compass-library-card{min-height:0;padding:26px 22px;}
+  .compass-library-all{margin-top:42px;padding-top:28px;}
+  .capsule-video-section{padding:36px 0 50px;}
+  .capsule-video-placeholder{min-height:430px;max-width:330px;}
+  .capsule-meat-block{min-height:0;padding:28px 22px;}
+  .capsule-meat-question p,.capsule-meat-explore > p{font-size:22px;}
+}
