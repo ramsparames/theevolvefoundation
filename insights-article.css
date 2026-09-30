@@ -1,0 +1,389 @@
+/* ==========================================================
+   THE EVOLVE FOUNDATION — INSIGHTS + ARTICLE PAGES
+   Uses the existing website design system.
+   This file is intentionally an override layer so the existing
+   styles.css and other pages remain untouched.
+   ========================================================== */
+
+/* ---------- INSIGHTS HERO ---------- */
+.insights-hero {
+  background: var(--ink);
+  color: var(--paper-text);
+  padding: 156px 0 96px;
+}
+
+.insights-hero .wrap {
+  max-width: 1200px;
+}
+
+.insights-hero .eyebrow {
+  color: var(--route-soft);
+  margin-bottom: 28px;
+}
+
+.insights-hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(44px, 5.5vw, 70px);
+  line-height: 1.03;
+  letter-spacing: -0.028em;
+  max-width: 12ch;
+  margin-bottom: 28px;
+}
+
+.insights-hero p {
+  max-width: 64ch;
+  color: var(--muted-on-ink);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* ---------- INSIGHTS LIST ---------- */
+.insights-list {
+  padding: 112px 0 120px;
+  background: var(--paper);
+}
+
+.insights-list .wrap {
+  max-width: 1200px;
+}
+
+.insight-card {
+  padding: 42px 44px;
+  margin-bottom: 24px;
+  border: 1px solid var(--paper-line);
+  border-radius: 16px;
+  background: var(--paper);
+}
+
+.insight-card.featured {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper-text);
+}
+
+.insight-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--route-dark);
+}
+
+.insight-kicker::before {
+  content: '';
+  width: 16px;
+  height: 1px;
+  background: currentColor;
+  display: inline-block;
+}
+
+.insight-card.featured .insight-kicker {
+  color: var(--route-soft);
+}
+
+.insight-card h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  max-width: 18ch;
+  margin-bottom: 18px;
+}
+
+.insight-card h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.insight-card h2 a:hover {
+  color: var(--brass);
+}
+
+.insight-card.featured h2 a:hover {
+  color: var(--brass-soft);
+}
+
+.insight-card p {
+  max-width: 66ch;
+  margin-bottom: 4px;
+  color: var(--muted-on-paper);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.insight-card.featured p {
+  color: var(--muted-on-ink);
+}
+
+.insight-card .text-link {
+  margin-top: 24px;
+}
+
+.insights-coming {
+  margin-top: 54px;
+  padding: 30px 34px;
+  background: var(--paper-soft);
+  border-left: 3px solid var(--brass);
+}
+
+.insights-coming p {
+  max-width: 60ch;
+  color: var(--muted-on-paper);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.insights-coming strong {
+  color: var(--ink-text);
+}
+
+/* ---------- ARTICLE HERO ---------- */
+.article-hero {
+  background: var(--ink);
+  color: var(--paper-text);
+  padding: 156px 0 92px;
+}
+
+.article-wrap {
+  max-width: 820px;
+}
+
+.article-hero .eyebrow {
+  color: var(--route-soft);
+  margin-bottom: 28px;
+}
+
+.article-hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(44px, 5.8vw, 72px);
+  line-height: 1.03;
+  letter-spacing: -.03em;
+  max-width: 15ch;
+  margin-bottom: 28px;
+}
+
+.article-deck {
+  max-width: 62ch;
+  color: var(--muted-on-ink);
+  font-size: 19px;
+  line-height: 1.65;
+  margin-bottom: 32px;
+}
+
+.article-byline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--ink-line);
+  color: var(--muted-on-ink);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .04em;
+}
+
+.article-byline a {
+  color: var(--paper-text);
+  text-decoration: none;
+}
+
+.article-byline a:hover {
+  color: var(--brass-soft);
+}
+
+/* ---------- ARTICLE BODY ---------- */
+.article-body {
+  background: var(--paper);
+  padding: 104px 0 120px;
+}
+
+.article-body .article-wrap {
+  max-width: 780px;
+}
+
+.article-body p {
+  margin-bottom: 24px;
+  color: var(--ink-text);
+  font-size: 18px;
+  line-height: 1.78;
+}
+
+.article-body .article-lead {
+  margin-bottom: 38px;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(25px, 3vw, 34px);
+  line-height: 1.32;
+  letter-spacing: -.01em;
+}
+
+.article-body h2 {
+  margin: 58px 0 20px;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(30px, 3.4vw, 42px);
+  line-height: 1.12;
+  letter-spacing: -.02em;
+}
+
+.article-callout {
+  margin: 52px 0 58px;
+  padding: 34px 38px;
+  background: var(--paper-soft);
+  border-left: 3px solid var(--brass);
+}
+
+.article-callout .eyebrow {
+  color: var(--route-dark);
+  margin-bottom: 16px;
+}
+
+.article-callout h2 {
+  margin: 0;
+  max-width: 25ch;
+  font-size: clamp(28px, 3.2vw, 40px);
+}
+
+.article-quote {
+  margin: 42px 0 46px !important;
+  padding-left: 28px;
+  border-left: 2px solid var(--brass);
+  font-family: 'Fraunces', serif;
+  font-size: clamp(25px, 3vw, 34px) !important;
+  line-height: 1.35 !important;
+  font-style: italic;
+}
+
+.article-programme {
+  margin-top: 68px;
+  padding: 42px 44px;
+  background: var(--ink);
+  color: var(--paper-text);
+  border-radius: 16px;
+}
+
+.article-programme .eyebrow {
+  color: var(--route-soft);
+  margin-bottom: 18px;
+}
+
+.article-programme h2 {
+  margin: 0 0 12px;
+  color: var(--paper-text);
+  font-size: 34px;
+}
+
+.article-programme p {
+  max-width: 58ch;
+  color: var(--muted-on-ink);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.article-programme .btn-primary {
+  margin-top: 8px;
+}
+
+.article-author {
+  margin-top: 72px;
+  padding-top: 28px;
+  border-top: 1px solid var(--paper-line);
+}
+
+.article-author p {
+  color: var(--muted-on-paper);
+  font-size: 15.5px;
+  line-height: 1.7;
+}
+
+.article-author .text-link {
+  margin-top: 4px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 680px) {
+  .insights-hero,
+  .article-hero {
+    padding-top: 126px;
+  }
+
+  .insights-hero {
+    padding-bottom: 72px;
+  }
+
+  .insights-hero h1,
+  .article-hero h1 {
+    font-size: clamp(38px, 11.5vw, 54px);
+    max-width: 100%;
+  }
+
+  .insights-hero p,
+  .article-deck {
+    font-size: 16.5px;
+  }
+
+  .insights-list {
+    padding: 76px 0 84px;
+  }
+
+  .insight-card {
+    padding: 30px 24px;
+    border-radius: 12px;
+  }
+
+  .insight-card h2 {
+    font-size: 31px;
+  }
+
+  .insight-card p {
+    font-size: 16px;
+  }
+
+  .insights-coming {
+    padding: 26px 22px;
+  }
+
+  .article-hero {
+    padding-bottom: 72px;
+  }
+
+  .article-byline {
+    display: block;
+    line-height: 1.8;
+  }
+
+  .article-byline span {
+    display: block;
+  }
+
+  .article-body {
+    padding: 76px 0 84px;
+  }
+
+  .article-body p {
+    font-size: 17px;
+    line-height: 1.72;
+  }
+
+  .article-body h2 {
+    margin-top: 48px;
+    font-size: 31px;
+  }
+
+  .article-callout,
+  .article-programme {
+    padding: 28px 24px;
+    border-radius: 12px;
+  }
+
+  .article-quote {
+    padding-left: 20px;
+  }
+
+  .article-author {
+    margin-top: 56px;
+  }
+}
