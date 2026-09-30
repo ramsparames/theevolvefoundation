@@ -1080,3 +1080,243 @@
     padding-top: 82px;
   }
 }
+
+/* ==========================================================
+   V5 — CALMER HEROES FOR RESULT / DETAILS / IDEAS SCREENS
+   Keep each screen intentional and fully contained.
+   ========================================================== */
+@media (min-width: 681px) {
+  .compass-form-hero,
+  .compass-results-hero {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .compass-form-hero .wrap,
+  .compass-results-hero .wrap {
+    width: 100%;
+    text-align: left;
+  }
+
+  .compass-form-hero h1,
+  .compass-results-hero h1 {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  /* DETAILS: give the hero enough room for the heading + explanation,
+     then keep the form comfortably inside the remaining viewport. */
+  .compass-form-hero {
+    height: 37svh;
+    min-height: 292px;
+    padding: 92px 0 34px;
+  }
+
+  .compass-form-hero .eyebrow {
+    margin-bottom: 14px;
+  }
+
+  .compass-form-hero h1 {
+    max-width: 12ch;
+    font-size: clamp(40px, 4.5vw, 58px);
+    line-height: 1.02;
+  }
+
+  .compass-form-hero p {
+    max-width: 62ch;
+    font-size: 16px;
+    line-height: 1.48;
+    margin-top: 14px;
+  }
+
+  .compass-form-section {
+    height: 59svh;
+    min-height: 0;
+    padding: 38px 0 28px;
+  }
+
+  .compass-form-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .compass-field label {
+    margin-bottom: 7px;
+  }
+
+  .compass-field input {
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  .compass-form button[type="submit"] {
+    margin-top: 22px !important;
+  }
+
+  .compass-form-note {
+    max-width: 900px;
+    margin-top: 14px;
+    font-size: 12.5px;
+    line-height: 1.48;
+  }
+
+  /* RESULTS: left-aligned editorial hero, with the complete reflection
+     comfortably contained in the paper section below. */
+  .compass-results-hero {
+    height: 36svh;
+    min-height: 286px;
+    padding: 92px 0 30px;
+  }
+
+  .compass-results-hero .eyebrow {
+    margin-bottom: 14px;
+  }
+
+  .compass-results-hero h1 {
+    max-width: 15ch;
+    font-size: clamp(40px, 4.6vw, 60px);
+    line-height: 1.03;
+  }
+
+  .compass-results {
+    height: 60svh;
+    min-height: 0;
+    padding: 30px 0 24px;
+  }
+
+  .compass-results-intro {
+    max-width: 820px;
+    margin-bottom: 18px;
+    font-size: 14.5px;
+    line-height: 1.42;
+  }
+
+  .compass-result-grid {
+    gap: 18px;
+  }
+
+  .compass-result-card {
+    padding: 22px 24px;
+  }
+
+  .compass-result-card .eyebrow {
+    margin-bottom: 8px;
+  }
+
+  .compass-result-card h2 {
+    font-size: clamp(24px, 2.7vw, 34px);
+    line-height: 1.1;
+    margin-bottom: 7px;
+  }
+
+  .compass-result-card p {
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  .compass-result-next {
+    margin-top: 20px;
+    padding-top: 17px;
+  }
+
+  .compass-result-next h2 {
+    font-size: 26px;
+    margin-bottom: 5px;
+  }
+
+  .compass-result-next p {
+    max-width: 72ch;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  .compass-inline-cta {
+    margin-top: 13px;
+  }
+
+  /* IDEAS: same hero treatment as Results, with the editorial cards
+     and Launchpad CTA contained in the remaining viewport. */
+  .compass-ideas {
+    height: 60svh;
+    min-height: 0;
+    padding: 30px 0 24px;
+  }
+
+  .compass-ideas-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .compass-idea {
+    padding: 20px 22px;
+  }
+
+  .compass-idea .number {
+    margin-bottom: 8px;
+  }
+
+  .compass-idea h3 {
+    font-size: 21px;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .compass-idea p {
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  .compass-ideas-cta {
+    margin-top: 20px;
+    padding-top: 17px;
+  }
+
+  .compass-ideas-heading {
+    font-size: clamp(26px, 3vw, 38px);
+    line-height: 1.08;
+    margin-top: 7px;
+  }
+
+  .compass-ideas-copy {
+    max-width: 72ch;
+    font-size: 13.5px;
+    line-height: 1.45;
+    margin-top: 7px;
+  }
+
+  .compass-ideas-button {
+    margin-top: 13px;
+  }
+}
+
+/* Short desktop screens: preserve containment without shrinking the
+   editorial type into something that feels like a form. */
+@media (min-width: 681px) and (max-height: 820px) {
+  .compass-form-hero {
+    height: 38svh;
+    min-height: 286px;
+    padding-top: 82px;
+  }
+
+  .compass-form-section {
+    height: 58svh;
+    padding-top: 30px;
+  }
+
+  .compass-results-hero {
+    height: 37svh;
+    min-height: 280px;
+    padding-top: 82px;
+  }
+
+  .compass-results {
+    height: 59svh;
+    padding-top: 24px;
+  }
+
+  .compass-ideas {
+    height: 59svh;
+    padding-top: 24px;
+  }
+}
