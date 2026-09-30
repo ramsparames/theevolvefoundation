@@ -659,3 +659,420 @@
 .compass-ideas-button {
   margin-top: 28px;
 }
+
+/* ==========================================================
+   V3 — SCREEN-FIRST STUDENT COMPASS
+   Keep the meaningful Compass experience within one viewport.
+   The footer may sit just below the viewport if needed.
+   ========================================================== */
+
+@media (min-width: 681px) {
+  /* Landing page: one-screen composition */
+  body:has(.compass-hero) .compass-hero {
+    height: 50svh;
+    min-height: 0;
+    padding: 88px 0 26px;
+    display: flex;
+    align-items: center;
+  }
+
+  body:has(.compass-hero) .compass-hero-inner {
+    width: 100%;
+    grid-template-columns: minmax(0, 1.05fr) minmax(250px, .72fr);
+    gap: 44px;
+  }
+
+  body:has(.compass-hero) .compass-copy h1 {
+    font-size: clamp(36px, 4.4vw, 58px);
+    margin-bottom: 18px;
+  }
+
+  body:has(.compass-hero) .compass-copy .lede {
+    font-size: 16px;
+    line-height: 1.45;
+    margin-bottom: 20px;
+    max-width: 50ch;
+  }
+
+  body:has(.compass-hero) .compass-hero .eyebrow {
+    margin-bottom: 18px;
+  }
+
+  body:has(.compass-hero) .compass-hero .cta-row {
+    margin-bottom: 20px;
+  }
+
+  body:has(.compass-hero) .compass-meta {
+    margin-top: 0;
+  }
+
+  body:has(.compass-hero) .compass-meta span {
+    padding: 9px 13px;
+    font-size: 9px;
+  }
+
+  body:has(.compass-hero) .compass-visual {
+    min-height: 0;
+  }
+
+  body:has(.compass-hero) .compass-visual-card {
+    width: min(100%, 285px);
+  }
+
+  body:has(.compass-hero) .compass-note {
+    padding: 10px 12px;
+    max-width: 185px;
+  }
+
+  body:has(.compass-hero) .compass-note p {
+    font-size: 15px;
+  }
+
+  body:has(.compass-hero) .compass-intro {
+    height: 31svh;
+    min-height: 0;
+    padding: 30px 0 20px;
+  }
+
+  body:has(.compass-hero) .compass-intro .section-head {
+    margin-bottom: 18px;
+    max-width: 760px;
+  }
+
+  body:has(.compass-hero) .compass-intro .section-head .eyebrow {
+    margin-bottom: 8px;
+  }
+
+  body:has(.compass-hero) .compass-intro .section-head h2 {
+    font-size: clamp(24px, 2.6vw, 34px);
+  }
+
+  body:has(.compass-hero) .compass-intro .section-head p {
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 1.4;
+    max-width: 70ch;
+  }
+
+  body:has(.compass-hero) .compass-journey-item {
+    grid-template-columns: 58px minmax(170px, .75fr) minmax(0, 1.35fr);
+    gap: 18px;
+    padding: 11px 0;
+  }
+
+  body:has(.compass-hero) .compass-journey-item h3 {
+    font-size: 20px;
+  }
+
+  body:has(.compass-hero) .compass-journey-item p {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  body:has(.compass-hero) .compass-start {
+    height: 19svh;
+    min-height: 0;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  body:has(.compass-hero) .compass-start .section-head {
+    margin-bottom: 0;
+    max-width: 980px;
+  }
+
+  body:has(.compass-hero) .compass-start .eyebrow {
+    margin-bottom: 6px;
+  }
+
+  body:has(.compass-hero) .compass-start h2 {
+    display: inline;
+    font-size: clamp(22px, 2.4vw, 32px);
+  }
+
+  body:has(.compass-hero) .compass-start p {
+    display: inline;
+    font-size: 13.5px;
+    line-height: 1.4;
+    margin: 0 0 0 10px;
+  }
+
+  body:has(.compass-hero) .compass-start .compass-inline-cta {
+    display: inline-flex;
+    margin: 0 0 0 14px;
+    vertical-align: middle;
+  }
+
+  body:has(.compass-hero) .compass-start .compass-inline-cta .btn {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  /* Reflection question: all controls remain on-screen */
+  .compass-question-page {
+    min-height: calc(100svh - 64px);
+    height: calc(100svh - 64px);
+    padding: 78px 0 30px;
+    display: flex;
+    align-items: center;
+  }
+
+  .compass-question-shell {
+    width: 100%;
+    max-width: 820px;
+  }
+
+  .compass-question-top {
+    margin-bottom: 8px;
+  }
+
+  .compass-progress {
+    margin-bottom: 22px;
+  }
+
+  .compass-question-shell h1 {
+    max-width: 31ch;
+    font-size: clamp(28px, 3.2vw, 40px);
+    line-height: 1.06;
+    margin-bottom: 8px;
+  }
+
+  .compass-question-prompt {
+    max-width: 68ch;
+    font-size: 14px;
+    line-height: 1.42;
+    margin-bottom: 16px;
+  }
+
+  .compass-scale-label {
+    margin-bottom: 7px;
+  }
+
+  .compass-scale {
+    max-width: 620px;
+    gap: 8px;
+  }
+
+  .compass-scale button {
+    min-height: 54px;
+    font-size: 20px;
+  }
+
+  .compass-scale-ends {
+    max-width: 620px;
+    margin-top: 5px;
+    font-size: 11px;
+  }
+
+  .compass-question-actions {
+    margin-top: 15px;
+  }
+
+  .compass-question-actions .btn {
+    padding: 11px 20px;
+    font-size: 13.5px;
+  }
+
+  /* Lead capture */
+  .compass-form-hero {
+    height: 34svh;
+    min-height: 0;
+    padding: 92px 0 30px;
+    display: flex;
+    align-items: center;
+  }
+
+  .compass-form-hero .eyebrow {
+    margin-bottom: 14px;
+  }
+
+  .compass-form-hero h1 {
+    font-size: clamp(38px, 4.6vw, 58px);
+  }
+
+  .compass-form-hero p {
+    font-size: 15px;
+    line-height: 1.45;
+    margin-top: 14px;
+    max-width: 65ch;
+  }
+
+  .compass-form-section {
+    min-height: 46svh;
+    padding: 34px 0 30px;
+  }
+
+  .compass-form-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .compass-field input {
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  .compass-form button[type="submit"] {
+    margin-top: 20px !important;
+  }
+
+  .compass-form-note {
+    margin-top: 14px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  /* Results */
+  .compass-results-hero {
+    height: 29svh;
+    min-height: 0;
+    padding: 88px 0 26px;
+    display: flex;
+    align-items: center;
+  }
+
+  .compass-results-hero .eyebrow {
+    margin-bottom: 14px;
+  }
+
+  .compass-results-hero h1 {
+    font-size: clamp(38px, 4.6vw, 58px);
+  }
+
+  .compass-results {
+    min-height: 67svh;
+    padding: 30px 0 28px;
+  }
+
+  .compass-results-intro {
+    max-width: 760px;
+    margin-bottom: 22px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .compass-result-grid {
+    gap: 16px;
+  }
+
+  .compass-result-card {
+    padding: 22px 24px;
+  }
+
+  .compass-result-card .eyebrow {
+    margin-bottom: 10px;
+  }
+
+  .compass-result-card h2 {
+    font-size: clamp(24px, 2.7vw, 34px);
+    margin-bottom: 8px;
+  }
+
+  .compass-result-card p {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .compass-result-next {
+    margin-top: 22px;
+    padding-top: 18px;
+  }
+
+  .compass-result-next h2 {
+    font-size: 26px;
+    margin-bottom: 6px;
+  }
+
+  .compass-result-next p {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .compass-inline-cta {
+    margin-top: 14px;
+  }
+
+  /* Ideas */
+  .compass-ideas {
+    min-height: 67svh;
+    padding: 28px 0 30px;
+  }
+
+  .compass-ideas-grid {
+    gap: 0;
+  }
+
+  .compass-idea {
+    padding: 20px 22px;
+  }
+
+  .compass-idea .number {
+    margin-bottom: 10px;
+  }
+
+  .compass-idea h3 {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+
+  .compass-idea p {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .compass-ideas-cta {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid var(--paper-line);
+  }
+
+  .compass-ideas-heading {
+    font-size: clamp(26px, 3vw, 38px);
+    margin-top: 8px;
+  }
+
+  .compass-ideas-copy {
+    font-size: 14px;
+    line-height: 1.45;
+    margin-top: 8px;
+  }
+
+  .compass-ideas-button {
+    margin-top: 14px;
+  }
+}
+
+@media (max-width: 680px) {
+  /* On phones the same screen-first principle applies, but natural page
+     scrolling is retained when the viewport is physically too small. */
+  .compass-question-page {
+    padding-top: 82px;
+  }
+
+  .compass-question-shell h1 {
+    font-size: 29px;
+    line-height: 1.08;
+  }
+
+  .compass-question-prompt {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .compass-question-actions .btn {
+    padding: 10px 16px;
+  }
+
+  .compass-form-hero,
+  .compass-results-hero {
+    padding-top: 102px;
+    padding-bottom: 44px;
+  }
+}
+
+@media (min-width: 681px) {
+  body:has(.compass-hero) .compass-visual-card {
+    width: min(100%, 30svh, 285px);
+  }
+}
