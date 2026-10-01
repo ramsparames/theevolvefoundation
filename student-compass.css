@@ -1430,3 +1430,15 @@
     min-height: calc(100svh - 350px);
   }
 }
+
+/* ---------- LEAD SUBMISSION ---------- */
+.compass-form button[type="submit"]:disabled {
+  opacity: .62;
+  cursor: wait;
+}
+.compass-form [data-lead-status]:empty {
+  display: none;
+}
+.compass-form [data-lead-status] {
+  margin-top: 18px;
+}

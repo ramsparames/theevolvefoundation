@@ -10,7 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="student-compass.css">
-<link rel="stylesheet" href="footer-compact.css">
 </head>
 <body>
 <nav>
@@ -19,7 +18,7 @@
     <button aria-label="Toggle menu" class="nav-toggle" id="navToggle">MENU</button>
     <div class="nav-links" id="navLinks">
       <a href="index.html#foundation">About</a>
-      <a class="nav-student-compass" href="student-compass.html" aria-current="page">Student Compass</a>
+      <a class="nav-student-compass active" href="student-compass.html" aria-current="page">Student Compass</a>
       <div class="nav-dropdown">
         <button aria-expanded="false" class="nav-dropdown-trigger">Programmes <span aria-hidden="true">⌄</span></button>
         <div class="nav-dropdown-menu">
@@ -33,7 +32,7 @@
   </div>
 </nav>
 
-<header class="hero compass-hero compass-landing">
+<header class="hero compass-hero">
   <div class="wrap compass-hero-inner">
     <div class="compass-copy">
       <span class="eyebrow">Student Compass · Reflection Experience</span>
@@ -69,41 +68,62 @@
       </div>
     </div>
   </div>
+</header>
 
-  <div class="wrap compass-discovery">
-    <div class="compass-discovery-label">
+<section class="compass-intro">
+  <div class="wrap">
+    <div class="section-head">
       <span class="eyebrow">What will you discover?</span>
+      <h2>A little space to understand where you are today.</h2>
+      <p>Student Compass helps you pause, notice what is already true about you and think about what may be worth exploring next.</p>
     </div>
-    <div class="compass-discovery-item">
-      <span class="compass-discovery-number">01</span>
-      <h2>Understand Yourself</h2>
-      <p>Recognise what is already true about you.</p>
-    </div>
-    <div class="compass-discovery-item">
-      <span class="compass-discovery-number">02</span>
-      <h2>Explore Possibilities</h2>
-      <p>Notice what may be worth exploring next.</p>
-    </div>
-    <div class="compass-discovery-item">
-      <span class="compass-discovery-number">03</span>
-      <h2>Take Your Next Step</h2>
-      <p>Move forward without needing every answer today.</p>
+
+    <div class="compass-journey">
+      <div class="compass-journey-item">
+        <span class="compass-journey-number">01</span>
+        <h3>Understand Yourself</h3>
+        <p>Recognise your strengths, experiences and what makes you unique.</p>
+      </div>
+      <div class="compass-journey-item">
+        <span class="compass-journey-number">02</span>
+        <h3>Explore Possibilities</h3>
+        <p>Think about interests, ideas and directions worth exploring.</p>
+      </div>
+      <div class="compass-journey-item">
+        <span class="compass-journey-number">03</span>
+        <h3>Take Your Next Step</h3>
+        <p>Build confidence in moving forward without needing every answer today.</p>
+      </div>
     </div>
   </div>
-</header>
+</section>
+
+<section class="compass-start">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The Reflection</span>
+      <h2>Answer honestly. There is nothing to get right.</h2>
+      <p>You'll move through 12 simple reflections using a 1–5 scale. Take your time. The point is to notice, not to perform.</p>
+      <div class="cta-row compass-inline-cta">
+        <a class="btn btn-primary" href="compass-reflection.html">Begin the Reflection →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <footer id="contact">
   <div class="wrap">
-    <div class="footer-compact">
-      <div class="footer-compact-brand">
+    <div class="footer-v2">
+      <div class="footer-v2-brand">
         <h2>The Evolve Foundation</h2>
         <p>Helping young people understand themselves and navigate life well</p>
       </div>
-      <div class="footer-compact-meta">
+      <div class="footer-v2-meta">
         <a href="mailto:enquire@theevolvefoundation.com?subject=The%20Evolve%20Foundation%20Enquiry">enquire@theevolvefoundation.com</a>
-        <span>© 2026 The Evolve Foundation</span>
         <a href="https://www.linkedin.com/company/the-evolve-foundation/" target="_blank" rel="noopener noreferrer" aria-label="The Evolve Foundation on LinkedIn">LinkedIn</a>
-        <span class="footer-compact-legal"><a href="terms-and-conditions.html">Terms &amp; Conditions</a><span class="footer-dot">·</span><a href="privacy-policy.html">Privacy Policy</a></span>
+        <span>India · Established 2026</span>
+        <span>© 2026 The Evolve Foundation</span>
+        <span><a href="terms-and-conditions.html">Terms &amp; Conditions</a> · <a href="privacy-policy.html">Privacy Policy</a></span>
       </div>
     </div>
   </div>

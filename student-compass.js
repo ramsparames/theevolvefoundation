@@ -1,5 +1,6 @@
 /* Student Compass — front-end flow and reflection logic. */
 (function () {
+  const API_URL = window.STUDENT_COMPASS_API_URL || '/api/student-compass/submit';
   const QUESTIONS = [
     { section: 'Understand Yourself', text: 'I have spent time thinking about what I am naturally good at.', prompt: 'Think about strengths that show up in real situations, not just things you wish were true.', category: 'understand' },
     { section: 'Understand Yourself', text: 'I can point to experiences that show what I do well.', prompt: 'Think about projects, conversations, activities or moments you handled well.', category: 'understand' },
@@ -123,7 +124,6 @@
       } else {
         index += 1;
         render();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     });
 
@@ -131,29 +131,94 @@
       if (index > 0) {
         index -= 1;
         render();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     });
 
     render();
   }
 
+  function calculateResultFromAnswers(answers) {
+    const totals = { understand: 0, explore: 0, decide: 0 };
+    const counts = { understand: 0, explore: 0, decide: 0 };
+
+    QUESTIONS.forEach((item, index) => {
+      const value = Number(answers[index] || 0);
+      if (value) {
+        totals[item.category] += value;
+        counts[item.category] += 1;
+      }
+    });
+
+    const averages = Object.keys(totals).map((key) => ({
+      key,
+      value: counts[key] ? totals[key] / counts[key] : 0
+    })).sort((a, b) => b.value - a.value);
+
+    return { natural: averages[0].key, strengthen: averages[averages.length - 1].key };
+  }
+
   function initLeadForm() {
     const form = document.querySelector('[data-compass-lead]');
     if (!form) return;
 
-    form.addEventListener('submit', (event) => {
+    const submitButton = form.querySelector('button[type="submit"]');
+    const status = form.querySelector('[data-lead-status]');
+
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
       const data = new FormData(form);
+      const answers = getAnswers();
+      const values = QUESTIONS.map((_, index) => Number(answers[index] || 0));
+
+      if (values.some((value) => value < 1 || value > 5)) {
+        if (status) status.textContent = 'Please complete all 12 reflections before continuing.';
+        return;
+      }
+
       const lead = {
         name: String(data.get('name') || '').trim(),
         email: String(data.get('email') || '').trim(),
         phone: String(data.get('phone') || '').trim(),
-        capturedAt: new Date().toISOString()
+        answers: values,
+        capturedAt: new Date().toISOString(),
+        website: String(data.get('website') || '')
       };
 
-      localStorage.setItem('studentCompassLead', JSON.stringify(lead));
-      window.location.href = 'compass-result.html';
+      if (status) {
+        status.textContent = 'Sending your reflection…';
+        status.removeAttribute('role');
+      }
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending your reflection…';
+      }
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(lead)
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.ok) {
+          throw new Error(result.message || 'Submission failed');
+        }
+
+        // The lead is not stored in localStorage. Only the reflection answers remain locally
+        // so the result page can render the same reflection the student just completed.
+        localStorage.removeItem('studentCompassLead');
+        window.location.href = 'compass-result.html';
+      } catch (error) {
+        console.error('Student Compass submission failed:', error);
+        if (status) {
+          status.textContent = 'We could not send your reflection just now. Please try again in a moment.';
+          status.setAttribute('role', 'alert');
+        }
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Show My Compass Reflection →';
+        }
+      }
     });
   }
 

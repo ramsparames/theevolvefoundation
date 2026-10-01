@@ -9,8 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="student-compass.css">
-<link rel="stylesheet" href="evolve-library.css">
-<link rel="stylesheet" href="footer-compact.css">
 </head>
 <body>
 <nav>
@@ -19,7 +17,7 @@
     <button aria-label="Toggle menu" class="nav-toggle" id="navToggle">MENU</button>
     <div class="nav-links" id="navLinks">
       <a href="index.html#foundation">About</a>
-      <a class="nav-student-compass" href="student-compass.html" aria-current="page">Student Compass</a>
+      <a class="nav-student-compass active" href="student-compass.html" aria-current="page">Student Compass</a>
       <div class="nav-dropdown">
         <button aria-expanded="false" class="nav-dropdown-trigger">Programmes <span aria-hidden="true">⌄</span></button>
         <div class="nav-dropdown-menu">
@@ -33,68 +31,62 @@
   </div>
 </nav>
 
-<header class="compass-results-hero compass-ideas-hero">
+<header class="compass-results-hero">
   <div class="wrap">
     <span class="eyebrow">Ideas to Explore</span>
-    <h1>Keep the reflection moving.</h1>
-    <p>A few ideas connected to the themes that came through in your reflection. They are invitations to explore, not labels.</p>
+    <h1>Continue your reflection.</h1>
+    <p style="max-width:62ch;color:var(--muted-on-ink);font-size:18px;margin-top:24px;">A few simple ideas to help you keep thinking about yourself, your choices and what may be worth trying next.</p>
   </div>
 </header>
 
-<main class="compass-ideas compass-library-recommendations" data-library-recommended>
+<main class="compass-ideas">
   <div class="wrap">
-    <div class="compass-library-grid" data-recommended-grid>
-      <article class="compass-library-card">
-  <span class="library-number">01</span>
-  <h2>Driving Through Fog</h2>
-  <p class="library-moment">“I don’t know where this will lead.”</p>
-  <div class="library-tags"><a class="library-tag" href="library.html?tag=uncertainty">#uncertainty</a> <a class="library-tag" href="library.html?tag=direction">#direction</a> <a class="library-tag" href="library.html?tag=next-step">#next-step</a> <a class="library-tag" href="library.html?tag=exploration">#exploration</a></div>
-  <a class="text-link" href="library-driving-through-fog.html">Explore the idea →</a>
-</article>
-<article class="compass-library-card">
-  <span class="library-number">05</span>
-  <h2>The Dressing Room</h2>
-  <p class="library-moment">“What if I try something and discover it isn’t right for me?”</p>
-  <div class="library-tags"><a class="library-tag" href="library.html?tag=exploration">#exploration</a> <a class="library-tag" href="library.html?tag=experimentation">#experimentation</a> <a class="library-tag" href="library.html?tag=choice">#choice</a> <a class="library-tag" href="library.html?tag=curiosity">#curiosity</a></div>
-  <a class="text-link" href="library-the-dressing-room.html">Explore the idea →</a>
-</article>
-<article class="compass-library-card">
-  <span class="library-number">08</span>
-  <h2>The First Domino</h2>
-  <p class="library-moment">“I know what I should do. I just can’t get started.”</p>
-  <div class="library-tags"><a class="library-tag" href="library.html?tag=action">#action</a> <a class="library-tag" href="library.html?tag=overwhelm">#overwhelm</a> <a class="library-tag" href="library.html?tag=starting">#starting</a> <a class="library-tag" href="library.html?tag=momentum">#momentum</a></div>
-  <a class="text-link" href="library-the-first-domino.html">Explore the idea →</a>
-</article>
+    <div class="compass-ideas-grid">
+      <article class="compass-idea">
+        <span class="number">01</span>
+        <h3>Fear cannot drive the bus</h3>
+        <p>Notice when fear is making a decision for you, and separate the feeling from the direction you actually want to explore.</p>
+      </article>
+      <article class="compass-idea">
+        <span class="number">02</span>
+        <h3>The Regret Test</h3>
+        <p>For a decision worth testing, imagine looking back later. Which choice would you regret not trying?</p>
+      </article>
+      <article class="compass-idea">
+        <span class="number">03</span>
+        <h3>Confidence is knowing why you chose</h3>
+        <p>You do not need certainty to make a useful decision. You need to understand why you are choosing it with what you know today.</p>
+      </article>
     </div>
 
-    <section class="compass-library-all">
-      <div>
-        <span class="eyebrow">Explore further</span>
-        <h2>Want to browse all the ideas?</h2>
-        <p>Use the Library to explore all 10 short videos and find the one that feels useful right now.</p>
+    <div class="compass-ideas-cta">
+      <div class="compass-ideas-cta-copy">
+        <span class="eyebrow">From The Evolve Foundation</span>
+        <h2 class="compass-ideas-heading">Want to build these skills deeper?</h2>
+        <p class="compass-ideas-copy">Launchpad creates a longer, guided experience for college students to understand themselves, explore possibilities, make thoughtful decisions and turn decisions into action.</p>
       </div>
-      <a class="btn btn-primary" href="library.html">Explore all ideas →</a>
-    </section>
+      <a class="btn btn-primary compass-ideas-button" href="launchpad.html">Explore Launchpad →</a>
+    </div>
   </div>
 </main>
 
 <footer id="contact">
   <div class="wrap">
-    <div class="footer-compact">
-      <div class="footer-compact-brand">
+    <div class="footer-v2">
+      <div class="footer-v2-brand">
         <h2>The Evolve Foundation</h2>
         <p>Helping young people understand themselves and navigate life well</p>
       </div>
-      <div class="footer-compact-meta">
+      <div class="footer-v2-meta">
         <a href="mailto:enquire@theevolvefoundation.com?subject=The%20Evolve%20Foundation%20Enquiry">enquire@theevolvefoundation.com</a>
+        <a href="https://www.linkedin.com/company/the-evolve-foundation/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span>India · Established 2026</span>
         <span>© 2026 The Evolve Foundation</span>
-        <a href="https://www.linkedin.com/company/the-evolve-foundation/" target="_blank" rel="noopener noreferrer" aria-label="The Evolve Foundation on LinkedIn">LinkedIn</a>
-        <span class="footer-compact-legal"><a href="terms-and-conditions.html">Terms &amp; Conditions</a><span class="footer-dot">·</span><a href="privacy-policy.html">Privacy Policy</a></span>
+        <span><a href="terms-and-conditions.html">Terms &amp; Conditions</a> · <a href="privacy-policy.html">Privacy Policy</a></span>
       </div>
     </div>
   </div>
 </footer>
 <script defer src="student-compass.js"></script>
-<script defer src="evolve-library.js"></script>
 </body>
 </html>
