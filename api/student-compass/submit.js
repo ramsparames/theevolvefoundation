@@ -93,12 +93,21 @@ function buildStudentEmail(name, result) {
       <h2 style="font-family:Georgia,serif;font-weight:500;margin:0 0 10px;font-size:26px;">${escapeHtml(strengthen.title)}</h2>
       <p style="margin:0;">${escapeHtml(strengthen.strengthen)}</p>
     </div>
-    <p>Use this as a starting point, not a label. You can keep exploring through Student Compass and the ideas from The Evolve Foundation.</p>
+    <p>Use this as a starting point, not a label. Clarity often comes from trying things, learning from experiences and asking better questions.</p>
+    <div style="margin:30px 0 24px;padding-top:4px;">
+      <p style="font-family:Georgia,serif;font-size:22px;margin:0 0 8px;color:#17231f;">Keep exploring</p>
+      <p style="margin:0 0 18px;">Here are two ways to continue when you are ready.</p>
+      <p style="margin:0 0 12px;">
+        <a href="https://www.theevolvefoundation.com/compass-capsules.html" style="display:inline-block;padding:12px 20px;background:#B87A2E;color:#ffffff;text-decoration:none;font-weight:600;">Ideas to Explore →</a>
+      </p>
+      <p style="margin:0;">
+        <a href="https://www.theevolvefoundation.com/launchpad.html" style="display:inline-block;padding:12px 20px;border:1px solid #B87A2E;color:#B87A2E;text-decoration:none;font-weight:600;">Join Launchpad →</a>
+      </p>
+    </div>
     <p style="margin-top:34px;color:#52605a;">Helping young people understand themselves and navigate life well</p>
-    <p style="font-size:13px;color:#6a746f;">The Evolve Foundation · India</p>
+    <p style="font-size:13px;color:#6a746f;">Warmly,<br><strong>Rams</strong><br>The Evolve Foundation · India</p>
   </div>`;
 }
-
 function buildNotificationEmail(lead, result, answers) {
   const natural = CATEGORY_META[result.natural];
   const strengthen = CATEGORY_META[result.strengthen];
