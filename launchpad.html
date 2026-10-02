@@ -11,6 +11,111 @@
 <link href="styles.css" rel="stylesheet"/>
 <link rel="stylesheet" href="footer-compact.css">
 <meta content="The Evolve Foundation is creating meaningful experiences that help young people understand themselves, prepare for life and navigate important decisions. Launchpad is its first programme." name="description"/>
+
+<style id="home-launchpad-background-rhythm">
+/* Home + Launchpad only: match Ignite's two content background tones.
+   Hero and bottom CTA/contact treatments are intentionally untouched. */
+
+/* HOME: dark hero → cream → soft cream → cream → soft cream → brown contact */
+body:has(.foundation-hero) .mission {
+  background: var(--paper);
+  color: var(--ink-text);
+}
+
+body:has(.foundation-hero) .student-compass-home {
+  background: var(--paper-soft);
+  color: var(--ink-text);
+}
+
+body:has(.foundation-hero) .programmes-section {
+  background: var(--paper);
+  color: var(--ink-text);
+}
+
+body:has(.foundation-hero) .programmes-section .section-head h2,
+body:has(.foundation-hero) .programmes-section .section-head p {
+  color: var(--ink-text);
+}
+
+body:has(.foundation-hero) .programmes-section .section-head p {
+  color: var(--muted-on-paper);
+}
+
+body:has(.foundation-hero) .programmes-section .programme-feature,
+body:has(.foundation-hero) .programmes-section .programme-feature:first-child {
+  background: var(--paper-soft);
+  color: var(--ink-text);
+  border-color: var(--paper-line);
+  box-shadow: none;
+}
+
+body:has(.foundation-hero) .programmes-section .programme-feature > p:not(.programme-purpose),
+body:has(.foundation-hero) .programmes-section .programme-feature:first-child > p:not(.programme-purpose) {
+  color: var(--muted-on-paper);
+}
+
+body:has(.foundation-hero) .home-founder {
+  background: var(--paper-soft);
+  color: var(--ink-text);
+}
+
+/* LAUNCHPAD: dark hero → cream → soft cream → cream → soft cream → brown CTA */
+body:has(.launchpad-hero) > .section {
+  background: var(--paper);
+  color: var(--ink-text);
+}
+
+body:has(.launchpad-hero) > .parents {
+  background: var(--paper-soft);
+  color: var(--ink-text);
+}
+
+body:has(.launchpad-hero) > .explore {
+  background: var(--paper);
+  color: var(--ink-text);
+}
+
+body:has(.launchpad-hero) > .programme-founder {
+  background: var(--paper-soft);
+  color: var(--ink-text);
+}
+
+/* Make the Parents section read correctly on the new light background. */
+body:has(.launchpad-hero) > .parents .parents-copy .eyebrow {
+  color: var(--route-dark);
+}
+
+body:has(.launchpad-hero) > .parents .parents-copy > p,
+body:has(.launchpad-hero) > .parents .parent-note {
+  color: var(--muted-on-paper);
+}
+
+body:has(.launchpad-hero) > .parents .parent-points {
+  background: var(--paper-line);
+  border-color: var(--paper-line);
+}
+
+body:has(.launchpad-hero) > .parents .parent-point {
+  background: var(--paper);
+}
+
+body:has(.launchpad-hero) > .parents .parent-point .k {
+  color: var(--route-dark);
+}
+
+body:has(.launchpad-hero) > .parents .parent-point h3 {
+  color: var(--ink-text);
+}
+
+body:has(.launchpad-hero) > .parents .parent-point p {
+  color: var(--muted-on-paper);
+}
+
+body:has(.launchpad-hero) > .parents .parent-note strong {
+  color: var(--ink-text);
+}
+</style>
+
 </head>
 <body>
 <nav><div class="nav-inner"><div class="nav-brand-group"><a class="nav-brand" href="index.html">The Evolve Foundation</a><span class="programme-context">8-week live, online programme for college students</span></div><button aria-label="Toggle menu" class="nav-toggle" id="navToggle">MENU</button><div class="nav-links" id="navLinks">
