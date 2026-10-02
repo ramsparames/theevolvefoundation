@@ -1,20 +1,13 @@
 /* The Evolve Foundation — compact site footer */
 .footer-compact {
-  background: var(--ink);
-  color: var(--muted-on-ink);
-  padding: 28px 0;
-  border-top: 1px solid var(--ink-line);
-}
-
-.footer-compact .wrap {
-  width: 100%;
-}
-
-.footer-compact-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 36px;
+  background: var(--ink);
+  color: var(--muted-on-ink);
+  padding: 28px 40px;
+  border-top: 1px solid var(--ink-line);
 }
 
 .footer-compact-brand {
@@ -82,13 +75,14 @@
 
 @media (max-width: 760px) {
   .footer-compact {
-    padding: 26px 0;
+    padding: 26px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
   }
 
-  .footer-compact-inner {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 16px;
+  .footer-compact-brand {
+    width: 100%;
   }
 
   .footer-compact-meta {
@@ -98,6 +92,19 @@
 }
 
 @media (max-width: 520px) {
+  .footer-compact {
+    padding: 24px;
+  }
+
+  .footer-compact-brand h2 {
+    font-size: 18px;
+  }
+
+  .footer-compact-brand p {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
   .footer-compact-meta {
     display: block;
   }
