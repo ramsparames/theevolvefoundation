@@ -106,6 +106,126 @@ body:has(.launchpad-hero) > .parents .parent-note strong {
 }
 </style>
 
+
+<style id="home-launchpad-font-colour-fix">
+/*
+  Typography-only correction for the new alternating light sections.
+  No spacing, sizing, layout, images, buttons, hero, CTA or footer rules are changed.
+*/
+
+/* ================= HOME ================= */
+
+body:has(.foundation-hero) .mission,
+body:has(.foundation-hero) .student-compass-home,
+body:has(.foundation-hero) .programmes-section,
+body:has(.foundation-hero) .home-founder {
+  color: var(--ink-text);
+}
+
+body:has(.foundation-hero) .mission .eyebrow,
+body:has(.foundation-hero) .student-compass-home .eyebrow,
+body:has(.foundation-hero) .programmes-section .section-head .eyebrow,
+body:has(.foundation-hero) .home-founder .eyebrow {
+  color: var(--route-dark) !important;
+}
+
+body:has(.foundation-hero) .mission blockquote {
+  color: var(--ink-text) !important;
+}
+
+body:has(.foundation-hero) .mission .bridge-line {
+  color: var(--muted-on-paper) !important;
+}
+
+body:has(.foundation-hero) .mission .bridge-line strong {
+  color: var(--route-dark) !important;
+}
+
+body:has(.foundation-hero) .student-compass-home h2 {
+  color: var(--ink-text) !important;
+}
+
+body:has(.foundation-hero) .student-compass-home p {
+  color: var(--muted-on-paper) !important;
+}
+
+body:has(.foundation-hero) .student-compass-home .student-compass-home-label {
+  color: var(--route-dark) !important;
+}
+
+body:has(.foundation-hero) .programmes-section .section-head h2,
+body:has(.foundation-hero) .programmes-section .programme-feature h3 {
+  color: var(--ink-text) !important;
+}
+
+body:has(.foundation-hero) .programmes-section .section-head p,
+body:has(.foundation-hero) .programmes-section .programme-feature > p:not(.programme-purpose) {
+  color: var(--muted-on-paper) !important;
+}
+
+body:has(.foundation-hero) .programmes-section .programme-audience,
+body:has(.foundation-hero) .programmes-section .programme-status.developing,
+body:has(.foundation-hero) .programmes-section .programme-purpose {
+  color: var(--route-dark) !important;
+}
+
+body:has(.foundation-hero) .programmes-section .programme-status.current {
+  color: var(--brass) !important;
+}
+
+body:has(.foundation-hero) .home-founder .founder-inner h2 {
+  color: var(--ink-text) !important;
+}
+
+body:has(.foundation-hero) .home-founder .founder-inner p,
+body:has(.foundation-hero) .home-founder .founder-signoff span {
+  color: var(--muted-on-paper) !important;
+}
+
+/* ================= LAUNCHPAD ================= */
+
+body:has(.launchpad-hero) > .section,
+body:has(.launchpad-hero) > .parents,
+body:has(.launchpad-hero) > .explore,
+body:has(.launchpad-hero) > .programme-founder {
+  color: var(--ink-text);
+}
+
+body:has(.launchpad-hero) > .section .section-head .eyebrow,
+body:has(.launchpad-hero) > .parents .eyebrow,
+body:has(.launchpad-hero) > .explore .section-head .eyebrow,
+body:has(.launchpad-hero) > .programme-founder .eyebrow {
+  color: var(--route-dark) !important;
+}
+
+body:has(.launchpad-hero) > .section .section-head h2,
+body:has(.launchpad-hero) > .explore .section-head h2,
+body:has(.launchpad-hero) > .parents .parents-copy h2,
+body:has(.launchpad-hero) > .programme-founder .founder-inner h2 {
+  color: var(--ink-text) !important;
+}
+
+body:has(.launchpad-hero) > .section .section-head p,
+body:has(.launchpad-hero) > .explore .section-head p,
+body:has(.launchpad-hero) > .parents .parents-copy > p,
+body:has(.launchpad-hero) > .parents .parent-note,
+body:has(.launchpad-hero) > .programme-founder .founder-inner p {
+  color: var(--muted-on-paper) !important;
+}
+
+body:has(.launchpad-hero) > .parents .parent-note strong {
+  color: var(--ink-text) !important;
+}
+
+body:has(.launchpad-hero) > .parents .parent-point h3 {
+  color: var(--ink-text) !important;
+}
+
+body:has(.launchpad-hero) > .parents .parent-point p {
+  color: var(--muted-on-paper) !important;
+}
+</style>
+
 </head><body><nav><div class="nav-inner"><a class="nav-brand" href="index.html">The Evolve Foundation</a><button aria-label="Toggle menu" class="nav-toggle" id="navToggle">MENU</button><div class="nav-links" id="navLinks">
 <a href="index.html#foundation">About</a>
 <a class="nav-student-compass" href="student-compass.html">Student Compass</a>
