@@ -1362,3 +1362,11 @@ footer{padding:76px 0;background:var(--ink);}
   background: var(--paper);
 }
 
+
+/* Student Compass is a navigation link, not an active section state */
+.nav-links a[href="student-compass.html"],
+.nav-links a[href="student-compass.html"].active,
+.nav-links a[href="student-compass.html"][aria-current="page"] {
+  font-weight: 400 !important;
+}
+
