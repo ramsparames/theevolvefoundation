@@ -1035,3 +1035,246 @@ footer{padding:76px 0;background:var(--ink);}
   white-space: nowrap;
 }
 
+/* ==========================================================
+   HOMEPAGE SECTION RHYTHM + STUDENT COMPASS
+   Philosophy → dark | Compass → light | Programmes → dark | Founder → light
+   ========================================================== */
+
+/* Our Core Philosophy — darker */
+.mission{
+  background:var(--ink);
+  color:var(--paper-text);
+}
+.mission .eyebrow{
+  color:var(--route-soft);
+}
+.mission blockquote{
+  color:var(--paper-text);
+}
+.mission .bridge-line{
+  color:var(--muted-on-ink);
+  border-top-color:var(--ink-line);
+}
+.mission .bridge-line strong{
+  color:var(--brass-soft);
+}
+
+/* Student Compass — lighter */
+.student-compass-home{
+  background:var(--paper);
+  color:var(--ink-text);
+  padding:120px 0;
+}
+.student-compass-home-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr);
+  gap:80px;
+  align-items:center;
+}
+.student-compass-home-copy{
+  max-width:680px;
+}
+.student-compass-home-copy .eyebrow{
+  color:var(--route-dark);
+  margin-bottom:22px;
+}
+.student-compass-home-copy h2{
+  font-size:clamp(38px,4.5vw,58px);
+  line-height:1.08;
+  letter-spacing:-.025em;
+  margin-bottom:20px;
+}
+.student-compass-home-copy p{
+  font-size:18px;
+  line-height:1.7;
+  color:var(--muted-on-paper);
+  max-width:58ch;
+}
+.student-compass-home-copy .student-compass-home-lede{
+  font-family:'Fraunces',serif;
+  font-size:clamp(21px,2.3vw,28px);
+  line-height:1.4;
+  color:var(--ink-text);
+  margin-bottom:12px;
+}
+.student-compass-home-copy .btn{
+  margin-top:30px;
+}
+
+.student-compass-home-visual{
+  min-height:360px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.student-compass-home-circle{
+  position:relative;
+  width:min(100%,360px);
+  aspect-ratio:1;
+  border:1px solid rgba(27,35,43,.18);
+  border-radius:50%;
+}
+.student-compass-home-circle::before,
+.student-compass-home-circle::after{
+  content:"";
+  position:absolute;
+  background:rgba(27,35,43,.10);
+}
+.student-compass-home-circle::before{
+  width:1px;
+  height:100%;
+  left:50%;
+  top:0;
+}
+.student-compass-home-circle::after{
+  width:100%;
+  height:1px;
+  left:0;
+  top:50%;
+}
+.student-compass-home-north,
+.student-compass-home-east,
+.student-compass-home-south,
+.student-compass-home-west{
+  position:absolute;
+  z-index:2;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:.12em;
+  color:var(--route-dark);
+  background:var(--paper);
+  padding:3px 5px;
+}
+.student-compass-home-north{top:-8px;left:50%;transform:translateX(-50%);}
+.student-compass-home-east{right:-8px;top:50%;transform:translateY(-50%);}
+.student-compass-home-south{bottom:-8px;left:50%;transform:translateX(-50%);}
+.student-compass-home-west{left:-8px;top:50%;transform:translateY(-50%);}
+
+.student-compass-home-center{
+  position:absolute;
+  z-index:3;
+  left:50%;
+  top:50%;
+  width:66px;
+  height:66px;
+  transform:translate(-50%,-50%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:var(--brass);
+  color:var(--ink);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.08em;
+  box-shadow:0 8px 24px rgba(27,35,43,.12);
+}
+.student-compass-home-needle{
+  position:absolute;
+  z-index:2;
+  left:50%;
+  top:50%;
+  width:2px;
+  height:42%;
+  transform:translate(-50%,-100%) rotate(32deg);
+  transform-origin:50% 100%;
+  background:var(--route-dark);
+}
+.student-compass-home-needle::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  transform:translateX(-50%);
+  border-left:6px solid transparent;
+  border-right:6px solid transparent;
+  border-bottom:16px solid var(--route-dark);
+}
+.student-compass-home-label{
+  margin-top:22px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:.18em;
+  color:var(--route-dark);
+}
+
+/* Programmes — darker */
+.programmes-section{
+  background:var(--ink);
+  color:var(--paper-text);
+}
+.programmes-section .section-head .eyebrow{
+  color:var(--route-soft);
+}
+.programmes-section .section-head h2{
+  color:var(--paper-text);
+}
+.programmes-section .section-head p{
+  color:var(--muted-on-ink);
+}
+.programmes-section .programme-feature,
+.programmes-section .programme-feature:first-child{
+  background:var(--ink-soft);
+  color:var(--paper-text);
+  border-color:var(--ink-line);
+  box-shadow:none;
+}
+.programmes-section .programme-feature .programme-audience,
+.programmes-section .programme-feature:first-child .programme-audience,
+.programmes-section .programme-campus .programme-audience{
+  color:var(--route-soft);
+}
+.programmes-section .programme-feature .programme-status,
+.programmes-section .programme-feature:first-child .programme-status,
+.programmes-section .programme-status.current,
+.programmes-section .programme-status.developing{
+  color:var(--brass-soft);
+}
+.programmes-section .programme-feature .programme-purpose,
+.programmes-section .programme-feature:first-child .programme-purpose{
+  color:var(--brass-soft);
+}
+.programmes-section .programme-feature>p:not(.programme-purpose),
+.programmes-section .programme-feature:first-child>p:not(.programme-purpose){
+  color:var(--muted-on-ink);
+}
+
+/* Founder — lighter */
+.home-founder{
+  background:var(--paper);
+  color:var(--ink-text);
+}
+
+/* Compass + homepage rhythm on smaller screens */
+@media(max-width:880px){
+  .student-compass-home-inner{
+    grid-template-columns:1fr;
+    gap:56px;
+  }
+  .student-compass-home-copy{
+    max-width:760px;
+  }
+  .student-compass-home-visual{
+    min-height:0;
+  }
+}
+@media(max-width:680px){
+  .student-compass-home{
+    padding:92px 0;
+  }
+  .student-compass-home-copy h2{
+    font-size:clamp(36px,11vw,50px);
+  }
+  .student-compass-home-copy p{
+    font-size:16.5px;
+  }
+  .student-compass-home-copy .student-compass-home-lede{
+    font-size:23px;
+  }
+  .student-compass-home-circle{
+    width:min(78vw,320px);
+  }
+}
+
