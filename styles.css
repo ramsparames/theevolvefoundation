@@ -1278,3 +1278,9 @@ footer{padding:76px 0;background:var(--ink);}
   }
 }
 
+/* Keep Student Compass navigation consistent with the other menu items */
+.nav-links a[href="student-compass.html"],
+.nav-links a[href="student-compass.html"] strong,
+.nav-links a.nav-student-compass {
+  font-weight: 400 !important;
+}
