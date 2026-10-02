@@ -1034,3 +1034,156 @@ footer{padding:76px 0;background:var(--ink);}
   display: block;
 }
 
+/* ---------- STUDENT COMPASS HOME ---------- */
+
+.student-compass-home {
+  padding: 92px 0;
+  background: var(--paper-soft);
+}
+
+.student-compass-home-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(260px, .75fr);
+  gap: 80px;
+  align-items: center;
+}
+
+.student-compass-home-copy {
+  max-width: 700px;
+}
+
+.student-compass-home-copy h2 {
+  max-width: 12ch;
+  margin: 12px 0 18px;
+}
+
+.student-compass-home-lede {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(24px, 2.5vw, 32px);
+  line-height: 1.35;
+  max-width: 22ch;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+
+.student-compass-home-copy > p:not(.student-compass-home-lede) {
+  max-width: 58ch;
+  color: var(--muted-on-paper);
+  font-size: 17px;
+  line-height: 1.65;
+  margin-bottom: 26px;
+}
+
+.student-compass-home-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.student-compass-home-circle {
+  position: relative;
+  width: min(300px, 70vw);
+  aspect-ratio: 1;
+  border: 1px solid var(--ink-line);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.student-compass-home-circle::before {
+  content: "";
+  position: absolute;
+  inset: 14%;
+  border: 1px solid var(--ink-line);
+  border-radius: 50%;
+}
+
+.student-compass-home-north,
+.student-compass-home-east,
+.student-compass-home-south,
+.student-compass-home-west {
+  position: absolute;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .12em;
+  color: var(--muted-on-paper);
+}
+
+.student-compass-home-north { top: 9%; left: 50%; transform: translateX(-50%); }
+.student-compass-home-east { right: 9%; top: 50%; transform: translateY(-50%); }
+.student-compass-home-south { bottom: 9%; left: 50%; transform: translateX(-50%); }
+.student-compass-home-west { left: 9%; top: 50%; transform: translateY(-50%); }
+
+.student-compass-home-center {
+  position: relative;
+  z-index: 2;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .18em;
+  color: var(--brass);
+}
+
+.student-compass-home-needle {
+  position: absolute;
+  width: 1px;
+  height: 42%;
+  background: var(--brass);
+  transform: rotate(38deg);
+  transform-origin: 50% 100%;
+  bottom: 50%;
+  left: calc(50% - .5px);
+}
+
+.student-compass-home-needle::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: -5px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--brass);
+}
+
+.student-compass-home-label {
+  margin-top: 16px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+  color: var(--muted-on-paper);
+}
+
+@media (max-width: 880px) {
+  .student-compass-home-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .student-compass-home-visual {
+    order: -1;
+  }
+
+  .student-compass-home-circle {
+    width: min(240px, 62vw);
+  }
+}
+
+@media (max-width: 680px) {
+  .student-compass-home {
+    padding: 72px 0;
+  }
+
+  .student-compass-home-copy h2 {
+    max-width: 100%;
+  }
+
+  .student-compass-home-lede {
+    font-size: 24px;
+  }
+
+  .student-compass-home-copy > p:not(.student-compass-home-lede) {
+    font-size: 16px;
+  }
+}
