@@ -1343,3 +1343,22 @@ footer{padding:76px 0;background:var(--ink);}
   }
 }
 
+/* ---------- HOMEPAGE SECTION ALTERNATION ---------- */
+
+.mission {
+  background: var(--paper-soft);
+}
+
+.student-compass-home {
+  background: var(--paper);
+}
+
+.programmes-section {
+  background: var(--paper-soft);
+}
+
+.home-founder,
+.founder.home-founder {
+  background: var(--paper);
+}
+
