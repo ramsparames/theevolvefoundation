@@ -181,6 +181,7 @@
         phone: String(data.get('phone') || '').trim(),
         answers: values,
         capturedAt: new Date().toISOString(),
+        submissionId: (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`,
         website: String(data.get('website') || '')
       };
 
