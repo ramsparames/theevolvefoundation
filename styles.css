@@ -1278,3 +1278,100 @@ footer{padding:76px 0;background:var(--ink);}
   }
 }
 
+
+
+/* ==========================================================
+   SECTION COLOUR RHYTHM — HOMEPAGE + LAUNCHPAD
+   Only background/foreground colours are changed here.
+   Existing layout, spacing, components and interactions remain untouched.
+   ========================================================== */
+
+/* HOMEPAGE
+   Hero       = existing dark hero
+   Philosophy = light sage
+   Compass    = warm cream
+   Programmes = light sage
+   Founder    = warm cream
+*/
+.mission{
+  background:var(--route-soft);
+  color:var(--ink-text);
+}
+.mission .eyebrow{
+  color:var(--route-dark);
+}
+.mission blockquote{
+  color:var(--ink-text);
+}
+.mission .bridge-line{
+  color:var(--ink-text);
+  border-top-color:var(--paper-line);
+}
+.mission .bridge-line strong{
+  color:var(--route-dark);
+}
+
+.student-compass-home{
+  background:var(--paper);
+  color:var(--ink-text);
+}
+
+.programmes-section{
+  background:var(--route-soft);
+  color:var(--ink-text);
+}
+.programmes-section .section-head .eyebrow{
+  color:var(--route-dark);
+}
+.programmes-section .section-head h2{
+  color:var(--ink-text);
+}
+.programmes-section .section-head p{
+  color:var(--muted-on-paper);
+}
+
+/* Keep the existing programme cards themselves unchanged. */
+.programmes-section .programme-feature{
+  color:var(--paper-text);
+}
+.programmes-section .programme-campus{
+  color:var(--ink-text);
+}
+
+.home-founder{
+  background:var(--paper);
+  color:var(--ink-text);
+}
+
+/* LAUNCHPAD
+   Hero       = existing dark hero
+   Why        = light sage
+   Parents    = warm cream
+   Inside     = light sage
+   Founder    = warm cream
+*/
+.launchpad-hero + .section{
+  background:var(--route-soft);
+  color:var(--ink-text);
+}
+.launchpad-hero + .section .section-head h2{
+  color:var(--ink-text);
+}
+.launchpad-hero + .section .section-head p{
+  color:var(--muted-on-paper);
+}
+
+.launchpad-hero + .section + .parents{
+  background:var(--paper);
+  color:var(--ink-text);
+}
+
+.launchpad-hero + .section + .parents + .section.explore{
+  background:var(--route-soft);
+  color:var(--ink-text);
+}
+
+.launchpad-hero + .section + .parents + .section.explore + .founder{
+  background:var(--paper);
+  color:var(--ink-text);
+}
