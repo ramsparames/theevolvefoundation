@@ -104,6 +104,7 @@ function buildStudentEmail(name, result) {
         <a href="https://www.theevolvefoundation.com/launchpad.html" style="display:inline-block;padding:12px 20px;border:1px solid #B87A2E;color:#B87A2E;text-decoration:none;font-weight:600;">Join Launchpad →</a>
       </p>
     </div>
+    <p style="margin-top:34px;color:#52605a;">Helping young people understand themselves and navigate life well</p>
     <p style="font-size:13px;color:#6a746f;">Warmly,<br><strong>Rams</strong><br>The Evolve Foundation<br>Helping young people understand themselves and navigate life well</p>
   </div>`;
 }

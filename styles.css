@@ -1019,7 +1019,9 @@ footer{padding:76px 0;background:var(--ink);}
     white-space: nowrap;
   }
 
-
+  .home-contact h2 .keep-together {
+    white-space: nowrap;
+  }
 }
 
 .footer-v2-meta {
@@ -1030,114 +1032,5 @@ footer{padding:76px 0;background:var(--ink);}
 
 .footer-v2-meta > * {
   display: block;
-}
-.home-contact h2 .keep-together {
-  white-space: nowrap;
-}
-
-/* ---------- Student Compass navigation consistency ---------- */
-.nav-links a.nav-student-compass,
-.nav-links a.nav-student-compass.active,
-.nav-links a.nav-student-compass[aria-current="page"] {
-  color:#4D5962 !important;
-  font-weight:400 !important;
-}
-.nav-links a.nav-student-compass:hover,
-.nav-links a.nav-student-compass.active:hover,
-.nav-links a.nav-student-compass[aria-current="page"]:hover {
-  color:var(--ink) !important;
-}
-
-/* ---------- COMPACT FOOTER ---------- */
-
-footer {
-  padding: 28px 0 24px;
-  background: var(--ink);
-}
-
-.footer-v2 {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 32px;
-  align-items: center;
-  border-top: 1px solid var(--ink-line);
-  padding-top: 20px;
-}
-
-.footer-v2-brand h2 {
-  font-size: 20px;
-  line-height: 1.2;
-  color: var(--paper-text);
-  margin: 0 0 5px;
-}
-
-.footer-v2-brand p {
-  max-width: none;
-  color: var(--muted-on-ink);
-  font-size: 12.5px;
-  line-height: 1.4;
-  margin: 0;
-}
-
-.footer-v2-meta {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center !important;
-  justify-content: flex-end;
-  gap: 6px 16px;
-  color: var(--muted-on-ink);
-  font-size: 11.5px;
-  line-height: 1.4;
-  text-align: right !important;
-}
-
-.footer-v2-meta > * {
-  display: inline !important;
-}
-
-.footer-v2-meta a {
-  color: var(--paper-text);
-  text-decoration: none;
-}
-
-.footer-v2-meta a:hover {
-  color: var(--brass-soft);
-}
-
-@media (max-width: 880px) {
-  .footer-v2 {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-
-  .footer-v2-meta {
-    justify-content: flex-start;
-    text-align: left !important;
-  }
-}
-
-@media (max-width: 680px) {
-  footer {
-    padding: 24px 0 20px;
-  }
-
-  .footer-v2 {
-    gap: 16px;
-    padding-top: 16px;
-  }
-
-  .footer-v2-brand h2 {
-    font-size: 19px;
-  }
-
-  .footer-v2-brand p {
-    font-size: 12px;
-  }
-
-  .footer-v2-meta {
-    gap: 5px 12px;
-    font-size: 11px;
-  }
 }
 
