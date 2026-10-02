@@ -1,46 +1,52 @@
-/* ---------- COMPACT FOOTER ---------- */
-
-footer {
-  padding: 28px 0 24px;
+/* The Evolve Foundation — compact site footer */
+.footer-compact {
   background: var(--ink);
+  color: var(--muted-on-ink);
+  padding: 28px 0;
+  border-top: 1px solid var(--ink-line);
 }
 
-.footer-compact {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 32px;
+.footer-compact .wrap {
+  width: 100%;
+}
+
+.footer-compact-inner {
+  display: flex;
   align-items: center;
-  border-top: 1px solid var(--ink-line);
-  padding-top: 20px;
+  justify-content: space-between;
+  gap: 36px;
+}
+
+.footer-compact-brand {
+  min-width: 0;
 }
 
 .footer-compact-brand h2 {
+  margin: 0 0 5px;
   font-family: 'Fraunces', serif;
-  font-size: 20px;
-  line-height: 1.2;
+  font-size: 19px;
+  line-height: 1.15;
   font-weight: 600;
   color: var(--paper-text);
-  margin: 0 0 5px;
+  letter-spacing: -.01em;
 }
 
 .footer-compact-brand p {
-  max-width: none;
-  color: var(--muted-on-ink);
-  font-size: 12.5px;
-  line-height: 1.4;
   margin: 0;
+  color: var(--muted-on-ink);
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 .footer-compact-meta {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
-  gap: 6px 16px;
+  gap: 5px 0;
   color: var(--muted-on-ink);
-  font-size: 11.5px;
-  line-height: 1.4;
+  font-size: 12px;
+  line-height: 1.45;
   text-align: right;
 }
 
@@ -53,20 +59,36 @@ footer {
   color: var(--brass-soft);
 }
 
-.footer-compact-legal {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.footer-dot {
+.footer-compact-meta > * + *::before {
+  content: '·';
+  display: inline-block;
+  margin: 0 10px;
   color: var(--muted-on-ink);
 }
 
-@media (max-width: 880px) {
+.footer-compact-legal {
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-compact-legal::before {
+  content: none !important;
+}
+
+.footer-compact-legal .footer-dot {
+  margin: 0 7px;
+  color: var(--muted-on-ink);
+}
+
+@media (max-width: 760px) {
   .footer-compact {
-    grid-template-columns: 1fr;
-    gap: 18px;
+    padding: 26px 0;
+  }
+
+  .footer-compact-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
   }
 
   .footer-compact-meta {
@@ -75,26 +97,16 @@ footer {
   }
 }
 
-@media (max-width: 680px) {
-  footer {
-    padding: 24px 0 20px;
-  }
-
-  .footer-compact {
-    gap: 16px;
-    padding-top: 16px;
-  }
-
-  .footer-compact-brand h2 {
-    font-size: 19px;
-  }
-
-  .footer-compact-brand p {
-    font-size: 12px;
-  }
-
+@media (max-width: 520px) {
   .footer-compact-meta {
-    gap: 5px 12px;
-    font-size: 11px;
+    display: block;
+  }
+
+  .footer-compact-meta > * {
+    display: inline;
+  }
+
+  .footer-compact-meta > * + *::before {
+    margin: 0 7px;
   }
 }
