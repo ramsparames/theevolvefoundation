@@ -78,51 +78,34 @@ function calculateResult(answers) {
 function buildStudentEmail(name, result) {
   const natural = CATEGORY_META[result.natural];
   const strengthen = CATEGORY_META[result.strengthen];
-
   return `<div style="font-family:Arial,sans-serif;line-height:1.6;color:#17231f;max-width:680px;margin:0 auto;padding:32px 20px;">
     <p style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#B87A2E;">STUDENT COMPASS</p>
-
     <h1 style="font-family:Georgia,serif;font-weight:500;font-size:34px;line-height:1.15;">Your reflection is ready.</h1>
-
     <p>Hi ${escapeHtml(name)},</p>
-
-    <p>Thank you for taking the time to pause and reflect. There are no right or wrong answers here. This was simply a chance to think about yourself, your choices and what you might want to explore next.</p>
-
+    <p>Thank you for taking the time to pause and reflect. Your Student Compass responses are not a score or diagnosis. They simply highlight a couple of themes that may be useful as you think about what comes next.</p>
     <div style="margin:28px 0;padding:22px;border:1px solid #ddd8ce;background:#FBFAF7;">
-      <p style="margin:0 0 6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#5C8A7E;">What seems to come naturally to you</p>
+      <p style="margin:0 0 6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#5C8A7E;">What seems to come naturally</p>
       <h2 style="font-family:Georgia,serif;font-weight:500;margin:0 0 10px;font-size:26px;">${escapeHtml(natural.title)}</h2>
       <p style="margin:0;">${escapeHtml(natural.natural)}</p>
     </div>
-
     <div style="margin:28px 0;padding:22px;border:1px solid #ddd8ce;background:#FBFAF7;">
-      <p style="margin:0 0 6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#5C8A7E;">Something worth exploring further</p>
+      <p style="margin:0 0 6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#5C8A7E;">Something you may want to strengthen</p>
       <h2 style="font-family:Georgia,serif;font-weight:500;margin:0 0 10px;font-size:26px;">${escapeHtml(strengthen.title)}</h2>
       <p style="margin:0;">${escapeHtml(strengthen.strengthen)}</p>
     </div>
-
     <p>Use this as a starting point, not a label. Clarity often comes from trying things, learning from experiences and asking better questions.</p>
-
-    <div style="margin:30px 0 24px;">
-      <h2 style="font-family:Georgia,serif;font-weight:500;font-size:24px;margin:0 0 8px;color:#17231f;">Keep exploring</h2>
-
-      <p style="margin:0 0 18px;">When you're ready, here are two ways to continue.</p>
-
+    <div style="margin:30px 0 24px;padding-top:4px;">
+      <p style="font-family:Georgia,serif;font-size:22px;margin:0 0 8px;color:#17231f;">Keep exploring</p>
+      <p style="margin:0 0 18px;">Here are two ways to continue when you are ready.</p>
       <p style="margin:0 0 12px;">
         <a href="https://www.theevolvefoundation.com/compass-capsules.html" style="display:inline-block;padding:12px 20px;background:#B87A2E;color:#ffffff;text-decoration:none;font-weight:600;">Ideas to Explore →</a>
       </p>
-
       <p style="margin:0;">
         <a href="https://www.theevolvefoundation.com/launchpad.html" style="display:inline-block;padding:12px 20px;border:1px solid #B87A2E;color:#B87A2E;text-decoration:none;font-weight:600;">Join Launchpad →</a>
       </p>
     </div>
-
     <p style="margin-top:34px;color:#52605a;">Helping young people understand themselves and navigate life well</p>
-
-    <p style="font-size:13px;color:#6a746f;">
-      Warmly,<br>
-      <strong>Rams</strong><br>
-      The Evolve Foundation
-    </p>
+    <p style="font-size:13px;color:#6a746f;">Warmly,<br><strong>Rams</strong><br>The Evolve Foundation<br>Helping young people understand themselves and navigate life well</p>
   </div>`;
 }
 function buildNotificationEmail(lead, result, answers) {
@@ -132,13 +115,15 @@ function buildNotificationEmail(lead, result, answers) {
   return `<div style="font-family:Arial,sans-serif;line-height:1.5;color:#17231f;max-width:800px;">
     <h2>New Student Compass lead</h2>
     <p><strong>Name:</strong> ${escapeHtml(lead.name)}<br><strong>Email:</strong> ${escapeHtml(lead.email)}<br><strong>Phone:</strong> ${escapeHtml(lead.phone)}<br><strong>Captured:</strong> ${escapeHtml(lead.capturedAt)}</p>
-    <h3>Reflection summary</h3>
-    <p><strong>Natural theme:</strong> ${escapeHtml(natural.title)} — ${escapeHtml(natural.natural)}</p>
-    <p><strong>Strengthening theme:</strong> ${escapeHtml(strengthen.title)} — ${escapeHtml(strengthen.strengthen)}</p>
-    <h3>Category averages</h3>
-    <ul>${result.averages.map(item => `<li>${escapeHtml(CATEGORY_META[item.key].title)}: ${item.value.toFixed(2)} / 5</li>`).join('')}</ul>
-    <h3>Responses</h3>
+    <h3>Reflection responses</h3>
     <table style="border-collapse:collapse;width:100%;font-size:13px;"><thead><tr><th style="text-align:left;padding:7px;border-bottom:2px solid #ccc;">#</th><th style="text-align:left;padding:7px;border-bottom:2px solid #ccc;">Reflection</th><th style="padding:7px;border-bottom:2px solid #ccc;">Score</th></tr></thead><tbody>${rows}</tbody></table>
+    <div style="margin-top:28px;padding:20px;background:#FBFAF7;border:1px solid #ddd8ce;">
+      <h3 style="margin-top:0;">Summary for follow up</h3>
+      <p><strong>What seems to come naturally:</strong><br>${escapeHtml(natural.title)}<br>${escapeHtml(natural.natural)}</p>
+      <p><strong>Something worth exploring further:</strong><br>${escapeHtml(strengthen.title)}<br>${escapeHtml(strengthen.strengthen)}</p>
+      <p><strong>Category averages</strong></p>
+      <ul>${result.averages.map(item => `<li>${escapeHtml(CATEGORY_META[item.key].title)}: ${item.value.toFixed(2)} / 5</li>`).join('')}</ul>
+    </div>
   </div>`;
 }
 
@@ -217,7 +202,7 @@ module.exports = async function handler(req, res) {
       sendResendEmail({
         to: ENQUIRY_EMAIL,
         replyTo: cleanEmail,
-        subject: `New Student Compass lead — ${cleanName}`,
+        subject: `New Student Compass lead: ${cleanName}`,
         html: buildNotificationEmail(lead, result, values),
         idempotencyKey: `student-compass-lead-${submissionId}`
       })
