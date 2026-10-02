@@ -1,12 +1,120 @@
-/* Compact footer used by the Library pages. */
-.footer-compact{display:grid;grid-template-columns:1.2fr .8fr;gap:72px;border-top:1px solid var(--ink-line);padding-top:44px;}
-.footer-compact-brand h2{font-family:'Fraunces',serif;font-size:30px;font-weight:600;color:var(--paper-text);margin-bottom:14px;}
-.footer-compact-brand p{max-width:36ch;color:var(--muted-on-ink);font-size:16px;}
-.footer-compact-meta{display:flex;flex-direction:column;align-items:flex-start;gap:12px;color:var(--muted-on-ink);font-size:13px;}
-.footer-compact-meta a{color:var(--paper-text);text-decoration:none;}
-.footer-compact-meta a:hover{color:var(--brass-soft);}
-.footer-compact-legal{display:inline-flex;align-items:center;gap:8px;}
-.footer-dot{color:var(--muted-on-ink);}
-@media(max-width:880px){
-  .footer-compact{grid-template-columns:1fr;gap:38px;}
+/* The Evolve Foundation — compact site footer */
+
+.footer-compact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  background: var(--ink);
+  color: var(--muted-on-ink);
+  padding: 28px 40px;
+  border-top: 1px solid var(--ink-line);
+}
+
+.footer-compact-brand {
+  min-width: 0;
+}
+
+.footer-compact-brand h2 {
+  margin: 0 0 5px;
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  line-height: 1.15;
+  font-weight: 600;
+  color: var(--paper-text);
+  letter-spacing: -.01em;
+}
+
+.footer-compact-brand p {
+  margin: 0;
+  color: var(--muted-on-ink);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.footer-compact-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px 0;
+  color: var(--muted-on-ink);
+  font-size: 12px;
+  line-height: 1.45;
+  text-align: right;
+}
+
+.footer-compact-meta a {
+  color: var(--paper-text);
+  text-decoration: none;
+}
+
+.footer-compact-meta a:hover {
+  color: var(--brass-soft);
+}
+
+.footer-compact-meta > * + *::before {
+  content: '·';
+  display: inline-block;
+  margin: 0 10px;
+  color: var(--muted-on-ink);
+}
+
+.footer-compact-legal {
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-compact-legal::before {
+  content: none !important;
+}
+
+.footer-compact-legal .footer-dot {
+  margin: 0 7px;
+  color: var(--muted-on-ink);
+}
+
+@media (max-width: 760px) {
+  .footer-compact {
+    padding: 26px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .footer-compact-brand {
+    width: 100%;
+  }
+
+  .footer-compact-meta {
+    justify-content: flex-start;
+    text-align: left;
+  }
+}
+
+@media (max-width: 520px) {
+  .footer-compact {
+    padding: 24px;
+  }
+
+  .footer-compact-brand h2 {
+    font-size: 18px;
+  }
+
+  .footer-compact-brand p {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .footer-compact-meta {
+    display: block;
+  }
+
+  .footer-compact-meta > * {
+    display: inline;
+  }
+
+  .footer-compact-meta > * + *::before {
+    margin: 0 7px;
+  }
 }
