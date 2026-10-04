@@ -12,12 +12,11 @@
   <link rel="stylesheet" href="footer-compact.css">
   <link rel="stylesheet" href="student-compass.css">
 </head>
-<body>
-
-<nav>
+<body class="student-compass-site">
+<nav class="site-nav" aria-label="Primary navigation">
   <div class="nav-inner">
     <a class="nav-brand" href="index.html">The Evolve Foundation</a>
-    <button aria-label="Toggle menu" class="nav-toggle" id="navToggle">MENU</button>
+    <button aria-label="Toggle menu" class="nav-toggle" id="navToggle" type="button">MENU</button>
     <div class="nav-links" id="navLinks">
       <a href="index.html#foundation">About</a>
       <a href="student-compass.html">Student Compass</a>
@@ -33,30 +32,9 @@
     </div>
   </div>
 </nav>
-
-<main class="compass-result-page">
-  <div class="wrap compass-result-inner">
-    <span class="eyebrow">STUDENT COMPASS</span>
-
-    <section class="compass-result-block">
-      <div class="result-label">WHERE YOU ARE TODAY</div>
-      <h1 id="state-title"></h1>
-      <p id="state-summary"></p>
-    </section>
-
-    <section class="compass-result-block">
-      <div class="result-label">WHAT YOU CAN DO NEXT</div>
-      <h2 id="step-title"></h2>
-      <p id="step-text"></p>
-    </section>
-
-    <div class="compass-result-cta">
-      <a href="launchpad.html">Want a more structured space to work through this? Explore Launchpad →</a>
-    </div>
-  </div>
-</main>
-
-<footer>
+<main class="compass-result-page"><div class="wrap compass-result-inner"><section class="compass-result-block"><div class="result-label">WHERE YOU ARE TODAY</div><h1 id="state-title"></h1><p id="state-summary"></p></section><section class="compass-result-block"><div class="result-label">WHAT YOU CAN DO NEXT</div><h2 id="step-title"></h2><p id="step-text"></p></section></div></main>
+<script src="compass-result.js"></script>
+<footer id="contact">
   <div class="wrap">
     <div class="footer-compact">
       <div class="footer-compact-brand">
@@ -72,8 +50,6 @@
     </div>
   </div>
 </footer>
-
-<script src="compass-result.js"></script>
 <script defer src="script.js"></script>
 </body>
 </html>

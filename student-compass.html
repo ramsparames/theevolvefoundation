@@ -12,12 +12,11 @@
   <link rel="stylesheet" href="footer-compact.css">
   <link rel="stylesheet" href="student-compass.css">
 </head>
-<body>
-
-<nav>
+<body class="student-compass-site">
+<nav class="site-nav" aria-label="Primary navigation">
   <div class="nav-inner">
     <a class="nav-brand" href="index.html">The Evolve Foundation</a>
-    <button aria-label="Toggle menu" class="nav-toggle" id="navToggle">MENU</button>
+    <button aria-label="Toggle menu" class="nav-toggle" id="navToggle" type="button">MENU</button>
     <div class="nav-links" id="navLinks">
       <a href="index.html#foundation">About</a>
       <a href="student-compass.html">Student Compass</a>
@@ -33,52 +32,39 @@
     </div>
   </div>
 </nav>
-
 <header class="compass-hero">
   <div class="wrap compass-hero-inner">
     <div class="compass-hero-copy">
       <span class="eyebrow">STUDENT COMPASS</span>
       <h1>Know where you are.<br><em>Know what to do next.</em></h1>
       <p class="lede">A short reflection journey for students who are figuring out what comes next.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="compass-question.html">Start your reflection →</a>
-      </div>
+      <div class="cta-row compass-cta-row"><a class="btn btn-primary" href="compass-question.html">Start your reflection →</a></div>
       <p class="compass-hero-note">About 10 minutes · No right or wrong answers · This is not a career test</p>
     </div>
-
     <div class="compass-hero-visual" aria-hidden="true">
-      <div class="compass-dial">
-        <span class="compass-direction compass-n">N</span>
-        <span class="compass-direction compass-e">E</span>
-        <span class="compass-direction compass-s">S</span>
-        <span class="compass-direction compass-w">W</span>
-        <span class="compass-cross compass-cross-v"></span>
-        <span class="compass-cross compass-cross-h"></span>
-        <span class="compass-center">SC</span>
-        <span class="compass-needle"></span>
-      </div>
-      <span class="compass-visual-label">STUDENT COMPASS</span>
+      <svg class="compass-svg" viewBox="0 0 420 420" role="presentation">
+        <circle cx="210" cy="210" r="174" class="compass-ring compass-ring-outer"/>
+        <circle cx="210" cy="210" r="132" class="compass-ring compass-ring-mid"/>
+        <circle cx="210" cy="210" r="82" class="compass-ring compass-ring-inner"/>
+        <g class="compass-ticks"><path d="M210 24v24M210 372v24M24 210h24M372 210h24"/><path d="M78.5 78.5l17 17M324.5 324.5l17 17M341.5 78.5l-17 17M95.5 324.5l-17 17"/></g>
+        <circle cx="210" cy="210" r="52" class="compass-core"/>
+        <path d="M210 58 L226 210 L210 192 L194 210 Z" class="compass-needle-north"/>
+        <path d="M210 362 L226 210 L210 228 L194 210 Z" class="compass-needle-south"/>
+        <circle cx="210" cy="210" r="8" class="compass-hub"/>
+        <text x="210" y="43" class="compass-letter" text-anchor="middle">N</text><text x="377" y="216" class="compass-letter" text-anchor="middle">E</text><text x="210" y="391" class="compass-letter" text-anchor="middle">S</text><text x="43" y="216" class="compass-letter" text-anchor="middle">W</text>
+        <path d="M76 310 A174 174 0 0 0 344 310" class="compass-arc"/>
+      </svg>
+      <span class="compass-visual-label">FIND YOUR BEARINGS</span>
     </div>
   </div>
 </header>
-
 <section class="compass-intro">
   <div class="wrap compass-intro-grid">
-    <div class="compass-intro-copy">
-      <span class="eyebrow">A MOMENT TO PAUSE</span>
-      <h2>There is no need to have it all figured out.</h2>
-      <p>Student Compass is simply a chance to pause and notice where you are today. Your reflection will give you a useful picture of where you are and one practical next step.</p>
-      <p>It won't tell you what career to choose. It will help you think about what might be useful to do next.</p>
-    </div>
-    <div class="compass-principles">
-      <div class="compass-principle"><strong>Reflect</strong><span>Notice what feels true for you right now.</span></div>
-      <div class="compass-principle"><strong>Find your bearings</strong><span>See which navigation state sounds most like you.</span></div>
-      <div class="compass-principle"><strong>Take one next step</strong><span>Leave with something practical to try.</span></div>
-    </div>
+    <div class="compass-intro-copy"><span class="eyebrow">A MOMENT TO PAUSE</span><h2>There is no need to have it all figured out.</h2><p>Student Compass is simply a chance to pause and notice where you are today. Your reflection will give you a useful picture of where you are and one practical next step.</p><p>It won't tell you what career to choose. It will help you think about what might be useful to do next.</p></div>
+    <div class="compass-intro-note"><span class="compass-intro-note-label">WHAT YOU'LL LEAVE WITH</span><p>A clearer sense of where you are today — and one thing you can do next.</p></div>
   </div>
 </section>
-
-<footer>
+<footer id="contact">
   <div class="wrap">
     <div class="footer-compact">
       <div class="footer-compact-brand">
@@ -94,7 +80,9 @@
     </div>
   </div>
 </footer>
-
 <script defer src="script.js"></script>
+<script>
+(function(){const nav=document.getElementById('navLinks');const toggle=document.getElementById('navToggle');const dropdown=document.querySelector('.nav-dropdown');const trigger=document.querySelector('.nav-dropdown-trigger');if(toggle&&nav){toggle.addEventListener('click',()=>nav.classList.toggle('open'));}if(dropdown&&trigger){trigger.addEventListener('click',()=>{const open=dropdown.classList.toggle('open');trigger.setAttribute('aria-expanded',String(open));});}})();
+</script>
 </body>
 </html>

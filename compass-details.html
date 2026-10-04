@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Compass | The Evolve Foundation</title>
+  <meta name="description" content="Tell us where to send your Student Compass reflection.">
   <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"><title>Your Compass | The Evolve Foundation</title><link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="footer-compact.css">
-<link rel="stylesheet" href="student-compass.css"></head><body>
-<nav>
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="footer-compact.css">
+  <link rel="stylesheet" href="student-compass.css">
+</head>
+<body class="student-compass-site">
+<nav class="site-nav" aria-label="Primary navigation">
   <div class="nav-inner">
     <a class="nav-brand" href="index.html">The Evolve Foundation</a>
-    <button aria-label="Toggle menu" class="nav-toggle" id="navToggle">MENU</button>
+    <button aria-label="Toggle menu" class="nav-toggle" id="navToggle" type="button">MENU</button>
     <div class="nav-links" id="navLinks">
       <a href="index.html#foundation">About</a>
       <a href="student-compass.html">Student Compass</a>
@@ -24,6 +32,24 @@
     </div>
   </div>
 </nav>
-<main class="lead-section"><div class="wrap"><div class="lead-card"><p class="eyebrow">ALMOST THERE</p><h1>Your Compass is ready.</h1><p>Before we show you your starting point, tell us where to send your reflection.</p><form id="lead-form"><div class="form-grid"><div class="form-field"><label for="name">Name</label><input id="name" name="name" required></div><div class="form-field"><label for="email">Email</label><input id="email" name="email" type="email" required></div><div class="form-field full"><label for="phone">Phone number</label><input id="phone" name="phone" required></div></div><input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden"><p class="form-note">We'll use your details to send your reflection and relevant resources from The Evolve Foundation.</p><p id="form-error" class="form-error hidden"></p><div class="actions"><button class="btn btn-primary" type="submit">Show me my Compass →</button></div></form></div></div></main>
-<div class="footer-compact"><div class="footer-compact-brand"><h2>The Evolve Foundation</h2><p>Helping young people understand themselves and navigate life well</p></div><div class="footer-compact-meta"><a href="mailto:enquire@theevolvefoundation.com?subject=The%20Evolve%20Foundation%20Enquiry">enquire@theevolvefoundation.com</a><span>© 2026 The Evolve Foundation</span><a href="https://www.linkedin.com/company/the-evolve-foundation/" target="_blank" rel="noopener noreferrer" aria-label="The Evolve Foundation on LinkedIn">LinkedIn</a><span class="footer-compact-legal"><a href="terms-and-conditions.html">Terms &amp; Conditions</a><span class="footer-dot">·</span><a href="privacy-policy.html">Privacy Policy</a></span></div></div>
-<script src="compass-details.js"></script></body></html>
+<main class="lead-section"><div class="wrap"><div class="lead-card"><p class="eyebrow">ALMOST THERE</p><h1>Your Compass is ready.</h1><p>Before we show you where you are today, tell us where to send your reflection.</p><form id="lead-form"><div class="form-grid"><div class="form-field"><label for="name">Name</label><input id="name" name="name" required></div><div class="form-field"><label for="email">Email</label><input id="email" name="email" type="email" required></div><div class="form-field full"><label for="phone">Phone number</label><input id="phone" name="phone" required></div></div><input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden"><p class="form-note">We'll use your details to send your reflection and relevant resources from The Evolve Foundation.</p><p id="form-error" class="form-error hidden"></p><div class="actions"><button class="btn btn-primary" type="submit">Show me my Compass →</button></div></form></div></div></main>
+<script src="compass-details.js"></script>
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-compact">
+      <div class="footer-compact-brand">
+        <h2>The Evolve Foundation</h2>
+        <p>Helping young people understand themselves and navigate life well</p>
+      </div>
+      <div class="footer-compact-meta">
+        <a href="mailto:enquire@theevolvefoundation.com?subject=The%20Evolve%20Foundation%20Enquiry">enquire@theevolvefoundation.com</a>
+        <span>© 2026 The Evolve Foundation</span>
+        <a href="https://www.linkedin.com/company/the-evolve-foundation/" target="_blank" rel="noopener noreferrer" aria-label="The Evolve Foundation on LinkedIn">LinkedIn</a>
+        <span class="footer-compact-legal"><a href="terms-and-conditions.html">Terms &amp; Conditions</a><span class="footer-dot">·</span><a href="privacy-policy.html">Privacy Policy</a></span>
+      </div>
+    </div>
+  </div>
+</footer>
+<script defer src="script.js"></script>
+</body>
+</html>
