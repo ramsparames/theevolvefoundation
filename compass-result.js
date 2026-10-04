@@ -18,3 +18,23 @@ document.getElementById('state-summary').textContent=state.summary;
 document.getElementById('step-title').textContent=state.stepTitle;
 document.getElementById('step-text').textContent=state.step;
 document.getElementById('launch-text').textContent=state.launch;
+
+const recommendations={
+ bearings:['strengths','decisions','opportunities'],
+ exploring:['opportunities','strengths','decisions'],
+ direction:['decisions','opportunities','strengths'],
+ moving:['decisions','opportunities','strengths']
+};
+const capsuleMeta={
+ strengths:{title:'Understanding Your Strengths',copy:'Notice what comes naturally and learn how to build on it.',href:'compass-capsules.html#strengths'},
+ decisions:{title:'Making Decisions with Confidence',copy:'Make thoughtful choices without needing complete certainty.',href:'compass-capsules.html#decisions'},
+ opportunities:{title:'Exploring Opportunities',copy:'Turn curiosity into small experiments and real experiences.',href:'compass-capsules.html#opportunities'}
+};
+(recommendations[getState()]||recommendations.bearings).forEach((key,index)=>{
+ const card=document.getElementById(`idea-${index+1}`);
+ const meta=capsuleMeta[key];
+ if(!card||!meta) return;
+ card.href=meta.href;
+ card.querySelector('.idea-title').textContent=meta.title;
+ card.querySelector('.idea-copy').textContent=meta.copy;
+});
