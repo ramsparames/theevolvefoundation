@@ -18,4 +18,3 @@ document.getElementById('state-summary').textContent=state.summary;
 document.getElementById('step-title').textContent=state.stepTitle;
 document.getElementById('step-text').textContent=state.step;
 document.getElementById('launch-text').textContent=state.launch;
-document.getElementById('student-name').textContent=name;
