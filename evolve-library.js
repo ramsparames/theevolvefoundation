@@ -1,4 +1,4 @@
-/* Evolve Library discovery + reflection-based Compass recommendations. */
+/* Library discovery + reflection-based Compass recommendations. */
 (function () {
   const CAPSULES = [
     {id:'01',slug:'driving-through-fog',title:'Driving Through Fog',moment:'I don’t know where this will lead.',shift:'Uncertainty does not necessarily mean you are lost. Sometimes clarity appears because you move.',question:'What are my next thirty metres?',tags:['uncertainty','direction','next-step','exploration']},

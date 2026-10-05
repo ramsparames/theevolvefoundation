@@ -151,5 +151,68 @@
 
 <script defer src="student-compass.js"></script>
 <script defer src="evolve-library.js"></script>
+<script id="library-hashtag-filter">
+(function () {
+  function normalise(value) {
+    return String(value || '').trim().toLowerCase().replace(/^#/, '').replace(/\s+/g, '-');
+  }
+
+  function init() {
+    var controls = Array.prototype.slice.call(document.querySelectorAll('a,button')).filter(function (el) {
+      var text = (el.textContent || '').trim();
+      var href = el.getAttribute('href') || '';
+      var container = el.closest('[class*="filter"], [id*="filter"], [class*="tag"], [id*="tag"], [class*="topic"], [id*="topic"], [class*="category"], [id*="category"]');
+      return !!(el.dataset && (el.dataset.filter || el.dataset.tag)) || /^#/.test(text) || (/^#/.test(href) && !!container) || (container && /^(all|everything)$/i.test(text));
+    });
+    if (!controls.length) return;
+
+    var links = Array.prototype.slice.call(document.querySelectorAll('a[href*="library-"]'));
+    var cards = links.map(function (link) {
+      return link.closest('[data-idea], [data-capsule], article, [class*="idea"], [class*="capsule"], [class*="library-card"], li') || link.parentElement || link;
+    });
+
+    function tagsFor(card) {
+      var explicit = card.getAttribute && (card.getAttribute('data-tags') || card.getAttribute('data-tag'));
+      if (explicit) return explicit.split(/[,| ]+/).map(normalise).filter(Boolean);
+      return Array.prototype.slice.call(card.querySelectorAll('a,span,button')).map(function (el) {
+        return (el.textContent || '').trim();
+      }).filter(function (t) { return /^#/.test(t); }).map(normalise);
+    }
+
+    var cardTags = cards.map(tagsFor);
+
+    function apply(filter) {
+      filter = normalise(filter);
+      cards.forEach(function (card, i) {
+        var show = !filter || cardTags[i].indexOf(filter) !== -1;
+        card.hidden = !show;
+      });
+      controls.forEach(function (control) {
+        var value = normalise(control.dataset.filter || control.dataset.tag || control.getAttribute('href') || control.textContent);
+        control.classList.toggle('active', value === filter || (!filter && value === 'all'));
+        control.setAttribute('aria-pressed', String(value === filter));
+      });
+      if (history.replaceState) {
+        history.replaceState(null, '', filter ? '#' + filter : window.location.pathname + window.location.search);
+      }
+    }
+
+    controls.forEach(function (control) {
+      control.addEventListener('click', function (event) {
+        var value = control.dataset.filter || control.dataset.tag || control.getAttribute('href') || control.textContent;
+        if (!String(value).trim()) return;
+        event.preventDefault();
+        apply(value);
+      });
+    });
+
+    var initial = window.location.hash ? window.location.hash.slice(1) : '';
+    apply(initial);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
 </body>
 </html>

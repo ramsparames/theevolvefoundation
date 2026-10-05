@@ -156,7 +156,7 @@ document.getElementById('launch-text').textContent = state.launch;
 document.getElementById('hero-summary').textContent = state.hero;
 
 document.getElementById('recommendations-intro').textContent =
-  `These three Evolve Library ideas were chosen to connect with ${state.title.toLowerCase()} and the next step suggested by your reflection.`;
+  `These three Library ideas were chosen to connect with ${state.title.toLowerCase()} and the next step suggested by your reflection.`;
 
 ideas.forEach((idea, index) => {
   const n = index + 1;
