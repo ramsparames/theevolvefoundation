@@ -113,30 +113,109 @@
 
   function initFilters() {
     const grid = document.querySelector('[data-library-grid]');
-    const buttons = [...document.querySelectorAll('[data-filter]')];
+    const buttons = [...document.querySelectorAll('.library-filter [data-filter]')];
     const status = document.querySelector('[data-filter-status]');
     const empty = document.querySelector('[data-library-empty]');
     if (!grid || !buttons.length) return;
 
-    function apply(filter) {
+    const cards = [...grid.querySelectorAll('.library-card')];
+    const selected = new Set();
+
+    function normalise(value) {
+      return String(value || '').trim().toLowerCase().replace(/^#/, '');
+    }
+
+    function render() {
       let visible = 0;
-      grid.querySelectorAll('.library-card').forEach(card => {
-        const tags = (card.dataset.tags || '').split(/\s+/);
-        const show = filter === 'all' || tags.includes(filter);
+
+      cards.forEach(card => {
+        const tags = (card.dataset.tags || '')
+          .split(/\s+/)
+          .map(normalise)
+          .filter(Boolean);
+
+        // Multiple selected themes use OR logic.
+        const show = selected.size === 0 ||
+          [...selected].some(tag => tags.includes(tag));
+
         card.hidden = !show;
         if (show) visible++;
       });
-      buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.filter === filter));
-      if (status) status.textContent = filter === 'all' ? 'Showing all 10 ideas' : `Showing ${visible} ${visible === 1 ? 'idea' : 'ideas'} tagged #${filter}`;
+
+      buttons.forEach(btn => {
+        const tag = normalise(btn.dataset.filter);
+        const active = tag === 'all'
+          ? selected.size === 0
+          : selected.has(tag);
+
+        btn.classList.toggle('active', active);
+        btn.classList.toggle('is-selected', active);
+        btn.setAttribute('aria-pressed', String(active));
+      });
+
+      if (status) {
+        if (selected.size === 0) {
+          status.textContent = `Showing all ${cards.length} ideas`;
+        } else if (visible === 0) {
+          status.textContent = 'No ideas match the selected themes yet';
+        } else if (selected.size === 1) {
+          const tag = [...selected][0];
+          status.textContent =
+            `Showing ${visible} ${visible === 1 ? 'idea' : 'ideas'} tagged #${tag}`;
+        } else {
+          status.textContent =
+            `Showing ${visible} ${visible === 1 ? 'idea' : 'ideas'} matching ` +
+            [...selected].map(tag => `#${tag}`).join(' or ');
+        }
+      }
+
       if (empty) empty.hidden = visible !== 0;
     }
 
-    buttons.forEach(btn => btn.addEventListener('click', () => apply(btn.dataset.filter)));
-    grid.querySelectorAll('[data-tag]').forEach(tag => tag.addEventListener('click', () => apply(tag.dataset.tag)));
+    function toggleTag(tag) {
+      tag = normalise(tag);
+      if (!tag) return;
+
+      if (tag === 'all') {
+        selected.clear();
+      } else if (selected.has(tag)) {
+        selected.delete(tag);
+      } else {
+        selected.add(tag);
+      }
+
+      render();
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', event => {
+        event.preventDefault();
+        toggleTag(btn.dataset.filter);
+      });
+    });
+
+    // Hashtags inside cards can also add/remove a theme without clearing
+    // any themes already selected.
+    grid.querySelectorAll('[data-tag]').forEach(tag => {
+      tag.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+        toggleTag(tag.dataset.tag);
+      });
+    });
+
+    // Preserve support for ?tag=career&tag=change and ?tags=career,change.
     const params = new URLSearchParams(window.location.search);
-    const initial = params.get('tag');
-    if (initial && buttons.some(b => b.dataset.filter === initial)) apply(initial);
-    else apply('all');
+    const initial = params.getAll('tag').concat((params.get('tags') || '').split(','));
+
+    initial
+      .map(normalise)
+      .filter(tag =>
+        buttons.some(btn => normalise(btn.dataset.filter) === tag)
+      )
+      .forEach(tag => selected.add(tag));
+
+    render();
   }
 
   initRecommendations();
