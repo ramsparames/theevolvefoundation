@@ -25,6 +25,71 @@
   text-decoration: none;
 }
 </style>
+
+<style id="library-story-temporary">
+  .library-story {
+    padding: 0 0 5.5rem;
+  }
+  .library-story-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 0 0 1.25rem;
+    border-bottom: 1px solid var(--line, #d8d6cf);
+  }
+  .library-story-label {
+    font-family: var(--mono, "Courier New", monospace);
+    font-size: .82rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--sage, #718075);
+  }
+  .library-story-time {
+    font-family: var(--mono, "Courier New", monospace);
+    font-size: .82rem;
+    letter-spacing: .12em;
+    color: var(--muted, #71808c);
+    white-space: nowrap;
+  }
+  .library-story-body {
+    max-width: 58rem;
+    margin: 3.25rem auto 0;
+  }
+  .library-story-body p {
+    margin: 0 0 1.25rem;
+    color: var(--ink, #1d2730);
+    font-size: clamp(1.05rem, 1.45vw, 1.35rem);
+    line-height: 1.72;
+  }
+  .library-story-body p:last-child {
+    margin-bottom: 0;
+  }
+  .library-story-question {
+    margin-top: 2.25rem !important;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--brass, #c99a43);
+    font-family: var(--serif, Georgia, serif);
+    font-size: clamp(1.3rem, 2vw, 1.7rem) !important;
+    line-height: 1.45 !important;
+  }
+  @media (max-width: 720px) {
+    .library-story {
+      padding-bottom: 4rem;
+    }
+    .library-story-head {
+      align-items: flex-start;
+    }
+    .library-story-body {
+      margin-top: 2.25rem;
+    }
+    .library-story-body p {
+      font-size: 1.08rem;
+      line-height: 1.68;
+    }
+  }
+</style>
+
 </head>
 <body>
 <nav>
@@ -56,16 +121,26 @@
 </header>
 
 <main class="capsule-page">
-  <section class="capsule-video-section">
-    <div class="wrap capsule-video-wrap">
-      <div class="capsule-video-meta"><span class="eyebrow">Watch</span><strong>65–80 seconds</strong></div>
-      <div class="capsule-video-placeholder" data-video-slot>
-        <div class="capsule-video-mark">VIDEO</div>
-        <p>The finished video will live here.</p>
-        <span>9:16 master · 65–80 seconds</span>
-      </div>
-    </div>
-  </section>
+  <section class="library-story">
+  <div class="library-story-head">
+    <span class="library-story-label">— THE STORY</span>
+    <span class="library-story-time">65–80 seconds</span>
+  </div>
+  <div class="library-story-body">
+      <p>Imagine walking into a clothing store with one strange rule:</p>
+      <p>Anything you try on, you have to buy.</p>
+      <p>You would probably be very careful about what you tried. Maybe so careful that you wouldn't try much at all.</p>
+      <p>But that isn't how a dressing room works.</p>
+      <p>You try something on. You notice what fits. What doesn't. What feels like you.</p>
+      <p>Sometimes you put it back.</p>
+      <p>And even that tells you something useful.</p>
+      <p>We sometimes treat possibilities as though trying one means committing to it.</p>
+      <p>A project. An internship. A course. A club. A conversation with someone doing a kind of work you're curious about.</p>
+      <p>But exploring something is not the same as choosing it forever.</p>
+      <p>Sometimes the purpose of trying something is simply to learn:</p>
+      <p class="library-story-question">“Does this fit me?”</p>
+  </div>
+</section>
 
   <section class="capsule-meat-section">
     <div class="wrap">

@@ -25,6 +25,71 @@
   text-decoration: none;
 }
 </style>
+
+<style id="library-story-temporary">
+  .library-story {
+    padding: 0 0 5.5rem;
+  }
+  .library-story-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 0 0 1.25rem;
+    border-bottom: 1px solid var(--line, #d8d6cf);
+  }
+  .library-story-label {
+    font-family: var(--mono, "Courier New", monospace);
+    font-size: .82rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--sage, #718075);
+  }
+  .library-story-time {
+    font-family: var(--mono, "Courier New", monospace);
+    font-size: .82rem;
+    letter-spacing: .12em;
+    color: var(--muted, #71808c);
+    white-space: nowrap;
+  }
+  .library-story-body {
+    max-width: 58rem;
+    margin: 3.25rem auto 0;
+  }
+  .library-story-body p {
+    margin: 0 0 1.25rem;
+    color: var(--ink, #1d2730);
+    font-size: clamp(1.05rem, 1.45vw, 1.35rem);
+    line-height: 1.72;
+  }
+  .library-story-body p:last-child {
+    margin-bottom: 0;
+  }
+  .library-story-question {
+    margin-top: 2.25rem !important;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--brass, #c99a43);
+    font-family: var(--serif, Georgia, serif);
+    font-size: clamp(1.3rem, 2vw, 1.7rem) !important;
+    line-height: 1.45 !important;
+  }
+  @media (max-width: 720px) {
+    .library-story {
+      padding-bottom: 4rem;
+    }
+    .library-story-head {
+      align-items: flex-start;
+    }
+    .library-story-body {
+      margin-top: 2.25rem;
+    }
+    .library-story-body p {
+      font-size: 1.08rem;
+      line-height: 1.68;
+    }
+  }
+</style>
+
 </head>
 <body>
 <nav>
@@ -56,16 +121,25 @@
 </header>
 
 <main class="capsule-page">
-  <section class="capsule-video-section">
-    <div class="wrap capsule-video-wrap">
-      <div class="capsule-video-meta"><span class="eyebrow">Watch</span><strong>65–80 seconds</strong></div>
-      <div class="capsule-video-placeholder" data-video-slot>
-        <div class="capsule-video-mark">VIDEO</div>
-        <p>The finished video will live here.</p>
-        <span>9:16 master · 65–80 seconds</span>
-      </div>
-    </div>
-  </section>
+  <section class="library-story">
+  <div class="library-story-head">
+    <span class="library-story-label">— THE STORY</span>
+    <span class="library-story-time">65–80 seconds</span>
+  </div>
+  <div class="library-story-body">
+      <p>Imagine running a race while constantly turning your head to watch the person in the next lane.</p>
+      <p>How fast are they going? Are they ahead? Do they look tired? Should I be running the way they are?</p>
+      <p>You might learn something by looking occasionally.</p>
+      <p>But try running the entire race that way.</p>
+      <p>At some point, watching their lane starts affecting how well you run in yours.</p>
+      <p>Comparison can work like that.</p>
+      <p>Someone gets an internship. Someone has better marks. Someone seems clearer about what they want. Someone posts another achievement.</p>
+      <p>Some of that information can be useful.</p>
+      <p>But if every piece of someone else's progress becomes a judgement about yours, you stop using their journey as information and start using it as a scoreboard.</p>
+      <p>Perhaps the useful question isn't: “Am I ahead of them?”</p>
+      <p>It is: “Am I moving in a direction that matters to me?”</p>
+  </div>
+</section>
 
   <section class="capsule-meat-section">
     <div class="wrap">

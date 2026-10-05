@@ -25,6 +25,71 @@
   text-decoration: none;
 }
 </style>
+
+<style id="library-story-temporary">
+  .library-story {
+    padding: 0 0 5.5rem;
+  }
+  .library-story-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 0 0 1.25rem;
+    border-bottom: 1px solid var(--line, #d8d6cf);
+  }
+  .library-story-label {
+    font-family: var(--mono, "Courier New", monospace);
+    font-size: .82rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--sage, #718075);
+  }
+  .library-story-time {
+    font-family: var(--mono, "Courier New", monospace);
+    font-size: .82rem;
+    letter-spacing: .12em;
+    color: var(--muted, #71808c);
+    white-space: nowrap;
+  }
+  .library-story-body {
+    max-width: 58rem;
+    margin: 3.25rem auto 0;
+  }
+  .library-story-body p {
+    margin: 0 0 1.25rem;
+    color: var(--ink, #1d2730);
+    font-size: clamp(1.05rem, 1.45vw, 1.35rem);
+    line-height: 1.72;
+  }
+  .library-story-body p:last-child {
+    margin-bottom: 0;
+  }
+  .library-story-question {
+    margin-top: 2.25rem !important;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--brass, #c99a43);
+    font-family: var(--serif, Georgia, serif);
+    font-size: clamp(1.3rem, 2vw, 1.7rem) !important;
+    line-height: 1.45 !important;
+  }
+  @media (max-width: 720px) {
+    .library-story {
+      padding-bottom: 4rem;
+    }
+    .library-story-head {
+      align-items: flex-start;
+    }
+    .library-story-body {
+      margin-top: 2.25rem;
+    }
+    .library-story-body p {
+      font-size: 1.08rem;
+      line-height: 1.68;
+    }
+  }
+</style>
+
 </head>
 <body>
 <nav>
@@ -56,16 +121,24 @@
 </header>
 
 <main class="capsule-page">
-  <section class="capsule-video-section">
-    <div class="wrap capsule-video-wrap">
-      <div class="capsule-video-meta"><span class="eyebrow">Watch</span><strong>60–70 seconds</strong></div>
-      <div class="capsule-video-placeholder" data-video-slot>
-        <div class="capsule-video-mark">VIDEO</div>
-        <p>The finished video will live here.</p>
-        <span>9:16 master · 60–70 seconds</span>
-      </div>
-    </div>
-  </section>
+  <section class="library-story">
+  <div class="library-story-head">
+    <span class="library-story-label">— THE STORY</span>
+    <span class="library-story-time">60–70 seconds</span>
+  </div>
+  <div class="library-story-body">
+      <p>Imagine you're driving at night and suddenly the road ahead disappears into thick fog.</p>
+      <p>You can't see where it ends. You can't see every turn. You can only see the next thirty metres or so.</p>
+      <p>What do you do?</p>
+      <p>You slow down. You pay attention. And you drive the part of the road you can see.</p>
+      <p>As you move, a little more becomes visible.</p>
+      <p>Decisions are often like that. We want to know where a course, an internship, a project — even a career direction — will lead before we're willing to try it.</p>
+      <p>But some of the information we need is further down the road. Sometimes we only get it by moving.</p>
+      <p>A conversation. A small project. Exploring something you're curious about. Each can show you a little more of the road.</p>
+      <p>So if you're uncertain about something right now, perhaps don't ask: “Where will this eventually take me?”</p>
+      <p class="library-story-question">Ask: “What are my next thirty metres?”</p>
+  </div>
+</section>
 
   <section class="capsule-meat-section">
     <div class="wrap">
