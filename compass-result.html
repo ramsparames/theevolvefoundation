@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Compass | The Evolve Foundation</title>
+  <title>Student Compass Reflection | The Evolve Foundation</title>
   <meta name="description" content="Your Student Compass reflection: where you are today and what you can do next.">
   <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+  <link crossorigin href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="footer-compact.css">
@@ -32,24 +32,36 @@
     </div>
   </div>
 </nav>
+
 <main class="compass-result-page">
   <div class="wrap compass-result-inner">
     <header class="compass-result-heading">
       <span class="eyebrow">STUDENT COMPASS REFLECTION</span>
       <h1>Student Compass Reflection</h1>
-      <p>A snapshot of where you are today — and one useful next step.</p>
+      <p>A snapshot of where you are today and one useful next step.</p>
     </header>
 
-    <section class="compass-result-block">
-      <div class="result-label">WHERE YOU ARE TODAY</div>
-      <h2 id="state-title"></h2>
-      <p id="state-summary"></p>
+    <section class="compass-result-hero" aria-label="Your Compass reflection">
+      <div class="compass-result-column">
+        <div class="result-label">WHERE YOU ARE TODAY</div>
+        <h2 id="state-title"></h2>
+        <p id="state-summary"></p>
+      </div>
+      <div class="compass-result-divider" aria-hidden="true"></div>
+      <div class="compass-result-column">
+        <div class="result-label">WHAT YOU CAN DO NEXT</div>
+        <h2 id="step-title"></h2>
+        <p id="step-text"></p>
+      </div>
     </section>
 
-    <section class="compass-result-block">
-      <div class="result-label">WHAT YOU CAN DO NEXT</div>
-      <h2 id="step-title"></h2>
-      <p id="step-text"></p>
+    <section class="compass-result-cta">
+      <div>
+        <span class="result-label">WANT TO GO DEEPER?</span>
+        <h2>Explore Launchpad.</h2>
+        <p id="launch-text">Launchpad gives students a structured space to understand themselves, explore possibilities, make thoughtful decisions and turn decisions into action.</p>
+      </div>
+      <a class="btn btn-primary" href="launchpad.html">Explore Launchpad →</a>
     </section>
 
     <section class="compass-result-ideas">
@@ -67,19 +79,11 @@
           <span class="idea-number">03</span><span class="idea-title">Exploring Opportunities</span><span class="idea-copy">Turn curiosity into small experiments and real experiences.</span><span class="idea-link">Explore →</span>
         </a>
       </div>
-      <a class="btn btn-ghost compass-ideas-cta" href="compass-capsules.html">Explore Recommended Capsules →</a>
-    </section>
-
-    <section class="compass-result-cta">
-      <div>
-        <span class="result-label">WANT TO GO DEEPER?</span>
-        <h2>Explore Launchpad.</h2>
-        <p id="launch-text">Launchpad gives students a structured space to understand themselves, explore possibilities, make thoughtful decisions and turn decisions into action.</p>
-      </div>
-      <a class="btn btn-primary" href="launchpad.html">Explore Launchpad →</a>
+      <a class="btn btn-ghost compass-ideas-cta" href="compass-capsules.html">Explore the Idea Library →</a>
     </section>
   </div>
 </main>
+
 <script src="compass-result.js"></script>
 <footer id="contact">
   <div class="wrap">
