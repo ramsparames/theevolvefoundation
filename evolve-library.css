@@ -193,7 +193,7 @@
 .capsule-meat-explore .text-link{color:var(--paper-text);display:inline-block;margin-top:22px;}
 
 /* Idea pages are public Library pages, so do not visually activate Student Compass. */
-body:has(.capsule-page) .nav-student-compass{color:var(--muted-on-ink);}
+body:has(.capsule-page) .nav-student-compass{color:var(--muted);}
 
 @media(max-width:900px){
   .compass-library-grid{grid-template-columns:1fr;}
