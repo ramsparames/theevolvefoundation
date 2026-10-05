@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Compass Reflection | The Evolve Foundation</title>
-  <meta name="description" content="Your Student Compass reflection: where you are today and what you can do next.">
+  <meta name="description" content="Your Student Compass reflection: where you are today, what you can do next, and a few ideas chosen for you.">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link crossorigin href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="footer-compact.css">
   <link rel="stylesheet" href="student-compass.css">
 </head>
-<body class="student-compass-site">
+<body class="student-compass-site compass-result-site">
 <nav class="site-nav" aria-label="Primary navigation">
   <div class="nav-inner">
     <a class="nav-brand" href="index.html">The Evolve Foundation</a>
@@ -34,24 +34,85 @@
 </nav>
 
 <main class="compass-result-page">
-  <div class="wrap compass-result-inner">
-    <header class="compass-result-heading">
-      <span class="eyebrow">STUDENT COMPASS REFLECTION</span>
-      <h1>Student Compass Reflection</h1>
-      <p>A snapshot of where you are today and one useful next step.</p>
-    </header>
+  <section class="compass-result-hero">
+    <div class="wrap compass-result-hero-inner">
+      <div class="compass-result-hero-copy">
+        <span class="eyebrow">STUDENT COMPASS</span>
+        <h1>Student Compass Reflection</h1>
+        <p id="hero-summary">A snapshot of where you are today and one useful next step.</p>
+        <p class="compass-result-note">This is not a label or a prediction. It is simply a useful way to think about what might help next.</p>
+      </div>
+      <div class="compass-result-hero-visual" aria-hidden="true">
+        <svg class="compass-result-svg" viewBox="0 0 420 420" role="presentation">
+          <circle cx="210" cy="210" r="174" class="compass-ring compass-ring-outer"/>
+          <circle cx="210" cy="210" r="132" class="compass-ring compass-ring-mid"/>
+          <circle cx="210" cy="210" r="82" class="compass-ring compass-ring-inner"/>
+          <g class="compass-ticks"><path d="M210 24v24M210 372v24M24 210h24M372 210h24"/><path d="M78.5 78.5l17 17M324.5 324.5l17 17M341.5 78.5l-17 17M95.5 324.5l-17 17"/></g>
+          <circle cx="210" cy="210" r="52" class="compass-core"/>
+          <path d="M210 58 L226 210 L210 192 L194 210 Z" class="compass-needle-north"/>
+          <path d="M210 362 L226 210 L210 228 L194 210 Z" class="compass-needle-south"/>
+          <circle cx="210" cy="210" r="8" class="compass-hub"/>
+          <text x="210" y="43" class="compass-letter" text-anchor="middle">N</text>
+          <text x="377" y="216" class="compass-letter" text-anchor="middle">E</text>
+          <text x="210" y="391" class="compass-letter" text-anchor="middle">S</text>
+          <text x="43" y="216" class="compass-letter" text-anchor="middle">W</text>
+          <path d="M76 310 A174 174 0 0 0 344 310" class="compass-arc"/>
+        </svg>
+        <span class="compass-visual-label">A USEFUL DIRECTION, NOT A DESTINATION</span>
+      </div>
+    </div>
+  </section>
 
-    <section class="compass-result-hero" aria-label="Your Compass reflection">
-      <div class="compass-result-column">
-        <div class="result-label">WHERE YOU ARE TODAY</div>
+  <div class="wrap compass-result-inner">
+    <section class="compass-result-state" aria-label="Your Compass reflection">
+      <div class="compass-result-state-card">
+        <span class="result-label">WHERE YOU ARE TODAY</span>
         <h2 id="state-title"></h2>
         <p id="state-summary"></p>
       </div>
-      <div class="compass-result-divider" aria-hidden="true"></div>
-      <div class="compass-result-column">
-        <div class="result-label">WHAT YOU CAN DO NEXT</div>
+      <div class="compass-result-state-card compass-result-next">
+        <span class="result-label">WHAT YOU CAN DO NEXT</span>
         <h2 id="step-title"></h2>
         <p id="step-text"></p>
+      </div>
+    </section>
+
+    <section class="compass-result-recommendations" aria-labelledby="recommendations-title">
+      <div class="recommendations-heading">
+        <div>
+          <span class="result-label">CHOSEN FOR YOUR REFLECTION</span>
+          <h2 id="recommendations-title">A few ideas to explore.</h2>
+        </div>
+        <p id="recommendations-intro">These are not answers or assignments. They are a few Evolve Library ideas that connect with where you are now and what may be useful next.</p>
+      </div>
+
+      <div class="personalised-ideas-grid">
+        <a class="personalised-idea" id="idea-1" href="#">
+          <span class="personalised-idea-role" id="idea-role-1">START HERE</span>
+          <span class="personalised-idea-number">01</span>
+          <span class="personalised-idea-title" id="idea-title-1"></span>
+          <span class="personalised-idea-why" id="idea-why-1"></span>
+          <span class="personalised-idea-link">Explore capsule →</span>
+        </a>
+        <a class="personalised-idea" id="idea-2" href="#">
+          <span class="personalised-idea-role" id="idea-role-2">TRY THIS NEXT</span>
+          <span class="personalised-idea-number">02</span>
+          <span class="personalised-idea-title" id="idea-title-2"></span>
+          <span class="personalised-idea-why" id="idea-why-2"></span>
+          <span class="personalised-idea-link">Explore capsule →</span>
+        </a>
+        <a class="personalised-idea" id="idea-3" href="#">
+          <span class="personalised-idea-role" id="idea-role-3">KEEP IN MIND</span>
+          <span class="personalised-idea-number">03</span>
+          <span class="personalised-idea-title" id="idea-title-3"></span>
+          <span class="personalised-idea-why" id="idea-why-3"></span>
+          <span class="personalised-idea-link">Explore capsule →</span>
+        </a>
+      </div>
+
+      <div class="library-link-row">
+        <p>Want to browse beyond these three?</p>
+        <a href="library.html" class="btn btn-ghost">Explore the Library →</a>
       </div>
     </section>
 
@@ -62,24 +123,6 @@
         <p id="launch-text">Launchpad gives students a structured space to understand themselves, explore possibilities, make thoughtful decisions and turn decisions into action.</p>
       </div>
       <a class="btn btn-primary" href="launchpad.html">Explore Launchpad →</a>
-    </section>
-
-    <section class="compass-result-ideas">
-      <div class="result-label">IDEAS TO EXPLORE</div>
-      <h2>Keep exploring.</h2>
-      <p class="ideas-intro">A few perspectives you can come back to as you think about what comes next.</p>
-      <div class="ideas-grid">
-        <a class="idea-card" id="idea-1" href="compass-capsules.html#strengths">
-          <span class="idea-number">01</span><span class="idea-title">Understanding Your Strengths</span><span class="idea-copy">Notice what comes naturally and learn how to build on it.</span><span class="idea-link">Explore →</span>
-        </a>
-        <a class="idea-card" id="idea-2" href="compass-capsules.html#decisions">
-          <span class="idea-number">02</span><span class="idea-title">Making Decisions with Confidence</span><span class="idea-copy">Make thoughtful choices without needing complete certainty.</span><span class="idea-link">Explore →</span>
-        </a>
-        <a class="idea-card" id="idea-3" href="compass-capsules.html#opportunities">
-          <span class="idea-number">03</span><span class="idea-title">Exploring Opportunities</span><span class="idea-copy">Turn curiosity into small experiments and real experiences.</span><span class="idea-link">Explore →</span>
-        </a>
-      </div>
-      <a class="btn btn-ghost compass-ideas-cta" href="compass-capsules.html">Explore the Idea Library →</a>
     </section>
   </div>
 </main>
