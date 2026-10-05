@@ -113,7 +113,7 @@
 
   function initFilters() {
     const grid = document.querySelector('[data-library-grid]');
-    const buttons = [...document.querySelectorAll('.library-filter [data-filter]')];
+    const buttons = [...document.querySelectorAll('[data-filter]')];
     const status = document.querySelector('[data-filter-status]');
     const empty = document.querySelector('[data-library-empty]');
     if (!grid || !buttons.length) return;
