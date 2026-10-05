@@ -138,7 +138,7 @@
         const show = selected.size === 0 ||
           [...selected].some(tag => tags.includes(tag));
 
-        card.hidden = !show;
+        card.style.setProperty('display', show ? '' : 'none', 'important');
         if (show) visible++;
       });
 
