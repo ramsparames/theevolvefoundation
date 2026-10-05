@@ -170,163 +170,115 @@
   'use strict';
 
   function normalise(value) {
-    return String(value || '')
-      .trim()
-      .toLowerCase()
-      .replace(/^#+/, '')
-      .replace(/\s+/g, '-');
+    return String(value || '').trim().toLowerCase().replace(/^#/, '');
   }
 
   function unique(values) {
     return Array.from(new Set(values.filter(Boolean)));
   }
 
-  function isTagText(value) {
-    return /^#/.test(String(value || '').trim());
-  }
-
-  function tagFromControl(control) {
-    return normalise(
-      control.getAttribute('data-filter') ||
-      control.getAttribute('data-tag') ||
-      control.getAttribute('data-topic') ||
-      control.textContent
-    );
-  }
-
-  function getControls() {
-    var all = Array.prototype.slice.call(document.querySelectorAll('a, button, [role="button"]'));
-    return all.filter(function (el) {
-      var text = (el.textContent || '').trim();
-      var hasData = el.hasAttribute('data-filter') || el.hasAttribute('data-tag') || el.hasAttribute('data-topic');
-      var filterContainer = el.closest(
-        '[class*="filter"], [id*="filter"], [class*="tag"], [id*="tag"], [class*="topic"], [id*="topic"], [class*="category"], [id*="category"]'
-      );
-      return hasData || isTagText(text) || (filterContainer && /^(all|everything)$/i.test(text));
-    });
-  }
-
-  function isIdeaLink(link) {
-    var href = link.getAttribute('href') || '';
-    if (!href || href.charAt(0) === '#') return false;
-    var path = href.split('#')[0].split('?')[0].toLowerCase();
-    if (path === '' || path === 'library.html' || path === '/library' || path === '/library/') return false;
-    // The Library uses both root-level library-*.html links and /library/<slug> links.
-    return /(^|\/)library(?:-|\/)/.test(path) || path.indexOf('library-') !== -1;
-  }
-
-  function findCard(link) {
-    var selectors = [
-      '[data-idea]', '[data-capsule]', 'article',
-      '.library-card', '.library-idea', '.library-capsule',
-      '.capsule-card', '.idea-card', '.idea', '.capsule',
-      'li'
-    ];
-    for (var i = 0; i < selectors.length; i++) {
-      var found = link.closest(selectors[i]);
-      if (found) return found;
-    }
-    return link.parentElement || link;
-  }
-
-  function getTags(card) {
-    var explicit = card.getAttribute && (
-      card.getAttribute('data-tags') ||
-      card.getAttribute('data-tag') ||
-      card.getAttribute('data-topics') ||
-      card.getAttribute('data-topic')
-    );
-
-    if (explicit) {
-      return unique(explicit.split(/[,|\s]+/).map(normalise));
-    }
-
-    var nodes = Array.prototype.slice.call(card.querySelectorAll('a, button, span, small, li, [data-tag], [data-topic]'));
-    return unique(nodes.map(function (node) {
-      var data = node.getAttribute('data-tag') || node.getAttribute('data-topic');
-      var text = data || (node.textContent || '').trim();
-      return isTagText(text) ? normalise(text) : '';
-    }));
-  }
-
   function readInitialSelection() {
     var hash = window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : '';
-    if (hash) return unique(hash.split(',').map(normalise));
-
-    var params = new URLSearchParams(window.location.search);
-    var fromQuery = params.getAll('tag').concat((params.get('tags') || '').split(','));
-    return unique(fromQuery.map(normalise));
+    return unique(hash.split(',').map(normalise));
   }
 
   function updateUrl(selected) {
-    var url = window.location.pathname + window.location.search;
+    var base = window.location.pathname + window.location.search;
     if (selected.length) {
-      url += '#' + selected.join(',');
+      history.replaceState(null, '', base + '#' + selected.join(','));
+    } else {
+      history.replaceState(null, '', base);
     }
-    if (history.replaceState) history.replaceState(null, '', url);
   }
 
   function init() {
-    var controls = getControls();
-    if (!controls.length) return;
+    var filterBar = document.querySelector('.library-filter');
+    var controls = filterBar
+      ? Array.prototype.slice.call(filterBar.querySelectorAll('.library-filter-btn[data-filter]'))
+      : [];
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.library-card[data-tags]'));
+    var status = document.querySelector('[data-filter-status]');
+    var empty = document.querySelector('[data-library-empty]');
 
-    var linkCards = [];
-    var seenCards = [];
-    Array.prototype.slice.call(document.querySelectorAll('a[href]')).forEach(function (link) {
-      if (!isIdeaLink(link)) return;
-      var card = findCard(link);
-      if (seenCards.indexOf(card) !== -1) return;
-      seenCards.push(card);
-      linkCards.push({ card: card, tags: getTags(card) });
+    if (!controls.length || !cards.length) return;
+
+    var selected = readInitialSelection().filter(function (tag) {
+      return controls.some(function (control) {
+        return normalise(control.getAttribute('data-filter')) === tag;
+      });
     });
 
-    if (!linkCards.length) return;
-
-    var selected = readInitialSelection();
-
     function render() {
-      linkCards.forEach(function (item) {
-        // Multi-select uses OR semantics: an idea stays visible when it matches
-        // at least one of the selected hashtags.
+      var visibleCount = 0;
+
+      cards.forEach(function (card) {
+        var tags = normalise(card.getAttribute('data-tags') || '')
+          .split(/\s+/)
+          .filter(Boolean);
+
         var visible = !selected.length || selected.some(function (tag) {
-          return item.tags.indexOf(tag) !== -1;
+          return tags.indexOf(tag) !== -1;
         });
-        item.card.hidden = !visible;
-        item.card.setAttribute('aria-hidden', String(!visible));
+
+        card.hidden = !visible;
+        card.setAttribute('aria-hidden', String(!visible));
+
+        if (visible) visibleCount++;
       });
 
       controls.forEach(function (control) {
-        var text = (control.textContent || '').trim();
-        var isAll = /^(all|everything)$/i.test(text) && !control.hasAttribute('data-tag') && !control.hasAttribute('data-filter');
-        var tag = isAll ? '' : tagFromControl(control);
-        var active = !!tag && selected.indexOf(tag) !== -1;
-        if (isAll) active = selected.length === 0;
+        var tag = normalise(control.getAttribute('data-filter'));
+        var active = tag === 'all'
+          ? selected.length === 0
+          : selected.indexOf(tag) !== -1;
 
         control.classList.toggle('active', active);
         control.classList.toggle('is-selected', active);
         control.setAttribute('aria-pressed', String(active));
-        if (active) control.setAttribute('data-filter-active', 'true');
-        else control.removeAttribute('data-filter-active');
       });
+
+      if (empty) {
+        empty.hidden = visibleCount !== 0;
+      }
+
+      if (status) {
+        if (!selected.length) {
+          status.textContent = 'Showing all ' + cards.length + ' ideas';
+        } else if (visibleCount === 0) {
+          status.textContent = 'No ideas match the selected themes yet';
+        } else if (selected.length === 1) {
+          status.textContent =
+            'Showing ' + visibleCount + ' ' +
+            (visibleCount === 1 ? 'idea' : 'ideas') +
+            ' tagged #' + selected[0];
+        } else {
+          status.textContent =
+            'Showing ' + visibleCount + ' ' +
+            (visibleCount === 1 ? 'idea' : 'ideas') +
+            ' matching ' +
+            selected.map(function (tag) { return '#' + tag; }).join(' or ');
+        }
+      }
 
       updateUrl(selected);
     }
 
     controls.forEach(function (control) {
       control.addEventListener('click', function (event) {
-        var text = (control.textContent || '').trim();
-        var isAll = /^(all|everything)$/i.test(text) && !control.hasAttribute('data-tag') && !control.hasAttribute('data-filter');
-        var tag = isAll ? '' : tagFromControl(control);
-        if (!isAll && !tag) return;
-
         event.preventDefault();
 
-        if (isAll) {
+        var tag = normalise(control.getAttribute('data-filter'));
+
+        if (tag === 'all') {
           selected = [];
         } else {
           var index = selected.indexOf(tag);
-          if (index === -1) selected.push(tag);
-          else selected.splice(index, 1);
+
+          if (index === -1) {
+            selected.push(tag);
+          } else {
+            selected.splice(index, 1);
+          }
         }
 
         render();
