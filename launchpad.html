@@ -12,229 +12,6 @@
 <link href="audience.css" rel="stylesheet"/>
 <link rel="stylesheet" href="footer-compact.css">
 <meta content="The Evolve Foundation is creating meaningful experiences that help young people understand themselves, prepare for life and navigate important decisions. Launchpad is its first programme." name="description"/>
-
-<style id="home-launchpad-background-rhythm">
-/* Home + Launchpad only: match Ignite's two content background tones.
-   Hero and bottom CTA/contact treatments are intentionally untouched. */
-
-/* HOME: dark hero → cream → soft cream → cream → soft cream → brown contact */
-body:has(.foundation-hero) .mission {
-  background: var(--paper);
-  color: var(--ink-text);
-}
-
-body:has(.foundation-hero) .student-compass-home {
-  background: var(--paper-soft);
-  color: var(--ink-text);
-}
-
-body:has(.foundation-hero) .programmes-section {
-  background: var(--paper);
-  color: var(--ink-text);
-}
-
-body:has(.foundation-hero) .programmes-section .section-head h2,
-body:has(.foundation-hero) .programmes-section .section-head p {
-  color: var(--ink-text);
-}
-
-body:has(.foundation-hero) .programmes-section .section-head p {
-  color: var(--muted-on-paper);
-}
-
-body:has(.foundation-hero) .programmes-section .programme-feature,
-body:has(.foundation-hero) .programmes-section .programme-feature:first-child {
-  background: var(--paper-soft);
-  color: var(--ink-text);
-  border-color: var(--paper-line);
-  box-shadow: none;
-}
-
-body:has(.foundation-hero) .programmes-section .programme-feature > p:not(.programme-purpose),
-body:has(.foundation-hero) .programmes-section .programme-feature:first-child > p:not(.programme-purpose) {
-  color: var(--muted-on-paper);
-}
-
-body:has(.foundation-hero) .home-founder {
-  background: var(--paper-soft);
-  color: var(--ink-text);
-}
-
-/* LAUNCHPAD: dark hero → cream → soft cream → cream → soft cream → brown CTA */
-body:has(.launchpad-hero) > .section {
-  background: var(--paper);
-  color: var(--ink-text);
-}
-
-body:has(.launchpad-hero) > .parents {
-  background: var(--paper-soft);
-  color: var(--ink-text);
-}
-
-body:has(.launchpad-hero) > .explore {
-  background: var(--paper);
-  color: var(--ink-text);
-}
-
-body:has(.launchpad-hero) > .programme-founder {
-  background: var(--paper-soft);
-  color: var(--ink-text);
-}
-
-/* Make the Parents section read correctly on the new light background. */
-body:has(.launchpad-hero) > .parents .parents-copy .eyebrow {
-  color: var(--route-dark);
-}
-
-body:has(.launchpad-hero) > .parents .parents-copy > p,
-body:has(.launchpad-hero) > .parents .parent-note {
-  color: var(--muted-on-paper);
-}
-
-body:has(.launchpad-hero) > .parents .parent-points {
-  background: var(--paper-line);
-  border-color: var(--paper-line);
-}
-
-body:has(.launchpad-hero) > .parents .parent-point {
-  background: var(--paper);
-}
-
-body:has(.launchpad-hero) > .parents .parent-point .k {
-  color: var(--route-dark);
-}
-
-body:has(.launchpad-hero) > .parents .parent-point h3 {
-  color: var(--ink-text);
-}
-
-body:has(.launchpad-hero) > .parents .parent-point p {
-  color: var(--muted-on-paper);
-}
-
-body:has(.launchpad-hero) > .parents .parent-note strong {
-  color: var(--ink-text);
-}
-</style>
-
-<style id="home-launchpad-font-colour-fix">
-/*
-  Typography-only correction for the new alternating light sections.
-  No spacing, sizing, layout, images, buttons, hero, CTA or footer rules are changed.
-*/
-
-/* ================= HOME ================= */
-
-body:has(.foundation-hero) .mission,
-body:has(.foundation-hero) .student-compass-home,
-body:has(.foundation-hero) .programmes-section,
-body:has(.foundation-hero) .home-founder {
-  color: var(--ink-text);
-}
-
-body:has(.foundation-hero) .mission .eyebrow,
-body:has(.foundation-hero) .student-compass-home .eyebrow,
-body:has(.foundation-hero) .programmes-section .section-head .eyebrow,
-body:has(.foundation-hero) .home-founder .eyebrow {
-  color: var(--route-dark) !important;
-}
-
-body:has(.foundation-hero) .mission blockquote {
-  color: var(--ink-text) !important;
-}
-
-body:has(.foundation-hero) .mission .bridge-line {
-  color: var(--muted-on-paper) !important;
-}
-
-body:has(.foundation-hero) .mission .bridge-line strong {
-  color: var(--route-dark) !important;
-}
-
-body:has(.foundation-hero) .student-compass-home h2 {
-  color: var(--ink-text) !important;
-}
-
-body:has(.foundation-hero) .student-compass-home p {
-  color: var(--muted-on-paper) !important;
-}
-
-body:has(.foundation-hero) .student-compass-home .student-compass-home-label {
-  color: var(--route-dark) !important;
-}
-
-body:has(.foundation-hero) .programmes-section .section-head h2,
-body:has(.foundation-hero) .programmes-section .programme-feature h3 {
-  color: var(--ink-text) !important;
-}
-
-body:has(.foundation-hero) .programmes-section .section-head p,
-body:has(.foundation-hero) .programmes-section .programme-feature > p:not(.programme-purpose) {
-  color: var(--muted-on-paper) !important;
-}
-
-body:has(.foundation-hero) .programmes-section .programme-audience,
-body:has(.foundation-hero) .programmes-section .programme-status.developing,
-body:has(.foundation-hero) .programmes-section .programme-purpose {
-  color: var(--route-dark) !important;
-}
-
-body:has(.foundation-hero) .programmes-section .programme-status.current {
-  color: var(--brass) !important;
-}
-
-body:has(.foundation-hero) .home-founder .founder-inner h2 {
-  color: var(--ink-text) !important;
-}
-
-body:has(.foundation-hero) .home-founder .founder-inner p,
-body:has(.foundation-hero) .home-founder .founder-signoff span {
-  color: var(--muted-on-paper) !important;
-}
-
-/* ================= LAUNCHPAD ================= */
-
-body:has(.launchpad-hero) > .section,
-body:has(.launchpad-hero) > .parents,
-body:has(.launchpad-hero) > .explore,
-body:has(.launchpad-hero) > .programme-founder {
-  color: var(--ink-text);
-}
-
-body:has(.launchpad-hero) > .section .section-head .eyebrow,
-body:has(.launchpad-hero) > .parents .eyebrow,
-body:has(.launchpad-hero) > .explore .section-head .eyebrow,
-body:has(.launchpad-hero) > .programme-founder .eyebrow {
-  color: var(--route-dark) !important;
-}
-
-body:has(.launchpad-hero) > .section .section-head h2,
-body:has(.launchpad-hero) > .explore .section-head h2,
-body:has(.launchpad-hero) > .parents .parents-copy h2,
-body:has(.launchpad-hero) > .programme-founder .founder-inner h2 {
-  color: var(--ink-text) !important;
-}
-
-body:has(.launchpad-hero) > .section .section-head p,
-body:has(.launchpad-hero) > .explore .section-head p,
-body:has(.launchpad-hero) > .parents .parents-copy > p,
-body:has(.launchpad-hero) > .parents .parent-note,
-body:has(.launchpad-hero) > .programme-founder .founder-inner p {
-  color: var(--muted-on-paper) !important;
-}
-
-body:has(.launchpad-hero) > .parents .parent-note strong {
-  color: var(--ink-text) !important;
-}
-
-body:has(.launchpad-hero) > .parents .parent-point h3 {
-  color: var(--ink-text) !important;
-}
-
-body:has(.launchpad-hero) > .parents .parent-point p {
-  color: var(--muted-on-paper) !important;
-}
-</style>
 </head>
 <body class="audience-nav">
 <nav>
@@ -256,9 +33,9 @@ body:has(.launchpad-hero) > .parents .parent-point p {
 <div class="wrap campus-hero-inner">
 <span class="eyebrow">Launchpad · For College Students</span>
 <h1>Clarity. <em>Confidence.</em> Direction.</h1>
-<p class="lede">An 8-week live, online cohort experience for college students who want the time and space to understand themselves, make thoughtful choices and move forward with a direction they can own.</p>
+<p class="lede">An 8 week live, online cohort experience for college students who want the time and space to understand themselves, make thoughtful choices and move forward with a direction they can own.</p>
 <div class="cta-row"><a class="btn btn-primary" href="#apply">Register interest for a future cohort →</a><a class="btn btn-ghost" href="#acc-route">Explore the journey</a></div>
-<div class="campus-strip"><span>8 weeks</span><span>·</span><span>90–120 minutes each week</span><span>·</span><span>Live online</span><span>·</span><span>Interactive</span><span>·</span><span>15–20 students</span><span>·</span><span>Founding Cohort 01 is now underway</span></div>
+<div class="campus-strip"><span>8 weeks</span><span>·</span><span>90 to 120 minutes each week</span><span>·</span><span>Live online</span><span>·</span><span>Interactive</span><span>·</span><span>15 to 20 students</span><span>·</span><span>Founding Cohort 01 is now underway</span></div>
 </div></header>
 <!-- ============ ABOUT THE EVOLVE FOUNDATION ============ -->
 <!-- ============ PROGRAMMES ============ -->
@@ -289,39 +66,6 @@ body:has(.launchpad-hero) > .parents .parent-point p {
 </div>
 </div>
 </section>
-<!-- ============ FOR PARENTS ============ -->
-<section class="parents" id="parents">
-<div class="wrap parents-grid">
-<div class="parents-copy reveal">
-<span class="eyebrow">A Note to Parents</span>
-<h2>You do not have to choose your child's path. You can help them learn how to choose.</h2>
-<p>Parents often see their child's potential before the child can put it into words. Launchpad gives college students a structured and professionally facilitated space to understand their strengths, explore possible directions and take ownership of their next step without feeling that they must have their entire future figured out.</p>
-<p class="parent-note"><strong>Your role remains important.</strong> We encourage supportive conversations at home while making sure that the college student's thinking, decisions and action plan remain their own.</p>
-</div>
-<div class="parent-points reveal">
-<div class="parent-point">
-<span class="k">What changes</span>
-<h3>More specific conversations</h3>
-<p>Instead of 'I don't know,' college students begin explaining what they are good at, what they want to test, and why.</p>
-</div>
-<div class="parent-point">
-<span class="k">What they leave with</span>
-<h3>Visible, written outcomes</h3>
-<p>A validated strengths list, one direction worth testing, a practised personal story and a dated 30 day plan.</p>
-</div>
-<div class="parent-point">
-<span class="k">How it is delivered</span>
-<h3>Small group and individual support</h3>
-<p>Eight live sessions in a cohort of 15 to 20 college students, along with direct one to one time with the facilitator.</p>
-</div>
-<div class="parent-point">
-<span class="k">What it is not</span>
-<h3>Not a test that assigns a career</h3>
-<p>Launchpad does not prescribe one 'correct' profession. It helps college students make a grounded decision and test it through action.</p>
-</div>
-</div>
-</div>
-</section>
 <!-- ============ INSIDE LAUNCHPAD (ACCORDION) ============ -->
 <section class="section explore">
 <div class="wrap">
@@ -336,7 +80,7 @@ body:has(.launchpad-hero) > .parents .parent-point p {
 <button aria-controls="panel-route" aria-expanded="false" class="acc-trigger">
 <span class="acc-title-wrap">
 <span class="acc-title">The Programme</span>
-<span class="acc-sub">Four waypoints, eight weeks, one plotted course</span>
+<span class="acc-sub">Four modules. Eight weeks.</span>
 </span>
 <span class="acc-icon">+</span>
 </button>
@@ -344,40 +88,29 @@ body:has(.launchpad-hero) > .parents .parent-point p {
 <div class="acc-panel-inner">
 <div class="acc-dark-card">
 <div class="panel-head">
-<h3>Four waypoints. Eight weeks. One plotted course.</h3>
-<p>This is not a lecture series. Each module builds on what college students discovered and wrote in the previous one.</p>
-</div>
-<div class="route-chart">
-<svg class="route-svg" preserveaspectratio="xMidYMid meet" viewbox="0 0 1100 90">
-<line class="route-grid-line" x1="0" x2="1100" y1="45" y2="45"></line>
-<path class="route-path" d="M60,45 L 380,45 L 680,45 L 1000,45"></path>
-<circle class="waypoint-dot active" cx="60" cy="45" r="7"></circle>
-<circle class="waypoint-dot" cx="380" cy="45" r="7"></circle>
-<circle class="waypoint-dot" cx="680" cy="45" r="7"></circle>
-<circle class="waypoint-dot" cx="1000" cy="45" r="7"></circle>
-</svg>
+<h3>Four modules. Eight weeks. Each one builds on the last.</h3>
+<p>This is not a lecture series. Each module builds on what students discovered and wrote in the previous one.</p>
 </div>
 <div class="modules">
 <div class="module-card">
-<span class="wk">WK 01 TO 02</span>
+<span class="wk">01 · WEEKS 1 TO 2</span>
 <h3>Self Awareness</h3>
 <p>A clearer picture of who they are, with strengths backed by real examples and feedback from people who know them well.</p>
 </div>
 <div class="module-card">
-<span class="wk">WK 03 TO 04</span>
+<span class="wk">02 · WEEKS 3 TO 4</span>
 <h3>Clarity</h3>
-<p>The fear underneath avoidance gets named; a direction gets chosen because it connects to a real strength, not just excitement.</p>
+<p>The fear underneath avoidance gets named. A direction gets chosen because it connects to a real strength, not just excitement.</p>
 </div>
 <div class="module-card">
-<span class="wk">WK 05 TO 06</span>
+<span class="wk">03 · WEEKS 5 TO 6</span>
 <h3>Decision &amp; Confidence</h3>
-<p>Direction becomes a real decision. College students also practise explaining what they chose, why they chose it and what they will do next.</p>
+<p>Direction becomes a real decision. Students practise explaining what they chose, why they chose it and what they will do next.</p>
 </div>
 <div class="module-card">
-<span class="wk">WK 07 TO 08</span>
+<span class="wk">04 · WEEKS 7 TO 8</span>
 <h3>Real World Readiness</h3>
 <p>A plan for when things get difficult, one small habit and a dated 30 day action plan built gradually across the programme.</p>
-</div>
 </div>
 </div>
 </div>
@@ -581,7 +314,7 @@ body:has(.launchpad-hero) > .parents .parent-point p {
 <!-- ITEM 5: BEYOND LAUNCHPAD -->
 <div class="acc-item" id="acc-faq">
 <button aria-controls="panel-faq" aria-expanded="false" class="acc-trigger">
-<span class="acc-title-wrap"><span class="acc-title">Frequently Asked Questions</span><span class="acc-sub">What college students and parents usually want to know</span></span>
+<span class="acc-title-wrap"><span class="acc-title">Frequently Asked Questions</span><span class="acc-sub">What students usually want to know</span></span>
 <span class="acc-icon">+</span></button>
 <div class="acc-panel" id="panel-faq"><div class="acc-panel-inner"><div class="faq-grid">
 <!--
@@ -744,18 +477,6 @@ body:has(.launchpad-hero) > .parents .parent-point p {
       and will be anonymised where appropriate.
     </p>
 </div>
-<div class="faq-item">
-<h3>Do parents attend the sessions?</h3>
-<p>
-      No. The sessions are the student's space, which is important for honest
-      reflection and independent thinking.
-    </p>
-<p>
-      Parents receive a short note at the beginning explaining the programme
-      and how they can support the process. Students also leave with clear,
-      written outcomes that they can naturally share and discuss at home.
-    </p>
-</div>
 </div>
 </div>
 </div></div>
@@ -771,7 +492,7 @@ body:has(.launchpad-hero) > .parents .parent-point p {
 <h2>Experience showed me that knowing yourself matters.</h2>
 <p>For nearly 30 years, Rams Parameswaran built and led technology organisations across the United States and India, working with global financial institutions including Citigroup, Bank of America, BNY Mellon and Fiserv.</p>
 <p>Throughout his career, he hired, coached and mentored professionals and saw the same pattern repeatedly: those who thrived understood their strengths, could explain their choices with confidence and took ownership of their direction.</p>
-<p>Rams founded The Evolve Foundation to help young people develop that self-understanding earlier.</p>
+<p>Rams founded The Evolve Foundation to help young people understand themselves earlier.</p>
 <div class="founder-signoff"><strong>Rams Parameswaran</strong><span>Founder, The Evolve Foundation</span></div>
 <a class="text-link" href="about-rams.html">Read the founder’s story →</a>
 </div>
@@ -784,7 +505,7 @@ body:has(.launchpad-hero) > .parents .parent-point p {
 <span class="final-cta-label">LAUNCHPAD</span>
 <h2>Founding Cohort 01<br/>is now underway.</h2>
 <p class="final-cta-details">
-      8 weeks · 90–120 minutes each week · Live online · Interactive · 15–20 college students
+      8 weeks · 90 to 120 minutes each week · Live online · Interactive · 15 to 20 college students
 </p>
 <div class="final-cta-investment">
 <span class="final-price-label">FOUNDING COHORT 01</span>
