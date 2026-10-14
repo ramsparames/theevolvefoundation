@@ -52,11 +52,11 @@
       <p>Launchpad is the Foundation's deeper 8 week experience for college students who want the time and space to understand themselves, make thoughtful choices and move forward with a direction they can own.</p>
     </div>
     <div class="audience-product reveal">
-      <span class="eyebrow">LAUNCHPAD · COHORT 02 · NOW FORMING</span>
+      <span class="eyebrow">LAUNCHPAD · 8 WEEK LIVE ONLINE COHORT</span>
       <h3>Clarity. Confidence. Direction.</h3>
       <p class="purpose">Understand yourself. Think through your choices. Decide what to test next.</p>
       <p>Over eight weeks, students identify their proven strengths, choose one direction worth testing, practise explaining that direction with confidence and leave with a dated 30 day action plan.</p>
-      <a class="btn btn-primary" href="launchpad.html">Register interest for Cohort 02 →</a>
+      <a class="btn btn-primary" href="launchpad.html">Explore Launchpad →</a>
     </div>
   </div>
 </section>
@@ -68,11 +68,75 @@
       <h2>Things worth thinking about.</h2>
       <p>Read, reflect and explore ideas from The Evolve Foundation's work with students.</p>
     </div>
-    <div class="home-ideas-grid">
-      <article class="home-idea reveal"><span class="insight-kicker">Student Compass · 3 min read</span><h3>We ask students to decide before we ask them to understand themselves</h3><p>Perhaps the first step is to pause.</p><a class="text-link" href="we-ask-students-to-decide-before-we-ask-them-to-understand-themselves.html">Read the insight →</a></article>
-      <article class="home-idea reveal"><span class="insight-kicker">Launchpad · 3 min read</span><h3>Self awareness becomes useful when it changes what you do</h3><p>Knowing your strengths is only the starting point.</p><a class="text-link" href="self-awareness-becomes-useful-when-it-changes-what-you-do.html">Read the insight →</a></article>
-      <article class="home-idea reveal"><span class="insight-kicker">Launchpad · 4 min read</span><h3>Your strengths don't need to sound impressive</h3><p>The strengths that matter aren't always the ones that sound exceptional.</p><a class="text-link" href="your-strengths-dont-need-to-sound-impressive.html">Read the insight →</a></article>
+    <div class="home-ideas-grid" id="ideasToExplore">
+      <!-- Fallback content. The cards are refreshed from the latest Insights page when available. -->
+      <article class="home-idea reveal"><span class="insight-kicker">Confidence · Being yourself · 2 min read</span><h3>You don't have to look confident to be confident</h3><p>Confidence does not have to be performed. It can grow when young people become more comfortable being themselves.</p><a class="text-link" href="you-dont-have-to-look-confident-to-be-confident.html">Read the insight →</a></article>
+      <article class="home-idea reveal"><span class="insight-kicker">Choices · Understanding yourself · 2 min read</span><h3>We ask students to decide before we ask them to understand themselves</h3><p>Students are often asked what they want to do next before they have had much time to understand themselves. Perhaps the first step is to pause.</p><a class="text-link" href="we-ask-students-to-decide-before-we-ask-them-to-understand-themselves.html">Read the insight →</a></article>
+      <article class="home-idea reveal"><span class="insight-kicker">Self-awareness · Exploring possibilities · 2 min read</span><h3>Self-awareness becomes useful when it changes what you do</h3><p>Knowing your strengths is only the starting point. The next step is to combine what you are good at with what draws your attention and find possibilities worth testing.</p><a class="text-link" href="self-awareness-becomes-useful-when-it-changes-what-you-do.html">Read the insight →</a></article>
     </div>
+    <script>
+      (function () {
+        const container = document.getElementById('ideasToExplore');
+        if (!container) return;
+
+        fetch('insights.html')
+          .then(response => {
+            if (!response.ok) throw new Error('Could not load insights');
+            return response.text();
+          })
+          .then(markup => {
+            const doc = new DOMParser().parseFromString(markup, 'text/html');
+            const cards = Array.from(doc.querySelectorAll('.insights-list .insight-card')).slice(0, 3);
+
+            if (cards.length < 3) return;
+
+            const fragment = document.createDocumentFragment();
+
+            cards.forEach(card => {
+              const kicker = card.querySelector('.insight-kicker');
+              const title = card.querySelector('h2');
+              const description = card.querySelector('p');
+              const link = card.querySelector('a.text-link');
+
+              if (!kicker || !title || !link) return;
+
+              const article = document.createElement('article');
+              article.className = 'home-idea reveal';
+
+              const kickerEl = document.createElement('span');
+              kickerEl.className = 'insight-kicker';
+              kickerEl.textContent = kicker.textContent.trim();
+
+              const titleEl = document.createElement('h3');
+              titleEl.textContent = title.textContent.trim();
+
+              article.appendChild(kickerEl);
+              article.appendChild(titleEl);
+
+              if (description) {
+                const descriptionEl = document.createElement('p');
+                descriptionEl.textContent = description.textContent.trim();
+                article.appendChild(descriptionEl);
+              }
+
+              const linkEl = document.createElement('a');
+              linkEl.className = 'text-link';
+              linkEl.href = link.getAttribute('href');
+              linkEl.textContent = 'Read the insight →';
+              article.appendChild(linkEl);
+
+              fragment.appendChild(article);
+            });
+
+            if (fragment.childElementCount === 3) {
+              container.replaceChildren(fragment);
+            }
+          })
+          .catch(() => {
+            // Keep the server-rendered fallback cards if the Insights page cannot be loaded.
+          });
+      })();
+    </script>
     <a class="text-link" href="insights.html" style="margin-top:30px;">Explore all insights →</a>
   </div>
 </section>
