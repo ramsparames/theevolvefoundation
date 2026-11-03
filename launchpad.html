@@ -75,6 +75,30 @@
   line-height: 1.65;
   color: var(--muted-on-paper);
 }
+
+.cohort-proof-photo {
+  margin: 34px 0 42px;
+}
+.cohort-proof-photo img {
+  display: block;
+  width: 100%;
+  max-width: 1128px;
+  height: auto;
+  border-radius: 18px;
+}
+.cohort-proof-photo figcaption {
+  margin-top: 12px;
+  font-family: var(--mono, "IBM Plex Mono", monospace);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted-on-paper);
+}
+@media (max-width: 760px) {
+  .cohort-proof-photo { margin: 28px 0 34px; }
+  .cohort-proof-photo img { border-radius: 14px; }
+}
+
 @media (max-width: 760px) {
   .cohort-proof-grid {
     grid-template-columns: 1fr;
@@ -592,6 +616,10 @@
 <p>Founding Cohort 01 has now completed its eight week journey. Six college students came into Launchpad with different questions, different interests and different levels of clarity about what might come next. At the end of the programme, we asked them to reflect on what felt different.</p>
 </div>
 <div class="cohort-proof-meta"><span>8 weeks</span><span>·</span><span>6 students</span><span>·</span><span>One journey</span></div>
+<figure class="cohort-proof-photo reveal">
+<img src="images/launchpad-cohort01-final-session.png" alt="Launchpad Cohort 01 final session with students and Rams Parameswaran"/>
+<figcaption>Final session · Cohort 01</figcaption>
+</figure>
 <div class="cohort-proof-grid">
 <div class="cohort-proof-card reveal">
 <blockquote>“This programme was like a source of light in the dark tunnel of ignorance.”</blockquote>
