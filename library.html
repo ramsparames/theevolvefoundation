@@ -123,6 +123,49 @@
 }
 </style>
 
+
+<style>
+.library-final-cta .section-head {
+  text-align: center !important;
+  max-width: 920px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.library-final-cta .section-head p {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 820px;
+}
+.library-final-cta .library-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 300px;
+  padding: 20px 32px;
+  border-radius: 16px;
+  background: #cda04d;
+  color: #18222b;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.2;
+  border: 0;
+  box-sizing: border-box;
+  transition: transform .2s ease, opacity .2s ease;
+}
+.library-final-cta .library-cta-button:hover {
+  transform: translateY(-2px);
+  opacity: .94;
+}
+@media (max-width:760px) {
+  .library-final-cta .library-cta-button {
+    min-width: 0;
+    width: 100%;
+    max-width: 320px;
+  }
+}
+</style>
+
 </head>
 <body class="audience-nav">
 <nav>
@@ -255,7 +298,7 @@
       <p>Whether you're approaching college, already in college, or looking for an experience for a wider group, explore our programmes and see where you fit.</p>
     </div>
     <div style="display:flex;justify-content:center;margin-top:34px;">
-      <a class="button button-primary" href="index.html#programmes">Explore all programmes →</a>
+      <a class="library-cta-button" href="index.html#programmes">Explore all programmes →</a>
     </div>
   </div>
 </section>
