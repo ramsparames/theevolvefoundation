@@ -49,11 +49,88 @@
 .cohort-proof-photo figcaption { margin-top:12px; font-family:var(--mono,"IBM Plex Mono",monospace); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted-on-paper); }
 @media (max-width:760px) { .cohort-proof-grid{grid-template-columns:1fr;} .cohort-proof-card{min-height:0;} .cohort-proof-photo{margin:28px 0 34px;} .cohort-proof-photo img{border-radius:14px;} }
 </style>
-<link rel="stylesheet" href="evolve-brand-logo.css"/>
+<style>
+/* Ignite impact page — simplified feedback layout */
+.ignite-simple p { margin-bottom: 0; }
+@media (max-width:760px) {
+  .audience-two-col { grid-template-columns:1fr; }
+}
+</style>
+
+<style>
+.ignite-impact-stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+@media (max-width: 900px) {
+  .ignite-impact-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media (max-width: 520px) {
+  .ignite-impact-stats {
+    grid-template-columns: 1fr !important;
+  }
+}
+</style>
+
+<style>
+/* Tighten the opening Ignite impact section */
+.ignite-impact-intro {
+  margin-bottom: 0 !important;
+}
+.ignite-impact-intro + .audience-two-col {
+  margin-top: 24px !important;
+}
+</style>
+
+<style>
+/* Circular Evolve logo — matched header/footer treatment */
+.nav-brand {
+  display:flex !important;
+  align-items:center;
+  gap:12px;
+}
+.nav-brand .brand-logo {
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  flex:0 0 42px;
+}
+.footer-compact-brand {
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+.footer-compact-brand .footer-brand-row {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.footer-compact-brand .footer-brand-logo {
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  flex:0 0 42px;
+}
+@media (max-width:760px) {
+  .nav-brand .brand-logo,
+  .footer-compact-brand .footer-brand-logo {
+    width:36px;
+    height:36px;
+    flex-basis:36px;
+  }
+}
+</style>
+
+<style>
+@media (max-width:760px) {
+  .ignite-own-words-grid { grid-template-columns:1fr !important; }
+}
+</style>
 </head>
 <body class="audience-nav"><nav>
 <div class="nav-inner">
-<a class="nav-brand" href="index.html"><img class="nav-brand-logo" src="evolve-circular-logo-exact.png" alt="The Evolve Foundation"><span class="nav-brand-wordmark">The Evolve Foundation</span></a>
+<a class="nav-brand" href="index.html"><img class="brand-logo" src="evolve-circular-logo-exact(1).png" alt="The Evolve Foundation logo"><span>The Evolve Foundation</span></a>
 <button aria-label="Toggle menu" class="nav-toggle" id="navToggle">MENU</button>
 <div class="nav-links" id="navLinks">
 <a href="index.html#foundation">About</a>
@@ -83,17 +160,110 @@
 </nav>
 <header class="audience-hero"><div class="wrap"><span class="eyebrow">IGNITE · IN ACTION</span><h1>What happened when students experienced <em>Ignite.</em></h1><p class="lede">A look at the first Ignite session at Rajalakshmi Engineering College, what students told us afterwards, and what they found most useful.</p><p class="support">Rajalakshmi Engineering College · 24 September 2026 · Third-year students across engineering disciplines</p></div></header>
 <main>
-<section class="audience-section soft"><div class="wrap"><div class="section-head"><span class="eyebrow">RAJALAKSHMI ENGINEERING COLLEGE</span><h2>A practical bridge between placement preparation and career readiness.</h2><p>The first session brought together about 80 nominated students and used real workplace situations, two simple frameworks and reflection exercises to move from awareness to action.</p></div><div class="impact-stat-grid" style="margin-top:40px"><div class="impact-stat"><strong>~80</strong><span>Students attended</span></div><div class="impact-stat"><strong>43</strong><span>Feedback responses</span></div><div class="impact-stat"><strong>4.65 / 5</strong><span>Average usefulness</span></div><div class="impact-stat"><strong>98%</strong><span>Rated Ignite 4 or 5</span></div><div class="impact-stat"><strong>98%</strong><span>Better understood career readiness beyond placement</span></div><div class="impact-stat"><strong>86%</strong><span>Likely / very likely to act on their chosen next step</span></div></div></div></section>
-<section class="audience-section"><div class="wrap"><div class="audience-two-col"><div class="audience-copy"><span class="eyebrow">THE SESSION</span><h2>Real situations. Reflection. One next step.</h2><p>Students worked through realistic workplace situations, practised turning their experiences into evidence, and reflected on what career readiness means beyond getting placed.</p><p>The strongest responses clustered around using experience as evidence, articulating it clearly and working through realistic workplace situations.</p></div><div class="audience-callout"><img src="rajalakshmi-ignite-session.JPG" alt="Ignite session at Rajalakshmi Engineering College" style="width:100%;border-radius:12px;display:block"/><p class="proof-meta" style="margin-top:12px">Ignite session · Rajalakshmi Engineering College</p></div></div></div></section>
-<section class="audience-section soft"><div class="wrap"><div class="section-head"><span class="eyebrow">IN THEIR OWN WORDS</span><h2>What students said stayed with them.</h2><p>These are students’ own words from the feedback collected after the session.</p></div><div class="audience-card-row"><article class="audience-product"><p>“How to work with real world experiences.”</p></article><article class="audience-product secondary"><p>“I have always struggled to articulate, but after this session, I feel quite confident of building my articulation skills.”</p></article><article class="audience-product"><p>“How to face the interview and how to be ready after getting the job.”</p></article><article class="audience-product secondary"><p>“How to handle real workplace situations.”</p></article></div></div></section>
-<section class="audience-section"><div class="wrap"><div class="section-head"><span class="eyebrow">MOST USEFUL PARTS</span><h2>What students valued most.</h2></div><div class="audience-points" style="margin-top:36px"><div class="audience-point"><span class="point-number">61%</span><h3>Turning experiences into evidence</h3></div><div class="audience-point"><span class="point-number">53%</span><h3>Practising articulation</h3></div><div class="audience-point"><span class="point-number">47%</span><h3>Real workplace situations</h3></div></div></div></section>
-<section class="audience-section soft"><div class="wrap"><div class="audience-two-col"><div class="audience-copy"><span class="eyebrow">THE TAKEAWAY</span><h2>Placement preparation helps you get the opportunity. Career readiness helps you navigate it well.</h2><p>Percentages are based on 43 feedback responses. Student comments above are presented in their own words, with only formatting and line breaks adjusted for the page.</p></div><div class="audience-callout"><a class="btn btn-primary" href="ignite.html">See how Ignite works →</a><a class="btn btn-outline-on-paper" href="ignite-impact-snapshot-rajalakshmi.pdf" target="_blank" rel="noopener">Read the full impact snapshot ↓</a></div></div></div></section>
+<section class="audience-section soft ignite-impact-intro">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">THE SESSION</span>
+      <h2>Real situations. Reflection. One next step.</h2>
+      
+      
+    </div>
+
+    <div class="audience-two-col" style="margin-top:42px;align-items:center">
+      <div class="audience-copy">
+        <p>At Rajalakshmi Engineering College, about 80 third-year students experienced Ignite as a practical bridge between placement preparation and career readiness.</p>
+        <p>Students worked through realistic workplace situations, practised turning their experiences into evidence, and reflected on what career readiness means beyond getting placed.</p>
+      </div>
+      <div class="audience-callout" style="padding:0;background:transparent;border:0;box-shadow:none">
+        <img src="rajalakshmi-ignite-session.JPG" alt="Ignite session at Rajalakshmi Engineering College" style="width:100%;border-radius:12px;display:block"/>
+        <p class="proof-meta" style="margin-top:12px">Ignite session · Rajalakshmi Engineering College</p>
+      </div>
+    </div>
+
+    <div class="impact-stat-grid ignite-impact-stats" style="margin-top:48px">
+      <div class="impact-stat"><strong>~80</strong><span>Students attended</span></div>
+      <div class="impact-stat"><strong>4.65 / 5</strong><span>Average usefulness</span></div>
+      <div class="impact-stat"><strong>98%</strong><span>Rated Ignite 4 or 5</span></div>
+      <div class="impact-stat"><strong>86%</strong><span>Likely / very likely to act on their chosen next step</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="audience-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">WHAT STUDENTS TOLD US</span>
+      <h2>What stayed with them.</h2>
+    </div>
+
+    <div class="audience-two-col" style="margin-top:36px;align-items:start">
+      <div class="audience-copy">
+        <p><strong>Beyond placement.</strong> Getting the job is different from being ready to work well once you get there.</p>
+        <p><strong>Real workplace judgement.</strong> Students connected with mistakes, pressure, ownership and how to respond in real situations.</p>
+      </div>
+      <div class="audience-copy">
+        <p><strong>Articulation matters.</strong> Students valued learning how to turn their experiences into evidence and explain them clearly.</p>
+        <p><strong>Action matters.</strong> The session encouraged practice, consistency and one small next step.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:42px;max-width:900px">
+      <span class="eyebrow">IN THEIR WORDS</span>
+      <div class="ignite-own-words-grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px;margin-top:18px">
+        <p style="margin:0;font-family:Fraunces,Georgia,serif;font-size:clamp(22px,2.4vw,30px);line-height:1.25">“How to work with real world experiences.”</p>
+        <p style="margin:0;font-family:Fraunces,Georgia,serif;font-size:clamp(22px,2.4vw,30px);line-height:1.25">“I have always struggled to articulate, but after this session, I feel quite confident of building my articulation skills.”</p>
+        <p style="margin:0;font-family:Fraunces,Georgia,serif;font-size:clamp(22px,2.4vw,30px);line-height:1.25">“How to face the interview and how to be ready after getting the job.”</p>
+        <p style="margin:0;font-family:Fraunces,Georgia,serif;font-size:clamp(22px,2.4vw,30px);line-height:1.25">“How to handle real workplace situations.”</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="audience-section soft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">WHAT STUDENTS VALUED MOST</span>
+      <h2>The parts they found most useful.</h2>
+    </div>
+
+    <div style="margin-top:36px;max-width:900px">
+      <div style="display:flex;justify-content:space-between;gap:24px;padding:18px 0;border-bottom:1px solid rgba(30,42,51,.14)">
+        <span>Turning experiences into evidence</span><strong>61%</strong>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:24px;padding:18px 0;border-bottom:1px solid rgba(30,42,51,.14)">
+        <span>Practising articulation</span><strong>53%</strong>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:24px;padding:18px 0">
+        <span>Real workplace situations</span><strong>47%</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="audience-section">
+  <div class="wrap">
+    <div class="audience-two-col">
+      <div class="audience-copy">
+        <span class="eyebrow">THE TAKEAWAY</span>
+        <h2>Placement preparation helps you get the opportunity. Career readiness helps you navigate it well.</h2>
+        <p>Percentages are based on 43 feedback responses. Student comments are lightly edited for punctuation/grammar without changing meaning.</p>
+      </div>
+      <div class="audience-callout">
+        <a class="btn btn-primary" href="ignite.html">See how Ignite works →</a>
+        <a class="btn btn-outline-on-paper" href="ignite-impact-snapshot-rajalakshmi.pdf" target="_blank" rel="noopener">Read the full impact snapshot ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 <footer id="footer">
 <div class="wrap">
 <div class="footer-compact">
 <div class="footer-compact-brand">
-        <div class="footer-brand-lockup"><img src="evolve-circular-logo-exact.png" alt="The Evolve Foundation"><span>The Evolve Foundation</span></div>
+<div class="footer-brand-row">
+  <img class="footer-brand-logo" src="evolve-circular-logo-exact(1).png" alt="The Evolve Foundation logo">
+  <h2>The Evolve Foundation</h2>
+</div>
 <p>Helping young people understand themselves and navigate life well</p>
 </div>
 <div class="footer-compact-meta">
@@ -106,5 +276,4 @@
 </div>
 </footer>
 <script defer="" src="script.js"></script>
-</body><script defer="" src="script.js"></script>
 </body></html>
