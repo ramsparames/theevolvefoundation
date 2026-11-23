@@ -81,16 +81,23 @@
     a.addEventListener('click', () => navLinks.classList.remove('open'));
   });
 
-// programmes dropdown
-const programmeDropdown = document.querySelector('.nav-dropdown');
-const programmeTrigger = document.querySelector('.nav-dropdown-trigger');
-if(programmeDropdown && programmeTrigger){
-  programmeTrigger.addEventListener('click', (e) => {
+// navigation dropdowns
+document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+  const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+  if(!trigger) return;
+  trigger.addEventListener('click', (e) => {
     e.stopPropagation();
-    const open = programmeDropdown.classList.toggle('open');
-    programmeTrigger.setAttribute('aria-expanded', String(open));
+    document.querySelectorAll('.nav-dropdown').forEach(other => {
+      if(other !== dropdown){ other.classList.remove('open'); const t=other.querySelector('.nav-dropdown-trigger'); if(t) t.setAttribute('aria-expanded','false'); }
+    });
+    const open = dropdown.classList.toggle('open');
+    trigger.setAttribute('aria-expanded', String(open));
   });
-  document.addEventListener('click', (e) => {
-    if(!programmeDropdown.contains(e.target)){ programmeDropdown.classList.remove('open'); programmeTrigger.setAttribute('aria-expanded','false'); }
+});
+document.addEventListener('click', () => {
+  document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+    dropdown.classList.remove('open');
+    const trigger=dropdown.querySelector('.nav-dropdown-trigger');
+    if(trigger) trigger.setAttribute('aria-expanded','false');
   });
-}
+});

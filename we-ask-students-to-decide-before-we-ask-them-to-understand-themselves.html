@@ -7,7 +7,7 @@
   <meta content="A reflection from The Evolve Foundation on why students need space to understand themselves before deciding what comes next." name="description"/>
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
   <link href="styles.css" rel="stylesheet"/>
   <link href="insights-article.css" rel="stylesheet"/>
   <link href="footer-compact.css" rel="stylesheet"/>
@@ -23,17 +23,33 @@
   <meta content="A reflection from The Evolve Foundation on why students need space to understand themselves before deciding what comes next." name="twitter:description"/>
   <meta content="https://www.theevolvefoundation.com/og-image-new.png" name="twitter:image"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"We ask students to decide before we ask them to understand themselves","description":"A reflection from The Evolve Foundation on why students need space to understand themselves before deciding what comes next.","datePublished":"2026-10-02","dateModified":"2026-10-02","mainEntityOfPage":"https://www.theevolvefoundation.com/we-ask-students-to-decide-before-we-ask-them-to-understand-themselves.html","author":{"@id":"https://www.theevolvefoundation.com/about-rams.html#rams-parameswaran"},"publisher":{"@id":"https://www.theevolvefoundation.com/#organization"},"isPartOf":{"@id":"https://www.theevolvefoundation.com/#website"}}</script>
-</head>
+<link rel="stylesheet" href="evolve-typography.css"><link rel="stylesheet" href="evolve-brand-logo.css"></head>
 <body class="audience-nav">
 <nav>
   <div class="nav-inner">
-    <a class="nav-brand" href="index.html">The Evolve Foundation</a>
+    <a class="nav-brand" href="index.html"><img class="nav-brand-logo" src="evolve-circular-logo-exact.png" alt="The Evolve Foundation"><span class="nav-brand-wordmark">The Evolve Foundation</span></a>
     <button aria-label="Toggle menu" class="nav-toggle" id="navToggle">MENU</button>
     <div class="nav-links" id="navLinks">
       <a href="index.html#foundation">About</a>
-      <a href="for-students.html">For Students</a>
-      <a href="for-parents.html">For Parents</a>
-      <a href="for-colleges.html">For Colleges</a>
+      <div class="nav-dropdown">
+        <button aria-expanded="false" class="nav-dropdown-trigger">Experiences <span aria-hidden="true">⌄</span></button>
+        <div class="nav-dropdown-menu">
+          <a href="compass.html"><strong>Compass</strong><small>Before college · make a better-informed choice</small></a>
+          <a href="launchpad.html"><strong>Launchpad</strong><small>Early college · find a direction worth exploring</small></a>
+          <a href="ignite.html"><strong>Ignite</strong><small>Approaching work · prepare for the transition</small></a>
+          <a href="momentum.html"><strong>Momentum</strong><small>Early career · learn how to navigate work</small></a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button aria-expanded="false" class="nav-dropdown-trigger">Who We Work With <span aria-hidden="true">⌄</span></button>
+        <div class="nav-dropdown-menu">
+          <a href="for-students.html"><strong>Students</strong><small>Find the experience that fits where you are</small></a>
+          <a href="for-parents.html"><strong>Parents</strong><small>Support without choosing the path for them</small></a>
+          <a href="for-colleges.html"><strong>Colleges</strong><small>Bring meaningful experiences to students</small></a>
+          <a href="for-organisations.html"><strong>Organisations</strong><small>Develop early-career professionals</small></a>
+        </div>
+      </div>
+      <a href="library.html">Library</a>
       <a href="insights.html">Insights</a>
       <a class="nav-cta" href="index.html#contact">Contact</a>
     </div>
@@ -92,9 +108,9 @@
 
       <p>The goal is not to have all the answers. It is to make the next choice with a little more understanding.</p>
 
-      <h2>This is why we built Student Compass.</h2>
+      <h2>This is why we built Compass.</h2>
 
-      <p>Student Compass came from this idea.</p>
+      <p>Compass came from this idea.</p>
 
       <p>It is not a career test, and it does not tell a student what they should become. It is simply a short opportunity to pause and reflect.</p>
 
@@ -108,9 +124,9 @@
 
       <div class="article-programme">
         <span class="eyebrow">From The Evolve Foundation</span>
-        <h2>Student Compass</h2>
+        <h2>Compass</h2>
         <p>A short reflection journey to help students understand their strengths, explore possibilities and think about what comes next.</p>
-        <a class="btn btn-primary" href="student-compass.html">Take Your Compass →</a>
+        <a class="btn btn-primary" href="compass.html">Take Your Compass →</a>
       </div>
 
       <div class="article-author">
@@ -125,7 +141,7 @@
   <div class="wrap">
     <div class="footer-compact">
       <div class="footer-compact-brand">
-        <h2>The Evolve Foundation</h2>
+        <div class="footer-brand-lockup"><img src="evolve-circular-logo-exact.png" alt="The Evolve Foundation"><span>The Evolve Foundation</span></div>
         <p>Helping young people understand themselves and navigate life well</p>
       </div>
       <div class="footer-compact-meta">

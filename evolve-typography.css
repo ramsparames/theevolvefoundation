@@ -1,0 +1,24 @@
+/* The Evolve Foundation — shared typography system */
+:root{
+  --serif:'Fraunces', serif;
+  --sans:'Source Sans 3', sans-serif;
+  --mono:'IBM Plex Mono', monospace;
+}
+html, body{
+  font-family:var(--sans);
+}
+h1,h2,h3,h4,h5,h6{
+  font-family:var(--serif);
+}
+button,input,select,textarea{
+  font-family:var(--sans);
+}
+.mono,.eyebrow,.tag,.wk,.point-number,.library-meta,.library-number,.proof-badge{
+  font-family:var(--mono);
+}
+
+/* V4.9 — keep programme hero labels consistent with the experience family */
+.launchpad-hero .eyebrow,
+.ignite-hero .eyebrow {
+  color: var(--brass-soft) !important;
+}

@@ -12,10 +12,10 @@
 <link rel="stylesheet" href="audience.css">
 <link rel="stylesheet" href="student-compass.css">
 <link rel="stylesheet" href="evolve-library.css">
-<link rel="stylesheet" href="footer-compact.css">
+<link rel="stylesheet" href="footer-compact.css"><link rel="stylesheet" href="evolve-redesign.css">
 
 <style id="student-compass-nav-idea-page-fix">
-/* Library idea pages: Student Compass is a normal, clickable navigation item. */
+/* Library idea pages: Compass is a normal, clickable navigation item. */
 .site-nav a[href$="student-compass.html"],
 .site-nav a[href$="/student-compass.html"],
 .site-nav a[href$="/student-compass"] {
@@ -131,17 +131,33 @@
 </script>
 <!-- EVOLVE LIBRARY SEO END -->
 
-</head>
+<link rel="stylesheet" href="evolve-typography.css"><link rel="stylesheet" href="evolve-brand-logo.css"></head>
 <body class="audience-nav">
-<nav class="site-nav" aria-label="Primary navigation">
+<nav>
   <div class="nav-inner">
-    <a class="nav-brand" href="index.html">The Evolve Foundation</a>
-    <button aria-label="Toggle menu" class="nav-toggle" id="navToggle" type="button">MENU</button>
+    <a class="nav-brand" href="index.html"><img class="nav-brand-logo" src="evolve-circular-logo-exact.png" alt="The Evolve Foundation"><span class="nav-brand-wordmark">The Evolve Foundation</span></a>
+    <button aria-label="Toggle menu" class="nav-toggle" id="navToggle">MENU</button>
     <div class="nav-links" id="navLinks">
       <a href="index.html#foundation">About</a>
-      <a class="active" href="for-students.html">For Students</a>
-      <a href="for-parents.html">For Parents</a>
-      <a href="for-colleges.html">For Colleges</a>
+      <div class="nav-dropdown">
+        <button aria-expanded="false" class="nav-dropdown-trigger">Experiences <span aria-hidden="true">⌄</span></button>
+        <div class="nav-dropdown-menu">
+          <a href="compass.html"><strong>Compass</strong><small>Before college · make a better-informed choice</small></a>
+          <a href="launchpad.html"><strong>Launchpad</strong><small>Early college · find a direction worth exploring</small></a>
+          <a href="ignite.html"><strong>Ignite</strong><small>Approaching work · prepare for the transition</small></a>
+          <a href="momentum.html"><strong>Momentum</strong><small>Early career · learn how to navigate work</small></a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button aria-expanded="false" class="nav-dropdown-trigger">Who We Work With <span aria-hidden="true">⌄</span></button>
+        <div class="nav-dropdown-menu">
+          <a href="for-students.html"><strong>Students</strong><small>Find the experience that fits where you are</small></a>
+          <a href="for-parents.html"><strong>Parents</strong><small>Support without choosing the path for them</small></a>
+          <a href="for-colleges.html"><strong>Colleges</strong><small>Bring meaningful experiences to students</small></a>
+          <a href="for-organisations.html"><strong>Organisations</strong><small>Develop early-career professionals</small></a>
+        </div>
+      </div>
+      <a href="library.html">Library</a>
       <a href="insights.html">Insights</a>
       <a class="nav-cta" href="index.html#contact">Contact</a>
     </div>
@@ -208,7 +224,7 @@
   <div class="wrap">
     <div class="footer-compact">
       <div class="footer-compact-brand">
-        <h2>The Evolve Foundation</h2>
+        <div class="footer-brand-lockup"><img src="evolve-circular-logo-exact.png" alt="The Evolve Foundation"><span>The Evolve Foundation</span></div>
         <p>Helping young people understand themselves and navigate life well</p>
       </div>
       <div class="footer-compact-meta">
