@@ -6,7 +6,7 @@ const link=document.getElementById("continue");
 (async()=>{
   if(!token){title.textContent="This link is incomplete.";message.textContent="Please use the latest Compass link we sent you.";return;}
   try{
-    const r=await fetch("../api/compass/verify.js?token="+encodeURIComponent(token),{credentials:"include"});
+    const r=await fetch("../api/compass/verify?token="+encodeURIComponent(token),{credentials:"include"});
     const data=await r.json();
     if(!r.ok||!data.ok) throw new Error(data.message||"This link is no longer valid.");
     if(data.answers){localStorage.setItem("evolveCompassSlice1",JSON.stringify(data.answers));}

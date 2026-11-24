@@ -159,7 +159,7 @@ document.getElementById("authForm").addEventListener("submit",async(e)=>{
   state.email=document.getElementById("emailInput").value.trim();
   btn.disabled=true; status.textContent="Saving your Compass…";
   try{
-    const r=await fetch("../api/compass/request-link.js",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
+    const r=await fetch("../api/compass/request-link",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
       email:state.email,name:state.name,answers:state.answers
     })});
     const payload=await r.json();
