@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Compass | The Evolve Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../v2.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body class="compass-app">
+<header class="compass-header">
+  <a href="../index.html" class="compass-brand">
+    <img src="../evolve-circular-logo-exact.png" alt="The Evolve Foundation">
+    <span>The Evolve Foundation</span>
+  </a>
+  <div class="compass-header-right">
+    <span class="compass-wordmark">COMPASS</span>
+    <button id="resumeBtn" class="quiet-btn" type="button">Save &amp; continue later</button>
+  </div>
+</header>
+
+<main>
+  <section id="welcomeView" class="app-view active">
+    <div class="app-container intro-grid">
+      <div>
+        <p class="eyebrow">BEFORE COLLEGE · COMPASS</p>
+        <h1>Choosing what comes next isn't easy.</h1>
+        <p class="lede">You don't need to know exactly what you want to do. You just need a better way to think through the choices in front of you.</p>
+        <p class="lede small">Compass will not tell you which course or college to choose. It helps you understand yourself, define what matters and make a better-informed choice.</p>
+        <button id="startBtn" class="primary-btn">Start Compass <span>→</span></button>
+        <p class="microcopy">Start with the free five-question Know Me section.</p>
+      </div>
+      <div class="journey-card">
+        <p class="eyebrow">HOW IT WORKS</p>
+        <div class="journey-step"><span>01</span><div><strong>Know Me</strong><small>Start with yourself.</small></div></div>
+        <div class="journey-step"><span>02</span><div><strong>What Am I Looking For?</strong><small>Define the college experience you want.</small></div></div>
+        <div class="journey-step"><span>03</span><div><strong>Explore My Options</strong><small>Bring your real choices.</small></div></div>
+        <div class="journey-step"><span>04</span><div><strong>Check the Fit</strong><small>See what you know and what you still need to find out.</small></div></div>
+        <div class="journey-step"><span>05</span><div><strong>My Compass</strong><small>Pull it together and decide what to do next.</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="questionView" class="app-view">
+    <div class="app-container narrow-app">
+      <div class="progress-row"><span id="sectionLabel">01 KNOW ME</span><span id="progressText">Question 1 of 5</span></div>
+      <div class="progress-track"><span id="progressBar"></span></div>
+      <div class="question-shell">
+        <div>
+          <p class="eyebrow">START WITH YOURSELF</p>
+          <h2 id="questionText"></h2>
+          <p id="questionHint" class="question-hint"></p>
+        </div>
+        <div id="optionList" class="option-list"></div>
+        <div id="textFollowup" class="followup hidden">
+          <label id="followupLabel" for="followupInput"></label>
+          <textarea id="followupInput" rows="4" maxlength="500"></textarea>
+          <p class="microcopy">Optional. A real example helps Compass reflect your thinking rather than just your selections.</p>
+        </div>
+        <p id="questionError" class="form-error" role="alert"></p>
+        <div class="question-actions">
+          <button id="backBtn" class="secondary-btn" type="button">← Back</button>
+          <button id="nextBtn" class="primary-btn" type="button">Next <span>→</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reflectionView" class="app-view">
+    <div class="app-container reflection-container">
+      <div class="reflection-intro">
+        <p class="eyebrow">YOUR FIRST COMPASS REFLECTION</p>
+        <h1 id="reflectionTitle">A first read of where you are.</h1>
+        <p>There is no score here. These are simply patterns from what you told us.</p>
+      </div>
+      <div class="reflection-grid">
+        <article><span class="card-label">WHAT SEEMS TO ENERGISE YOU</span><h2 id="energyTitle"></h2><p id="energyCopy"></p></article>
+        <article><span class="card-label">WHAT YOU SEEM TO BRING</span><h2 id="bringTitle"></h2><p id="bringCopy"></p></article>
+        <article><span class="card-label">WHAT SEEMS TO MATTER TO YOU</span><h2 id="matterTitle"></h2><p id="matterCopy"></p></article>
+        <article class="notice-card"><span class="card-label">SOMETHING WORTH NOTICING</span><p id="noticeCopy"></p></article>
+      </div>
+      <div class="reflection-footer">
+        <div><strong>You've started with yourself.</strong><span>Now let's look at the college experience you actually want.</span></div>
+        <button id="continueBtn" class="primary-btn">Continue with Compass <span>→</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="authView" class="app-view">
+    <div class="app-container auth-container">
+      <div class="auth-card">
+        <p class="eyebrow">SAVE YOUR COMPASS</p>
+        <h1>Want to continue later?</h1>
+        <p>Enter your email and we'll send you a secure link to continue your Compass. No password to remember.</p>
+        <form id="authForm">
+          <label for="nameInput">Your name <span>(optional)</span></label>
+          <input id="nameInput" name="name" autocomplete="name" maxlength="120">
+          <label for="emailInput">Email</label>
+          <input id="emailInput" name="email" type="email" autocomplete="email" required>
+          <button class="primary-btn" type="submit">Send me my Compass link <span>→</span></button>
+          <p id="authStatus" class="status" role="status"></p>
+        </form>
+        <p class="privacy-note">Your Compass is private. You choose if and when you share it with a parent.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="continueView" class="app-view">
+    <div class="app-container auth-container">
+      <div class="auth-card centered">
+        <p class="eyebrow">CHECK YOUR EMAIL</p>
+        <h1>Your Compass is saved.</h1>
+        <p id="continueMessage">We sent a secure link to continue. You can close this page and come back whenever you're ready.</p>
+        <button id="backToReflection" class="secondary-btn" type="button">Back to my reflection</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="step2PreviewView" class="app-view">
+    <div class="app-container auth-container">
+      <div class="auth-card centered">
+        <p class="eyebrow">02 · WHAT AM I LOOKING FOR?</p>
+        <h1>You're ready for the next part.</h1>
+        <p>The next section will help you define what you want your college years, your course and your life beyond the classroom to give you.</p>
+        <div class="preview-note"><strong>Your first reflection is saved.</strong><span>We will build the full Step 2 interaction next.</span></div>
+        <a href="../compass.html" class="secondary-btn">Back to Compass <span>→</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

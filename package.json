@@ -1,0 +1,7 @@
+{
+  "name": "theevolvefoundation-compass-slice-1",
+  "private": true,
+  "dependencies": {
+    "@neondatabase/serverless": "latest"
+  }
+}
