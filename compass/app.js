@@ -38,7 +38,75 @@ const QUESTIONS = [
   }
 ];
 
-const KEY = "evolveCompassSlice1";
+const PAYMENT_TEST_MODE = true;
+
+const STEP2_KEY = "evolveCompassStep2";
+
+const STEP2_QUESTIONS = [
+  {
+    key:"decision",
+    text:"What are you actually trying to decide?",
+    hint:"Choose the one that best describes the decision in front of you.",
+    max:1,
+    options:[
+      "Which course or degree should I choose?",
+      "Which college should I choose?",
+      "Which course and college combination should I choose?",
+      "What direction should I explore?",
+      "I'm not sure yet"
+    ]
+  },
+  {
+    key:"matters",
+    text:"What matters most to you in the experience you choose?",
+    hint:"Pick up to 5. These are things we will keep coming back to later.",
+    max:5,
+    options:[
+      "Strong learning and teaching",
+      "Practical experience",
+      "Freedom to explore different subjects",
+      "Good people and community",
+      "Opportunities outside the classroom",
+      "A clear path into work",
+      "Flexibility to change direction",
+      "Independence",
+      "A good balance outside academics",
+      "Being close to home",
+      "Affordability",
+      "I'm still figuring this out"
+    ]
+  },
+  {
+    key:"wants",
+    text:"What do you most want your choice to give you?",
+    hint:"Pick up to 5.",
+    max:5,
+    options:[
+      "Confidence that I chose well",
+      "Room to discover what I enjoy",
+      "Skills I can actually use",
+      "A strong foundation for the future",
+      "People I can learn with",
+      "Different experiences and opportunities",
+      "A chance to build something",
+      "A chance to make a difference",
+      "A clear route into a career",
+      "Freedom to change my mind",
+      "A life that feels balanced",
+      "I'm not sure yet"
+    ]
+  },
+  {
+    key:"note",
+    text:"Is there anything else you already know about what you want?",
+    hint:"You do not need to have a complete answer. A thought, concern or question is enough.",
+    max:1,
+    options:[],
+    followup:true
+  }
+];
+
+const PAYMENT_KEY = "evolveCompassPaid";
 const INDEX_KEY = "evolveCompassSlice1Index";
 
 let savedAnswers = {};
@@ -64,7 +132,9 @@ const views = {
   reflection: document.getElementById("reflectionView"),
   auth: document.getElementById("authView"),
   continue: document.getElementById("continueView"),
-  step2: document.getElementById("step2PreviewView")
+  payment: document.getElementById("paymentView"),
+  step2: document.getElementById("step2View"),
+  step2Summary: document.getElementById("step2SummaryView")
 };
 
 function persist(){
@@ -81,6 +151,52 @@ function show(view){
 
 function selectedFor(q){
   return Array.isArray(state.answers[q.key]) ? state.answers[q.key] : [];
+}
+
+function step2SavedState(){
+
+  try{
+
+    const saved=JSON.parse(
+      localStorage.getItem(STEP2_KEY) || "{}"
+    );
+
+    if(
+      saved &&
+      typeof saved === "object" &&
+      saved.answers &&
+      typeof saved.answers === "object"
+    ){
+
+      return {
+        index:Number(saved.index)||0,
+        answers:saved.answers
+      };
+
+    }
+
+  }
+  catch(e){}
+
+  return {
+    index:0,
+    answers:{}
+  };
+
+}
+
+let step2State=step2SavedState();
+
+function persistStep2(){
+
+  localStorage.setItem(
+    STEP2_KEY,
+    JSON.stringify({
+      index:step2State.index,
+      answers:step2State.answers
+    })
+  );
+
 }
 
 function renderQuestion(){
@@ -888,6 +1004,338 @@ function validQuestion(){
 
 
 /* -------------------------------------------------------
+   STEP 2 · WHAT AM I LOOKING FOR?
+   ------------------------------------------------------- */
+
+function step2Selected(q){
+  return Array.isArray(step2State.answers[q.key])
+    ? step2State.answers[q.key]
+    : [];
+}
+
+function renderStep2(){
+
+  const q=STEP2_QUESTIONS[step2State.index];
+
+  document.getElementById("step2ProgressText")
+    .textContent=
+      `${step2State.index+1} of ${STEP2_QUESTIONS.length}`;
+
+  document.getElementById("step2ProgressBar")
+    .style.width=
+      `${((step2State.index+1)/STEP2_QUESTIONS.length)*100}%`;
+
+  document.getElementById("step2Question")
+    .textContent=q.text;
+
+  document.getElementById("step2Hint")
+    .textContent=q.hint;
+
+  const list=document.getElementById("step2Options");
+
+  list.innerHTML="";
+
+  const chosen=step2Selected(q);
+
+  q.options.forEach((label,i)=>{
+
+    const b=document.createElement("button");
+
+    b.type="button";
+    b.className="option";
+
+    b.innerHTML=
+      `<span class="option-key">${String.fromCharCode(65+i)}</span><span class="option-text"></span>`;
+
+    b.querySelector(".option-text").textContent=label;
+
+    if(chosen.includes(i)){
+      b.classList.add("selected");
+    }
+
+    b.addEventListener("click",()=>{
+
+      let current=step2Selected(q).slice();
+
+      if(q.max===1){
+
+        current=[i];
+
+      }
+      else if(current.includes(i)){
+
+        current=current.filter(x=>x!==i);
+
+      }
+      else if(current.length<q.max){
+
+        current.push(i);
+
+      }
+      else{
+
+        current.shift();
+        current.push(i);
+
+      }
+
+      step2State.answers[q.key]=current;
+
+      persistStep2();
+
+      renderStep2();
+
+    });
+
+    list.appendChild(b);
+
+  });
+
+  const follow=document.getElementById("step2Followup");
+  const input=document.getElementById("step2Input");
+
+  if(q.followup){
+
+    follow.classList.remove("hidden");
+
+    input.value=
+      step2State.answers[q.key+"_text"] || "";
+
+  }
+  else{
+
+    follow.classList.add("hidden");
+
+    input.value="";
+
+  }
+
+  document.getElementById("step2BackBtn").hidden=
+    step2State.index===0;
+
+  document.getElementById("step2NextBtn").textContent=
+    step2State.index===STEP2_QUESTIONS.length-1
+      ?"See my decision frame →"
+      :"Next →";
+
+  document.getElementById("step2Error").textContent="";
+
+  requestAnimationFrame(scrollQuestionToTop);
+
+}
+
+
+function validStep2(){
+
+  const q=STEP2_QUESTIONS[step2State.index];
+
+  if(q.followup){
+    return true;
+  }
+
+  return step2Selected(q).length>0;
+
+}
+
+
+function labelForStep2(key,index){
+
+  const q=STEP2_QUESTIONS.find(
+    item=>item.key===key
+  );
+
+  return q && q.options[index]
+    ? q.options[index]
+    : "";
+
+}
+
+
+function buildStep2Summary(){
+
+  const decision=
+    step2Selected(STEP2_QUESTIONS[0])
+      .map(i=>labelForStep2("decision",i))[0]
+      || "Still figuring this out";
+
+  const matters=
+    step2Selected(STEP2_QUESTIONS[1])
+      .map(i=>labelForStep2("matters",i))
+      .join(", ");
+
+  const wants=
+    step2Selected(STEP2_QUESTIONS[2])
+      .map(i=>labelForStep2("wants",i))
+      .join(", ");
+
+  const note=
+    step2State.answers.note_text
+      ? step2State.answers.note_text
+      : "Nothing specific yet. That is okay.";
+
+  document.getElementById("summaryDecision")
+    .textContent=decision;
+
+  document.getElementById("summaryDecisionCopy")
+    .textContent=
+      "This is the decision Compass will help you work through.";
+
+  document.getElementById("summaryMatters")
+    .textContent=
+      matters || "You have not chosen any priorities yet.";
+
+  document.getElementById("summaryWants")
+    .textContent=
+      wants || "You have not chosen any priorities yet.";
+
+  document.getElementById("summaryNote")
+    .textContent=note;
+
+}
+
+
+function openPaidCompass(){
+
+  if(PAYMENT_TEST_MODE){
+
+    localStorage.setItem(
+      PAYMENT_KEY,
+      "true"
+    );
+
+    step2State=step2SavedState();
+
+    show("step2");
+    renderStep2();
+
+    return;
+
+  }
+
+  show("payment");
+
+}
+
+
+document.getElementById("paymentBtn")
+  .addEventListener(
+    "click",
+    openPaidCompass
+  );
+
+
+document.getElementById("continueBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      if(localStorage.getItem(PAYMENT_KEY)==="true"){
+
+        step2State=step2SavedState();
+
+        show("step2");
+        renderStep2();
+
+      }
+      else{
+
+        show("payment");
+
+      }
+
+    }
+  );
+
+
+document.getElementById("step2BackBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      if(step2State.index>0){
+
+        step2State.index--;
+
+        persistStep2();
+
+        renderStep2();
+
+      }
+      else{
+
+        show("reflection");
+
+      }
+
+    }
+  );
+
+
+document.getElementById("step2NextBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      const q=STEP2_QUESTIONS[step2State.index];
+
+      if(!validStep2()){
+
+        document.getElementById("step2Error")
+          .textContent=
+            "Choose at least one response to continue.";
+
+        return;
+
+      }
+
+      if(q.followup){
+
+        step2State.answers.note_text=
+          document.getElementById("step2Input")
+            .value
+            .trim();
+
+        persistStep2();
+
+      }
+
+      if(
+        step2State.index<
+        STEP2_QUESTIONS.length-1
+      ){
+
+        step2State.index++;
+
+        persistStep2();
+
+        renderStep2();
+
+      }
+      else{
+
+        buildStep2Summary();
+
+        show("step2Summary");
+
+      }
+
+    }
+  );
+
+
+document.getElementById("step2ContinueBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      // Step 3 will replace this placeholder.
+      alert("Step 3 is next: Explore My Options.");
+
+    }
+  );
+
+
+/* -------------------------------------------------------
    NAVIGATION
    ------------------------------------------------------- */
 
@@ -898,6 +1346,13 @@ function start(){
 
   localStorage.removeItem(KEY);
   localStorage.removeItem(INDEX_KEY);
+  localStorage.removeItem(PAYMENT_KEY);
+  localStorage.removeItem(STEP2_KEY);
+
+  step2State={
+    index:0,
+    answers:{}
+  };
 
   document.getElementById("saveBtn").hidden=false;
 
@@ -979,8 +1434,7 @@ document.getElementById("nextBtn")
   });
 
 
-document.getElementById("continueBtn")
-  .addEventListener("click",()=>show("step2"));
+
 
 
 document.getElementById("backToReflection")
@@ -1053,7 +1507,14 @@ document.getElementById("authForm")
             body:JSON.stringify({
               email:state.email,
               name:state.name,
-              answers:state.answers,
+              answers:{
+                ...state.answers,
+                __step2:{
+                  index:step2State.index,
+                  answers:step2State.answers
+                },
+                __paid:localStorage.getItem(PAYMENT_KEY)==="true"
+              },
               index:state.index
             })
           }
@@ -1099,6 +1560,52 @@ document.getElementById("authForm")
    ------------------------------------------------------- */
 
 function resumeFromSavedCompass(){
+
+  if(state.answers.__step2){
+
+    const savedStep2=state.answers.__step2;
+
+    step2State={
+      index:Number(savedStep2.index)||0,
+      answers:
+        savedStep2.answers &&
+        typeof savedStep2.answers==="object"
+          ? savedStep2.answers
+          : {}
+    };
+
+    persistStep2();
+
+    delete state.answers.__step2;
+
+  }
+
+  if(state.answers.__paid){
+
+    localStorage.setItem(
+      PAYMENT_KEY,
+      "true"
+    );
+
+    delete state.answers.__paid;
+
+    persist();
+
+  }
+
+  if(
+    localStorage.getItem(PAYMENT_KEY)==="true" &&
+    localStorage.getItem(STEP2_KEY)
+  ){
+
+    step2State=step2SavedState();
+
+    show("step2");
+    renderStep2();
+
+    return;
+
+  }
 
   const has=Object.keys(state.answers).length>0;
 

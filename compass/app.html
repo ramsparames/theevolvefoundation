@@ -122,14 +122,99 @@
     </div>
   </section>
 
-  <section id="step2PreviewView" class="app-view">
+  <section id="paymentView" class="app-view">
     <div class="app-container auth-container">
       <div class="auth-card centered">
-        <p class="eyebrow">02 · WHAT AM I LOOKING FOR?</p>
-        <h1>You're ready for the next part.</h1>
-        <p>The next section will help you define what you want your college years, your course and your life beyond the classroom to give you.</p>
-        <div class="preview-note"><strong>Your first reflection is saved.</strong><span>We will build the full Step 2 interaction next.</span></div>
-        <a href="../compass.html" class="secondary-btn">Back to Compass <span>→</span></a>
+        <p class="eyebrow">YOUR COMPASS · NEXT STEP</p>
+        <h1>Now let's turn that reflection into a decision.</h1>
+        <p>You have started with yourself. The full Compass helps you define what you are actually deciding, explore your options and work out what you still need to know.</p>
+        <div class="preview-note">
+          <strong>Compass Founding Edition · ₹999</strong>
+          <span>One time access to the full Compass experience. No subscription.</span>
+        </div>
+        <button id="paymentBtn" class="primary-btn" type="button">Continue with Compass <span>→</span></button>
+        <p class="microcopy">Payment will be connected here when Compass is ready for launch.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="step2View" class="app-view">
+    <div class="app-container narrow-app">
+      <div class="progress-row">
+        <span>02 WHAT AM I LOOKING FOR?</span>
+        <span id="step2ProgressText">1 of 4</span>
+      </div>
+
+      <div class="progress-track">
+        <span id="step2ProgressBar"></span>
+      </div>
+
+      <div class="question-shell step2-shell">
+
+        <div>
+          <p class="eyebrow">DEFINE THE DECISION</p>
+          <h2 id="step2Question"></h2>
+          <p id="step2Hint" class="question-hint"></p>
+        </div>
+
+        <div id="step2Options" class="option-list"></div>
+
+        <div id="step2Followup" class="followup hidden">
+          <label for="step2Input">Anything else you already know?</label>
+          <span class="followup-optional">Optional. There is no need to have this figured out.</span>
+          <textarea id="step2Input" rows="4" maxlength="800"></textarea>
+        </div>
+
+        <p id="step2Error" class="form-error" role="alert"></p>
+
+        <div class="question-actions">
+          <button id="step2BackBtn" class="secondary-btn" type="button">← Back</button>
+          <button id="step2NextBtn" class="primary-btn" type="button">Next <span>→</span></button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="step2SummaryView" class="app-view">
+    <div class="app-container reflection-container">
+      <div class="reflection-intro">
+        <p class="eyebrow">02 · YOUR DECISION FRAME</p>
+        <h1>Now the question is clearer.</h1>
+        <p>This is not a recommendation. It is the frame we will use when you start looking at your actual options.</p>
+      </div>
+
+      <div class="reflection-grid step2-summary-grid">
+        <article>
+          <span class="card-label">WHAT YOU ARE DECIDING</span>
+          <h2 id="summaryDecision"></h2>
+          <p id="summaryDecisionCopy"></p>
+        </article>
+
+        <article>
+          <span class="card-label">WHAT MATTERS TO YOU</span>
+          <h2>Things worth keeping in view</h2>
+          <p id="summaryMatters"></p>
+        </article>
+
+        <article>
+          <span class="card-label">WHAT YOU WANT FROM THE EXPERIENCE</span>
+          <h2>Your priorities</h2>
+          <p id="summaryWants"></p>
+        </article>
+
+        <article class="notice-card">
+          <span class="card-label">WHAT YOU ALREADY KNOW</span>
+          <p id="summaryNote"></p>
+        </article>
+      </div>
+
+      <div class="reflection-footer">
+        <div>
+          <strong>Now bring your real options.</strong>
+          <span>Step 3 will let you compare up to three options you are genuinely considering.</span>
+        </div>
+        <button id="step2ContinueBtn" class="primary-btn" type="button">Explore my options <span>→</span></button>
       </div>
     </div>
   </section>

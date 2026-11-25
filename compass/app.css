@@ -131,3 +131,28 @@ h1,h2,strong{font-family:var(--serif);font-weight:500}
     gap:8px;
   }
 }
+
+
+.step2-shell{
+  margin-top:0;
+}
+
+.step2-summary-grid article{
+  min-height:210px;
+}
+
+.step2-summary-grid article:nth-child(1){
+  background:#fff;
+}
+
+.step2-summary-grid article:nth-child(2){
+  background:var(--sage);
+}
+
+.step2-summary-grid article:nth-child(3){
+  background:var(--peach);
+}
+
+.step2-summary-grid article:nth-child(4){
+  background:var(--lilac);
+}
