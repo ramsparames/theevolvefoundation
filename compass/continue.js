@@ -57,9 +57,11 @@ const link=document.getElementById("continue");
     title.textContent="Your Compass is ready.";
 
     message.textContent=
-      "We saved your progress. You can continue from where you left off.";
+      "Opening your Compass…";
 
-    link.classList.remove("hidden");
+    window.location.replace(
+      "app.html?resume=1"
+    );
 
   }
   catch(err){

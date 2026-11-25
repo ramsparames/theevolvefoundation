@@ -118,3 +118,16 @@ h1,h2,strong{font-family:var(--serif);font-weight:500}
 .compass-header-right .quiet-btn[hidden]{
   display:none;
 }
+
+
+.question-actions-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+@media(max-width:680px){
+  .question-actions-right{
+    gap:8px;
+  }
+}

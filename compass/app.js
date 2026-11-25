@@ -899,6 +899,8 @@ function start(){
   localStorage.removeItem(KEY);
   localStorage.removeItem(INDEX_KEY);
 
+  document.getElementById("saveBtn").hidden=false;
+
   show("question");
 
   renderQuestion();
@@ -910,30 +912,7 @@ document.getElementById("startBtn")
   .addEventListener("click",start);
 
 
-document.getElementById("resumeBtn")
-  .addEventListener("click",()=>{
-
-    const has=Object.keys(state.answers).length>0;
-
-    if(!has){
-      start();
-      return;
-    }
-
-    const savedIndex=Number(localStorage.getItem(INDEX_KEY) || 0);
-
-    state.index=Math.max(
-      0,
-      Math.min(savedIndex,QUESTIONS.length-1)
-    );
-
-    show("question");
-
-    renderQuestion();
-
-    requestAnimationFrame(scrollQuestionToTop);
-
-  });
+// Resume is handled by the secure email link.
 
 
 document.getElementById("backBtn")
@@ -1106,12 +1085,43 @@ document.getElementById("authForm")
    INITIALISE
    ------------------------------------------------------- */
 
-function init(){
+function resumeFromSavedCompass(){
 
   const has=Object.keys(state.answers).length>0;
 
-  document.getElementById("resumeBtn").hidden=!has;
-  document.getElementById("saveBtn").hidden=!has;
+  if(!has){
+    show("welcome");
+    return;
+  }
+
+  const savedIndex=Number(
+    localStorage.getItem(INDEX_KEY) || 0
+  );
+
+  state.index=Math.max(
+    0,
+    Math.min(savedIndex,QUESTIONS.length-1)
+  );
+
+  document.getElementById("saveBtn").hidden=false;
+
+  show("question");
+  renderQuestion();
+
+  requestAnimationFrame(scrollQuestionToTop);
+}
+
+function init(){
+
+  document.getElementById("saveBtn").hidden=true;
+
+  const params=new URLSearchParams(
+    window.location.search
+  );
+
+  if(params.get("resume")==="1"){
+    resumeFromSavedCompass();
+  }
 
 }
 

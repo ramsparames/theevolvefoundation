@@ -18,8 +18,7 @@
   </a>
   <div class="compass-header-right">
     <span class="compass-wordmark">COMPASS</span>
-    <button id="saveBtn" class="quiet-btn" type="button" hidden>Save my Compass</button>
-    <button id="resumeBtn" class="quiet-btn" type="button" hidden>Continue my Compass</button>
+
   </div>
 </header>
 
@@ -64,7 +63,10 @@
         <p id="questionError" class="form-error" role="alert"></p>
         <div class="question-actions">
           <button id="backBtn" class="secondary-btn" type="button">← Back</button>
-          <button id="nextBtn" class="primary-btn" type="button">Next <span>→</span></button>
+          <div class="question-actions-right">
+            <button id="saveBtn" class="secondary-btn" type="button" hidden>Save my Compass</button>
+            <button id="nextBtn" class="primary-btn" type="button">Next <span>→</span></button>
+          </div>
         </div>
       </div>
     </div>
