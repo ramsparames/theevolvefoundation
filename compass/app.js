@@ -42,6 +42,7 @@ const KEY = "evolveCompassSlice1";
 const PAYMENT_TEST_MODE = true;
 
 const STEP2_KEY = "evolveCompassStep2";
+const STEP3_KEY = "evolveCompassStep3";
 
 const STEP2_QUESTIONS = [
   {
@@ -135,7 +136,9 @@ const views = {
   continue: document.getElementById("continueView"),
   payment: document.getElementById("paymentView"),
   step2: document.getElementById("step2View"),
-  step2Summary: document.getElementById("step2SummaryView")
+  step2Summary: document.getElementById("step2SummaryView"),
+  step3: document.getElementById("step3View"),
+  step3Summary: document.getElementById("step3SummaryView")
 };
 
 function persist(){
@@ -187,6 +190,56 @@ function step2SavedState(){
 }
 
 let step2State=step2SavedState();
+
+
+function step3SavedState(){
+
+  try{
+
+    const saved=JSON.parse(
+      localStorage.getItem(STEP3_KEY) || "{}"
+    );
+
+    if(
+      saved &&
+      typeof saved === "object" &&
+      Array.isArray(saved.options)
+    ){
+
+      return {
+        options:saved.options
+      };
+
+    }
+
+  }
+  catch(e){}
+
+  return {
+    options:[
+      {name:"",course:"",college:"",why:""},
+      {name:"",course:"",college:"",why:""},
+      {name:"",course:"",college:"",why:""}
+    ]
+  };
+
+}
+
+
+let step3State=step3SavedState();
+
+
+function persistStep3(){
+
+  localStorage.setItem(
+    STEP3_KEY,
+    JSON.stringify({
+      options:step3State.options
+    })
+  );
+
+}
+
 
 function persistStep2(){
 
@@ -1344,6 +1397,491 @@ function buildStep2Summary(){
 
 }
 
+/* -------------------------------------------------------
+   STEP 3 · EXPLORE MY OPTIONS
+   ------------------------------------------------------- */
+
+function getStep2DecisionIndex(){
+
+  const selected=step2Selected(
+    STEP2_QUESTIONS[0]
+  );
+
+  return selected.length
+    ? Number(selected[0])
+    : 4;
+
+}
+
+
+function getStep3Mode(){
+
+  const decisionIndex=
+    getStep2DecisionIndex();
+
+  if(decisionIndex===0){
+    return "course";
+  }
+
+  if(decisionIndex===1){
+    return "college";
+  }
+
+  if(decisionIndex===2){
+    return "courseCollege";
+  }
+
+  if(decisionIndex===3){
+    return "direction";
+  }
+
+  return "option";
+
+}
+
+
+function getStep3Labels(){
+
+  const mode=getStep3Mode();
+
+  if(mode==="course"){
+    return {
+      name:"Course or degree",
+      placeholder:"For example, B.Tech Computer Science"
+    };
+  }
+
+  if(mode==="college"){
+    return {
+      name:"College",
+      placeholder:"For example, a college you are considering"
+    };
+  }
+
+  if(mode==="courseCollege"){
+    return {
+      course:"Course or degree",
+      college:"College"
+    };
+  }
+
+  if(mode==="direction"){
+    return {
+      name:"Direction you are considering",
+      placeholder:"For example, design, medicine, technology"
+    };
+  }
+
+  return {
+    name:"Option you are curious about",
+    placeholder:"A course, college, career direction or anything else on your mind"
+  };
+
+}
+
+
+function ensureStep3Options(){
+
+  if(
+    !Array.isArray(step3State.options) ||
+    step3State.options.length!==3
+  ){
+
+    step3State.options=[
+      {name:"",course:"",college:"",why:""},
+      {name:"",course:"",college:"",why:""},
+      {name:"",course:"",college:"",why:""}
+    ];
+
+  }
+
+}
+
+
+function renderStep3(){
+
+  ensureStep3Options();
+
+  const mode=getStep3Mode();
+  const labels=getStep3Labels();
+  const container=
+    document.getElementById("step3Options");
+
+  container.innerHTML="";
+
+  step3State.options.forEach((option,index)=>{
+
+    const card=
+      document.createElement("article");
+
+    card.className=
+      "step3-option-card";
+
+    const optional=
+      index>0
+        ? "Optional"
+        : "Start here";
+
+    let fields="";
+
+    if(mode==="courseCollege"){
+
+      fields=`
+        <label>
+          ${labels.course}
+          <input
+            type="text"
+            data-step3-field="course"
+            data-step3-index="${index}"
+            maxlength="160"
+            placeholder="For example, B.Tech Computer Science"
+          >
+        </label>
+
+        <label>
+          ${labels.college}
+          <input
+            type="text"
+            data-step3-field="college"
+            data-step3-index="${index}"
+            maxlength="160"
+            placeholder="For example, a college you are considering"
+          >
+        </label>
+      `;
+
+    }
+    else{
+
+      fields=`
+        <label>
+          ${labels.name}
+          <input
+            type="text"
+            data-step3-field="name"
+            data-step3-index="${index}"
+            maxlength="160"
+            placeholder="${labels.placeholder}"
+          >
+        </label>
+      `;
+
+    }
+
+    fields+=`
+      <label>
+        What makes this worth considering?
+        <span class="field-optional">Optional</span>
+        <textarea
+          data-step3-field="why"
+          data-step3-index="${index}"
+          rows="3"
+          maxlength="500"
+          placeholder="A reason, attraction, question or simply something you have heard about it."
+        ></textarea>
+      </label>
+    `;
+
+    card.innerHTML=`
+      <div class="step3-option-header">
+        <div>
+          <span class="card-label">OPTION ${index+1}</span>
+          <h2>${index===0 ? "Your first option" : "Another possibility"}</h2>
+        </div>
+        <span class="step3-optional">${optional}</span>
+      </div>
+      <div class="step3-fields">${fields}</div>
+    `;
+
+    container.appendChild(card);
+
+  });
+
+
+  container
+    .querySelectorAll("[data-step3-field]")
+    .forEach(input=>{
+
+      const index=
+        Number(input.dataset.step3Index);
+
+      const field=
+        input.dataset.step3Field;
+
+      input.value=
+        step3State.options[index][field] || "";
+
+      input.addEventListener(
+        "input",
+        ()=>{
+
+          step3State.options[index][field]=
+            input.value;
+
+          persistStep3();
+
+        }
+      );
+
+    });
+
+
+  document.getElementById("step3Error")
+    .textContent="";
+
+  requestAnimationFrame(
+    scrollQuestionToTop
+  );
+
+}
+
+
+function step3OptionHasContent(option){
+
+  return Boolean(
+    (option.name || "").trim() ||
+    (option.course || "").trim() ||
+    (option.college || "").trim()
+  );
+
+}
+
+
+function validStep3(){
+
+  const first=
+    step3State.options[0];
+
+  const mode=getStep3Mode();
+
+  if(mode==="courseCollege"){
+
+    return Boolean(
+      first.course.trim() &&
+      first.college.trim()
+    );
+
+  }
+
+  return Boolean(
+    first.name.trim()
+  );
+
+}
+
+
+function optionDisplayText(option){
+
+  const mode=getStep3Mode();
+
+  if(mode==="courseCollege"){
+
+    return [
+      option.course.trim(),
+      option.college.trim()
+    ]
+      .filter(Boolean)
+      .join(" · ");
+
+  }
+
+  return (
+    option.name ||
+    option.course ||
+    option.college ||
+    "Unnamed option"
+  ).trim();
+
+}
+
+
+function buildStep3Summary(){
+
+  const grid=
+    document.getElementById(
+      "step3SummaryGrid"
+    );
+
+  grid.innerHTML="";
+
+  step3State.options
+    .filter(option=>step3OptionHasContent(option))
+    .forEach((option,index)=>{
+
+      const card=
+        document.createElement("article");
+
+      card.className=
+        "step3-summary-card";
+
+      const name=
+        optionDisplayText(option);
+
+      const why=
+        option.why.trim();
+
+      card.innerHTML=`
+        <span class="card-label">OPTION ${index+1}</span>
+        <h2></h2>
+        <p></p>
+        <button
+          type="button"
+          class="summary-change-btn"
+          data-step3-change="${index}"
+        >Change →</button>
+      `;
+
+      card.querySelector("h2")
+        .textContent=name;
+
+      card.querySelector("p")
+        .textContent=
+          why ||
+          "You have not added a reason yet.";
+
+      grid.appendChild(card);
+
+    });
+
+}
+
+
+function openStep3(){
+
+  step3State=step3SavedState();
+
+  ensureStep3Options();
+
+  show("step3");
+  renderStep3();
+
+}
+
+
+document.getElementById("step3BackBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      buildStep2Summary();
+
+      show("step2Summary");
+
+    }
+  );
+
+
+document.getElementById("step3NextBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      if(!validStep3()){
+
+        document.getElementById("step3Error")
+          .textContent=
+            getStep3Mode()==="courseCollege"
+              ? "Add a course and college for your first option to continue."
+              : "Add your first option to continue.";
+
+        return;
+
+      }
+
+      persistStep3();
+      buildStep3Summary();
+
+      show("step3Summary");
+
+    }
+  );
+
+
+document.getElementById("step3SaveBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      persistStep3();
+
+      state.saveReturnView="step3";
+
+      show("auth");
+
+    }
+  );
+
+
+document.getElementById("changeStep3Btn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      openStep3();
+
+    }
+  );
+
+
+document
+  .querySelector("#step3SummaryView")
+  .addEventListener(
+    "click",
+    event=>{
+
+      const button=
+        event.target.closest(
+          "[data-step3-change]"
+        );
+
+      if(!button){
+        return;
+      }
+
+      const index=
+        Number(button.dataset.step3Change);
+
+      const card=
+        step3State.options[index];
+
+      if(!card){
+        return;
+      }
+
+      openStep3();
+
+      requestAnimationFrame(()=>{
+
+        const firstInput=
+          document.querySelector(
+            `[data-step3-index="${index}"]`
+          );
+
+        if(firstInput){
+          firstInput.focus();
+          firstInput.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+          });
+        }
+
+      });
+
+    }
+  );
+
+
+document.getElementById("step3ContinueBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      alert("Step 4 is next: Check the Fit.");
+
+    }
+  );
+
+
 function openPaidCompass(){
 
   if(PAYMENT_TEST_MODE){
@@ -1548,12 +2086,7 @@ document.getElementById("changeStep2Btn")
 document.getElementById("step2ContinueBtn")
   .addEventListener(
     "click",
-    ()=>{
-
-      // Step 3 will replace this placeholder.
-      alert("Step 3 is next: Explore My Options.");
-
-    }
+    openStep3
   );
 
 
@@ -1570,10 +2103,19 @@ function start(){
   localStorage.removeItem(INDEX_KEY);
   localStorage.removeItem(PAYMENT_KEY);
   localStorage.removeItem(STEP2_KEY);
+  localStorage.removeItem(STEP3_KEY);
 
   step2State={
     index:0,
     answers:{}
+  };
+
+  step3State={
+    options:[
+      {name:"",course:"",college:"",why:""},
+      {name:"",course:"",college:"",why:""},
+      {name:"",course:"",college:"",why:""}
+    ]
   };
 
   document.getElementById("saveBtn").hidden=false;
@@ -1735,6 +2277,9 @@ document.getElementById("authForm")
                   index:step2State.index,
                   answers:step2State.answers
                 },
+                __step3:{
+                  options:step3State.options
+                },
                 __paid:localStorage.getItem(PAYMENT_KEY)==="true"
               },
               index:state.index
@@ -1802,6 +2347,29 @@ function resumeFromSavedCompass(){
 
   }
 
+  if(state.answers.__step3){
+
+    const savedStep3=
+      state.answers.__step3;
+
+    if(
+      savedStep3 &&
+      Array.isArray(savedStep3.options)
+    ){
+
+      step3State={
+        options:savedStep3.options
+      };
+
+      persistStep3();
+
+    }
+
+    delete state.answers.__step3;
+
+  }
+
+
   if(state.answers.__paid){
 
     localStorage.setItem(
@@ -1812,6 +2380,19 @@ function resumeFromSavedCompass(){
     delete state.answers.__paid;
 
     persist();
+
+  }
+
+  if(
+    localStorage.getItem(PAYMENT_KEY)==="true" &&
+    localStorage.getItem(STEP3_KEY)
+  ){
+
+    step3State=step3SavedState();
+
+    openStep3();
+
+    return;
 
   }
 
