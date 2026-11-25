@@ -994,6 +994,19 @@ document.getElementById("backToReflection")
 document.getElementById("saveBtn")
   .addEventListener("click",()=>{
 
+    const q=QUESTIONS[state.index];
+
+    if(q.followup){
+
+      state.answers[q.key+"_example"]=
+        document.getElementById("followupInput")
+          .value
+          .trim();
+
+    }
+
+    persist();
+
     state.saveReturnView = state.step || "welcome";
 
     show("auth");
