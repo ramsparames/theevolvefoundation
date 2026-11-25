@@ -844,6 +844,29 @@ function buildReflection(){
     noticeText;
 }
 
+function scrollQuestionToTop(){
+
+  const header =
+    document.querySelector("#questionView .question-header");
+
+  if(!header){
+    window.scrollTo({
+      top:0,
+      behavior:"instant"
+    });
+    return;
+  }
+
+  const top =
+    header.getBoundingClientRect().top +
+    window.scrollY -
+    92;
+
+  window.scrollTo({
+    top:Math.max(0,top),
+    behavior:"instant"
+  });
+}
 
 function validQuestion(){
 
@@ -904,6 +927,8 @@ document.getElementById("backBtn")
 
       renderQuestion();
 
+      requestAnimationFrame(scrollQuestionToTop);
+
     }
 
   });
@@ -938,6 +963,8 @@ document.getElementById("nextBtn")
       state.index++;
 
       renderQuestion();
+
+      requestAnimationFrame(scrollQuestionToTop);
 
     }
     else{
