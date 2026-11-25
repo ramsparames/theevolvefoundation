@@ -1374,6 +1374,22 @@ document.getElementById("paymentBtn")
   );
 
 
+document.getElementById("changeStep1Btn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      state.index=0;
+
+      show("question");
+      renderQuestion();
+
+      requestAnimationFrame(scrollQuestionToTop);
+
+    }
+  );
+
+
 document.getElementById("continueBtn")
   .addEventListener(
     "click",
@@ -1468,6 +1484,62 @@ document.getElementById("step2NextBtn")
         show("step2Summary");
 
       }
+
+    }
+  );
+
+
+document.querySelectorAll("[data-step2-change]")
+  .forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+
+        const index=
+          Number(
+            button.dataset.step2Change
+          );
+
+        step2State.index=
+          Math.max(
+            0,
+            Math.min(
+              index,
+              STEP2_QUESTIONS.length-1
+            )
+          );
+
+        persistStep2();
+
+        show("step2");
+        renderStep2();
+
+        requestAnimationFrame(
+          scrollQuestionToTop
+        );
+
+      }
+    );
+
+  });
+
+
+document.getElementById("changeStep2Btn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      step2State.index=0;
+
+      persistStep2();
+
+      show("step2");
+      renderStep2();
+
+      requestAnimationFrame(
+        scrollQuestionToTop
+      );
 
     }
   );

@@ -87,7 +87,10 @@
       </div>
       <div class="reflection-footer">
         <div><strong>You've started with yourself.</strong><span>Now let's look at the college experience you actually want.</span></div>
-        <button id="continueBtn" class="primary-btn">Continue with Compass <span>→</span></button>
+        <div class="reflection-actions">
+          <button id="changeStep1Btn" class="secondary-btn" type="button">Change my answers</button>
+          <button id="continueBtn" class="primary-btn" type="button">Continue with Compass <span>→</span></button>
+        </div>
       </div>
     </div>
   </section>
@@ -189,23 +192,27 @@
           <span class="card-label">WHAT YOU ARE DECIDING</span>
           <h2 id="summaryDecision"></h2>
           <p id="summaryDecisionCopy"></p>
+          <button class="summary-change-btn" type="button" data-step2-change="0">Change →</button>
         </article>
 
         <article>
           <span class="card-label">WHAT MATTERS TO YOU</span>
           <h2>Things worth keeping in view</h2>
           <p id="summaryMatters"></p>
+          <button class="summary-change-btn" type="button" data-step2-change="1">Change →</button>
         </article>
 
         <article>
           <span class="card-label">WHAT YOU WANT FROM THE EXPERIENCE</span>
           <h2>Your priorities</h2>
           <p id="summaryWants"></p>
+          <button class="summary-change-btn" type="button" data-step2-change="2">Change →</button>
         </article>
 
         <article class="notice-card">
           <span class="card-label">WHAT YOU ALREADY KNOW</span>
           <p id="summaryNote"></p>
+          <button class="summary-change-btn" type="button" data-step2-change="3">Change →</button>
         </article>
       </div>
 
@@ -214,7 +221,10 @@
           <strong>Now bring your real options.</strong>
           <span>Step 3 will let you compare up to three options you are genuinely considering.</span>
         </div>
-        <button id="step2ContinueBtn" class="primary-btn" type="button">Explore my options <span>→</span></button>
+        <div class="reflection-actions">
+          <button id="changeStep2Btn" class="secondary-btn" type="button">Change my answers</button>
+          <button id="step2ContinueBtn" class="primary-btn" type="button">Explore my options <span>→</span></button>
+        </div>
       </div>
     </div>
   </section>
