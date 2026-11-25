@@ -43,6 +43,7 @@ const PAYMENT_TEST_MODE = true;
 
 const STEP2_KEY = "evolveCompassStep2";
 const STEP3_KEY = "evolveCompassStep3";
+const STEP4_KEY = "evolveCompassStep4";
 
 const STEP2_QUESTIONS = [
   {
@@ -138,7 +139,9 @@ const views = {
   step2: document.getElementById("step2View"),
   step2Summary: document.getElementById("step2SummaryView"),
   step3: document.getElementById("step3View"),
-  step3Summary: document.getElementById("step3SummaryView")
+  step3Summary: document.getElementById("step3SummaryView"),
+  step4: document.getElementById("step4View"),
+  step4Summary: document.getElementById("step4SummaryView")
 };
 
 function persist(){
@@ -227,6 +230,51 @@ function step3SavedState(){
 
 
 let step3State=step3SavedState();
+
+
+function step4SavedState(){
+
+  try{
+
+    const saved=JSON.parse(
+      localStorage.getItem(STEP4_KEY) || "{}"
+    );
+
+    if(
+      saved &&
+      typeof saved === "object" &&
+      Array.isArray(saved.options)
+    ){
+
+      return {
+        options:saved.options
+      };
+
+    }
+
+  }
+  catch(e){}
+
+  return {
+    options:[]
+  };
+
+}
+
+
+let step4State=step4SavedState();
+
+
+function persistStep4(){
+
+  localStorage.setItem(
+    STEP4_KEY,
+    JSON.stringify({
+      options:step4State.options
+    })
+  );
+
+}
 
 
 function persistStep3(){
@@ -1874,9 +1922,448 @@ document
 document.getElementById("step3ContinueBtn")
   .addEventListener(
     "click",
+    openStep4
+  );
+
+
+/* -------------------------------------------------------
+   STEP 4 · CHECK THE FIT
+   ------------------------------------------------------- */
+
+function createStep4Option(option){
+
+  return {
+    option:optionDisplayText(option),
+    fit:"",
+    known:"",
+    uncertain:"",
+    findOut:""
+  };
+
+}
+
+
+function ensureStep4Options(){
+
+  const validOptions=
+    step3State.options
+      .filter(option=>step3OptionHasContent(option));
+
+  const existing=
+    Array.isArray(step4State.options)
+      ? step4State.options
+      : [];
+
+  step4State.options=
+    validOptions.map((option,index)=>{
+
+      const old=
+        existing[index] || {};
+
+      return {
+        option:optionDisplayText(option),
+        fit:old.fit || "",
+        known:old.known || "",
+        uncertain:old.uncertain || "",
+        findOut:old.findOut || ""
+      };
+
+    });
+
+}
+
+
+function renderStep4(){
+
+  ensureStep4Options();
+
+  const container=
+    document.getElementById("step4Options");
+
+  container.innerHTML="";
+
+  step4State.options.forEach((item,index)=>{
+
+    const card=
+      document.createElement("article");
+
+    card.className=
+      "step4-option-card";
+
+    card.innerHTML=`
+      <div class="step4-option-header">
+        <div>
+          <span class="card-label">OPTION ${index+1}</span>
+          <h2></h2>
+        </div>
+      </div>
+
+      <div class="step4-fit-question">
+        <span class="field-title">
+          Based on what you know right now, how does this option feel?
+        </span>
+
+        <div class="step4-fit-options">
+
+          <button
+            type="button"
+            class="fit-choice"
+            data-step4-field="fit"
+            data-step4-value="Feels aligned"
+          >
+            <span>Feels aligned</span>
+            <small>What I know seems to fit what matters to me.</small>
+          </button>
+
+          <button
+            type="button"
+            class="fit-choice"
+            data-step4-field="fit"
+            data-step4-value="Some things fit, some need checking"
+          >
+            <span>Some things fit, some need checking</span>
+            <small>There are good signs, but I still have questions.</small>
+          </button>
+
+          <button
+            type="button"
+            class="fit-choice"
+            data-step4-field="fit"
+            data-step4-value="Too early to tell"
+          >
+            <span>Too early to tell</span>
+            <small>I need more information before I can judge this.</small>
+          </button>
+
+        </div>
+      </div>
+
+      <div class="step4-text-fields">
+
+        <label>
+          What do you already know?
+          <span class="field-optional">Optional</span>
+          <textarea
+            data-step4-field="known"
+            rows="3"
+            maxlength="700"
+            placeholder="Facts, conversations, visits, experiences or anything you already know."
+          ></textarea>
+        </label>
+
+        <label>
+          What are you unsure about?
+          <span class="field-optional">Optional</span>
+          <textarea
+            data-step4-field="uncertain"
+            rows="3"
+            maxlength="700"
+            placeholder="What makes you hesitate, wonder or feel uncertain?"
+          ></textarea>
+        </label>
+
+        <label>
+          What do you need to find out?
+          <span class="field-optional">Optional</span>
+          <textarea
+            data-step4-field="findOut"
+            rows="3"
+            maxlength="700"
+            placeholder="What would you want to know before making this choice?"
+          ></textarea>
+        </label>
+
+      </div>
+    `;
+
+    card.querySelector("h2")
+      .textContent=item.option;
+
+    container.appendChild(card);
+
+
+    card
+      .querySelectorAll(".fit-choice")
+      .forEach(button=>{
+
+        const field=
+          button.dataset.step4Field;
+
+        button.classList.toggle(
+          "selected",
+          item[field]===button.dataset.step4Value
+        );
+
+        button.addEventListener(
+          "click",
+          ()=>{
+
+            item[field]=
+              button.dataset.step4Value;
+
+            persistStep4();
+
+            card
+              .querySelectorAll(
+                `.fit-choice[data-step4-field="${field}"]`
+              )
+              .forEach(other=>{
+                other.classList.toggle(
+                  "selected",
+                  other===button
+                );
+              });
+
+          }
+        );
+
+      });
+
+
+    card
+      .querySelectorAll(
+        "textarea[data-step4-field]"
+      )
+      .forEach(input=>{
+
+        const field=
+          input.dataset.step4Field;
+
+        input.value=
+          item[field] || "";
+
+        input.addEventListener(
+          "input",
+          ()=>{
+
+            item[field]=input.value;
+
+            persistStep4();
+
+          }
+        );
+
+      });
+
+  });
+
+
+  document.getElementById("step4Error")
+    .textContent="";
+
+  requestAnimationFrame(
+    scrollQuestionToTop
+  );
+
+}
+
+
+function buildStep4Summary(){
+
+  ensureStep4Options();
+
+  const grid=
+    document.getElementById(
+      "step4SummaryGrid"
+    );
+
+  grid.innerHTML="";
+
+  step4State.options
+    .forEach((item,index)=>{
+
+      const card=
+        document.createElement("article");
+
+      card.className=
+        "step4-summary-card";
+
+      const fit=
+        item.fit ||
+        "You have not judged this yet.";
+
+      const known=
+        item.known.trim() ||
+        "Nothing added yet.";
+
+      const uncertain=
+        item.uncertain.trim() ||
+        "Nothing added yet.";
+
+      const findOut=
+        item.findOut.trim() ||
+        "You have not added a question yet.";
+
+      card.innerHTML=`
+        <span class="card-label">OPTION ${index+1}</span>
+        <h2></h2>
+
+        <div class="step4-summary-section">
+          <span>HOW IT FEELS RIGHT NOW</span>
+          <p class="fit-summary"></p>
+        </div>
+
+        <div class="step4-summary-section">
+          <span>WHAT YOU KNOW</span>
+          <p class="known-summary"></p>
+        </div>
+
+        <div class="step4-summary-section">
+          <span>WHAT IS UNCLEAR</span>
+          <p class="uncertain-summary"></p>
+        </div>
+
+        <div class="step4-summary-section important">
+          <span>WHAT YOU NEED TO FIND OUT</span>
+          <p class="findout-summary"></p>
+        </div>
+
+        <button
+          type="button"
+          class="summary-change-btn"
+          data-step4-change="${index}"
+        >Change →</button>
+      `;
+
+      card.querySelector("h2")
+        .textContent=item.option;
+
+      card.querySelector(".fit-summary")
+        .textContent=fit;
+
+      card.querySelector(".known-summary")
+        .textContent=known;
+
+      card.querySelector(".uncertain-summary")
+        .textContent=uncertain;
+
+      card.querySelector(".findout-summary")
+        .textContent=findOut;
+
+      grid.appendChild(card);
+
+    });
+
+}
+
+
+function openStep4(){
+
+  step4State=step4SavedState();
+
+  ensureStep4Options();
+
+  show("step4");
+  renderStep4();
+
+}
+
+
+document.getElementById("step4BackBtn")
+  .addEventListener(
+    "click",
     ()=>{
 
-      alert("Step 4 is next: Check the Fit.");
+      buildStep3Summary();
+
+      show("step3Summary");
+
+    }
+  );
+
+
+document.getElementById("step4NextBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      ensureStep4Options();
+
+      persistStep4();
+      buildStep4Summary();
+
+      show("step4Summary");
+
+    }
+  );
+
+
+document.getElementById("step4SaveBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      persistStep4();
+
+      state.saveReturnView="step4";
+
+      show("auth");
+
+    }
+  );
+
+
+document.getElementById("changeStep4Btn")
+  .addEventListener(
+    "click",
+    openStep4
+  );
+
+
+document
+  .getElementById("step4SummaryView")
+  .addEventListener(
+    "click",
+    event=>{
+
+      const button=
+        event.target.closest(
+          "[data-step4-change]"
+        );
+
+      if(!button){
+        return;
+      }
+
+      const index=
+        Number(button.dataset.step4Change);
+
+      if(!step4State.options[index]){
+        return;
+      }
+
+      openStep4();
+
+      requestAnimationFrame(()=>{
+
+        const cards=
+          document.querySelectorAll(
+            ".step4-option-card"
+          );
+
+        const card=cards[index];
+
+        if(card){
+
+          card.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+          });
+
+        }
+
+      });
+
+    }
+  );
+
+
+document.getElementById("step4ContinueBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      alert("Step 5 is next: My Compass.");
 
     }
   );
@@ -2104,6 +2591,7 @@ function start(){
   localStorage.removeItem(PAYMENT_KEY);
   localStorage.removeItem(STEP2_KEY);
   localStorage.removeItem(STEP3_KEY);
+  localStorage.removeItem(STEP4_KEY);
 
   step2State={
     index:0,
@@ -2116,6 +2604,10 @@ function start(){
       {name:"",course:"",college:"",why:""},
       {name:"",course:"",college:"",why:""}
     ]
+  };
+
+  step4State={
+    options:[]
   };
 
   document.getElementById("saveBtn").hidden=false;
@@ -2280,6 +2772,9 @@ document.getElementById("authForm")
                 __step3:{
                   options:step3State.options
                 },
+                __step4:{
+                  options:step4State.options
+                },
                 __paid:localStorage.getItem(PAYMENT_KEY)==="true"
               },
               index:state.index
@@ -2370,6 +2865,29 @@ function resumeFromSavedCompass(){
   }
 
 
+  if(state.answers.__step4){
+
+    const savedStep4=
+      state.answers.__step4;
+
+    if(
+      savedStep4 &&
+      Array.isArray(savedStep4.options)
+    ){
+
+      step4State={
+        options:savedStep4.options
+      };
+
+      persistStep4();
+
+    }
+
+    delete state.answers.__step4;
+
+  }
+
+
   if(state.answers.__paid){
 
     localStorage.setItem(
@@ -2380,6 +2898,19 @@ function resumeFromSavedCompass(){
     delete state.answers.__paid;
 
     persist();
+
+  }
+
+  if(
+    localStorage.getItem(PAYMENT_KEY)==="true" &&
+    localStorage.getItem(STEP4_KEY)
+  ){
+
+    step4State=step4SavedState();
+
+    openStep4();
+
+    return;
 
   }
 
