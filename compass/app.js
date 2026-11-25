@@ -1121,8 +1121,6 @@ function renderStep2(){
 
   document.getElementById("step2Error").textContent="";
 
-  requestAnimationFrame(scrollQuestionToTop);
-
 }
 
 
@@ -1161,18 +1159,169 @@ function buildStep2Summary(){
 
   const matters=
     step2Selected(STEP2_QUESTIONS[1])
-      .map(i=>labelForStep2("matters",i))
-      .join(", ");
+      .map(i=>labelForStep2("matters",i));
 
   const wants=
     step2Selected(STEP2_QUESTIONS[2])
-      .map(i=>labelForStep2("wants",i))
-      .join(", ");
+      .map(i=>labelForStep2("wants",i));
 
   const note=
     step2State.answers.note_text
       ? step2State.answers.note_text
-      : "Nothing specific yet. That is okay.";
+      : "";
+
+  let reflection="";
+
+  const practical=[
+    "Practical experience",
+    "Opportunities outside the classroom",
+    "A clear path into work",
+    "Skills I can actually use",
+    "A clear route into a career"
+  ];
+
+  const exploration=[
+    "Freedom to explore different subjects",
+    "Flexibility to change direction",
+    "Room to discover what I enjoy",
+    "Freedom to change my mind",
+    "Different experiences and opportunities"
+  ];
+
+  const community=[
+    "Good people and community",
+    "People I can learn with",
+    "Good people and community"
+  ];
+
+  const independence=[
+    "Independence"
+  ];
+
+  const balance=[
+    "A good balance outside academics",
+    "A life that feels balanced"
+  ];
+
+  const affordability=[
+    "Affordability"
+  ];
+
+  const practicalScore=
+    matters.filter(x=>practical.includes(x)).length+
+    wants.filter(x=>practical.includes(x)).length;
+
+  const explorationScore=
+    matters.filter(x=>exploration.includes(x)).length+
+    wants.filter(x=>exploration.includes(x)).length;
+
+  const communityScore=
+    matters.filter(x=>community.includes(x)).length+
+    wants.filter(x=>community.includes(x)).length;
+
+  const independenceScore=
+    matters.filter(x=>independence.includes(x)).length+
+    wants.filter(x=>independence.includes(x)).length;
+
+  const balanceScore=
+    matters.filter(x=>balance.includes(x)).length+
+    wants.filter(x=>balance.includes(x)).length;
+
+  const affordabilityScore=
+    matters.filter(x=>affordability.includes(x)).length+
+    wants.filter(x=>affordability.includes(x)).length;
+
+
+  if(
+    practicalScore>0 &&
+    explorationScore>0
+  ){
+
+    reflection=
+      "You seem to want room to explore rather than having everything mapped out from the beginning. At the same time, you want your learning to connect with the real world. That combination may be worth paying attention to when you compare your options.";
+
+  }
+  else if(
+    explorationScore>0 &&
+    independenceScore>0
+  ){
+
+    reflection=
+      "You seem to value having room to discover what interests you and enough freedom to make the experience your own. When you compare your options, it may be worth finding out how much choice students actually have.";
+
+  }
+  else if(
+    practicalScore>0 &&
+    communityScore>0
+  ){
+
+    reflection=
+      "You seem to want an experience that feels useful while also being surrounded by people you can learn and grow with. The course matters, but the environment around it may matter just as much.";
+
+  }
+  else if(
+    communityScore>0 &&
+    balanceScore>0
+  ){
+
+    reflection=
+      "The people around you and the life you have alongside your studies both seem important. You may want to look beyond the course itself and understand what everyday life in each option would actually feel like.";
+
+  }
+  else if(
+    practicalScore>0
+  ){
+
+    reflection=
+      "You seem to want learning that leads somewhere tangible. It may be important for you to see how much practical experience, real world exposure and useful skill building each option actually provides.";
+
+  }
+  else if(
+    explorationScore>0
+  ){
+
+    reflection=
+      "You seem to want room to explore before you commit too tightly to one direction. When you compare your options, look for places where you can try different things and change direction as you learn more about yourself.";
+
+  }
+  else if(
+    independenceScore>0
+  ){
+
+    reflection=
+      "Having some control over your own experience seems important to you. It may be worth finding out how much freedom each option gives students in what they study, try and pursue.";
+
+  }
+  else if(
+    balanceScore>0
+  ){
+
+    reflection=
+      "You seem to care about the kind of life your choice will support, not only what you will study. That is worth keeping in view when you compare your options.";
+
+  }
+  else if(
+    affordabilityScore>0
+  ){
+
+    reflection=
+      "The practical side of the decision matters to you as well. Cost is not separate from the decision, so it will be important to understand what each option gives you for what it asks of you.";
+
+  }
+  else{
+
+    reflection=
+      "You are still working out what you want from this decision. That is okay. The next step is not to force an answer, but to put some real options in front of you and see what you notice.";
+
+  }
+
+
+  if(note){
+
+    reflection+=" You have also added something personal here: "+note;
+
+  }
+
 
   document.getElementById("summaryDecision")
     .textContent=decision;
@@ -1182,18 +1331,18 @@ function buildStep2Summary(){
       "This is the decision Compass will help you work through.";
 
   document.getElementById("summaryMatters")
-    .textContent=
-      matters || "You have not chosen any priorities yet.";
+    .textContent=reflection;
 
   document.getElementById("summaryWants")
     .textContent=
-      wants || "You have not chosen any priorities yet.";
+      "As you compare options, notice whether they actually give you the kind of experience you say you want.";
 
   document.getElementById("summaryNote")
-    .textContent=note;
+    .textContent=
+      note ||
+      "You have not added anything else yet. That is completely okay.";
 
 }
-
 
 function openPaidCompass(){
 
