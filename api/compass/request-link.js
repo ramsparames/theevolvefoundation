@@ -8,6 +8,7 @@ module.exports=async(req,res)=>{
     const email=normalizeEmail(body.email);
     const name=String(body.name||"").trim().slice(0,120);
     const answers=body.answers;
+    const index=Math.max(0,Number(body.index)||0);
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json(res,400,{ok:false,message:"Please enter a valid email address."});
     if(!answers||typeof answers!=="object") return json(res,400,{ok:false,message:"Your Compass answers are missing."});
     const sql=getSql();
@@ -16,7 +17,7 @@ module.exports=async(req,res)=>{
     const tokenHash=hash(rawToken);
     const expires=new Date(Date.now()+30*60*1000);
     await sql`INSERT INTO compass_sessions (id,email,name,data,status,magic_token_hash,magic_expires_at,created_at,updated_at)
-      VALUES (${sessionId},${email},${name||null},${JSON.stringify(answers)}::jsonb,'in_progress',${tokenHash},${expires},NOW(),NOW())`;
+      VALUES (${sessionId},${email},${name||null},${JSON.stringify({...answers,__compass_index:index})}::jsonb,'in_progress',${tokenHash},${expires},NOW(),NOW())`;
     const origin=process.env.APP_ORIGIN || `https://${req.headers.host}`;
     const link=`${origin}/compass/continue.html?token=${encodeURIComponent(rawToken)}`;
     if(!process.env.RESEND_API_KEY) return json(res,500,{ok:false,message:"Email delivery is not configured yet."});

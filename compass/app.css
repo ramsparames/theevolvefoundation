@@ -113,3 +113,8 @@ h1,h2,strong{font-family:var(--serif);font-weight:500}
   .reflection-footer .primary-btn{width:100%}
   .auth-card{padding:34px 24px}
 }
+
+/* Compass header action visibility */
+.compass-header-right .quiet-btn[hidden]{
+  display:none;
+}

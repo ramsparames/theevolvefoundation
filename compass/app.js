@@ -39,13 +39,23 @@ const QUESTIONS = [
 ];
 
 const KEY = "evolveCompassSlice1";
+const INDEX_KEY = "evolveCompassSlice1Index";
+
+let savedAnswers = {};
+
+try{
+  savedAnswers = JSON.parse(localStorage.getItem(KEY) || "{}");
+}catch(e){
+  savedAnswers = {};
+}
 
 const state = {
   step: "welcome",
-  index: 0,
-  answers: JSON.parse(localStorage.getItem(KEY) || "{}"),
+  index: Number(localStorage.getItem(INDEX_KEY) || 0),
+  answers: savedAnswers && typeof savedAnswers === "object" ? savedAnswers : {},
   name: "",
-  email: ""
+  email: "",
+  saveReturnView: "welcome"
 };
 
 const views = {
@@ -59,6 +69,7 @@ const views = {
 
 function persist(){
   localStorage.setItem(KEY, JSON.stringify(state.answers));
+  localStorage.setItem(INDEX_KEY, String(state.index));
 }
 
 function show(view){
@@ -883,10 +894,15 @@ function validQuestion(){
 function start(){
 
   state.index=0;
+  state.answers={};
+
+  localStorage.removeItem(KEY);
+  localStorage.removeItem(INDEX_KEY);
 
   show("question");
 
   renderQuestion();
+  requestAnimationFrame(scrollQuestionToTop);
 }
 
 
@@ -897,23 +913,25 @@ document.getElementById("startBtn")
 document.getElementById("resumeBtn")
   .addEventListener("click",()=>{
 
-    const has=
-      Object.keys(state.answers).length>0;
+    const has=Object.keys(state.answers).length>0;
 
-    if(has){
-
-      state.index=0;
-
-      show("question");
-
-      renderQuestion();
-
-    }
-    else{
-
+    if(!has){
       start();
-
+      return;
     }
+
+    const savedIndex=Number(localStorage.getItem(INDEX_KEY) || 0);
+
+    state.index=Math.max(
+      0,
+      Math.min(savedIndex,QUESTIONS.length-1)
+    );
+
+    show("question");
+
+    renderQuestion();
+
+    requestAnimationFrame(scrollQuestionToTop);
 
   });
 
@@ -924,6 +942,8 @@ document.getElementById("backBtn")
     if(state.index>0){
 
       state.index--;
+
+      persist();
 
       renderQuestion();
 
@@ -962,6 +982,8 @@ document.getElementById("nextBtn")
 
       state.index++;
 
+      persist();
+
       renderQuestion();
 
       requestAnimationFrame(scrollQuestionToTop);
@@ -979,16 +1001,26 @@ document.getElementById("nextBtn")
 
 
 document.getElementById("continueBtn")
-  .addEventListener("click",()=>show("auth"));
+  .addEventListener("click",()=>show("step2"));
 
 
 document.getElementById("backToReflection")
-  .addEventListener("click",()=>show("reflection"));
+  .addEventListener("click",()=>show(state.saveReturnView||"welcome"));
 
 
 /* -------------------------------------------------------
    SAVE AND EMAIL
    ------------------------------------------------------- */
+
+document.getElementById("saveBtn")
+  .addEventListener("click",()=>{
+
+    state.saveReturnView = state.step || "welcome";
+
+    show("auth");
+
+  });
+
 
 document.getElementById("authForm")
   .addEventListener("submit",async(e)=>{
@@ -1029,7 +1061,8 @@ document.getElementById("authForm")
             body:JSON.stringify({
               email:state.email,
               name:state.name,
-              answers:state.answers
+              answers:state.answers,
+              index:state.index
             })
           }
         );
@@ -1075,15 +1108,10 @@ document.getElementById("authForm")
 
 function init(){
 
-  if(
-    Object.keys(state.answers).length
-  ){
+  const has=Object.keys(state.answers).length>0;
 
-    document.getElementById("resumeBtn")
-      .textContent=
-        "Continue my Compass";
-
-  }
+  document.getElementById("resumeBtn").hidden=!has;
+  document.getElementById("saveBtn").hidden=!has;
 
 }
 
