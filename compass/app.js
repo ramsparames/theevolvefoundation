@@ -44,6 +44,7 @@ const PAYMENT_TEST_MODE = true;
 const STEP2_KEY = "evolveCompassStep2";
 const STEP3_KEY = "evolveCompassStep3";
 const STEP4_KEY = "evolveCompassStep4";
+const STEP5_KEY = "evolveCompassStep5";
 
 const STEP2_QUESTIONS = [
   {
@@ -141,7 +142,8 @@ const views = {
   step3: document.getElementById("step3View"),
   step3Summary: document.getElementById("step3SummaryView"),
   step4: document.getElementById("step4View"),
-  step4Summary: document.getElementById("step4SummaryView")
+  step4Summary: document.getElementById("step4SummaryView"),
+  step5: document.getElementById("step5View")
 };
 
 function persist(){
@@ -263,6 +265,41 @@ function step4SavedState(){
 
 
 let step4State=step4SavedState();
+
+
+function step5SavedState(){
+
+  try{
+
+    const saved=JSON.parse(
+      localStorage.getItem(STEP5_KEY) || "{}"
+    );
+
+    if(saved && typeof saved==="object"){
+      return saved;
+    }
+
+  }
+  catch(e){}
+
+  return {
+    reviewed:false
+  };
+
+}
+
+
+let step5State=step5SavedState();
+
+
+function persistStep5(){
+
+  localStorage.setItem(
+    STEP5_KEY,
+    JSON.stringify(step5State)
+  );
+
+}
 
 
 function persistStep4(){
@@ -2358,15 +2395,222 @@ document
   );
 
 
-document.getElementById("step4ContinueBtn")
-  .addEventListener(
-    "click",
-    ()=>{
+/* -------------------------------------------------------
+   STEP 5 · MY COMPASS
+   ------------------------------------------------------- */
 
-      alert("Step 5 is next: My Compass.");
+function cleanList(values){
+  return values.map(value=>String(value||"").trim()).filter(Boolean);
+}
 
-    }
+function selectedLabels(question){
+  return cleanList(
+    step2Selected(question).map(i=>labelForStep2(question.key,i))
   );
+}
+
+function firstStep1Labels(key){
+  const values=state.answers && Array.isArray(state.answers[key])
+    ? state.answers[key] : [];
+  return cleanList(values);
+}
+
+function makeSentenceList(items){
+  if(!items.length) return "";
+  if(items.length===1) return items[0];
+  if(items.length===2) return items[0]+" and "+items[1];
+  return items.slice(0,-1).join(", ")+", and "+items[items.length-1];
+}
+
+function step5OptionItems(){
+  return step3State.options
+    .filter(option=>step3OptionHasContent(option))
+    .map((option,index)=>{
+      const fit=step4State.options[index] && step4State.options[index].fit
+        ? step4State.options[index].fit : "";
+      return {
+        name:optionDisplayText(option),
+        fit,
+        findOut:step4State.options[index] &&
+          (step4State.options[index].findOut||"").trim()
+            ? step4State.options[index].findOut.trim() : ""
+      };
+    });
+}
+
+function buildStep5Data(){
+  const interests=firstStep1Labels("interests");
+  const strengths=firstStep1Labels("strengths");
+  const matters=selectedLabels(STEP2_QUESTIONS[1]);
+  const wants=selectedLabels(STEP2_QUESTIONS[2]);
+  const options=step5OptionItems();
+  const questions=step4State.options
+    .map(item=>(item.findOut||"").trim())
+    .filter(Boolean);
+
+  let nextTitle="Keep learning before you decide.";
+  let nextCopy="You have a clearer starting point now. The next useful step is to answer the questions you have identified rather than trying to force a decision too early.";
+
+  if(questions.length){
+    nextTitle="Find out what you still do not know.";
+    nextCopy="Start with the questions that could genuinely change how you feel about your options. You do not need to answer everything at once.";
+  }else if(options.length>1){
+    nextTitle="Compare the options against what matters to you.";
+    nextCopy="Look at the differences between your options and ask which differences actually matter to you.";
+  }
+
+  return {interests,strengths,matters,wants,options,questions,nextTitle,nextCopy};
+}
+
+function addStep5Card(grid,label,title,copy,className=""){
+  const card=document.createElement("article");
+  card.className="step5-card "+className;
+  card.innerHTML='<span class="card-label"></span><h2></h2><p></p>';
+  card.querySelector(".card-label").textContent=label;
+  card.querySelector("h2").textContent=title;
+  card.querySelector("p").textContent=copy;
+  grid.appendChild(card);
+}
+
+function buildParentSummary(data){
+  const lines=[];
+  lines.push("Compass snapshot");
+  lines.push("");
+  lines.push("I am still working through my decision about what comes next.");
+
+  if(data.interests.length)
+    lines.push("What seems to interest me: "+makeSentenceList(data.interests.slice(0,4))+".");
+  if(data.strengths.length)
+    lines.push("What I seem to bring: "+makeSentenceList(data.strengths.slice(0,3))+".");
+  if(data.matters.length)
+    lines.push("What matters to me in the experience: "+makeSentenceList(data.matters.slice(0,5))+".");
+  if(data.wants.length)
+    lines.push("What I want from the choice: "+makeSentenceList(data.wants.slice(0,5))+".");
+
+  if(data.options.length){
+    lines.push("");
+    lines.push("Options I am considering:");
+    data.options.forEach((option,index)=>{
+      let line=(index+1)+". "+option.name;
+      if(option.fit) line+=" | "+option.fit;
+      lines.push(line);
+    });
+  }
+
+  if(data.questions.length){
+    lines.push("");
+    lines.push("Things I still want to find out:");
+    data.questions.slice(0,6).forEach(question=>lines.push("• "+question));
+  }
+
+  lines.push("");
+  lines.push("What would help me most from my parent:");
+  lines.push("Listen to what I am thinking, help me find reliable information and ask questions without trying to make the decision for me.");
+
+  return lines.join("\n");
+}
+
+function renderStep5(){
+  const data=buildStep5Data();
+  const grid=document.getElementById("step5StudentGrid");
+  grid.innerHTML="";
+
+  addStep5Card(grid,"WHAT I AM NOTICING ABOUT MYSELF","What pulls me in",
+    data.interests.length ? makeSentenceList(data.interests.slice(0,4))+"." : "I am still noticing what naturally pulls me in.");
+
+  addStep5Card(grid,"WHAT I BRING","Things I seem to be good at",
+    data.strengths.length ? makeSentenceList(data.strengths.slice(0,3))+"." : "I am still working out what I naturally bring to different situations.","sage");
+
+  addStep5Card(grid,"WHAT MATTERS TO ME","Things worth keeping in view",
+    data.matters.length ? makeSentenceList(data.matters.slice(0,5))+"." : "I am still figuring out what matters most to me.","peach");
+
+  addStep5Card(grid,"WHAT I WANT","What I hope this choice gives me",
+    data.wants.length ? makeSentenceList(data.wants.slice(0,5))+"." : "I am still figuring out what I want this experience to give me.","lilac");
+
+  if(data.options.length){
+    const card=document.createElement("article");
+    card.className="step5-card step5-options-card";
+    card.innerHTML='<span class="card-label">THE OPTIONS IN FRONT OF ME</span><h2>What I am considering</h2><div class="step5-option-list"></div>';
+    const list=card.querySelector(".step5-option-list");
+
+    data.options.forEach((option,index)=>{
+      const row=document.createElement("div");
+      row.className="step5-option-row";
+      row.innerHTML='<strong></strong><span></span>';
+      row.querySelector("strong").textContent=(index+1)+". "+option.name;
+      row.querySelector("span").textContent=option.fit || "Still working this out.";
+      list.appendChild(row);
+    });
+
+    grid.appendChild(card);
+  }
+
+  if(data.questions.length){
+    const card=document.createElement("article");
+    card.className="step5-card step5-questions-card";
+    card.innerHTML='<span class="card-label">WHAT I STILL NEED TO KNOW</span><h2>Questions worth answering</h2><ul></ul>';
+    const ul=card.querySelector("ul");
+
+    data.questions.slice(0,8).forEach(question=>{
+      const li=document.createElement("li");
+      li.textContent=question;
+      ul.appendChild(li);
+    });
+
+    grid.appendChild(card);
+  }
+
+  document.getElementById("step5NextTitle").textContent=data.nextTitle;
+  document.getElementById("step5NextCopy").textContent=data.nextCopy;
+  document.getElementById("parentSummaryText").textContent=buildParentSummary(data);
+}
+
+function openStep5(){
+  step5State=step5SavedState();
+  step5State.reviewed=true;
+  persistStep5();
+  renderStep5();
+  show("step5");
+  requestAnimationFrame(scrollQuestionToTop);
+}
+
+document.getElementById("step4ContinueBtn").addEventListener("click",openStep5);
+
+document.getElementById("step5BackBtn").addEventListener("click",()=>{
+  buildStep4Summary();
+  show("step4Summary");
+});
+
+document.getElementById("changeStep5Btn").addEventListener("click",()=>{
+  openStep4();
+});
+
+document.getElementById("parentSummaryBtn").addEventListener("click",()=>{
+  const panel=document.getElementById("parentSummaryPanel");
+  panel.classList.toggle("hidden");
+
+  if(!panel.classList.contains("hidden")){
+    requestAnimationFrame(()=>{
+      panel.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+    });
+  }
+});
+
+document.getElementById("copyParentSummaryBtn").addEventListener("click",async()=>{
+  const text=document.getElementById("parentSummaryText").textContent;
+  const status=document.getElementById("parentSummaryStatus");
+
+  try{
+    await navigator.clipboard.writeText(text);
+    status.textContent="Copied. You can paste this into a message to your parent.";
+  }
+  catch(e){
+    status.textContent="Copy is not available here. Select the summary and copy it.";
+  }
+});
 
 
 function openPaidCompass(){
@@ -2592,6 +2836,7 @@ function start(){
   localStorage.removeItem(STEP2_KEY);
   localStorage.removeItem(STEP3_KEY);
   localStorage.removeItem(STEP4_KEY);
+  localStorage.removeItem(STEP5_KEY);
 
   step2State={
     index:0,
@@ -2608,6 +2853,10 @@ function start(){
 
   step4State={
     options:[]
+  };
+
+  step5State={
+    reviewed:false
   };
 
   document.getElementById("saveBtn").hidden=false;
@@ -2775,6 +3024,9 @@ document.getElementById("authForm")
                 __step4:{
                   options:step4State.options
                 },
+                __step5:{
+                  reviewed:step5State.reviewed
+                },
                 __paid:localStorage.getItem(PAYMENT_KEY)==="true"
               },
               index:state.index
@@ -2884,6 +3136,20 @@ function resumeFromSavedCompass(){
     }
 
     delete state.answers.__step4;
+
+  }
+
+
+  if(state.answers.__step5){
+
+    const savedStep5=state.answers.__step5;
+
+    if(savedStep5 && typeof savedStep5==="object"){
+      step5State=savedStep5;
+      persistStep5();
+    }
+
+    delete state.answers.__step5;
 
   }
 

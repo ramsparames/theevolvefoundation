@@ -320,6 +320,53 @@
     </div>
   </section>
 
+  <section id="step5View" class="app-view">
+    <div class="app-container reflection-container">
+      <div class="reflection-intro">
+        <p class="eyebrow">05 · MY COMPASS</p>
+        <h1>Here is what your thinking looks like right now.</h1>
+        <p>
+          This is not a final answer. It is a clearer picture of what matters
+          to you, what you are considering and what you still need to find out.
+        </p>
+      </div>
+
+      <div id="step5StudentGrid" class="step5-student-grid"></div>
+
+      <div class="step5-next">
+        <span class="card-label">YOUR NEXT MOVE</span>
+        <h2 id="step5NextTitle"></h2>
+        <p id="step5NextCopy"></p>
+      </div>
+
+      <div class="step5-actions">
+        <button id="step5BackBtn" class="secondary-btn" type="button">← Back</button>
+        <div class="reflection-actions">
+          <button id="changeStep5Btn" class="secondary-btn" type="button">Review my answers</button>
+          <button id="parentSummaryBtn" class="secondary-btn" type="button">See parent summary</button>
+        </div>
+      </div>
+
+      <section id="parentSummaryPanel" class="parent-summary-panel hidden">
+        <div class="parent-summary-head">
+          <div>
+            <p class="eyebrow">PARENT SUMMARY</p>
+            <h2>A simple way to share where I am.</h2>
+          </div>
+          <button id="copyParentSummaryBtn" class="secondary-btn" type="button">Copy summary</button>
+        </div>
+
+        <div id="parentSummaryText" class="parent-summary-text"></div>
+        <p id="parentSummaryStatus" class="status" role="status"></p>
+
+        <p class="parent-summary-note">
+          This is a snapshot of the student's thinking right now.
+          It is not a recommendation or a final decision.
+        </p>
+      </section>
+    </div>
+  </section>
+
   <section id="step2SummaryView" class="app-view">
     <div class="app-container reflection-container">
       <div class="reflection-intro">
