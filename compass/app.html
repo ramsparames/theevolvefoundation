@@ -46,21 +46,28 @@
 
   <section id="questionView" class="app-view">
     <div class="app-container narrow-app">
-      <div class="progress-row"><span id="sectionLabel">01 KNOW ME</span><span id="progressText">Question 1 of 5</span></div>
-      <div class="progress-track"><span id="progressBar"></span></div>
       <div class="question-shell">
-        <div>
+        <div class="question-header">
+          <div class="progress-row">
+            <span id="sectionLabel">01 KNOW ME</span>
+            <span id="progressText">Question 1 of 5</span>
+          </div>
+          <div class="progress-track"><span id="progressBar"></span></div>
           <p class="eyebrow">START WITH YOURSELF</p>
           <h2 id="questionText"></h2>
           <p id="questionHint" class="question-hint"></p>
         </div>
+
         <div id="optionList" class="option-list"></div>
+
         <div id="textFollowup" class="followup hidden">
           <label id="followupLabel" for="followupInput"></label>
-          <textarea id="followupInput" rows="4" maxlength="500"></textarea>
-          <p class="microcopy">Optional. A real example helps Compass reflect your thinking rather than just your selections.</p>
+          <textarea id="followupInput" rows="2" maxlength="500"></textarea>
+          <p class="microcopy">Optional. A sentence or two is enough.</p>
         </div>
+
         <p id="questionError" class="form-error" role="alert"></p>
+
         <div class="question-actions">
           <button id="backBtn" class="secondary-btn" type="button">← Back</button>
           <button id="nextBtn" class="primary-btn" type="button">Next <span>→</span></button>
