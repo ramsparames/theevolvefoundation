@@ -38,6 +38,7 @@ const QUESTIONS = [
   }
 ];
 
+const KEY = "evolveCompassSlice1";
 const PAYMENT_TEST_MODE = true;
 
 const STEP2_KEY = "evolveCompassStep2";
