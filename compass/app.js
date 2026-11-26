@@ -2348,10 +2348,10 @@ function renderStep4Lens(){
 }
 
 
+
 function renderStep4(){
 
   ensureStep4Options();
-
   renderStep4Lens();
 
   const container=
@@ -2372,10 +2372,11 @@ function renderStep4(){
     card.innerHTML=`
       <div class="step4-option-header">
         <div>
-          <span class="card-label">COLLEGE ${index+1}</span>
+          <span class="card-label">COLLEGE ${index+1} OF ${step4State.options.length}</span>
           <h2></h2>
           <p class="step4-course-context"></p>
         </div>
+        <span class="step4-college-count">${STEP4_CRITERIA.length} checks</span>
       </div>
 
       <div class="step4-criteria"></div>
@@ -2396,7 +2397,7 @@ function renderStep4(){
         ".step4-criteria"
       );
 
-    STEP4_CRITERIA.forEach(criterion=>{
+    STEP4_CRITERIA.forEach((criterion,criterionIndex)=>{
 
       const value=
         item.criteria[criterion.key] || {
@@ -2406,27 +2407,29 @@ function renderStep4(){
         };
 
       const block=
-        document.createElement("div");
+        document.createElement("section");
 
       block.className=
         "step4-criterion";
 
       block.innerHTML=`
         <div class="step4-criterion-head">
+          <span class="step4-criterion-number">0${criterionIndex+1}</span>
           <div>
-            <strong class="step4-criterion-title"></strong>
-            <span class="step4-criterion-description"></span>
+            <span class="step4-criterion-kicker">CHECK ${criterionIndex+1}</span>
+            <h3 class="step4-criterion-title"></h3>
+            <p class="step4-criterion-description"></p>
           </div>
         </div>
 
         <div class="step4-evidence-options"></div>
 
+        <div class="step4-choice-note" aria-live="polite"></div>
+
         <div class="step4-optional-fields">
-
           <label>
-            What makes you say that?
+            <span class="step4-field-title">What makes you say that?</span>
             <span class="field-optional">Optional</span>
-
             <textarea
               data-step4-evidence="${criterion.key}"
               rows="2"
@@ -2436,9 +2439,8 @@ function renderStep4(){
           </label>
 
           <label>
-            What would you want to verify?
+            <span class="step4-field-title">What would you want to verify?</span>
             <span class="field-optional">Optional</span>
-
             <textarea
               data-step4-verify="${criterion.key}"
               rows="2"
@@ -2446,7 +2448,6 @@ function renderStep4(){
               placeholder="Something you would want to check before deciding."
             ></textarea>
           </label>
-
         </div>
       `;
 
@@ -2465,34 +2466,44 @@ function renderStep4(){
           ".step4-evidence-options"
         );
 
+      const choiceNote=
+        block.querySelector(
+          ".step4-choice-note"
+        );
+
+      const updateChoiceNote=()=>{
+
+        const selected=
+          STEP4_EVIDENCE_LEVELS.find(
+            level=>level.value===value.level
+          ) ||
+          STEP4_EVIDENCE_LEVELS[
+            STEP4_EVIDENCE_LEVELS.length-1
+          ];
+
+        choiceNote.textContent=
+          `${selected.label} — ${selected.description}`;
+
+      };
+
       STEP4_EVIDENCE_LEVELS.forEach(level=>{
 
         const button=
           document.createElement("button");
 
         button.type="button";
+        button.className="fit-choice";
+        button.dataset.step4Criterion=criterion.key;
+        button.dataset.step4Level=level.value;
+        button.setAttribute(
+          "aria-pressed",
+          value.level===level.value
+            ? "true"
+            : "false"
+        );
 
-        button.className=
-          "fit-choice";
-
-        button.dataset.step4Criterion=
-          criterion.key;
-
-        button.dataset.step4Level=
-          level.value;
-
-        button.innerHTML=`
-          <span></span>
-          <small></small>
-        `;
-
-        button.querySelector("span")
-          .textContent=
-            level.label;
-
-        button.querySelector("small")
-          .textContent=
-            level.description;
+        button.innerHTML=
+          `<span>${level.label}</span>`;
 
         button.classList.toggle(
           "selected",
@@ -2508,6 +2519,9 @@ function renderStep4(){
             ].level=
               level.value;
 
+            value.level=
+              level.value;
+
             persistStep4();
 
             choices
@@ -2516,12 +2530,24 @@ function renderStep4(){
               )
               .forEach(other=>{
 
+                const selected=
+                  other===button;
+
                 other.classList.toggle(
                   "selected",
-                  other===button
+                  selected
+                );
+
+                other.setAttribute(
+                  "aria-pressed",
+                  selected
+                    ? "true"
+                    : "false"
                 );
 
               });
+
+            updateChoiceNote();
 
           }
         );
@@ -2574,6 +2600,8 @@ function renderStep4(){
         }
       );
 
+      updateChoiceNote();
+
       criteriaContainer.appendChild(block);
 
     });
@@ -2585,6 +2613,10 @@ function renderStep4(){
   document.getElementById(
     "step4Error"
   ).textContent="";
+
+  requestAnimationFrame(
+    scrollQuestionToTop
+  );
 
 }
 
@@ -3459,6 +3491,7 @@ function addStep5Card(
 }
 
 
+
 function buildParentSummary(data){
 
   const lines=[];
@@ -3467,97 +3500,59 @@ function buildParentSummary(data){
   lines.push("");
 
   if(data.course){
-
-    lines.push(
-      "Course or direction: "+
-      data.course
-    );
-
-  }
-
-  lines.push(
-    "I am still working through my decision about what comes next."
-  );
-
-  if(data.interests.length){
-
-    lines.push(
-      "What seems to interest me: "+
-      makeSentenceList(
-        data.interests.slice(0,4)
-      )+
-      "."
-    );
-
-  }
-
-  if(data.strengths.length){
-
-    lines.push(
-      "What I seem to bring: "+
-      makeSentenceList(
-        data.strengths.slice(0,3)
-      )+
-      "."
-    );
-
-  }
-
-  if(data.matters.length){
-
-    lines.push(
-      "What matters to me in the experience: "+
-      makeSentenceList(
-        data.matters.slice(0,5)
-      )+
-      "."
-    );
-
-  }
-
-  if(data.wants.length){
-
-    lines.push(
-      "What I want from the choice: "+
-      makeSentenceList(
-        data.wants.slice(0,5)
-      )+
-      "."
-    );
-
+    lines.push("Course or direction: "+data.course);
   }
 
   if(data.options.length){
-
     lines.push("");
-    lines.push(
-      "Colleges I am considering:"
-    );
-
-    data.options.forEach(
-      (option,index)=>{
-
+    lines.push("Colleges I am considering:");
+    data.options
+      .slice(0,3)
+      .forEach((option,index)=>{
         lines.push(
-          (index+1)+". "+option.name
+          `${index+1}. ${option.name}`
         );
+      });
+  }
 
-      }
-    );
+  if(data.matters.length || data.wants.length){
+    lines.push("");
+    lines.push("What matters to me:");
 
+    const priorities=
+      cleanList(
+        data.matters.concat(data.wants)
+      )
+      .filter(
+        (value,index,array)=>
+          array.indexOf(value)===index
+      );
+
+    if(priorities.length){
+      lines.push(
+        makeSentenceList(
+          priorities.slice(0,6)
+        )+"."
+      );
+    }
+  }
+
+  if(data.interpretation){
+    lines.push("");
+    lines.push("What Compass is noticing:");
+    lines.push(data.interpretation);
   }
 
   if(data.tradeoffs.length){
-
     lines.push("");
-    lines.push("What Compass is noticing:");
+    lines.push("Where the options differ:");
 
     data.tradeoffs
       .slice(0,3)
       .forEach(tradeoff=>{
 
         let line=
-          tradeoff.first+
-          " appears stronger on ";
+          `${tradeoff.first} looks stronger on `;
 
         line+=
           tradeoff.firstAdvantages.length
@@ -3567,35 +3562,22 @@ function buildParentSummary(data){
               )
             : "some areas";
 
-        if(
-          tradeoff.secondAdvantages.length
-        ){
-
+        if(tradeoff.secondAdvantages.length){
           line+=
-            ", while "+
-            tradeoff.second+
-            " appears stronger on "+
+            `, while ${tradeoff.second} looks stronger on `+
             makeSentenceList(
               tradeoff.secondAdvantages
                 .map(item=>item.label)
             );
-
         }
 
-        line+=".";
-
-        lines.push(line);
-
+        lines.push(line+".");
       });
-
   }
 
   if(data.questions.length){
-
     lines.push("");
-    lines.push(
-      "Things still worth finding out:"
-    );
+    lines.push("What I still want to find out:");
 
     data.questions
       .slice(0,6)
@@ -3603,19 +3585,27 @@ function buildParentSummary(data){
         question=>
           lines.push("• "+question)
       );
+  }
 
+  if(data.nextActions.length){
+    lines.push("");
+    lines.push("My next steps:");
+
+    data.nextActions
+      .slice(0,3)
+      .forEach(
+        action=>
+          lines.push("• "+action)
+      );
   }
 
   lines.push("");
-  lines.push(
-    "What would help me most from my parent:"
-  );
-
+  lines.push("How I would like my parent to help:");
   lines.push(
     "Listen to what I am thinking, help me find reliable information and ask questions without trying to make the decision for me."
   );
 
-  return lines.join("\n");
+  return lines.join("\n\n");
 
 }
 
@@ -3937,7 +3927,7 @@ function renderStep5(){
 
   document.getElementById(
     "parentSummaryText"
-  ).textContent=
+  ).value=
     buildParentSummary(data);
 
 }
@@ -3963,32 +3953,184 @@ document.getElementById("changeStep5Btn").addEventListener("click",()=>{
   openStep4();
 });
 
-document.getElementById("parentSummaryBtn").addEventListener("click",()=>{
-  const panel=document.getElementById("parentSummaryPanel");
-  panel.classList.toggle("hidden");
 
-  if(!panel.classList.contains("hidden")){
-    requestAnimationFrame(()=>{
-      panel.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
+document.getElementById("parentSummaryBtn").addEventListener(
+  "click",
+  ()=>{
+    const panel=
+      document.getElementById("parentSummaryPanel");
+
+    panel.classList.toggle("hidden");
+
+    if(!panel.classList.contains("hidden")){
+
+      const textarea=
+        document.getElementById("parentSummaryText");
+
+      if(!textarea.value.trim()){
+        textarea.value=
+          buildParentSummary(
+            buildStep5Data()
+          );
+      }
+
+      requestAnimationFrame(()=>{
+        panel.scrollIntoView({
+          behavior:"smooth",
+          block:"start"
+        });
       });
-    });
-  }
-});
 
-document.getElementById("copyParentSummaryBtn").addEventListener("click",async()=>{
-  const text=document.getElementById("parentSummaryText").textContent;
-  const status=document.getElementById("parentSummaryStatus");
+    }
+  }
+);
 
-  try{
-    await navigator.clipboard.writeText(text);
-    status.textContent="Copied. You can paste this into a message to your parent.";
+
+document.getElementById("copyParentSummaryBtn").addEventListener(
+  "click",
+  async()=>{
+
+    const text=
+      document.getElementById(
+        "parentSummaryText"
+      ).value;
+
+    const status=
+      document.getElementById(
+        "parentSummaryStatus"
+      );
+
+    try{
+
+      await navigator.clipboard.writeText(text);
+
+      status.textContent=
+        "Copied. You can paste this into a message to your parent.";
+
+    }
+    catch(e){
+
+      status.textContent=
+        "Copy is not available here. Select the summary and copy it.";
+
+    }
+
   }
-  catch(e){
-    status.textContent="Copy is not available here. Select the summary and copy it.";
+);
+
+
+document.getElementById("sendParentSummaryBtn").addEventListener(
+  "click",
+  async()=>{
+
+    const emailInput=
+      document.getElementById(
+        "parentEmailInput"
+      );
+
+    const summaryInput=
+      document.getElementById(
+        "parentSummaryText"
+      );
+
+    const status=
+      document.getElementById(
+        "parentSummaryStatus"
+      );
+
+    const button=
+      document.getElementById(
+        "sendParentSummaryBtn"
+      );
+
+    const parentEmail=
+      emailInput.value.trim();
+
+    const summaryText=
+      summaryInput.value.trim();
+
+    if(!parentEmail){
+      status.textContent=
+        "Enter your parent's email address first.";
+      emailInput.focus();
+      return;
+    }
+
+    if(!emailInput.checkValidity()){
+      status.textContent=
+        "Please enter a valid parent email address.";
+      emailInput.focus();
+      return;
+    }
+
+    if(!summaryText){
+      status.textContent=
+        "Add a little to the snapshot before sending it.";
+      summaryInput.focus();
+      return;
+    }
+
+    const data=
+      buildStep5Data();
+
+    button.disabled=true;
+    status.textContent=
+      "Sending your Compass snapshot…";
+
+    try{
+
+      const response=
+        await fetch(
+          "../api/compass/parent-summary",
+          {
+            method:"POST",
+            headers:{
+              "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+              parentEmail,
+              studentName:String(
+                state.name||""
+              ).trim(),
+              studentEmail:String(
+                state.email||""
+              ).trim(),
+              course:data.course,
+              colleges:data.options
+                .slice(0,3)
+                .map(option=>option.name),
+              summaryText
+            })
+          }
+        );
+
+      const payload=
+        await response.json();
+
+      if(!response.ok || !payload.ok){
+        throw new Error(
+          payload.message||
+          "We could not send the Compass snapshot just now."
+        );
+      }
+
+      status.textContent=
+        `Sent to ${parentEmail}.`;
+
+    }
+    catch(error){
+
+      status.textContent=
+        error.message||
+        "We could not send the Compass snapshot just now.";
+
+    }
+    finally{
+      button.disabled=false;
+    }
+
   }
-});
+);
 
 
 function openPaidCompass(){
