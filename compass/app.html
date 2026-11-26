@@ -180,165 +180,123 @@
   </section>
 
   <section id="step3View" class="app-view">
-    <div class="app-container narrow-app">
-
-      <div class="progress-row">
-        <span>03 EXPLORE MY OPTIONS</span>
-        <span>Bring your real choices</span>
-      </div>
-
-      <div class="progress-track">
-        <span style="width:60%"></span>
-      </div>
-
+<div class="app-container narrow-app">
+      <div class="progress-row"><span>03 EXPLORE MY OPTIONS</span><span>Course + colleges</span></div>
+      <div class="progress-track"><span style="width:60%"></span></div>
       <div class="step3-intro">
         <p class="eyebrow">BRING YOUR REAL OPTIONS</p>
-        <h1>What are you actually considering?</h1>
-        <p>
-          There is no need to choose the right answer here.
-          Bring the options that are genuinely on your mind.
-        </p>
+        <h1>What course are you considering — and where could you study it?</h1>
+        <p>Do not choose between colleges yet. First tell Compass the course or direction you are exploring, then bring up to three colleges you genuinely have in mind.</p>
       </div>
-
-      <div id="step3Options" class="step3-options"></div>
-
+      <div class="step3-course-card">
+        <span class="card-label">THE COURSE OR DIRECTION</span>
+        <h2>What are you currently thinking of studying?</h2>
+        <p class="field-help">This can be a specific course or a broader direction. It does not have to be final.</p>
+        <input id="step3CourseInput" type="text" maxlength="160" placeholder="For example, B.Tech Computer Science">
+      </div>
+      <div class="step3-colleges-card">
+        <span class="card-label">COLLEGES YOU HAVE IN MIND</span>
+        <h2>Which colleges are you considering for this course?</h2>
+        <p class="field-help">Add one to three. We will compare them against the same decision lens rather than asking you to judge each one from scratch.</p>
+        <div id="step3CollegeList" class="step3-college-list"></div>
+        <button id="step3AddCollegeBtn" class="secondary-btn" type="button">+ Add another college</button>
+      </div>
       <p id="step3Error" class="form-error" role="alert"></p>
-
       <div class="question-actions">
         <button id="step3BackBtn" class="secondary-btn" type="button">← Back</button>
-
         <div class="question-actions-right">
           <button id="step3SaveBtn" class="secondary-btn" type="button">Save my Compass</button>
           <button id="step3NextBtn" class="primary-btn" type="button">Review my options <span>→</span></button>
         </div>
       </div>
-
     </div>
   </section>
 
   <section id="step3SummaryView" class="app-view">
-    <div class="app-container reflection-container">
-
+<div class="app-container reflection-container">
       <div class="reflection-intro">
         <p class="eyebrow">03 · YOUR OPTIONS</p>
-        <h1>Here are the choices you're carrying right now.</h1>
-        <p>
-          You do not need to have decided between them yet.
-          The next step is to look at what you know, what you do not know and what matters to you.
-        </p>
+        <h1>Now we have a real decision to work with.</h1>
+        <p>One course or direction. Up to three colleges. Next, Compass will use your earlier priorities to help you investigate the fit rather than simply repeating your choices back to you.</p>
       </div>
-
       <div id="step3SummaryGrid" class="step3-summary-grid"></div>
-
+      <div class="step3-decision-lens-note">
+        <span class="card-label">THE POINT OF THIS STEP</span>
+        <h2>We are separating the course decision from the college decision.</h2>
+        <p>A college can be excellent overall and still be a poor fit for a particular course or student. Step 4 is where we start checking that difference.</p>
+      </div>
       <div class="reflection-footer">
-        <div>
-          <strong>Now let's check the fit.</strong>
-          <span>We will look at each option against what you said matters to you.</span>
-        </div>
-
+        <div><strong>Now let's check the fit.</strong><span>We will look at course strength, practical exposure, opportunities, environment, career path and cost.</span></div>
         <div class="reflection-actions">
           <button id="changeStep3Btn" class="secondary-btn" type="button">Change my options</button>
           <button id="step3ContinueBtn" class="primary-btn" type="button">Check the fit <span>→</span></button>
         </div>
       </div>
-
     </div>
   </section>
 
   <section id="step4View" class="app-view">
-    <div class="app-container narrow-app">
-
-      <div class="progress-row">
-        <span>04 CHECK THE FIT</span>
-        <span>Look beyond the surface</span>
-      </div>
-
-      <div class="progress-track">
-        <span style="width:80%"></span>
-      </div>
-
+<div class="app-container narrow-app">
+      <div class="progress-row"><span>04 CHECK THE FIT</span><span>Evidence, not guesses</span></div>
+      <div class="progress-track"><span style="width:80%"></span></div>
       <div class="step4-intro">
         <p class="eyebrow">CHECK THE FIT</p>
-        <h1>What do you actually know about each option?</h1>
-        <p>
-          You do not need all the answers yet.
-          This step is about separating what you know from what you still need to find out.
-        </p>
+        <h1>How well is each college equipped for the course — and for what matters to you?</h1>
+        <p>You are not expected to know everything. Mark the strength of the evidence you have right now. “Not enough evidence” is a useful answer.</p>
       </div>
-
+      <div class="step4-lens-card">
+        <span class="card-label">YOUR PERSONAL DECISION LENS</span>
+        <h2>These are the priorities we will keep in view.</h2>
+        <div id="step4LensList" class="step4-lens-list"></div>
+      </div>
       <div id="step4Options" class="step4-options"></div>
-
       <p id="step4Error" class="form-error" role="alert"></p>
-
       <div class="question-actions">
         <button id="step4BackBtn" class="secondary-btn" type="button">← Back</button>
-
         <div class="question-actions-right">
           <button id="step4SaveBtn" class="secondary-btn" type="button">Save my Compass</button>
           <button id="step4NextBtn" class="primary-btn" type="button">See what I still need to know <span>→</span></button>
         </div>
       </div>
-
     </div>
   </section>
 
   <section id="step4SummaryView" class="app-view">
-    <div class="app-container reflection-container">
-
+<div class="app-container reflection-container">
       <div class="reflection-intro">
         <p class="eyebrow">04 · YOUR FIT CHECK</p>
-        <h1>Now you can see where the gaps are.</h1>
-        <p>
-          A good decision does not require knowing everything.
-          It requires knowing what you still need to find out.
-        </p>
+        <h1>Now you can see where the evidence is strong — and where it is missing.</h1>
+        <p>This is the part that turns “I like this college” into a more useful decision process: what is supported, what is uncertain and what needs verification.</p>
       </div>
-
       <div id="step4SummaryGrid" class="step4-summary-grid"></div>
-
       <div class="step4-next-note">
-        <span class="card-label">WHAT TO DO WITH THIS</span>
-        <h2>Do not rush to choose.</h2>
-        <p>
-          Use the questions you have identified to gather better information.
-          The final Compass will help you bring what you learn back to what matters to you.
-        </p>
+        <span class="card-label">WHY THIS MATTERS</span>
+        <h2>Unknown does not mean bad.</h2>
+        <p>It means you have found a question worth answering. The final Compass will turn those gaps into a short list of next actions rather than pretending the information is already known.</p>
       </div>
-
       <div class="reflection-footer">
-        <div>
-          <strong>One more step.</strong>
-          <span>We will pull your thinking together into a Compass you can actually use.</span>
-        </div>
-
+        <div><strong>Now pull it together.</strong><span>Compass will show you what the decision looks like today and what could make it clearer.</span></div>
         <div class="reflection-actions">
           <button id="changeStep4Btn" class="secondary-btn" type="button">Change my fit check</button>
           <button id="step4ContinueBtn" class="primary-btn" type="button">Build my Compass <span>→</span></button>
         </div>
       </div>
-
     </div>
   </section>
 
   <section id="step5View" class="app-view">
-    <div class="app-container reflection-container">
+<div class="app-container reflection-container">
       <div class="reflection-intro">
         <p class="eyebrow">05 · MY COMPASS</p>
-        <h1>Here is what your thinking looks like right now.</h1>
-        <p>
-          This is not a final answer. It is a clearer picture of what matters
-          to you, what you are considering and what you still need to find out.
-        </p>
+        <h1>A decision brief, not a replay of your answers.</h1>
+        <p>Compass now brings together your course, your real college options, your personal priorities and the evidence gaps that could actually change the decision.</p>
       </div>
-
       <div id="step5StudentGrid" class="step5-student-grid"></div>
-
       <div class="step5-next">
         <span class="card-label">YOUR NEXT MOVE</span>
         <h2 id="step5NextTitle"></h2>
         <p id="step5NextCopy"></p>
       </div>
-
       <div class="step5-actions">
         <button id="step5BackBtn" class="secondary-btn" type="button">← Back</button>
         <div class="reflection-actions">
@@ -346,24 +304,17 @@
           <button id="parentSummaryBtn" class="secondary-btn" type="button">See parent summary</button>
         </div>
       </div>
-
       <section id="parentSummaryPanel" class="parent-summary-panel hidden">
         <div class="parent-summary-head">
-          <div>
-            <p class="eyebrow">PARENT SUMMARY</p>
-            <h2>A simple way to share where I am.</h2>
-          </div>
+          <div><p class="eyebrow">PARENT SUMMARY</p><h2>A useful starting point for a conversation.</h2></div>
           <button id="copyParentSummaryBtn" class="secondary-btn" type="button">Copy summary</button>
         </div>
-
         <div id="parentSummaryText" class="parent-summary-text"></div>
         <p id="parentSummaryStatus" class="status" role="status"></p>
-
-        <p class="parent-summary-note">
-          This is a snapshot of the student's thinking right now.
-          It is not a recommendation or a final decision.
-        </p>
+        <p class="parent-summary-note">This is a snapshot of the student's thinking and the evidence still to gather. It is not a recommendation or a final decision.</p>
       </section>
+    </div>
+  </section>
     </div>
   </section>
 

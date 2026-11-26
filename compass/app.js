@@ -207,13 +207,50 @@ function step3SavedState(){
 
     if(
       saved &&
-      typeof saved === "object" &&
-      Array.isArray(saved.options)
+      typeof saved==="object"
     ){
 
-      return {
-        options:saved.options
-      };
+      if(
+        typeof saved.course==="string" &&
+        Array.isArray(saved.colleges)
+      ){
+
+        return {
+          course:saved.course.trim(),
+          colleges:saved.colleges
+            .map(value=>String(value||"").trim())
+            .filter(Boolean)
+            .slice(0,3)
+        };
+
+      }
+
+      /*
+       * Migrate the old Step 3 structure if a student already
+       * has an older Compass saved locally.
+       */
+      if(Array.isArray(saved.options)){
+
+        const first=saved.options[0] || {};
+
+        return {
+          course:String(
+            first.course ||
+            first.name ||
+            ""
+          ).trim(),
+
+          colleges:saved.options
+            .map(option=>
+              String(
+                option && option.college || ""
+              ).trim()
+            )
+            .filter(Boolean)
+            .slice(0,3)
+        };
+
+      }
 
     }
 
@@ -221,11 +258,8 @@ function step3SavedState(){
   catch(e){}
 
   return {
-    options:[
-      {name:"",course:"",college:"",why:""},
-      {name:"",course:"",college:"",why:""},
-      {name:"",course:"",college:"",why:""}
-    ]
+    course:"",
+    colleges:[]
   };
 
 }
@@ -319,7 +353,13 @@ function persistStep3(){
   localStorage.setItem(
     STEP3_KEY,
     JSON.stringify({
-      options:step3State.options
+      course:String(step3State.course||"").trim(),
+      colleges:Array.isArray(step3State.colleges)
+        ? step3State.colleges
+            .map(value=>String(value||"").trim())
+            .filter(Boolean)
+            .slice(0,3)
+        : []
     })
   );
 
@@ -1499,288 +1539,205 @@ function getStep2DecisionIndex(){
 }
 
 
-function getStep3Mode(){
+/* -------------------------------------------------------
+   STEP 3 · EXPLORE MY OPTIONS
+   ------------------------------------------------------- */
 
-  const decisionIndex=
-    getStep2DecisionIndex();
-
-  if(decisionIndex===0){
-    return "course";
-  }
-
-  if(decisionIndex===1){
-    return "college";
-  }
-
-  if(decisionIndex===2){
-    return "courseCollege";
-  }
-
-  if(decisionIndex===3){
-    return "direction";
-  }
-
-  return "option";
-
-}
-
-
-function getStep3Labels(){
-
-  const mode=getStep3Mode();
-
-  if(mode==="course"){
-    return {
-      name:"Course or degree",
-      placeholder:"For example, B.Tech Computer Science"
-    };
-  }
-
-  if(mode==="college"){
-    return {
-      name:"College",
-      placeholder:"For example, a college you are considering"
-    };
-  }
-
-  if(mode==="courseCollege"){
-    return {
-      course:"Course or degree",
-      college:"College"
-    };
-  }
-
-  if(mode==="direction"){
-    return {
-      name:"Direction you are considering",
-      placeholder:"For example, design, medicine, technology"
-    };
-  }
-
-  return {
-    name:"Option you are curious about",
-    placeholder:"A course, college, career direction or anything else on your mind"
-  };
-
-}
-
-
-function ensureStep3Options(){
+function ensureStep3State(){
 
   if(
-    !Array.isArray(step3State.options) ||
-    step3State.options.length!==3
+    !step3State ||
+    typeof step3State!=="object"
   ){
 
-    step3State.options=[
-      {name:"",course:"",college:"",why:""},
-      {name:"",course:"",college:"",why:""},
-      {name:"",course:"",college:"",why:""}
-    ];
+    step3State={
+      course:"",
+      colleges:[]
+    };
 
   }
+
+  step3State.course=
+    String(step3State.course||"").trim();
+
+  if(!Array.isArray(step3State.colleges)){
+    step3State.colleges=[];
+  }
+
+  step3State.colleges=
+    step3State.colleges
+      .map(value=>String(value||"").trim())
+      .slice(0,3);
 
 }
 
 
 function renderStep3(){
 
-  ensureStep3Options();
+  ensureStep3State();
 
-  const mode=getStep3Mode();
-  const labels=getStep3Labels();
-  const container=
-    document.getElementById("step3Options");
+  const courseInput=
+    document.getElementById(
+      "step3CourseInput"
+    );
 
-  container.innerHTML="";
+  const collegeList=
+    document.getElementById(
+      "step3CollegeList"
+    );
 
-  step3State.options.forEach((option,index)=>{
+  const addButton=
+    document.getElementById(
+      "step3AddCollegeBtn"
+    );
 
-    const card=
-      document.createElement("article");
+  courseInput.value=
+    step3State.course || "";
 
-    card.className=
-      "step3-option-card";
+  collegeList.innerHTML="";
 
-    const optional=
-      index>0
-        ? "Optional"
-        : "Start here";
+  /*
+   * Always render at least one college field.
+   */
+  const values=
+    step3State.colleges.length
+      ? step3State.colleges
+      : [""];
 
-    let fields="";
+  values.forEach((value,index)=>{
 
-    if(mode==="courseCollege"){
+    const row=
+      document.createElement("div");
 
-      fields=`
-        <label>
-          ${labels.course}
-          <input
-            type="text"
-            data-step3-field="course"
-            data-step3-index="${index}"
-            maxlength="160"
-            placeholder="For example, B.Tech Computer Science"
-          >
-        </label>
+    row.className=
+      "step3-college-row";
 
-        <label>
-          ${labels.college}
-          <input
-            type="text"
-            data-step3-field="college"
-            data-step3-index="${index}"
-            maxlength="160"
-            placeholder="For example, a college you are considering"
-          >
-        </label>
-      `;
-
-    }
-    else{
-
-      fields=`
-        <label>
-          ${labels.name}
-          <input
-            type="text"
-            data-step3-field="name"
-            data-step3-index="${index}"
-            maxlength="160"
-            placeholder="${labels.placeholder}"
-          >
-        </label>
-      `;
-
-    }
-
-    fields+=`
-      <label>
-        What makes this worth considering?
-        <span class="field-optional">Optional</span>
-        <textarea
-          data-step3-field="why"
-          data-step3-index="${index}"
-          rows="3"
-          maxlength="500"
-          placeholder="A reason, attraction, question or simply something you have heard about it."
-        ></textarea>
-      </label>
-    `;
-
-    card.innerHTML=`
-      <div class="step3-option-header">
-        <div>
-          <span class="card-label">OPTION ${index+1}</span>
-          <h2>${index===0 ? "Your first option" : "Another possibility"}</h2>
-        </div>
-        <span class="step3-optional">${optional}</span>
+    row.innerHTML=`
+      <div class="step3-college-number">
+        ${index+1}
       </div>
-      <div class="step3-fields">${fields}</div>
+
+      <input
+        type="text"
+        maxlength="160"
+        data-step3-college="${index}"
+        placeholder="${
+          index===0
+            ? "For example, VIT Vellore"
+            : "Another college you are considering"
+        }"
+      >
+
+      ${
+        index>0
+          ? `<button
+               type="button"
+               class="step3-remove-college"
+               data-step3-remove="${index}"
+             >Remove</button>`
+          : ""
+      }
     `;
 
-    container.appendChild(card);
+    const input=
+      row.querySelector("input");
 
-  });
+    input.value=value;
 
+    input.addEventListener(
+      "input",
+      ()=>{
 
-  container
-    .querySelectorAll("[data-step3-field]")
-    .forEach(input=>{
+        ensureStep3State();
 
-      const index=
-        Number(input.dataset.step3Index);
+        step3State.colleges[index]=
+          input.value;
 
-      const field=
-        input.dataset.step3Field;
+        persistStep3();
 
-      input.value=
-        step3State.options[index][field] || "";
+      }
+    );
 
-      input.addEventListener(
-        "input",
+    const remove=
+      row.querySelector(
+        "[data-step3-remove]"
+      );
+
+    if(remove){
+
+      remove.addEventListener(
+        "click",
         ()=>{
 
-          step3State.options[index][field]=
-            input.value;
+          step3State.colleges.splice(
+            index,
+            1
+          );
 
           persistStep3();
+
+          renderStep3();
 
         }
       );
 
-    });
+    }
 
+    collegeList.appendChild(row);
 
-  document.getElementById("step3Error")
-    .textContent="";
+  });
 
-  requestAnimationFrame(
-    scrollQuestionToTop
-  );
+  addButton.disabled=
+    values.length>=3;
 
-}
+  addButton.textContent=
+    values.length>=3
+      ? "Maximum of 3 colleges"
+      : "+ Add another college";
 
+  courseInput.oninput=()=>{
 
-function step3OptionHasContent(option){
+    step3State.course=
+      courseInput.value;
 
-  return Boolean(
-    (option.name || "").trim() ||
-    (option.course || "").trim() ||
-    (option.college || "").trim()
-  );
+    persistStep3();
+
+  };
+
+  document.getElementById(
+    "step3Error"
+  ).textContent="";
 
 }
 
 
 function validStep3(){
 
-  const first=
-    step3State.options[0];
+  ensureStep3State();
 
-  const mode=getStep3Mode();
+  const course=
+    step3State.course.trim();
 
-  if(mode==="courseCollege"){
+  const colleges=
+    step3State.colleges
+      .map(value=>String(value||"").trim())
+      .filter(Boolean);
 
-    return Boolean(
-      first.course.trim() &&
-      first.college.trim()
-    );
-
-  }
-
+  /*
+   * Require the course/direction and at least one
+   * real college. Additional colleges are optional.
+   */
   return Boolean(
-    first.name.trim()
+    course &&
+    colleges.length
   );
 
 }
 
 
-function optionDisplayText(option){
-
-  const mode=getStep3Mode();
-
-  if(mode==="courseCollege"){
-
-    return [
-      option.course.trim(),
-      option.college.trim()
-    ]
-      .filter(Boolean)
-      .join(" · ");
-
-  }
-
-  return (
-    option.name ||
-    option.course ||
-    option.college ||
-    "Unnamed option"
-  ).trim();
-
-}
-
-
 function buildStep3Summary(){
+
+  ensureStep3State();
 
   const grid=
     document.getElementById(
@@ -1789,9 +1746,43 @@ function buildStep3Summary(){
 
   grid.innerHTML="";
 
-  step3State.options
-    .filter(option=>step3OptionHasContent(option))
-    .forEach((option,index)=>{
+  const courseCard=
+    document.createElement("article");
+
+  courseCard.className=
+    "step3-summary-card";
+
+  courseCard.innerHTML=`
+    <span class="card-label">
+      COURSE OR DIRECTION
+    </span>
+
+    <h2></h2>
+
+    <p>
+      This is the course or direction
+      you want Compass to investigate.
+    </p>
+
+    <button
+      type="button"
+      class="summary-change-btn"
+      id="changeStep3CourseInline"
+    >
+      Change →
+    </button>
+  `;
+
+  courseCard.querySelector("h2")
+    .textContent=
+      step3State.course ||
+      "Not specified";
+
+  grid.appendChild(courseCard);
+
+  step3State.colleges
+    .filter(Boolean)
+    .forEach((college,index)=>{
 
       const card=
         document.createElement("article");
@@ -1799,30 +1790,30 @@ function buildStep3Summary(){
       card.className=
         "step3-summary-card";
 
-      const name=
-        optionDisplayText(option);
-
-      const why=
-        option.why.trim();
-
       card.innerHTML=`
-        <span class="card-label">OPTION ${index+1}</span>
+        <span class="card-label">
+          COLLEGE ${index+1}
+        </span>
+
         <h2></h2>
-        <p></p>
+
+        <p>
+          We will check how well this college
+          is equipped for the course and what
+          matters to you.
+        </p>
+
         <button
           type="button"
           class="summary-change-btn"
-          data-step3-change="${index}"
-        >Change →</button>
+          data-step3-change-college="${index}"
+        >
+          Change →
+        </button>
       `;
 
       card.querySelector("h2")
-        .textContent=name;
-
-      card.querySelector("p")
-        .textContent=
-          why ||
-          "You have not added a reason yet.";
+        .textContent=college;
 
       grid.appendChild(card);
 
@@ -1835,9 +1826,10 @@ function openStep3(){
 
   step3State=step3SavedState();
 
-  ensureStep3Options();
+  ensureStep3State();
 
   show("step3");
+
   renderStep3();
 
 }
@@ -1856,24 +1848,83 @@ document.getElementById("step3BackBtn")
   );
 
 
+document.getElementById("step3AddCollegeBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      ensureStep3State();
+
+      if(step3State.colleges.length>=3){
+        return;
+      }
+
+      /*
+       * Add a blank field. Do not persist an empty
+       * college as an actual option.
+       */
+      step3State.colleges.push("");
+
+      renderStep3();
+
+      requestAnimationFrame(()=>{
+
+        const inputs=
+          document.querySelectorAll(
+            "[data-step3-college]"
+          );
+
+        const last=
+          inputs[inputs.length-1];
+
+        if(last){
+
+          last.focus();
+
+          last.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+          });
+
+        }
+
+      });
+
+    }
+  );
+
+
 document.getElementById("step3NextBtn")
   .addEventListener(
     "click",
     ()=>{
 
+      ensureStep3State();
+
+      /*
+       * Remove blank college rows before validating.
+       */
+      step3State.colleges=
+        step3State.colleges
+          .map(value=>String(value||"").trim())
+          .filter(Boolean)
+          .slice(0,3);
+
+      persistStep3();
+
       if(!validStep3()){
 
-        document.getElementById("step3Error")
-          .textContent=
-            getStep3Mode()==="courseCollege"
-              ? "Add a course and college for your first option to continue."
-              : "Add your first option to continue.";
+        document.getElementById(
+          "step3Error"
+        ).textContent=
+          !step3State.course.trim()
+            ? "Add the course or direction you are considering."
+            : "Add at least one college you are genuinely considering.";
 
         return;
 
       }
 
-      persistStep3();
       buildStep3Summary();
 
       show("step3Summary");
@@ -1909,14 +1960,46 @@ document.getElementById("changeStep3Btn")
 
 
 document
-  .querySelector("#step3SummaryView")
+  .getElementById("step3SummaryView")
   .addEventListener(
     "click",
     event=>{
 
+      if(
+        event.target.closest(
+          "#changeStep3CourseInline"
+        )
+      ){
+
+        openStep3();
+
+        requestAnimationFrame(()=>{
+
+          const input=
+            document.getElementById(
+              "step3CourseInput"
+            );
+
+          if(input){
+
+            input.focus();
+
+            input.scrollIntoView({
+              behavior:"smooth",
+              block:"center"
+            });
+
+          }
+
+        });
+
+        return;
+
+      }
+
       const button=
         event.target.closest(
-          "[data-step3-change]"
+          "[data-step3-change-college]"
         );
 
       if(!button){
@@ -1924,30 +2007,28 @@ document
       }
 
       const index=
-        Number(button.dataset.step3Change);
-
-      const card=
-        step3State.options[index];
-
-      if(!card){
-        return;
-      }
+        Number(
+          button.dataset.step3ChangeCollege
+        );
 
       openStep3();
 
       requestAnimationFrame(()=>{
 
-        const firstInput=
+        const input=
           document.querySelector(
-            `[data-step3-index="${index}"]`
+            `[data-step3-college="${index}"]`
           );
 
-        if(firstInput){
-          firstInput.focus();
-          firstInput.scrollIntoView({
+        if(input){
+
+          input.focus();
+
+          input.scrollIntoView({
             behavior:"smooth",
             block:"center"
           });
+
         }
 
       });
@@ -1967,24 +2048,131 @@ document.getElementById("step3ContinueBtn")
    STEP 4 · CHECK THE FIT
    ------------------------------------------------------- */
 
-function createStep4Option(option){
+const STEP4_CRITERIA = [
+  {
+    key:"courseStrength",
+    label:"Course strength",
+    description:"How well the college seems equipped for the course you are considering."
+  },
+  {
+    key:"practicalExperience",
+    label:"Practical experience",
+    description:"Projects, labs, internships, industry exposure or other ways to apply what you learn."
+  },
+  {
+    key:"opportunities",
+    label:"Opportunities beyond the classroom",
+    description:"Clubs, competitions, research, entrepreneurship, exchange or other experiences."
+  },
+  {
+    key:"environment",
+    label:"People and learning environment",
+    description:"The kind of people, support and everyday learning environment you would be around."
+  },
+  {
+    key:"careerPath",
+    label:"Path after college",
+    description:"How clearly the college connects your course to further study, careers or work."
+  },
+  {
+    key:"affordability",
+    label:"Affordability and value",
+    description:"What the overall cost means in relation to what the college offers you."
+  }
+];
+
+
+const STEP4_EVIDENCE_LEVELS = [
+  {
+    value:"strong",
+    label:"Strong evidence",
+    description:"I have good reason to believe this is a strength."
+  },
+  {
+    value:"some",
+    label:"Some evidence",
+    description:"There are positive signs, but I would like to verify them."
+  },
+  {
+    value:"concern",
+    label:"Concern",
+    description:"Something here makes me hesitate."
+  },
+  {
+    value:"unknown",
+    label:"Not enough evidence",
+    description:"I do not know enough yet to judge this."
+  }
+];
+
+
+function createStep4Option(college,index){
+
+  const criteria={};
+
+  STEP4_CRITERIA.forEach(item=>{
+
+    criteria[item.key]={
+      level:"unknown",
+      evidence:"",
+      verify:""
+    };
+
+  });
 
   return {
-    option:optionDisplayText(option),
-    fit:"",
-    known:"",
-    uncertain:"",
-    findOut:""
+    option:String(college||"").trim(),
+    course:String(step3State.course||"").trim(),
+    criteria
   };
+
+}
+
+
+function normaliseStep4Criteria(saved){
+
+  const criteria={};
+
+  STEP4_CRITERIA.forEach(item=>{
+
+    const old=
+      saved &&
+      saved.criteria &&
+      saved.criteria[item.key]
+        ? saved.criteria[item.key]
+        : {};
+
+    criteria[item.key]={
+      level:
+        STEP4_EVIDENCE_LEVELS.some(
+          level=>level.value===old.level
+        )
+          ? old.level
+          : "unknown",
+
+      evidence:
+        String(old.evidence||"").trim(),
+
+      verify:
+        String(old.verify||"").trim()
+    };
+
+  });
+
+  return criteria;
 
 }
 
 
 function ensureStep4Options(){
 
-  const validOptions=
-    step3State.options
-      .filter(option=>step3OptionHasContent(option));
+  ensureStep3State();
+
+  const colleges=
+    step3State.colleges
+      .map(value=>String(value||"").trim())
+      .filter(Boolean)
+      .slice(0,3);
 
   const existing=
     Array.isArray(step4State.options)
@@ -1992,20 +2180,170 @@ function ensureStep4Options(){
       : [];
 
   step4State.options=
-    validOptions.map((option,index)=>{
+    colleges.map((college,index)=>{
 
+      /*
+       * Match by college name first. This prevents answers
+       * from moving to another college when the student edits
+       * the Step 3 list.
+       */
       const old=
-        existing[index] || {};
+        existing.find(
+          item=>
+            String(item.option||"").trim()===college
+        )
+        || existing[index]
+        || {};
+
+      /*
+       * Migrate the old Step 4 structure where possible.
+       */
+      const migratedCriteria={};
+
+      STEP4_CRITERIA.forEach(item=>{
+
+        const oldCriterion=
+          old.criteria &&
+          old.criteria[item.key]
+            ? old.criteria[item.key]
+            : null;
+
+        migratedCriteria[item.key]=
+          oldCriterion
+            ? {
+                level:
+                  oldCriterion.level || "unknown",
+                evidence:
+                  String(
+                    oldCriterion.evidence||""
+                  ).trim(),
+                verify:
+                  String(
+                    oldCriterion.verify||""
+                  ).trim()
+              }
+            : {
+                level:"unknown",
+                evidence:"",
+                verify:""
+              };
+
+      });
+
+      /*
+       * If the student has an old fit answer, retain it as
+       * context rather than silently throwing it away.
+       */
+      if(
+        old.fit &&
+        !Object.values(migratedCriteria)
+          .some(item=>item.level!=="unknown")
+      ){
+
+        const oldLevel=
+          old.fit==="Feels aligned"
+            ? "some"
+            : old.fit==="Some things fit, some need checking"
+              ? "some"
+              : "unknown";
+
+        /*
+         * Put the old general judgement into the course
+         * strength criterion as a migration only.
+         */
+        migratedCriteria.courseStrength.level=
+          oldLevel;
+
+      }
 
       return {
-        option:optionDisplayText(option),
-        fit:old.fit || "",
-        known:old.known || "",
-        uncertain:old.uncertain || "",
-        findOut:old.findOut || ""
+        option:college,
+        course:String(
+          step3State.course||""
+        ).trim(),
+        criteria:migratedCriteria
       };
 
     });
+
+}
+
+
+function renderStep4Lens(){
+
+  const lens=
+    document.getElementById(
+      "step4LensList"
+    );
+
+  lens.innerHTML="";
+
+  const priorities=
+    selectedLabels(
+      STEP2_QUESTIONS[1]
+    ).concat(
+      selectedLabels(
+        STEP2_QUESTIONS[2]
+      )
+    );
+
+  const unique=[];
+
+  priorities.forEach(priority=>{
+
+    if(
+      priority &&
+      !unique.includes(priority)
+    ){
+      unique.push(priority);
+    }
+
+  });
+
+  /*
+   * Show the student's own priorities first.
+   * Then explain the broader checks Compass will use.
+   */
+  if(unique.length){
+
+    unique.slice(0,6)
+      .forEach((priority,index)=>{
+
+        const item=
+          document.createElement("div");
+
+        item.className=
+          "step4-lens-item";
+
+        item.innerHTML=`
+          <strong></strong>
+          <span>Priority ${index+1}</span>
+        `;
+
+        item.querySelector("strong")
+          .textContent=priority;
+
+        lens.appendChild(item);
+
+      });
+
+  }
+  else{
+
+    const item=
+      document.createElement("div");
+
+    item.className=
+      "step4-lens-item";
+
+    item.innerHTML=`
+      <strong>Your priorities are still taking shape.</strong>
+      <span>Compass will keep the broader decision factors in view.</span>
+    `;
+
+    lens.appendChild(item);
+
+  }
 
 }
 
@@ -2014,8 +2352,12 @@ function renderStep4(){
 
   ensureStep4Options();
 
+  renderStep4Lens();
+
   const container=
-    document.getElementById("step4Options");
+    document.getElementById(
+      "step4Options"
+    );
 
   container.innerHTML="";
 
@@ -2030,167 +2372,219 @@ function renderStep4(){
     card.innerHTML=`
       <div class="step4-option-header">
         <div>
-          <span class="card-label">OPTION ${index+1}</span>
+          <span class="card-label">COLLEGE ${index+1}</span>
           <h2></h2>
+          <p class="step4-course-context"></p>
         </div>
       </div>
 
-      <div class="step4-fit-question">
-        <span class="field-title">
-          Based on what you know right now, how does this option feel?
-        </span>
-
-        <div class="step4-fit-options">
-
-          <button
-            type="button"
-            class="fit-choice"
-            data-step4-field="fit"
-            data-step4-value="Feels aligned"
-          >
-            <span>Feels aligned</span>
-            <small>What I know seems to fit what matters to me.</small>
-          </button>
-
-          <button
-            type="button"
-            class="fit-choice"
-            data-step4-field="fit"
-            data-step4-value="Some things fit, some need checking"
-          >
-            <span>Some things fit, some need checking</span>
-            <small>There are good signs, but I still have questions.</small>
-          </button>
-
-          <button
-            type="button"
-            class="fit-choice"
-            data-step4-field="fit"
-            data-step4-value="Too early to tell"
-          >
-            <span>Too early to tell</span>
-            <small>I need more information before I can judge this.</small>
-          </button>
-
-        </div>
-      </div>
-
-      <div class="step4-text-fields">
-
-        <label>
-          What do you already know?
-          <span class="field-optional">Optional</span>
-          <textarea
-            data-step4-field="known"
-            rows="3"
-            maxlength="700"
-            placeholder="Facts, conversations, visits, experiences or anything you already know."
-          ></textarea>
-        </label>
-
-        <label>
-          What are you unsure about?
-          <span class="field-optional">Optional</span>
-          <textarea
-            data-step4-field="uncertain"
-            rows="3"
-            maxlength="700"
-            placeholder="What makes you hesitate, wonder or feel uncertain?"
-          ></textarea>
-        </label>
-
-        <label>
-          What do you need to find out?
-          <span class="field-optional">Optional</span>
-          <textarea
-            data-step4-field="findOut"
-            rows="3"
-            maxlength="700"
-            placeholder="What would you want to know before making this choice?"
-          ></textarea>
-        </label>
-
-      </div>
+      <div class="step4-criteria"></div>
     `;
 
     card.querySelector("h2")
       .textContent=item.option;
 
-    container.appendChild(card);
+    card.querySelector(
+      ".step4-course-context"
+    ).textContent=
+      item.course
+        ? `Course: ${item.course}`
+        : "";
 
+    const criteriaContainer=
+      card.querySelector(
+        ".step4-criteria"
+      );
 
-    card
-      .querySelectorAll(".fit-choice")
-      .forEach(button=>{
+    STEP4_CRITERIA.forEach(criterion=>{
 
-        const field=
-          button.dataset.step4Field;
+      const value=
+        item.criteria[criterion.key] || {
+          level:"unknown",
+          evidence:"",
+          verify:""
+        };
+
+      const block=
+        document.createElement("div");
+
+      block.className=
+        "step4-criterion";
+
+      block.innerHTML=`
+        <div class="step4-criterion-head">
+          <div>
+            <strong class="step4-criterion-title"></strong>
+            <span class="step4-criterion-description"></span>
+          </div>
+        </div>
+
+        <div class="step4-evidence-options"></div>
+
+        <div class="step4-optional-fields">
+
+          <label>
+            What makes you say that?
+            <span class="field-optional">Optional</span>
+
+            <textarea
+              data-step4-evidence="${criterion.key}"
+              rows="2"
+              maxlength="400"
+              placeholder="A fact, conversation, visit, website or experience."
+            ></textarea>
+          </label>
+
+          <label>
+            What would you want to verify?
+            <span class="field-optional">Optional</span>
+
+            <textarea
+              data-step4-verify="${criterion.key}"
+              rows="2"
+              maxlength="400"
+              placeholder="Something you would want to check before deciding."
+            ></textarea>
+          </label>
+
+        </div>
+      `;
+
+      block.querySelector(
+        ".step4-criterion-title"
+      ).textContent=
+        criterion.label;
+
+      block.querySelector(
+        ".step4-criterion-description"
+      ).textContent=
+        criterion.description;
+
+      const choices=
+        block.querySelector(
+          ".step4-evidence-options"
+        );
+
+      STEP4_EVIDENCE_LEVELS.forEach(level=>{
+
+        const button=
+          document.createElement("button");
+
+        button.type="button";
+
+        button.className=
+          "fit-choice";
+
+        button.dataset.step4Criterion=
+          criterion.key;
+
+        button.dataset.step4Level=
+          level.value;
+
+        button.innerHTML=`
+          <span></span>
+          <small></small>
+        `;
+
+        button.querySelector("span")
+          .textContent=
+            level.label;
+
+        button.querySelector("small")
+          .textContent=
+            level.description;
 
         button.classList.toggle(
           "selected",
-          item[field]===button.dataset.step4Value
+          value.level===level.value
         );
 
         button.addEventListener(
           "click",
           ()=>{
 
-            item[field]=
-              button.dataset.step4Value;
+            item.criteria[
+              criterion.key
+            ].level=
+              level.value;
 
             persistStep4();
 
-            card
+            choices
               .querySelectorAll(
-                `.fit-choice[data-step4-field="${field}"]`
+                "[data-step4-level]"
               )
               .forEach(other=>{
+
                 other.classList.toggle(
                   "selected",
                   other===button
                 );
+
               });
 
           }
         );
 
+        choices.appendChild(button);
+
       });
 
-
-    card
-      .querySelectorAll(
-        "textarea[data-step4-field]"
-      )
-      .forEach(input=>{
-
-        const field=
-          input.dataset.step4Field;
-
-        input.value=
-          item[field] || "";
-
-        input.addEventListener(
-          "input",
-          ()=>{
-
-            item[field]=input.value;
-
-            persistStep4();
-
-          }
+      const evidence=
+        block.querySelector(
+          `[data-step4-evidence="${criterion.key}"]`
         );
 
-      });
+      const verify=
+        block.querySelector(
+          `[data-step4-verify="${criterion.key}"]`
+        );
+
+      evidence.value=
+        value.evidence || "";
+
+      verify.value=
+        value.verify || "";
+
+      evidence.addEventListener(
+        "input",
+        ()=>{
+
+          item.criteria[
+            criterion.key
+          ].evidence=
+            evidence.value;
+
+          persistStep4();
+
+        }
+      );
+
+      verify.addEventListener(
+        "input",
+        ()=>{
+
+          item.criteria[
+            criterion.key
+          ].verify=
+            verify.value;
+
+          persistStep4();
+
+        }
+      );
+
+      criteriaContainer.appendChild(block);
+
+    });
+
+    container.appendChild(card);
 
   });
 
-
-  document.getElementById("step4Error")
-    .textContent="";
-
-  requestAnimationFrame(
-    scrollQuestionToTop
-  );
+  document.getElementById(
+    "step4Error"
+  ).textContent="";
 
 }
 
@@ -2215,67 +2609,105 @@ function buildStep4Summary(){
       card.className=
         "step4-summary-card";
 
-      const fit=
-        item.fit ||
-        "You have not judged this yet.";
-
-      const known=
-        item.known.trim() ||
-        "Nothing added yet.";
-
-      const uncertain=
-        item.uncertain.trim() ||
-        "Nothing added yet.";
-
-      const findOut=
-        item.findOut.trim() ||
-        "You have not added a question yet.";
-
       card.innerHTML=`
-        <span class="card-label">OPTION ${index+1}</span>
+        <span class="card-label">COLLEGE ${index+1}</span>
+
         <h2></h2>
 
-        <div class="step4-summary-section">
-          <span>HOW IT FEELS RIGHT NOW</span>
-          <p class="fit-summary"></p>
-        </div>
+        <p class="step4-summary-course"></p>
 
-        <div class="step4-summary-section">
-          <span>WHAT YOU KNOW</span>
-          <p class="known-summary"></p>
-        </div>
-
-        <div class="step4-summary-section">
-          <span>WHAT IS UNCLEAR</span>
-          <p class="uncertain-summary"></p>
-        </div>
-
-        <div class="step4-summary-section important">
-          <span>WHAT YOU NEED TO FIND OUT</span>
-          <p class="findout-summary"></p>
-        </div>
+        <div class="step4-summary-criteria"></div>
 
         <button
           type="button"
           class="summary-change-btn"
           data-step4-change="${index}"
-        >Change →</button>
+        >
+          Change →
+        </button>
       `;
 
       card.querySelector("h2")
         .textContent=item.option;
 
-      card.querySelector(".fit-summary")
-        .textContent=fit;
+      card.querySelector(
+        ".step4-summary-course"
+      ).textContent=
+        item.course
+          ? `Course: ${item.course}`
+          : "";
 
-      card.querySelector(".known-summary")
-        .textContent=known;
+      const criteriaContainer=
+        card.querySelector(
+          ".step4-summary-criteria"
+        );
 
-      card.querySelector(".uncertain-summary")
-        .textContent=uncertain;
+      STEP4_CRITERIA.forEach(criterion=>{
 
-      card.querySelector(".findout-summary")
-        .textContent=findOut;
+        const value=
+          item.criteria[criterion.key] || {
+            level:"unknown"
+          };
+
+        const level=
+          STEP4_EVIDENCE_LEVELS.find(
+            option=>
+              option.value===value.level
+          );
+
+        const row=
+          document.createElement("div");
+
+        row.className=
+          "step4-summary-section";
+
+        row.innerHTML=`
+          <span></span>
+          <strong></strong>
+        `;
+
+        row.querySelector("span")
+          .textContent=
+            criterion.label;
+
+        row.querySelector("strong")
+          .textContent=
+            level
+              ? level.label
+              : "Not enough evidence";
+
+        criteriaContainer.appendChild(row);
+
+        if(
+          value.evidence ||
+          value.verify
+        ){
+
+          const detail=
+            document.createElement("p");
+
+          const pieces=[];
+
+          if(value.evidence){
+            pieces.push(
+              `Evidence: ${value.evidence}`
+            );
+          }
+
+          if(value.verify){
+            pieces.push(
+              `Verify: ${value.verify}`
+            );
+          }
+
+          detail.textContent=
+            pieces.join(" ");
+
+          criteriaContainer.appendChild(detail);
+
+        }
+
+      });
 
       grid.appendChild(card);
 
@@ -2423,147 +2855,1093 @@ function makeSentenceList(items){
 }
 
 function step5OptionItems(){
-  return step3State.options
-    .filter(option=>step3OptionHasContent(option))
-    .map((option,index)=>{
-      const fit=step4State.options[index] && step4State.options[index].fit
-        ? step4State.options[index].fit : "";
+
+  ensureStep3State();
+  ensureStep4Options();
+
+  return step3State.colleges
+    .map((college,index)=>{
+
+      const step4=
+        step4State.options[index] || {};
+
+      const criteria=
+        step4.criteria || {};
+
       return {
-        name:optionDisplayText(option),
-        fit,
-        findOut:step4State.options[index] &&
-          (step4State.options[index].findOut||"").trim()
-            ? step4State.options[index].findOut.trim() : ""
+        name:String(college||"").trim(),
+
+        course:String(
+          step3State.course || ""
+        ).trim(),
+
+        criteria,
+
+        fit:step4.fit || "",
+
+        findOut:String(
+          step4.findOut || ""
+        ).trim()
+
       };
-    });
+
+    })
+    .filter(option=>option.name);
+
 }
+
+
+function step5PriorityTerms(){
+
+  const matters=
+    selectedLabels(
+      STEP2_QUESTIONS[1]
+    );
+
+  const wants=
+    selectedLabels(
+      STEP2_QUESTIONS[2]
+    );
+
+  /*
+   * Keep the student's language intact.
+   * We use it as a qualitative lens rather than
+   * pretending we can calculate an exact score.
+   */
+  return cleanList(
+    matters.concat(wants)
+  ).filter(
+    (value,index,array)=>
+      array.indexOf(value)===index
+  );
+
+}
+
+
+function step5CriterionMatchesPriority(
+  criterion,
+  priorities
+){
+
+  const text=
+    String(
+      criterion.label+
+      " "+
+      criterion.description
+    ).toLowerCase();
+
+  return priorities.some(priority=>{
+
+    const words=
+      String(priority)
+        .toLowerCase()
+        .split(/\s+/)
+        .filter(word=>word.length>3);
+
+    return words.some(word=>
+      text.includes(word)
+    );
+
+  });
+
+}
+
+
+function step5EvidenceLabel(level){
+
+  if(level==="strong"){
+    return "Strong evidence";
+  }
+
+  if(level==="some"){
+    return "Some evidence";
+  }
+
+  if(level==="concern"){
+    return "Concern";
+  }
+
+  return "Not enough evidence";
+
+}
+
+
+function step5BuildAnalysis(){
+
+  const priorities=
+    step5PriorityTerms();
+
+  const options=
+    step5OptionItems();
+
+  const analysed=
+    options.map(option=>{
+
+      const strong=[];
+      const some=[];
+      const concerns=[];
+      const unknown=[];
+
+      STEP4_CRITERIA.forEach(criterion=>{
+
+        const value=
+          option.criteria[criterion.key] || {
+            level:"unknown",
+            evidence:"",
+            verify:""
+          };
+
+        const item={
+          key:criterion.key,
+          label:criterion.label,
+          description:criterion.description,
+          evidence:String(
+            value.evidence||""
+          ).trim(),
+          verify:String(
+            value.verify||""
+          ).trim(),
+          level:value.level || "unknown",
+          priority:
+            step5CriterionMatchesPriority(
+              criterion,
+              priorities
+            )
+        };
+
+        if(item.level==="strong"){
+          strong.push(item);
+        }
+        else if(item.level==="some"){
+          some.push(item);
+        }
+        else if(item.level==="concern"){
+          concerns.push(item);
+        }
+        else{
+          unknown.push(item);
+        }
+
+      });
+
+      const priorityStrong=
+        strong.filter(item=>item.priority);
+
+      const prioritySome=
+        some.filter(item=>item.priority);
+
+      const priorityConcerns=
+        concerns.filter(item=>item.priority);
+
+      const priorityUnknown=
+        unknown.filter(item=>item.priority);
+
+      return {
+        ...option,
+        strong,
+        some,
+        concerns,
+        unknown,
+        priorityStrong,
+        prioritySome,
+        priorityConcerns,
+        priorityUnknown
+      };
+
+    });
+
+
+  /*
+   * We deliberately do not create a numerical score.
+   *
+   * The order is based first on evidence against the
+   * student's stated priorities, then on broader evidence.
+   */
+  const ranked=
+    [...analysed].sort((a,b)=>{
+
+      const aPriorityStrong=
+        a.priorityStrong.length;
+
+      const bPriorityStrong=
+        b.priorityStrong.length;
+
+      if(
+        aPriorityStrong!==
+        bPriorityStrong
+      ){
+
+        return (
+          bPriorityStrong-
+          aPriorityStrong
+        );
+
+      }
+
+      const aPriorityConcerns=
+        a.priorityConcerns.length;
+
+      const bPriorityConcerns=
+        b.priorityConcerns.length;
+
+      if(
+        aPriorityConcerns!==
+        bPriorityConcerns
+      ){
+
+        return (
+          aPriorityConcerns-
+          bPriorityConcerns
+        );
+
+      }
+
+      const aStrong=
+        a.strong.length;
+
+      const bStrong=
+        b.strong.length;
+
+      return bStrong-aStrong;
+
+    });
+
+
+  const strongest=
+    ranked[0] || null;
+
+
+  /*
+   * Identify meaningful differences between options.
+   * This is the heart of the decision-support layer.
+   */
+  const tradeoffs=[];
+
+  for(
+    let i=0;
+    i<ranked.length;
+    i++
+  ){
+
+    for(
+      let j=i+1;
+      j<ranked.length;
+      j++
+    ){
+
+      const first=ranked[i];
+      const second=ranked[j];
+
+      const firstAdvantages=
+        first.strong.filter(item=>
+          second.concerns.some(
+            other=>other.key===item.key
+          )
+        );
+
+      const secondAdvantages=
+        second.strong.filter(item=>
+          first.concerns.some(
+            other=>other.key===item.key
+          )
+        );
+
+      if(
+        firstAdvantages.length ||
+        secondAdvantages.length
+      ){
+
+        tradeoffs.push({
+          first:first.name,
+          second:second.name,
+          firstAdvantages:
+            firstAdvantages.slice(0,3),
+          secondAdvantages:
+            secondAdvantages.slice(0,3)
+        });
+
+      }
+
+    }
+
+  }
+
+
+  /*
+   * Find the most important unknowns.
+   * Priority unknowns come first because those can
+   * actually affect the decision.
+   */
+  const evidenceGaps=[];
+
+  ranked.forEach(option=>{
+
+    option.priorityUnknown
+      .forEach(item=>{
+
+        evidenceGaps.push({
+          option:option.name,
+          criterion:item.label,
+          verify:item.verify
+        });
+
+      });
+
+    option.unknown
+      .filter(item=>!item.priority)
+      .forEach(item=>{
+
+        evidenceGaps.push({
+          option:option.name,
+          criterion:item.label,
+          verify:item.verify
+        });
+
+      });
+
+    option.prioritySome
+      .forEach(item=>{
+
+        if(item.verify){
+
+          evidenceGaps.push({
+            option:option.name,
+            criterion:item.label,
+            verify:item.verify
+          });
+
+        }
+
+      });
+
+  });
+
+
+  const uniqueGaps=[];
+
+  evidenceGaps.forEach(gap=>{
+
+    const key=
+      gap.option+"|"+gap.criterion;
+
+    if(
+      !uniqueGaps.some(
+        item=>
+          item.option+"|"+item.criterion===key
+      )
+    ){
+
+      uniqueGaps.push(gap);
+
+    }
+
+  });
+
+
+  /*
+   * Create practical next actions.
+   */
+  const nextActions=[];
+
+  uniqueGaps.forEach(gap=>{
+
+    if(nextActions.length>=3){
+      return;
+    }
+
+    const action=
+      gap.verify
+        ? `Verify ${gap.criterion.toLowerCase()} at ${gap.option}: ${gap.verify}`
+        : `Find reliable evidence about ${gap.criterion.toLowerCase()} at ${gap.option}.`;
+
+    if(!nextActions.includes(action)){
+      nextActions.push(action);
+    }
+
+  });
+
+
+  if(
+    nextActions.length<3 &&
+    ranked.length>1
+  ){
+
+    const action=
+      "Compare the leading options side by side on the two or three priorities that matter most to you.";
+
+    if(!nextActions.includes(action)){
+      nextActions.push(action);
+    }
+
+  }
+
+
+  if(
+    nextActions.length<3
+  ){
+
+    const action=
+      "Talk to a current student or recent graduate to test what the published information does not tell you.";
+
+    if(!nextActions.includes(action)){
+      nextActions.push(action);
+    }
+
+  }
+
+
+  /*
+   * Interpretation.
+   */
+  let interpretation="";
+
+  if(!strongest){
+
+    interpretation=
+      "There is not enough information yet to make a useful comparison.";
+
+  }
+  else if(ranked.length===1){
+
+    interpretation=
+      `${strongest.name} has some useful evidence behind it, but Compass cannot tell you whether it is the right choice without another option to compare.`;
+
+  }
+  else{
+
+    const second=
+      ranked[1];
+
+    const strongDifference=
+      strongest.priorityStrong.length-
+      second.priorityStrong.length;
+
+    const concernDifference=
+      strongest.priorityConcerns.length-
+      second.priorityConcerns.length;
+
+    if(
+      strongDifference>0 &&
+      concernDifference<=0
+    ){
+
+      interpretation=
+        `${strongest.name} currently has the strongest evidence against the priorities you have said matter most. That is a useful signal to investigate further, not a final recommendation.`;
+
+    }
+    else{
+
+      interpretation=
+        "There is not yet a clear front-runner. The options have different strengths and gaps, so the next useful step is to investigate the differences that matter most to you.";
+
+    }
+
+  }
+
+
+  return {
+    priorities,
+    options,
+    ranked,
+    strongest,
+    tradeoffs,
+    evidenceGaps:uniqueGaps.slice(0,8),
+    nextActions:nextActions.slice(0,3),
+    interpretation
+  };
+
+}
+
 
 function buildStep5Data(){
-  const interests=firstStep1Labels("interests");
-  const strengths=firstStep1Labels("strengths");
-  const matters=selectedLabels(STEP2_QUESTIONS[1]);
-  const wants=selectedLabels(STEP2_QUESTIONS[2]);
-  const options=step5OptionItems();
-  const questions=step4State.options
-    .map(item=>(item.findOut||"").trim())
-    .filter(Boolean);
 
-  let nextTitle="Keep learning before you decide.";
-  let nextCopy="You have a clearer starting point now. The next useful step is to answer the questions you have identified rather than trying to force a decision too early.";
+  const interests=
+    firstStep1Labels("interests");
 
-  if(questions.length){
-    nextTitle="Find out what you still do not know.";
-    nextCopy="Start with the questions that could genuinely change how you feel about your options. You do not need to answer everything at once.";
-  }else if(options.length>1){
-    nextTitle="Compare the options against what matters to you.";
-    nextCopy="Look at the differences between your options and ask which differences actually matter to you.";
+  const strengths=
+    firstStep1Labels("strengths");
+
+  const matters=
+    selectedLabels(
+      STEP2_QUESTIONS[1]
+    );
+
+  const wants=
+    selectedLabels(
+      STEP2_QUESTIONS[2]
+    );
+
+  const analysis=
+    step5BuildAnalysis();
+
+  const questions=
+    analysis.evidenceGaps.map(
+      gap=>{
+
+        return gap.verify
+          ? `${gap.option}: ${gap.verify}`
+          : `${gap.option}: find out more about ${gap.criterion.toLowerCase()}.`;
+
+      }
+    );
+
+  let nextTitle=
+    "Keep learning before you decide.";
+
+  let nextCopy=
+    analysis.interpretation;
+
+  if(
+    analysis.nextActions.length
+  ){
+
+    nextTitle=
+      "What could make this decision clearer.";
+
+    nextCopy=
+      analysis.nextActions[0];
+
   }
 
-  return {interests,strengths,matters,wants,options,questions,nextTitle,nextCopy};
+  return {
+    interests,
+    strengths,
+    matters,
+    wants,
+    course:String(
+      step3State.course||""
+    ).trim(),
+    options:analysis.ranked,
+    priorities:analysis.priorities,
+    tradeoffs:analysis.tradeoffs,
+    evidenceGaps:analysis.evidenceGaps,
+    questions,
+    nextActions:analysis.nextActions,
+    strongest:analysis.strongest,
+    interpretation:analysis.interpretation,
+    nextTitle,
+    nextCopy
+  };
+
 }
 
-function addStep5Card(grid,label,title,copy,className=""){
-  const card=document.createElement("article");
-  card.className="step5-card "+className;
-  card.innerHTML='<span class="card-label"></span><h2></h2><p></p>';
-  card.querySelector(".card-label").textContent=label;
-  card.querySelector("h2").textContent=title;
-  card.querySelector("p").textContent=copy;
+
+function addStep5Card(
+  grid,
+  label,
+  title,
+  copy,
+  className=""
+){
+
+  const card=
+    document.createElement("article");
+
+  card.className=
+    "step5-card "+className;
+
+  card.innerHTML=
+    '<span class="card-label"></span>'+
+    '<h2></h2><p></p>';
+
+  card.querySelector(
+    ".card-label"
+  ).textContent=label;
+
+  card.querySelector("h2")
+    .textContent=title;
+
+  card.querySelector("p")
+    .textContent=copy;
+
   grid.appendChild(card);
+
 }
+
 
 function buildParentSummary(data){
+
   const lines=[];
+
   lines.push("Compass snapshot");
   lines.push("");
-  lines.push("I am still working through my decision about what comes next.");
 
-  if(data.interests.length)
-    lines.push("What seems to interest me: "+makeSentenceList(data.interests.slice(0,4))+".");
-  if(data.strengths.length)
-    lines.push("What I seem to bring: "+makeSentenceList(data.strengths.slice(0,3))+".");
-  if(data.matters.length)
-    lines.push("What matters to me in the experience: "+makeSentenceList(data.matters.slice(0,5))+".");
-  if(data.wants.length)
-    lines.push("What I want from the choice: "+makeSentenceList(data.wants.slice(0,5))+".");
+  if(data.course){
+
+    lines.push(
+      "Course or direction: "+
+      data.course
+    );
+
+  }
+
+  lines.push(
+    "I am still working through my decision about what comes next."
+  );
+
+  if(data.interests.length){
+
+    lines.push(
+      "What seems to interest me: "+
+      makeSentenceList(
+        data.interests.slice(0,4)
+      )+
+      "."
+    );
+
+  }
+
+  if(data.strengths.length){
+
+    lines.push(
+      "What I seem to bring: "+
+      makeSentenceList(
+        data.strengths.slice(0,3)
+      )+
+      "."
+    );
+
+  }
+
+  if(data.matters.length){
+
+    lines.push(
+      "What matters to me in the experience: "+
+      makeSentenceList(
+        data.matters.slice(0,5)
+      )+
+      "."
+    );
+
+  }
+
+  if(data.wants.length){
+
+    lines.push(
+      "What I want from the choice: "+
+      makeSentenceList(
+        data.wants.slice(0,5)
+      )+
+      "."
+    );
+
+  }
 
   if(data.options.length){
+
     lines.push("");
-    lines.push("Options I am considering:");
-    data.options.forEach((option,index)=>{
-      let line=(index+1)+". "+option.name;
-      if(option.fit) line+=" | "+option.fit;
-      lines.push(line);
-    });
+    lines.push(
+      "Colleges I am considering:"
+    );
+
+    data.options.forEach(
+      (option,index)=>{
+
+        lines.push(
+          (index+1)+". "+option.name
+        );
+
+      }
+    );
+
+  }
+
+  if(data.tradeoffs.length){
+
+    lines.push("");
+    lines.push("What Compass is noticing:");
+
+    data.tradeoffs
+      .slice(0,3)
+      .forEach(tradeoff=>{
+
+        let line=
+          tradeoff.first+
+          " appears stronger on ";
+
+        line+=
+          tradeoff.firstAdvantages.length
+            ? makeSentenceList(
+                tradeoff.firstAdvantages
+                  .map(item=>item.label)
+              )
+            : "some areas";
+
+        if(
+          tradeoff.secondAdvantages.length
+        ){
+
+          line+=
+            ", while "+
+            tradeoff.second+
+            " appears stronger on "+
+            makeSentenceList(
+              tradeoff.secondAdvantages
+                .map(item=>item.label)
+            );
+
+        }
+
+        line+=".";
+
+        lines.push(line);
+
+      });
+
   }
 
   if(data.questions.length){
+
     lines.push("");
-    lines.push("Things I still want to find out:");
-    data.questions.slice(0,6).forEach(question=>lines.push("• "+question));
+    lines.push(
+      "Things still worth finding out:"
+    );
+
+    data.questions
+      .slice(0,6)
+      .forEach(
+        question=>
+          lines.push("• "+question)
+      );
+
   }
 
   lines.push("");
-  lines.push("What would help me most from my parent:");
-  lines.push("Listen to what I am thinking, help me find reliable information and ask questions without trying to make the decision for me.");
+  lines.push(
+    "What would help me most from my parent:"
+  );
+
+  lines.push(
+    "Listen to what I am thinking, help me find reliable information and ask questions without trying to make the decision for me."
+  );
 
   return lines.join("\n");
+
 }
+
 
 function renderStep5(){
-  const data=buildStep5Data();
-  const grid=document.getElementById("step5StudentGrid");
+
+  const data=
+    buildStep5Data();
+
+  const grid=
+    document.getElementById(
+      "step5StudentGrid"
+    );
+
   grid.innerHTML="";
 
-  addStep5Card(grid,"WHAT I AM NOTICING ABOUT MYSELF","What pulls me in",
-    data.interests.length ? makeSentenceList(data.interests.slice(0,4))+"." : "I am still noticing what naturally pulls me in.");
 
-  addStep5Card(grid,"WHAT I BRING","Things I seem to be good at",
-    data.strengths.length ? makeSentenceList(data.strengths.slice(0,3))+"." : "I am still working out what I naturally bring to different situations.","sage");
+  /*
+   * 1. THE DECISION
+   */
+  addStep5Card(
+    grid,
+    "THE DECISION IN FRONT OF ME",
+    data.course
+      ? data.course
+      : "What I am deciding next",
+    data.interpretation
+  );
 
-  addStep5Card(grid,"WHAT MATTERS TO ME","Things worth keeping in view",
-    data.matters.length ? makeSentenceList(data.matters.slice(0,5))+"." : "I am still figuring out what matters most to me.","peach");
 
-  addStep5Card(grid,"WHAT I WANT","What I hope this choice gives me",
-    data.wants.length ? makeSentenceList(data.wants.slice(0,5))+"." : "I am still figuring out what I want this experience to give me.","lilac");
+  /*
+   * 2. CURRENT SIGNAL
+   */
+  if(data.strongest){
 
+    addStep5Card(
+      grid,
+      "CURRENTLY STRONGEST SIGNAL",
+      data.strongest.name,
+      data.strongest.priorityStrong.length
+        ? "This option currently has the strongest evidence against the priorities you have said matter most."
+        : "This option currently has the clearest overall evidence, although the decision is not settled.",
+      "sage"
+    );
+
+  }
+
+
+  /*
+   * 3. OPTION COMPARISON
+   */
   if(data.options.length){
-    const card=document.createElement("article");
-    card.className="step5-card step5-options-card";
-    card.innerHTML='<span class="card-label">THE OPTIONS IN FRONT OF ME</span><h2>What I am considering</h2><div class="step5-option-list"></div>';
-    const list=card.querySelector(".step5-option-list");
 
-    data.options.forEach((option,index)=>{
-      const row=document.createElement("div");
-      row.className="step5-option-row";
-      row.innerHTML='<strong></strong><span></span>';
-      row.querySelector("strong").textContent=(index+1)+". "+option.name;
-      row.querySelector("span").textContent=option.fit || "Still working this out.";
-      list.appendChild(row);
-    });
+    const card=
+      document.createElement("article");
+
+    card.className=
+      "step5-card step5-options-card";
+
+    card.innerHTML=
+      '<span class="card-label">WHAT THE EVIDENCE SUGGESTS</span>'+
+      '<h2>How the options look today</h2>'+
+      '<div class="step5-option-list"></div>';
+
+    const list=
+      card.querySelector(
+        ".step5-option-list"
+      );
+
+    data.options.forEach(
+      (option,index)=>{
+
+        const row=
+          document.createElement("div");
+
+        row.className=
+          "step5-option-row";
+
+        row.innerHTML=
+          "<strong></strong><span></span>";
+
+        row.querySelector(
+          "strong"
+        ).textContent=
+          `${index+1}. ${option.name}`;
+
+        const pieces=[];
+
+        if(option.priorityStrong.length){
+
+          pieces.push(
+            "Strong evidence on "+
+            makeSentenceList(
+              option.priorityStrong
+                .slice(0,3)
+                .map(item=>item.label)
+            )+
+            "."
+          );
+
+        }
+
+        if(option.prioritySome.length){
+
+          pieces.push(
+            "Some areas still need checking, including "+
+            makeSentenceList(
+              option.prioritySome
+                .slice(0,2)
+                .map(item=>item.label)
+            )+
+            "."
+          );
+
+        }
+
+        if(option.priorityConcerns.length){
+
+          pieces.push(
+            "There are concerns around "+
+            makeSentenceList(
+              option.priorityConcerns
+                .slice(0,2)
+                .map(item=>item.label)
+            )+
+            "."
+          );
+
+        }
+
+        if(!pieces.length){
+
+          pieces.push(
+            "There is not enough evidence yet to say how well this option fits."
+          );
+
+        }
+
+        row.querySelector(
+          "span"
+        ).textContent=
+          pieces.join(" ");
+
+        list.appendChild(row);
+
+      }
+    );
 
     grid.appendChild(card);
+
   }
 
-  if(data.questions.length){
-    const card=document.createElement("article");
-    card.className="step5-card step5-questions-card";
-    card.innerHTML='<span class="card-label">WHAT I STILL NEED TO KNOW</span><h2>Questions worth answering</h2><ul></ul>';
-    const ul=card.querySelector("ul");
 
-    data.questions.slice(0,8).forEach(question=>{
-      const li=document.createElement("li");
-      li.textContent=question;
-      ul.appendChild(li);
-    });
+  /*
+   * 4. TRADE-OFFS
+   */
+  if(data.tradeoffs.length){
+
+    const card=
+      document.createElement("article");
+
+    card.className=
+      "step5-card";
+
+    card.innerHTML=
+      '<span class="card-label">THE TRADE-OFF</span>'+
+      '<h2>There may not be one perfect option.</h2>'+
+      '<div class="step5-tradeoff-list"></div>';
+
+    const list=
+      card.querySelector(
+        ".step5-tradeoff-list"
+      );
+
+    data.tradeoffs
+      .slice(0,3)
+      .forEach(tradeoff=>{
+
+        const item=
+          document.createElement("p");
+
+        let text=
+          `${tradeoff.first} looks stronger on `;
+
+        text+=
+          tradeoff.firstAdvantages.length
+            ? makeSentenceList(
+                tradeoff.firstAdvantages
+                  .map(item=>item.label)
+              )
+            : "some areas";
+
+        if(
+          tradeoff.secondAdvantages.length
+        ){
+
+          text+=
+            `, while ${tradeoff.second} looks stronger on `+
+            makeSentenceList(
+              tradeoff.secondAdvantages
+                .map(item=>item.label)
+            );
+
+        }
+
+        text+=".";
+
+        item.textContent=text;
+
+        list.appendChild(item);
+
+      });
 
     grid.appendChild(card);
+
   }
 
-  document.getElementById("step5NextTitle").textContent=data.nextTitle;
-  document.getElementById("step5NextCopy").textContent=data.nextCopy;
-  document.getElementById("parentSummaryText").textContent=buildParentSummary(data);
+
+  /*
+   * 5. WHAT IS STILL UNKNOWN
+   */
+  if(data.evidenceGaps.length){
+
+    const card=
+      document.createElement("article");
+
+    card.className=
+      "step5-card step5-questions-card";
+
+    card.innerHTML=
+      '<span class="card-label">WHAT COULD CHANGE MY MIND</span>'+
+      '<h2>Questions worth answering before I decide.</h2>'+
+      '<ul></ul>';
+
+    const ul=
+      card.querySelector("ul");
+
+    data.evidenceGaps
+      .slice(0,6)
+      .forEach(gap=>{
+
+        const li=
+          document.createElement("li");
+
+        li.textContent=
+          gap.verify
+            ? `${gap.option}: ${gap.verify}`
+            : `${gap.option}: find out more about ${gap.criterion.toLowerCase()}.`;
+
+        ul.appendChild(li);
+
+      });
+
+    grid.appendChild(card);
+
+  }
+
+
+  /*
+   * 6. STUDENT CONTEXT
+   *
+   * We keep this compact. These answers are context for
+   * the reasoning, not the conclusion itself.
+   */
+  if(
+    data.interests.length ||
+    data.strengths.length ||
+    data.matters.length ||
+    data.wants.length
+  ){
+
+    const contextParts=[];
+
+    if(data.matters.length){
+
+      contextParts.push(
+        "You said "+
+        makeSentenceList(
+          data.matters.slice(0,3)
+        )+
+        " matter to you."
+
+      );
+
+    }
+
+    if(data.wants.length){
+
+      contextParts.push(
+        "You want "+
+        makeSentenceList(
+          data.wants.slice(0,3)
+        )+
+        " from the experience."
+
+      );
+
+    }
+
+    addStep5Card(
+      grid,
+      "YOUR DECISION LENS",
+      "Why these differences matter",
+      contextParts.join(" ")
+    );
+
+  }
+
+
+  document.getElementById(
+    "step5NextTitle"
+  ).textContent=
+    data.nextTitle;
+
+  document.getElementById(
+    "step5NextCopy"
+  ).textContent=
+    data.nextCopy;
+
+  document.getElementById(
+    "parentSummaryText"
+  ).textContent=
+    buildParentSummary(data);
+
 }
+
 
 function openStep5(){
   step5State=step5SavedState();
@@ -3019,7 +4397,10 @@ document.getElementById("authForm")
                   answers:step2State.answers
                 },
                 __step3:{
-                  options:step3State.options
+                  course:String(step3State.course||""),
+                  colleges:Array.isArray(step3State.colleges)
+                    ? step3State.colleges
+                    : []
                 },
                 __step4:{
                   options:step4State.options
@@ -3101,14 +4482,63 @@ function resumeFromSavedCompass(){
 
     if(
       savedStep3 &&
-      Array.isArray(savedStep3.options)
+      typeof savedStep3==="object"
     ){
 
-      step3State={
-        options:savedStep3.options
-      };
+      /*
+       * New Step 3 structure:
+       * one course + up to three colleges.
+       */
+      if(
+        typeof savedStep3.course==="string" &&
+        Array.isArray(savedStep3.colleges)
+      ){
 
-      persistStep3();
+        step3State={
+          course:savedStep3.course,
+          colleges:savedStep3.colleges
+            .map(value=>String(value||"").trim())
+            .filter(Boolean)
+            .slice(0,3)
+        };
+
+        persistStep3();
+
+      }
+
+      /*
+       * Backward compatibility with any Compass saved
+       * before the Step 3 architecture change.
+       */
+      else if(
+        Array.isArray(savedStep3.options)
+      ){
+
+        const first=
+          savedStep3.options[0] || {};
+
+        step3State={
+          course:String(
+            first.course ||
+            first.name ||
+            ""
+          ).trim(),
+
+          colleges:savedStep3.options
+            .map(option=>
+              String(
+                option &&
+                option.college ||
+                ""
+              ).trim()
+            )
+            .filter(Boolean)
+            .slice(0,3)
+        };
+
+        persistStep3();
+
+      }
 
     }
 
